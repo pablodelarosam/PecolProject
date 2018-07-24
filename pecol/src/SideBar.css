@@ -1,0 +1,29 @@
+.user-image {
+  /* WARNING:  */
+  width: 35%;
+  display: block;
+  margin: auto;
+  padding-top: 5%;
+}
+
+.sidebar {
+  background: -webkit-linear-gradient(top, #6bba70 0%,#6bba70 100%);
+  height: 100%;
+  position: fixed;
+  width: 220px;
+}
+
+.sidebar a {
+  color: white;
+
+}
+
+.sidebar a:hover {
+  border-bottom: 3px solid #bdf1c1;
+}
+
+.sidebar h3 {
+  color: white;
+  text-align: center;
+  border-bottom: 3px solid white;
+}

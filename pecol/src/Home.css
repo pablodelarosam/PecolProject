@@ -1,0 +1,92 @@
+.principios {
+  background: linear-gradient(to left, #33cc33 0%, #ccff99 100%);
+}
+
+.top-container {
+  background: url('https://www.sogeti.fi/link/75ce8212b92145459d063a95d8e4159b.aspx');
+  height: 400px;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.custom-headers h1 {
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  /* z-index: 112; */
+  position: relative;
+  /* margin-top: 0%; */
+  padding-top: 7%;
+  font-size: 5.0rem;
+}
+
+.custom-headers {
+  margin-top: -300px;
+  margin-bottom: 115px;
+}
+
+.navbar a:hover {
+  border-bottom: 4px solid #afd320;
+}
+
+.navbar a {
+  color: white !important;
+  font-weight: 400;
+}
+
+
+.layer {
+  background-color: black;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 400px;
+  opacity: 0.4;
+}
+
+.bg-light {
+     background-color: none !important;
+}
+
+.contact h2 {
+  text-align: center;
+}
+
+.contact label {
+  display: block;
+}
+
+.form-contact {
+      padding-left: 35%;
+      margin-bottom: 5%;
+      margin-top: 1%;
+}
+
+.contact input {
+      width: 330px;
+}
+
+textarea {
+      width: 330px;
+}
+
+
+.team h3 {
+  text-align: center;
+}
+
+.submit-button {
+  background: #1f7b1f;
+    color: white;
+}
+
+.submit-button input: hover {
+    background: green;
+}
+
+.mision-vision {
+  background: linear-gradient(to left, #33cc33 0%, #ccff99 100%);
+}

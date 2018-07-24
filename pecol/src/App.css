@@ -1,0 +1,149 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.first-slide {
+  background: url('https://aifs.gov.au/sites/default/files/styles/publication_main/public/shutterstock_282305945.jpg?itok=DDd4w6Ol');
+height: 400px;
+width: 100%;
+background-size: cover;
+background-repeat: no-repeat;
+background-position: center;
+}
+
+.second-slide {
+  background: url('http://www.mesoamericaregion.org/wp-content/uploads/2018/05/family-unit-immigration-australia-visa.jpg');
+height: 400px;
+width: 100%;
+background-size: cover;
+background-repeat: no-repeat;
+background-position: center;
+}
+
+.third-slide {
+  background: url('https://www.naukrinama.com/stressbuster/wp-content/uploads/2018/03/fam.jpg');
+height: 400px;
+width: 100%;
+background-size: auto;
+background-repeat: no-repeat;
+background-position: center;
+}
+
+.image {
+  height: 400px;
+}
+
+.background-image {
+  background: url('https://www.strathcona.ca/files/images/fcs-medium-familyservices-660x396.jpg');
+height: 400px;
+width: 100%;
+background-size: cover;
+background-repeat: no-repeat;
+background-position: center;
+}
+
+.mision-vision {
+  margin-top: 2%;
+}
+
+.mision-vision p {
+  text-align: left;
+}
+
+.principios {
+  background-color: #ccffcc;
+  padding-top: 3%;
+  padding-left: 17%;
+  padding-right: 13%;
+}
+
+.principios  {
+  text-align: left;
+}
+.trabajo {
+  margin-top: 1%;
+  padding-top: 1%;
+}
+
+.footer {
+   /* WARNI */
+   width: 100%;
+   height: 100px;
+   background-color: #331a00;
+}
+
+.conf {
+  border-radius: 50%;
+height: 127px;
+    width: 51%;
+}
+
+.value {
+  width: 24%;
+    display: block;
+    margin: auto;
+}
+
+.team {
+  margin-top: 1%;
+}
+
+.person-image {
+
+  width: 100px;
+  height: 100px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  /* background-position: center; */
+  border-radius: 50px;
+  margin-left: 25.5%;
+
+}
+
+.nameperson {
+  text-align: center;
+margin-left: -10%;
+}
+
+.first {
+  height: 350px;
+}
+
+.logo {
+  width: 96%;
+}
+
+.anchorlogo {
+  width: 4%;
+
+}
+
+.carousel .slide img {
+    max-height: 450px;  /* change this to whatever you want */
+    width: auto;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
