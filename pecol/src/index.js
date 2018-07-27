@@ -12,7 +12,8 @@ import Normateca from './Normateca';
 import Advertisement from './Advertisement';
 
 
-ReactDOM.render(  <Router>
+ReactDOM.render(
+  <Router>
       <div>
         <Route exact path="/home" component={Home} />
         <Route exact path="/" component={Home} />
@@ -20,7 +21,7 @@ ReactDOM.render(  <Router>
         <Route path="/signup" component={Signup} />
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/normateca" component={Normateca} />
-          <Route path="/advertisement" component={Advertisement} />
+        <Route path="/advertisement" component={Advertisement} />
       </div>
   </Router>,document.getElementById('root'));
 registerServiceWorker();

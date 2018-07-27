@@ -1,23 +1,321 @@
-.principios {
-  background: linear-gradient(to left, #33cc33 0%, #ccff99 100%);
-}
-
-.top-container {
-  background: url('https://www.sogeti.fi/link/75ce8212b92145459d063a95d8e4159b.aspx');
-  height: 400px;
-  width: 100%;
-  background-size: cover;
+/*
+* LANDING PAGE
+*/
+.landingDiv {
+  background: url('imgs/BG.jpg');
   background-repeat: no-repeat;
+  background-size:cover;
+  background-clip: border-box;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   background-position: center;
+  height: 550px;
 }
 
+.Home{
+  width: 100%;
+  font-family: 'Roboto', sans-serif;
+}
+
+.jumbotron{
+  color: white;
+  padding-top: 150px;
+  padding-left: 5%;
+  background: rgba(0, 0, 0, 0.75);
+  height: 550px;
+  border-radius: 0px
+}
+
+.btn-success-landing{
+  background-color: #66A418;
+  border: none;
+  width: 150px;
+  color: white !important;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 30px;
+  border-radius: 0px;
+}
+
+.display-4{
+  font-size: 70px ;
+  font-family: 'Croissant One', cursive;
+}
+
+.watchCourses{
+  margin-left: 50px;
+  color: white
+}
+
+
+/*
+* BANNER OF NEWS
+*/
+.bannerNews{
+  padding-left: 5%;
+  height: 60px;
+  background-color: #66A418;
+}
+
+.bannerNewsFont{
+  line-height: 60px;
+  font-size: 22px;
+  color: white;
+}
+
+/*
+* MISSION VISION VALORES
+*/
+.missionVV{
+  padding-top: 30px;
+  padding-bottom: 30px;
+  min-height: 350px;
+  margin: auto;
+  width: 60%;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.iconContainer{
+  white-space: nowrap;
+  text-align: center;
+  line-height: 100px;
+}
+
+.missionDiv{
+  color: #ADC186;
+  margin-right: 50px;
+  font-size: 100px
+}
+
+.visionDiv{
+  color: #3685CD;
+  margin-left: 50px;
+  margin-right: 50px;
+  font-size: 100px
+}
+
+.valuesDiv{
+  color: #F6B283;
+  margin-left: 50px;
+  font-size: 100px
+}
+
+.fontContainer{
+  white-space: nowrap;
+  line-height: 20px;
+  padding-top: 40px;
+  font-size: 20px;
+}
+
+.missionFont{
+  color: #ADC186;
+  word-wrap: break-word;
+}
+
+.visionFont{
+  color: #3685CD;
+  word-wrap: break-word;
+}
+
+.valuesFont{
+  color: #F6B283;
+  word-wrap: break-word;
+}
+
+/*
+* Methodology
+*/
+
+.methodology{
+  text-align: center;
+  margin-top: 30px;
+  padding-top: 60px;
+  background-color: rgba(77, 77, 77, .16);
+  min-height: 550px;
+  color: #4D4D4D;
+}
+
+.methodology .row{
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.methodology h1{
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.icons{
+  font-size: 100px
+}
+
+.metTitle{
+  font-size: 40px;
+  margin-bottom: 10px
+}
+
+.metText{
+  font-size: 20px
+}
+
+/*
+* TEAM
+*/
+.team{
+  background-color: rgba(102, 164, 24, .07);
+  min-height: 600px;
+  margin-top: 0px;
+  color: #4D4D4D;
+  text-align: center;
+}
+
+.team h1 {
+  margin-top: 60px;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.teamComplete{
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+}
+
+.teammate {
+  padding-top: 40px;
+  min-height: 400px;
+  margin-bottom: 10px
+}
+
+.t1{
+  background-color: #CC7979;
+}
+.t2{
+  background-color: #ACCC79;
+}
+.t3{
+  background-color: #79A9CC;
+}
+.t4{
+  background-color: #CCB579;
+}
+
+.teammate img{
+  border-radius: 130px;
+  width: 130px;
+  height: 130px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: white;
+}
+
+.teammate-text{
+  margin-top: -65px;
+  padding-top: 85px;
+  background-color: white;
+  min-height: 295px
+}
+
+.socialMediaIcon{
+  text-align: center;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.position{
+  font-size: 13px
+}
+
+.dscr{
+  margin-bottom: 30px
+}
+
+/*
+* Contact + footer
+*/
+.contact{
+  color: #4D4D4D;
+  background-color: white;
+  min-height: 600px;
+  margin-top: 0px;
+  padding-top: 60px;
+}
+
+.cForm{
+  width: 50%;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: white;
+  min-height: 400px;
+  box-shadow: 1px 1px 1px 1px #242329;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.cForm h2 {
+  margin-top: 30px;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.input-form{
+  background-color: #C4C4C4;
+  border: 0;
+  width: 265px;
+  height: 40px;
+  padding-left: 10px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.input-form2{
+  background-color: #C4C4C4;
+  border: 0;
+  width: 550px;
+  height: 40px;
+  padding-left: 10px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.input-form3{
+  background-color: #C4C4C4;
+  border: 0;
+  width: 550px;
+  height: 120px;
+  padding-left: 10px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.footer{
+  margin-top: -200px;
+  min-height: 300px;
+  margin-top: 0px;
+  background-color: #66A418;
+}
+
+
+
+/*
 .custom-headers h1 {
   text-align: center;
   color: white;
   font-weight: bold;
-  /* z-index: 112; */
   position: relative;
-  /* margin-top: 0%; */
   padding-top: 7%;
   font-size: 5.0rem;
 }
@@ -27,14 +325,6 @@
   margin-bottom: 115px;
 }
 
-.navbar a:hover {
-  border-bottom: 4px solid #afd320;
-}
-
-.navbar a {
-  color: white !important;
-  font-weight: 400;
-}
 
 
 .layer {
@@ -47,9 +337,6 @@
   opacity: 0.4;
 }
 
-.bg-light {
-     background-color: none !important;
-}
 
 .contact h2 {
   text-align: center;
@@ -90,3 +377,4 @@ textarea {
 .mision-vision {
   background: linear-gradient(to left, #33cc33 0%, #ccff99 100%);
 }
+*/
