@@ -10,6 +10,8 @@ import gabi from './imgs/gabi.png'
 import logoPe from './imgs/xaxa.png'
 import acuerdo from './imgs/acuerdo.jpg'
 import SideBar from './SideBar.js'
+import teacher from './imgs/teacher.jpg'
+import secondteacher from './imgs/teacher-two.jpg'
 
 
 
@@ -41,8 +43,39 @@ return (
       <SideBar/>
     </div>
 
-    <div className="col-sm-3">
-      <h2> Dashboard screen </h2>
+    <div className="col-sm-9">
+      <h2> Profesores </h2>
+
+      <div className="row">
+        <div className="col-sm-6">
+        <div className="card" style={{
+          width: '18rem'
+        }}>
+          <img className="card-img-top" src={teacher} alt="Card image cap"/>
+          <div className="card-body">
+            <h5 className="card-title">Chris Neil</h5>
+            <p className="card-text">Profesor de psicología, especializado en el pensamiento humano.</p>
+            <a href="#" class="btn btn-primary">Conoce más</a>
+          </div>
+        </div>
+        </div>
+
+        <div className="col-sm-6">
+        <div className="card" style={{
+          width: '18rem'
+        }}>
+          <img className="card-img-top" src={secondteacher} alt="Card image cap"/>
+          <div className="card-body">
+            <h5 className="card-title">Ricardo Huerta</h5>
+                <p className="card-text">Profesor de psicología, especializado en el pensamiento humano.</p>
+            <a href="#" class="btn btn-primary">Conoce más</a>
+          </div>
+        </div>
+        </div>
+
+      </div>
+
+
     </div>
   </div>
 

@@ -37,32 +37,33 @@ return (
   <div className="sidebar">
 
     <img src={User} className="user-image"/>
-    <h3> Username </h3>
+    <h3> Ricardo Dórame </h3>
+    <h4> 150245 </h4>
     <div className="line">
       </div>
-      <Link className="nav-link" to="/home">Avances del curso
-      </Link>
-
       <Link className="nav-link" to="/home">Historial de actividades
       </Link>
 
-      <Link className="nav-link" to="/home">Avisos
+      <Link className="nav-link" to="/listCourses"> Cursos
       </Link>
 
-      <Link className="nav-link" to="/home">Profesores
+      <Link className="nav-link" to="/advertisement">Avisos
       </Link>
 
-      <Link className="nav-link" to="/home">Calificaciones
+      <Link className="nav-link" to="/teacher">Profesores
       </Link>
 
-      <Link className="nav-link" to="/home">Historial académico
+      <Link className="nav-link" to="/grades">Calificaciones
       </Link>
 
-      <Link className="nav-link" to="/home">Normateca
+      <Link className="nav-link" to="/academicHistory">Historial académico
+      </Link>
+
+      <Link className="nav-link" to="/normateca">Normateca
       </Link>
 
 
-      <Link className="nav-link" to="/home">Avances del curso
+      <Link className="nav-link" to="/account">Estado de cuenta
       </Link>
 
       <Link className="nav-link" to="/home">Salir

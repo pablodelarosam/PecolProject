@@ -31,7 +31,7 @@ class Advertisement extends Component {
 
           <div className="col-sm-9">
             <h2>
-              Advertisement screen
+              Avisos
             </h2>
             <div className="row">
               <div className="col-sm-6">
