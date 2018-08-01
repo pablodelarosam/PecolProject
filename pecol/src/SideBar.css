@@ -1,25 +1,21 @@
-.user-image {
-  /* WARNING:  */
-  width: 35%;
-  display: block;
-  margin: auto;
-  padding-top: 5%;
-}
-
 .sidebar {
-  background: -webkit-linear-gradient(top, #6bba70 0%,#6bba70 100%);
+  background: #2E3831;
   height: 100%;
   position: fixed;
   width: 220px;
 }
 
+.sideBar-left{
+  margin-top: 55px;
+}
+
 .sidebar a {
   color: white;
-
 }
 
 .sidebar a:hover {
-  border-bottom: 3px solid #bdf1c1;
+  background: white;
+  color: #2E3831;
 }
 
 .sidebar h3 {

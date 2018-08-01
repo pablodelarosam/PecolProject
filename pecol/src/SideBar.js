@@ -21,55 +21,43 @@ import {
 } from 'react-router-dom';
 class SideBar extends Component {
   constructor(props) {
-  super(props);
-
-
-
-
-}
-
-
-
+    super(props);
+  }
   render() {
+    return (
+      <div className="sidebar">
+        <div className="line">
+          </div>
+          <Link className="nav-link" to="/academicHistory">Historial de actividades
+          </Link>
+
+          <Link className="nav-link" to="/listCourses"> Cursos
+          </Link>
+
+          <Link className="nav-link" to="/advertisement">Avisos
+          </Link>
+
+          <Link className="nav-link" to="/teacher">Profesores
+          </Link>
+
+          <Link className="nav-link" to="/grades">Calificaciones
+          </Link>
+
+          <Link className="nav-link" to="/academicHistory">Historial académico
+          </Link>
+
+          <Link className="nav-link" to="/normateca">Normateca
+          </Link>
 
 
-return (
-  <div className="sidebar">
+          <Link className="nav-link" to="/account">Estado de cuenta
+          </Link>
 
-    <img src={User} className="user-image"/>
-    <h3> Username </h3>
-    <div className="line">
-      </div>
-      <Link className="nav-link" to="/home">Avances del curso
-      </Link>
+          <Link className="nav-link" to="/home">Salir
+          </Link>
 
-      <Link className="nav-link" to="/home">Historial de actividades
-      </Link>
-
-      <Link className="nav-link" to="/home">Avisos
-      </Link>
-
-      <Link className="nav-link" to="/home">Profesores
-      </Link>
-
-      <Link className="nav-link" to="/home">Calificaciones
-      </Link>
-
-      <Link className="nav-link" to="/home">Historial académico
-      </Link>
-
-      <Link className="nav-link" to="/home">Normateca
-      </Link>
-
-
-      <Link className="nav-link" to="/home">Avances del curso
-      </Link>
-
-      <Link className="nav-link" to="/home">Salir
-      </Link>
-
-    </div>
-);
+        </div>
+      );
   }
 }
 

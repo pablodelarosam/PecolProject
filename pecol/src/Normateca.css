@@ -3,7 +3,37 @@
   border-bottom: 4px solid lightgray;
 }
 
-
 .normateca-desc {
   padding-left: 2%;
 }
+
+.navbar-sec {
+  height: 55px;
+  background-color: #66A418 !important;
+  color: white !important;
+  padding-left: 20px;
+  line-height: 55px;
+  box-shadow: 0px 1px rgba(77, 77, 77, .16);
+}
+
+.btn-success {
+  background-color: white;
+  border: none;
+  color: #66A418 !important;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 200px;
+  margin-left: 10px;
+}
+
+.dashboard_content {
+  width: auto;
+  margin-top: 10px;
+  margin-left: -80px;
+}
+
+.btn-classes {}

@@ -8,94 +8,61 @@ import frida from './imgs/frida.png'
 import gabi from './imgs/gabi.png'
 import logoPe from './imgs/xaxa.png'
 import acuerdo from './imgs/acuerdo.jpg'
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-
-
-import  Signup  from './Signup.js'
-
-
-
-
+import {BrowserRouter as Router, Route, Link} from "react-router-dom";
+import Signup from './Signup.js'
+import PropTypes from 'prop-types';
+import {withStyles} from '@material-ui/core/styles';
+import MenuItem from '@material-ui/core/MenuItem';
+import TextField from '@material-ui/core/TextField';
 
 const pStyle = {
   width: '18rem'
 };
 
-class Login extends Component {
+class Login extends React.Component {
   constructor(props) {
-  super(props);
-  this.state = {
-    autoplay: true
-  };
-}
+    super(props);
+    this.state = {
+      autoplay: true
+    };
+  }
 
   render() {
-    return (
-      <div className="Login">
+    return (<div className="Login mainDiv">
 
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <a className="navbar-brand anchorlogo" href="#"><img src={logoPe} className="logo" /></a>
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
-            <li className="nav-item active">
-              <Link to="/home">Home
-                <span className="sr-only">(current)</span>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">ESCUELAS Y EMPRESAS</a>
-            </li>
+      <div className="NavBar">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+          <a className="navbar-brand" href="#">Navbar</a>
+          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
 
-            <li className="nav-item">
-              <a className="nav-link " href="#">CONTACTO</a>
-            </li>
-          </ul>
-        </div>
-        <ul class="nav justify-content-end">
-<li className="nav-item">
-<Link className="nav-link" to="/login">Login</Link>
-</li>
-</ul>
-      </nav>
-
-      <div className="row">
-
-      <div className="col-sm-7 education">
-
-
-
-      </div>
-
-      <div className="col-sm-5">
-
-            <div class="card card-login">
-
-          <div class="card-body">
-            <h5 class="card-title">Pecol</h5>
-            <p class="card-text">Iniciar sesión</p>
-            <form>
-            <label> Nombre de usuario
-              <input type="text" />
-              </label>
-              <label> Contraseña
-                <input type="password" />
-                </label>
-                <input type="submit" value="Iniciar sesión"/>
-            </form>
-            <Link className="nav-link" to="/signup">¿Aún no estás reigstrado?</Link>
-
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav mr-auto"></ul>
+            <div className="form-inline my-2 my-lg-0">
+              <Link className="nav-link" to="/login">Escuelas y empresas</Link>
+              <Link className="nav-link btn btn-success" to="/login">Registro</Link>
+            </div>
           </div>
-        </div>
+        </nav>
       </div>
 
+      <div className="row LoginCont">
+        <div className="container">
+          <h1>Ingrese su cuenta de usuario </h1>
+          <form>
+            <TextField id="username" label="Usuario" placeholder="Usuario" className="textField" margin="normal"/>
+            <br/>
+            <TextField id="password" label="Contraseña" type="password" placeholder="Contraseña" className="textField" margin="normal"/>
+            <br/>
+            <br/>
+            <input type="submit" className="btn" value="Iniciar sesión"/>
+          </form>
+        </div>
+
       </div>
 
-
-        </div>
-    );
+    </div>);
   }
 }
 
