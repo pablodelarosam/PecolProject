@@ -159,6 +159,50 @@ app.get("/currentModule/:id", function(req, res) {
 
 });
 
+//Get all definitions
+
+app.get("/definitions", function(req, res) {
+  sess = req.session;
+  var paramid = req.param("id");
+  console.log(sess.userid);
+  sql = "SELECT * from  DEFINITION";
+  connection.query(sql, function(err, records) {
+    // Do something
+    console.log("Datos al consultar: "+records);
+
+    return res.send(records);
+
+
+    if (err) {
+      return res.serverError(err);
+    }
+
+  });
+
+});
+
+
+app.get("/activities/:id", function(req, res) {
+  sess = req.session;
+  var paramid = req.param("id");
+  console.log(sess.userid);
+  sql = "SELECT * from  ACTIVITY where idModule = " + paramid + " ";
+  connection.query(sql, function(err, records) {
+    // Do something
+    console.log("Datos al consultar: "+records);
+
+    return res.send(records);
+
+
+    if (err) {
+      return res.serverError(err);
+    }
+
+  });
+
+});
+
+
 app.get("/getActivity/:id", function(req, res) {
   var id = req.param("id");
   sql = "SELECT *, DATE_FORMAT(startDate, '%Y-%m-%dT%H:%i') AS cStartDate, DATE_FORMAT(endDate, '%Y-%m-%dT%H:%i') AS cEndDate from activity where idActivity = " + id + " ";

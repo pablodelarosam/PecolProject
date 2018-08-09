@@ -81,7 +81,7 @@ gotoCourseDetails() {
                       <img className="card-img-top" src={human} alt="Card image cap" />
                       <div className="card-body">
                         <h5 className="card-title">{data.nameCourse}</h5>
-                        <p className="card-text">{data.introCourse}</p>
+                        <p className="card-text card-custom-courses">{data.introCourse}</p>
                         <a href="#" class="btn btn-primary">Ir al curso</a>
                       </div>
                     </div>

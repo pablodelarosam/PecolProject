@@ -17,6 +17,8 @@ import Grades from './Grades'
 import AcademicHistory from './AcademicHistory'
 import Account from './Account';
 import Module from './Module';
+import Definition from './Definition'
+import Activity from './Activity'
 
 
 ReactDOM.render(  <Router>
@@ -35,6 +37,8 @@ ReactDOM.render(  <Router>
         <Route path="/academicHistory" component={AcademicHistory} />
         <Route path="/account" component={Account} />
         <Route path="/module" component={Module} />
+        <Route path="/definition" component={Definition} />
+        <Route path="/activity" component={Activity} />
       </div>
   </Router>,document.getElementById('root'));
 registerServiceWorker();

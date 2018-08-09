@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import ReactDOM from 'react-dom';
-import './Module.css';
+import './Activity.css';
 import NavBar from './NavBar.js'
 import carmen from './carmen.png' // relative path to image
 import cristi from './imgs/cristi.png'
@@ -10,6 +10,7 @@ import gabi from './imgs/gabi.png'
 import logoPe from './imgs/xaxa.png'
 import acuerdo from './imgs/acuerdo.jpg'
 import SideBar from './SideBar.js'
+import human from './imgs/human.jpg'
 import Signup from './Signup.js'
 import axios from 'axios';
 import {
@@ -18,22 +19,22 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-class  Module extends Component {
+class Activity extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentModule:[]
+      activity:[]
     };
   }
 
 
   componentDidMount() {
-  axios.get(`http://localhost:3004/currentModule/1`)
+  axios.get(`http://localhost:3004/activities/1`)
    .then(res => {
-     const modules = res.data;
+     const activities = res.data;
 
-     this.setState({currentModule: modules });
-       console.log("currentModule", this.state.currentModule[0].idModule)
+     this.setState({activity: activities });
+       console.log("activity", this.state.activity[0].idActivity)
    })
   }
 
@@ -71,34 +72,37 @@ class  Module extends Component {
           </div>
 
           <div className="dashboard_content">
-          {this.state.currentModule.map((data) =>
-            <div className="col-sm-9 sideBar-left right-part" key={data.idModule}>
+            <div className="col-sm-12 sideBar-left">
+              <h2>Actividades</h2>
+              <div className="container">
+                <div className="row">
+                {this.state.activity.map((data) =>
+                  <Link className="custom-link-course" to="/courseDetails">
+                  <div className="col-sm-6" key={data.idActivity} onClick={this.gotoCourseDetails}>
+                    <div className="card" style={{
+                      width: '400px'
+                    }}>
+                      <img className="card-img-top" src={"https://formasformacion.com/wp-content/uploads/2018/03/5-preguntas-a-evitar-en-una-entrevista-de-trabajo.jpg"} alt="Card image cap" />
+                      <div className="card-body">
+                        <h5 className="card-title">{data.nameActivity}</h5>
 
-
-              <div className="container-module">
-              <div className="row">
-              <div className="col-sm-6">
-                <h2>{data.nameModule}</h2>
-              <p className="poar-border"> {data.moduleDescription} </p>
-
-              </div>
-
-              <div className="col-sm-6">
-              <img className="image-module" src={"http://www.automotivacion.net/wp-content/uploads/2013/08/Tu-valor-como-persona.jpg"}/>
-              </div>
-              </div>
-
-              </div>
+                        <a href="#" class="module-button btn btn-primary">Ir a la actividad</a>
+                      </div>
                     </div>
+                  </div>
+                  </Link>
                 )}
+                </div>
+              </div>
+            </div>
+          </div>
 
-      </div>
-      </div>
-      </div>
+          </div>
+        </div>
 
 
     );
   }
 }
 
-export default Module;
+export default Activity;

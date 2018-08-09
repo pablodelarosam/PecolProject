@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import ReactDOM from 'react-dom';
-import './Module.css';
+import './Definition.css';
 import NavBar from './NavBar.js'
 import carmen from './carmen.png' // relative path to image
 import cristi from './imgs/cristi.png'
@@ -12,34 +12,35 @@ import acuerdo from './imgs/acuerdo.jpg'
 import SideBar from './SideBar.js'
 import Signup from './Signup.js'
 import axios from 'axios';
+
 import {
   BrowserRouter as Router,
   Link,
   Route,
   Switch,
 } from 'react-router-dom';
-class  Module extends Component {
+class Definition extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentModule:[]
+      definition:[]
     };
   }
 
 
   componentDidMount() {
-  axios.get(`http://localhost:3004/currentModule/1`)
+ axios.get(`http://localhost:3004/definitions`)
    .then(res => {
-     const modules = res.data;
+     const definitions = res.data;
 
-     this.setState({currentModule: modules });
-       console.log("currentModule", this.state.currentModule[0].idModule)
+     this.setState({definition: definitions });
+       console.log("definition", this.state.definition[0].idDefinition)
    })
-  }
+}
 
-  gotoCourseDetails() {
+gotoCourseDetails() {
   console.log("clicked")
-  }
+}
 
   render() {
     return (
@@ -51,17 +52,17 @@ class  Module extends Component {
               <span className="navbar-toggler-icon"></span>
             </button>
 
-            <Link className="custom-link" to="/activity">ACTIVIDADES
-            </Link>
+                        <Link className="custom-link" to="/home">ACTIVIDADES
+                        </Link>
 
-            <Link className="custom-link" to="/definition">DEFINICIONES
-            </Link>
+                        <Link className="custom-link" to="/definition">DEFINICIONES
+                        </Link>
 
-            <Link className="custom-link" to="/home">ENLANCES
-            </Link>
+                        <Link className="custom-link" to="/home">ENLANCES
+                        </Link>
 
-            <Link className="custom-link" to="/home">CORREO
-            </Link>
+                        <Link className="custom-link" to="/home">CORREO
+                        </Link>
 
           </nav>
         </div>
@@ -71,34 +72,24 @@ class  Module extends Component {
           </div>
 
           <div className="dashboard_content">
-          {this.state.currentModule.map((data) =>
-            <div className="col-sm-9 sideBar-left right-part" key={data.idModule}>
+            <div className="col-sm-9 sideBar-left">
+              <h2>Definiciones</h2>
 
-
-              <div className="container-module">
-              <div className="row">
-              <div className="col-sm-6">
-                <h2>{data.nameModule}</h2>
-              <p className="poar-border"> {data.moduleDescription} </p>
-
-              </div>
-
-              <div className="col-sm-6">
-              <img className="image-module" src={"http://www.automotivacion.net/wp-content/uploads/2013/08/Tu-valor-como-persona.jpg"}/>
-              </div>
-              </div>
-
-              </div>
-                    </div>
+                {this.state.definition.map((data) =>
+                  <div className="container">
+                      <h2> {data.nameDefinition} </h2>
+                        <p> {data.descDefinition} </p>
+                          </div>
                 )}
 
-      </div>
-      </div>
-      </div>
 
+            </div>
+          </div>
+        </div>
+      </div>
 
     );
   }
 }
 
-export default Module;
+export default Definition;
