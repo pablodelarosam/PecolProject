@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import ReactDOM from 'react-dom';
 import './ListCourses.css';
-
+import axios from 'axios';
 import carmen from './carmen.png' // relative path to image
 import cristi from './imgs/cristi.png'
 import frida from './imgs/frida.png'
@@ -23,10 +23,29 @@ import {
 class ListCourses extends Component {
   constructor(props) {
     super(props);
-
-
-
+    this.state = {
+      course:[]
+    };
   }
+
+
+
+
+
+
+  componentDidMount() {
+ axios.get(`http://localhost:3004/ListCourses`)
+   .then(res => {
+     const courses = res.data;
+
+     this.setState({course: courses });
+       console.log("course", this.state.course[0].idCOURSE)
+   })
+}
+
+gotoCourseDetails() {
+  console.log("clicked")
+}
 
 
 
@@ -53,30 +72,22 @@ class ListCourses extends Component {
               <h2>Cursos</h2>
               <div className="container">
                 <div className="row">
-                  <div className="col-sm-6">
+                {this.state.course.map((data) =>
+                  <Link className="custom-link-course" to="/courseDetails">
+                  <div className="col-sm-6" key={data.idCOURSE} onClick={this.gotoCourseDetails}>
                     <div className="card" style={{
                       width: '18rem'
                     }}>
                       <img className="card-img-top" src={human} alt="Card image cap" />
                       <div className="card-body">
-                        <h5 className="card-title">La excelencia del liderazgo a través de los valores</h5>
-                        <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <h5 className="card-title">{data.nameCourse}</h5>
+                        <p className="card-text">{data.introCourse}</p>
                         <a href="#" class="btn btn-primary">Ir al curso</a>
                       </div>
                     </div>
                   </div>
-                  <div className="col-sm-6">
-                    <div className="card" style={{
-                      width: '18rem'
-                    }}>
-                      <img className="card-img-top" src={human} alt="Card image cap" />
-                      <div className="card-body">
-                        <h5 className="card-title">La excelencia del liderazgo a través de los valores</h5>
-                        <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Ir al curso</a>
-                      </div>
-                    </div>
-                  </div>
+                  </Link>
+                )}
                 </div>
               </div>
             </div>

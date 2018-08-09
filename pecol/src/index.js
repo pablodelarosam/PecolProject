@@ -15,7 +15,8 @@ import ListCourses from './ListCourses'
 import CourseDetails from './CourseDetails'
 import Grades from './Grades'
 import AcademicHistory from './AcademicHistory'
-import Account from './Account'
+import Account from './Account';
+import Module from './Module';
 
 
 ReactDOM.render(  <Router>
@@ -33,6 +34,7 @@ ReactDOM.render(  <Router>
         <Route path="/grades" component={Grades} />
         <Route path="/academicHistory" component={AcademicHistory} />
         <Route path="/account" component={Account} />
+        <Route path="/module" component={Module} />
       </div>
   </Router>,document.getElementById('root'));
 registerServiceWorker();

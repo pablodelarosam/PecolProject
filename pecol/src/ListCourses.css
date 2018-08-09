@@ -1,0 +1,10 @@
+.custom-link-course {
+  color: black !important;
+
+}
+
+.custom-link-course a: hover {
+  text-decoration: none;
+
+
+}
