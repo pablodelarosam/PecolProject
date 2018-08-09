@@ -10,11 +10,21 @@ var currentStudent;
 //var mongoose = require('mongoose');
 //var db = mongoose.connect('mongodb://localhost/swag-shop');
 var mysql = require('mysql');
-var connection = mysql.createConnection({host: 'localhost', port: 3306, user: 'root', password: 'CraftCode1234.', database: 'pecol'});
-app.use(session({secret: 'ssshhhhh'}));
+var connection = mysql.createConnection({
+  host: 'localhost',
+  port: 3306,
+  user: 'root',
+  password: '',
+  database: 'pecol'
+});
+app.use(session({
+  secret: 'ssshhhhh'
+}));
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 
 //app.use(require('./routes'));
 
@@ -39,11 +49,10 @@ app.get("/getGraph", function(req, res) {
   console.log("ID: ", id);
   console.log(req.query.dateC);
   console.log(req.query.typeC);
-  if(type == "D") sql = "select idStudent, nameAct, sum(TIME_TO_SEC(TIMEDIFF(endDate, startDate))/3600) as timeSpent from activity where idStudent = " + id + " AND YEAR(startDate) = "+parseInt(date[0])+" AND MONTH(startDate) = "+parseInt(date[1])+" and DAYOFMONTH(startDate) = "+parseInt(date[2])+" group by nameAct";
-  else if(type=="S"){
-    sql="select idStudent, nameAct, sum(TIME_TO_SEC(TIMEDIFF(endDate, startDate))/3600) as timeSpent from activity where idStudent = " + id + " AND WEEKOFYEAR(startDate) = "+parseInt(date)+" group by nameAct";
-  }
-    else sql = "select idStudent, nameAct, SUM((TIME_TO_SEC(endDate) - TIME_TO_SEC(startDate))/3600) as timeSpent from activity where idStudent = " + id+ " AND YEAR(startDate) = "+parseInt(date[0])+" AND MONTH(startDate) = "+parseInt(date[1]) +" group by nameAct";
+  if (type == "D") sql = "select idStudent, nameAct, sum(TIME_TO_SEC(TIMEDIFF(endDate, startDate))/3600) as timeSpent from activity where idStudent = " + id + " AND YEAR(startDate) = " + parseInt(date[0]) + " AND MONTH(startDate) = " + parseInt(date[1]) + " and DAYOFMONTH(startDate) = " + parseInt(date[2]) + " group by nameAct";
+  else if (type == "S") {
+    sql = "select idStudent, nameAct, sum(TIME_TO_SEC(TIMEDIFF(endDate, startDate))/3600) as timeSpent from activity where idStudent = " + id + " AND WEEKOFYEAR(startDate) = " + parseInt(date) + " group by nameAct";
+  } else sql = "select idStudent, nameAct, SUM((TIME_TO_SEC(endDate) - TIME_TO_SEC(startDate))/3600) as timeSpent from activity where idStudent = " + id + " AND YEAR(startDate) = " + parseInt(date[0]) + " AND MONTH(startDate) = " + parseInt(date[1]) + " group by nameAct";
   console.log(sql);
   connection.query(sql, function(err, records) {
     // Do something
@@ -71,7 +80,7 @@ app.post('/activity', function(req, res) {
   sess = req.session;
   console.log(sess.userid);
   console.log(req.body);
-//  console.log("Student ID:", studentID);
+  //  console.log("Student ID:", studentID);
   ACTIVITY.nameActivity = req.body.name;
   ACTIVITY.placeActivity = req.body.location;
   ACTIVITY.startDate = req.body.start;
@@ -79,7 +88,7 @@ app.post('/activity', function(req, res) {
   ACTIVITY.typeActivity = req.body.optradio;
   ACTIVITY.frecuency = req.body.productivity;
   //
-  ACTIVITY.registerActivity(sess.userid, ACTIVITY.nameActivity, ACTIVITY.placeActivity, ACTIVITY.startDate, ACTIVITY.endDate,  ACTIVITY.typeActivity, ACTIVITY.frecuency  );
+  ACTIVITY.registerActivity(sess.userid, ACTIVITY.nameActivity, ACTIVITY.placeActivity, ACTIVITY.startDate, ACTIVITY.endDate, ACTIVITY.typeActivity, ACTIVITY.frecuency);
   res.send("Activity created");
 
 });
@@ -102,7 +111,7 @@ app.get("/ListCourses", function(req, res) {
   sql = "SELECT * from  Course where idStudent = " + 1 + " ";
   connection.query(sql, function(err, records) {
     // Do something
-    console.log("Datos al consultar: "+records);
+    console.log("Datos al consultar: " + records);
 
     return res.send(records);
 
@@ -124,7 +133,7 @@ app.get("/courseModules/:id", function(req, res) {
   sql = "SELECT * from  Module where idCourse = " + paramid + " ";
   connection.query(sql, function(err, records) {
     // Do something
-    console.log("Datos al consultar: "+records);
+    console.log("Datos al consultar: " + records);
 
     return res.send(records);
 
@@ -146,7 +155,7 @@ app.get("/currentModule/:id", function(req, res) {
   sql = "SELECT * from  Module where idModule = " + paramid + " ";
   connection.query(sql, function(err, records) {
     // Do something
-    console.log("Datos al consultar: "+records);
+    console.log("Datos al consultar: " + records);
 
     return res.send(records);
 
@@ -181,7 +190,7 @@ app.get("/getActivity/:id", function(req, res) {
 app.post('/updateActivity/:id', function(req, res) {
   var id = req.param("id");
   console.log(req.body);
-//  console.log("Student ID:", studentID);
+  //  console.log("Student ID:", studentID);
   ACTIVITY.nameActivity = req.body.nameAct;
   ACTIVITY.placeActivity = req.body.place;
   ACTIVITY.startDate = req.body.startDate;
@@ -189,7 +198,7 @@ app.post('/updateActivity/:id', function(req, res) {
   ACTIVITY.typeActivity = req.body.type;
   ACTIVITY.frecuency = req.body.frecuency;
   //
-  ACTIVITY.modificarActividad(id, req.body.idStudent, ACTIVITY.nameActivity, ACTIVITY.placeActivity, ACTIVITY.startDate, ACTIVITY.endDate,  ACTIVITY.typeActivity, ACTIVITY.frecuency, req.body.grade );
+  ACTIVITY.modificarActividad(id, req.body.idStudent, ACTIVITY.nameActivity, ACTIVITY.placeActivity, ACTIVITY.startDate, ACTIVITY.endDate, ACTIVITY.typeActivity, ACTIVITY.frecuency, req.body.grade);
   res.send("Activity modified");
 
 });
@@ -225,7 +234,10 @@ app.post('/login', function(req, res, next) {
             console.log('idStudent: ', rows[i].idStudent);
             currentStudent = rows[i].idStudent;
             sess.userid = rows[i].idStudent;
-            res.send({idStudent: sess.userid, redirect: '/dia'});
+            res.send({
+              idStudent: sess.userid,
+              redirect: '/dia'
+            });
           }
 
         }
@@ -246,7 +258,7 @@ app.post('/login', function(req, res, next) {
 app.get('/logout', function(req, res, next) {
   //  res.view("/presentacion");
   req.session.destroy(function(err) {
-    if(err) {
+    if (err) {
       console.log(err);
     } else {
       res.redirect('/');
@@ -272,8 +284,10 @@ app.post('/student', function(req, res) {
   STUDENT.emailStudent = req.body.email;
 
   STUDENT.reigsterAccount(STUDENT.nameStudent, STUDENT.semesterStudent, STUDENT.careerStudent, STUDENT.passwordStudent, STUDENT.emailStudent);
-//  res.send("Usuario registrado");
-  res.send({redirect: '/inicio-sesion'});
+  //  res.send("Usuario registrado");
+  res.send({
+    redirect: '/inicio-sesion'
+  });
   //res.redirect("/inicio-sesion");
 });
 
@@ -297,7 +311,7 @@ app.post('/student', function(req, res) {
   STUDENT.emailStudent = req.body.email;
 
   STUDENT.modificarCuenta(id, STUDENT.nameStudent, STUDENT.emailStudent, STUDENT.passwordStudent, STUDENT.semesterStudent, STUDENT.careerStudent);
-  res.send("Usuario con id "+id+" modificado");
+  res.send("Usuario con id " + id + " modificado");
 });
 
 app.get('/student', function(req, res) {
@@ -317,17 +331,18 @@ app.get('/eliminar-estudiante', function(req, res) {
 
 app.delete('/student/delete/:id', function(req, res) {
   var id = req.param("id");
-  sql = "DELETE FROM activity where idStudent = "+ id;
+  sql = "DELETE FROM activity where idStudent = " + id;
   connection.query(sql, function(err, result) {
     if (err)
       throw err;
-      //res.send("Created "+JSON.stringify(result));
-    }
-  );
+    //res.send("Created "+JSON.stringify(result));
+  });
   //sess = req.session;
   STUDENT.deleteAccount(id);
   //res.send("User deleted");
-  res.send({redirect: '/actividad'});
+  res.send({
+    redirect: '/actividad'
+  });
 });
 
 /************** DAY CALENDAR ******+*/
@@ -431,12 +446,12 @@ var STUDENT = (function() {
     },
 
     modificarCuenta: function(id, n, e, p, s, c) {
-      sql = "UPDATE Student SET nameStu = '"+n+"', email='"+e+"', password = '"+p+"', semester = '"+s+"', career = '"+c+"' WHERE idStudent = "+id;
+      sql = "UPDATE Student SET nameStu = '" + n + "', email='" + e + "', password = '" + p + "', semester = '" + s + "', career = '" + c + "' WHERE idStudent = " + id;
       connection.query(sql, function(err, rows, fields) {
         //connection.end();
         if (!err) {
           //  res.send('User added to database with ID: ' + rows);
-          console.log('Estudiante con id '+id+" modificado");
+          console.log('Estudiante con id ' + id + " modificado");
           return true;
 
         } else {
@@ -453,9 +468,8 @@ var STUDENT = (function() {
       connection.query(sql, function(err, result) {
         if (err)
           throw err;
-          //res.send("Created "+JSON.stringify(result));
-        }
-      );
+        //res.send("Created "+JSON.stringify(result));
+      });
     }
   };
 })();
@@ -492,12 +506,12 @@ var ACTIVITY = (function() {
 
     modificarRating: function(id, g) {
       console.log("Modiifcando actividad");
-      sql = "UPDATE activity SET grade = "+g+" WHERE idActivity = "+id+" order by grade LIMIT 1";
+      sql = "UPDATE activity SET grade = " + g + " WHERE idActivity = " + id + " order by grade LIMIT 1";
       connection.query(sql, function(err, rows, fields) {
         //connection.end();
         if (!err) {
           //  res.send('User added to database with ID: ' + rows);
-          console.log('Actividad con id '+id+" modificado");
+          console.log('Actividad con id ' + id + " modificado");
           return true;
 
         } else {
@@ -510,12 +524,12 @@ var ACTIVITY = (function() {
 
     modificarActividad: function(id, idS, n, p, s, e, t, f, g) {
       console.log("Modiifcando actividad");
-      sql = "UPDATE activity SET idStudent= '"+idS+"', nameAct = '"+n+"', place='"+p+"', startDate = '"+s+"', endDate = '"+e+"', type = '"+t+"', frecuency = '"+f+"', grade = '"+g+"' WHERE idActivity = "+id;
+      sql = "UPDATE activity SET idStudent= '" + idS + "', nameAct = '" + n + "', place='" + p + "', startDate = '" + s + "', endDate = '" + e + "', type = '" + t + "', frecuency = '" + f + "', grade = '" + g + "' WHERE idActivity = " + id;
       connection.query(sql, function(err, rows, fields) {
         //connection.end();
         if (!err) {
           //  res.send('User added to database with ID: ' + rows);
-          console.log('Actividad con id '+id+" modificado");
+          console.log('Actividad con id ' + id + " modificado");
           return true;
 
         } else {
@@ -528,15 +542,14 @@ var ACTIVITY = (function() {
 
     registerActivity: function(id, n, p, s, e, t, f) {
 
-      sql = "INSERT INTO activity VALUES (" + activityID + ", " + id + ", '" + n + "','" + p + "','" + s + "','" + e + "','" + t + "','" + f + "', "+ 0 +")";
+      sql = "INSERT INTO activity VALUES (" + activityID + ", " + id + ", '" + n + "','" + p + "','" + s + "','" + e + "','" + t + "','" + f + "', " + 0 + ")";
       console.log(sql);
       connection.query(sql, function(err, result) {
         if (err)
           throw err;
-          //res.send("Created "+JSON.stringify(result));
-          console.log("New activity inserted");
-        }
-      );
+        //res.send("Created "+JSON.stringify(result));
+        console.log("New activity inserted");
+      });
       activityID++;
       // ACTIVITY.counter ++;
     },
@@ -547,9 +560,8 @@ var ACTIVITY = (function() {
       connection.query(sql, function(err, result) {
         if (err)
           throw err;
-          //res.send("Created "+JSON.stringify(result));
-        }
-      );
+        //res.send("Created "+JSON.stringify(result));
+      });
     },
 
     getAllActivities: function() {

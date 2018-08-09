@@ -63,6 +63,12 @@
   font-size: 22px;
   color: white;
 }
+/*
+* INTRO VIDEO
+*/
+.introVideo{
+  padding-left: 50px;
+}
 
 /*
 * MISSION VISION VALORES
@@ -241,6 +247,13 @@
 }
 
 /*
+* Carousel
+*/
+.carousel{
+  background-color: rgba(77, 77, 77, .16);
+}
+
+/*
 * Contact + footer
 */
 .contact{
@@ -303,78 +316,9 @@
 
 .footer{
   margin-top: -200px;
-  min-height: 300px;
+  min-height: 200px;
   margin-top: 0px;
+  padding-top: 75px;
   background-color: #66A418;
-}
-
-
-
-/*
-.custom-headers h1 {
-  text-align: center;
   color: white;
-  font-weight: bold;
-  position: relative;
-  padding-top: 7%;
-  font-size: 5.0rem;
 }
-
-.custom-headers {
-  margin-top: -300px;
-  margin-bottom: 115px;
-}
-
-
-
-.layer {
-  background-color: black;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 400px;
-  opacity: 0.4;
-}
-
-
-.contact h2 {
-  text-align: center;
-}
-
-.contact label {
-  display: block;
-}
-
-.form-contact {
-      padding-left: 35%;
-      margin-bottom: 5%;
-      margin-top: 1%;
-}
-
-.contact input {
-      width: 330px;
-}
-
-textarea {
-      width: 330px;
-}
-
-
-.team h3 {
-  text-align: center;
-}
-
-.submit-button {
-  background: #1f7b1f;
-    color: white;
-}
-
-.submit-button input: hover {
-    background: green;
-}
-
-.mision-vision {
-  background: linear-gradient(to left, #33cc33 0%, #ccff99 100%);
-}
-*/
