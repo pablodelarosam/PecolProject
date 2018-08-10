@@ -2,23 +2,12 @@
   width: 100%;
 }
 
-/*
-.education {
-  background: url('http://www.revistagenteqroo.com/wp-content/uploads/2018/03/bbva-educacion-e1464704439593-1920x0-c-f.jpg');
-  height: 700px;
-  width: 100%;
-  background-size: auto;
-  background-repeat: no-repeat;
-  background-position: center;
-  -webkit-filter: blur(5px);
-  filter: blur(5px);
-}
-*/
-.LoginCont{
+.SignupCont{
   width: 100%;
   margin-left: auto;
   margin-right: auto;
   margin-top: 150px;
+  text-align: center;
 }
 
 .NavBar{
@@ -35,7 +24,6 @@ input {
 }
 
 .mainDiv {
-  background: linear-gradient(to bottom, rgba(255,255,255,1), rgba(34, 104, 0, 1));
   height: 700px;
 }
 

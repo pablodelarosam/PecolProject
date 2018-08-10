@@ -41,7 +41,7 @@ class Login extends React.Component {
             <ul className="navbar-nav mr-auto"></ul>
             <div className="form-inline my-2 my-lg-0">
               <Link className="nav-link" to="/login">Escuelas y empresas</Link>
-              <Link className="nav-link btn btn-success" to="/login">Registro</Link>
+              <Link className="nav-link btn btn-success" to="/signup">Registro</Link>
             </div>
           </div>
         </nav>
@@ -56,7 +56,8 @@ class Login extends React.Component {
             <TextField id="password" label="Contraseña" type="password" placeholder="Contraseña" className="textField" margin="normal"/>
             <br/>
             <br/>
-            <input type="submit" className="btn" value="Iniciar sesión"/>
+              {/*<input type="submit" className="btn btn-success" value="Iniciar sesión" />*/}
+              <Link className="nav-link btn btn-success" to="/dashboard">Iniciar sesión</Link>
           </form>
         </div>
 

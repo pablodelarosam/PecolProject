@@ -37,7 +37,7 @@ axios.get(`http://localhost:3004/courseModules/3`)
    const modules = res.data;
 
    this.setState({module: modules });
-     console.log("module", this.state.module[0].idModule)
+     console.log("MODULE", this.state.module[0].idModule)
  })
 }
 

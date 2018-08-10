@@ -7,7 +7,7 @@ import './Home.css'
 import carmen from './carmen.png' // relative path to image
 import cristi from './imgs/cristi.png'
 import frida from './imgs/frida.png'
-import gabi from './imgs/gabi.png'
+import gabi from './imgs/gabi.jpeg'
 import landingBG from './imgs/BG.jpg'
 import logoPe from './imgs/pecol-logo.png'
 import acuerdo from './imgs/acuerdo.jpg'
@@ -197,18 +197,6 @@ class Home extends Component {
                 <p className="dscr">
                   General manager asdkasdlkasd adsf asdf a df
                 </p>
-                <SocialIcon className="socialMediaIcon" network="facebook" url="http://linkedin.com/in/jaketrent" style={{
-                    height: 25,
-                    width: 25
-                  }}/>
-                <SocialIcon className="socialMediaIcon" network="twitter" url="http://linkedin.com/in/jaketrent" style={{
-                    height: 25,
-                    width: 25
-                  }}/>
-                <SocialIcon className="socialMediaIcon" network="linkedin" url="http://linkedin.com/in/jaketrent" style={{
-                    height: 25,
-                    width: 25
-                  }}/>
               </div>
             </div>
           </div>
@@ -223,18 +211,6 @@ class Home extends Component {
                 <p className="dscr">
                   General manager asdkasdlkasd adsf asdf a df
                 </p>
-                <SocialIcon className="socialMediaIcon" network="facebook" url="http://linkedin.com/in/jaketrent" style={{
-                    height: 25,
-                    width: 25
-                  }}/>
-                <SocialIcon className="socialMediaIcon" network="twitter" url="http://linkedin.com/in/jaketrent" style={{
-                    height: 25,
-                    width: 25
-                  }}/>
-                <SocialIcon className="socialMediaIcon" network="linkedin" url="http://linkedin.com/in/jaketrent" style={{
-                    height: 25,
-                    width: 25
-                  }}/>
               </div>
             </div>
           </div>
@@ -249,18 +225,6 @@ class Home extends Component {
                 <p className="dscr">
                   General manager asdkasdlkasd adsf asdf a df
                 </p>
-                <SocialIcon className="socialMediaIcon" network="facebook" url="http://linkedin.com/in/jaketrent" style={{
-                    height: 25,
-                    width: 25
-                  }}/>
-                <SocialIcon className="socialMediaIcon" network="twitter" url="http://linkedin.com/in/jaketrent" style={{
-                    height: 25,
-                    width: 25
-                  }}/>
-                <SocialIcon className="socialMediaIcon" network="linkedin" url="http://linkedin.com/in/jaketrent" style={{
-                    height: 25,
-                    width: 25
-                  }}/>
               </div>
             </div>
           </div>
@@ -270,23 +234,11 @@ class Home extends Component {
               <div className="teammate-text">
                 <h4>Carmen Tommasi</h4>
                 <p className="position">
-                  General manager
+                  Licenciada en ciencias de la familia, diplomados en bioetica, familias disfuncionales
                 </p>
                 <p className="dscr">
-                  General manager asdkasdlkasd adsf asdf a df
+                  Experiencia laboral por más de 18 años
                 </p>
-                <SocialIcon className="socialMediaIcon" network="facebook" url="http://linkedin.com/in/jaketrent" style={{
-                    height: 25,
-                    width: 25
-                  }}/>
-                <SocialIcon className="socialMediaIcon" network="twitter" url="http://linkedin.com/in/jaketrent" style={{
-                    height: 25,
-                    width: 25
-                  }}/>
-                <SocialIcon className="socialMediaIcon" network="linkedin" url="http://linkedin.com/in/jaketrent" style={{
-                    height: 25,
-                    width: 25
-                  }}/>
               </div>
             </div>
           </div>
@@ -296,28 +248,16 @@ class Home extends Component {
       <div className="carousel">
         <Carousel>
           <div>
-            <img src={car1}/>
-            <p className="legend">Legend 1</p>
-          </div>
-          <div>
-            <img src={car2}/>
-            <p className="legend">Legend 2</p>
-          </div>
-          <div>
-            <img src={car3}/>
-            <p className="legend">Legend 3</p>
-          </div>
-          <div>
             <img src={car4}/>
-            <p className="legend">Legend 3</p>
+            <p className="legend">Talleres</p>
           </div>
           <div>
             <img src={car5}/>
-            <p className="legend">Legend 3</p>
+            <p className="legend">Conferencias</p>
           </div>
           <div>
             <img src={car6}/>
-            <p className="legend">Legend 3</p>
+            <p className="legend">Auditorías</p>
           </div>
         </Carousel>
       </div>
@@ -353,7 +293,7 @@ class Home extends Component {
 
       <div className="footer">
         <div className="container text-center">
-          The website footer has become a very common place to let visitors subscribe. Our website standards study found that 24% of top marketing sites have a signup box in the footer.
+
         </div>
       </div>
     </div>);
