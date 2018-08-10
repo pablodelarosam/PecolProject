@@ -37,9 +37,9 @@ class ListCourses extends Component {
  axios.get(`http://localhost:3004/ListCourses`)
    .then(res => {
      const courses = res.data;
-
+ console.log("course", res.data)
      this.setState({course: courses });
-       console.log("course", this.state.course[0].idCOURSE)
+
    })
 }
 
@@ -72,22 +72,22 @@ gotoCourseDetails() {
               <h2>Cursos</h2>
               <div className="container">
                 <div className="row">
-                {this.state.course.map((data) =>
+
                   <Link className="custom-link-course" to="/courseDetails">
-                  <div className="col-sm-6" key={data.idCOURSE} onClick={this.gotoCourseDetails}>
+                  <div className="col-sm-6" onClick={this.gotoCourseDetails}>
                     <div className="card" style={{
                       width: '18rem'
                     }}>
                       <img className="card-img-top" src={human} alt="Card image cap" />
                       <div className="card-body">
-                        <h5 className="card-title">{data.nameCourse}</h5>
-                        <p className="card-text card-custom-courses">{data.introCourse}</p>
+                        <h5 className="card-title">La excelencia del servicio a través de los valores.</h5>
+                    
                         <a href="#" class="btn btn-primary">Ir al curso</a>
                       </div>
                     </div>
                   </div>
                   </Link>
-                )}
+
                 </div>
               </div>
             </div>

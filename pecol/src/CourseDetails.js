@@ -37,7 +37,7 @@ axios.get(`http://localhost:3004/courseModules/3`)
    const modules = res.data;
 
    this.setState({module: modules });
-     console.log("module", this.state.module[0].idModule)
+
  })
 }
 
@@ -65,7 +65,7 @@ return (
       <Link className="custom-link" to="/definition">DEFINICIONES
       </Link>
 
-      <Link className="custom-link" to="/home">ENLANCES
+      <Link className="custom-link" to="/links">ENLANCES
       </Link>
 
       <Link className="custom-link" to="/home">CORREO
@@ -87,14 +87,14 @@ return (
         <h2>Módulos</h2>
         <div className="container">
           <div className="row">
-          {this.state.module.map((data) =>
 
-            <div className="col-sm-6" key={data.idModule} onClick={this.gotoCourseDetails}>
+
+            <div className="col-sm-6" onClick={this.gotoCourseDetails}>
               <div className="card" style={{
                 width: '18rem'
               }}>
 
-              <h5 class="card-header">{data.nameModule}</h5>
+              <h5 class="card-header">El valor de la persona</h5>
               <div class="card-body">
               <img className="module-img" src={"http://mastermosm.es/conte_ni_dos/uploads/2017/10/propuesta-valor-puzzle.jpg"}/>
               <Link className=" module-button btn btn-primary" to="/module">Ir al módulo</Link>
@@ -103,7 +103,10 @@ return (
               </div>
             </div>
 
-          )}
+
+
+
+
           </div>
         </div>
       </div>

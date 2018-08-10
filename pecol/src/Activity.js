@@ -33,8 +33,8 @@ class Activity extends Component {
    .then(res => {
      const activities = res.data;
 
-     this.setState({activity: activities });
-       console.log("activity", this.state.activity[0].idActivity)
+     // this.setState({activity: activities });
+     //   console.log("activity", this.state.activity[0].idActivity)
    })
   }
 
@@ -76,22 +76,38 @@ class Activity extends Component {
               <h2>Actividades</h2>
               <div className="container">
                 <div className="row">
-                {this.state.activity.map((data) =>
+
                   <Link className="custom-link-course" to="/courseDetails">
-                  <div className="col-sm-6" key={data.idActivity} onClick={this.gotoCourseDetails}>
+                  <div className="col-sm-6"  onClick={this.gotoCourseDetails}>
                     <div className="card" style={{
                       width: '400px'
                     }}>
                       <img className="card-img-top" src={"https://formasformacion.com/wp-content/uploads/2018/03/5-preguntas-a-evitar-en-una-entrevista-de-trabajo.jpg"} alt="Card image cap" />
                       <div className="card-body">
-                        <h5 className="card-title">{data.nameActivity}</h5>
+                        <h5 className="card-title">¿Quién soy yo?</h5>
 
                         <a href="#" class="module-button btn btn-primary">Ir a la actividad</a>
                       </div>
                     </div>
                   </div>
                   </Link>
-                )}
+
+
+                  <Link className="custom-link-course" to="/courseDetails">
+                  <div className="col-sm-6" onClick={this.gotoCourseDetails}>
+                    <div className="card" style={{
+                      width: '400px'
+                    }}>
+                      <img className="card-img-top" src={"https://formasformacion.com/wp-content/uploads/2018/03/5-preguntas-a-evitar-en-una-entrevista-de-trabajo.jpg"} alt="Card image cap" />
+                      <div className="card-body">
+                        <h5 className="card-title">Evaluación tema el valor de la PERSONA</h5>
+
+                        <a href="#" class="module-button btn btn-primary">Ir a la actividad</a>
+                      </div>
+                    </div>
+                  </div>
+                  </Link>
+
                 </div>
               </div>
             </div>

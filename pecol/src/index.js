@@ -19,6 +19,7 @@ import Account from './Account';
 import Module from './Module';
 import Definition from './Definition'
 import Activity from './Activity'
+import Links from './Links'
 
 
 ReactDOM.render(  <Router>
@@ -39,6 +40,7 @@ ReactDOM.render(  <Router>
         <Route path="/module" component={Module} />
         <Route path="/definition" component={Definition} />
         <Route path="/activity" component={Activity} />
+          <Route path="/links" component={Links} />
       </div>
   </Router>,document.getElementById('root'));
 registerServiceWorker();

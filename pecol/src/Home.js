@@ -105,15 +105,15 @@ class Home extends Component {
         <p className="bannerNewsFont">
           <span className="">
             <FaGlobe/>
-            Contamos con más de 500 cursos
+            Talleres y pláticas
           </span>
           <span className="col-md-6">
             <FaGlobe/>
-            Contamos con más de 500 cursos
+            Hemos formado a mas de mil personas
           </span>
           <span className="col-md-6">
             <FaGlobe/>
-            Contamos con más de 500 cursos
+            Consultoría familiar
           </span>
         </p>
       </div>

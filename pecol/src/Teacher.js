@@ -10,6 +10,7 @@ import gabi from './imgs/gabi.png'
 import logoPe from './imgs/xaxa.png'
 import acuerdo from './imgs/acuerdo.jpg'
 import SideBar from './SideBar.js'
+import gabriela from './imgs/gaby.jpeg'
 import teacher from './imgs/teacher.jpg'
 import secondteacher from './imgs/teacher-two.jpg'
 
@@ -53,13 +54,15 @@ class Teacher extends Component {
 
           <div className="dashboard_content">
             <div className="col-sm-12 sideBar-left">
-              <h2>Dashboard</h2>
+              <h2>Profesores</h2>
               <div className="container">
                 <div className="card" style={{ width: '18rem' }}>
-                  <img className="card-img-top" src={secondteacher} alt="Card image cap" />
+                  <img className="card-img-top" src={gabriela} alt="Card image cap" />
                   <div className="card-body">
-                    <h5 className="card-title">Ricardo Huerta</h5>
-                    <p className="card-text">Profesor de psicología, especializado en el pensamiento humano.</p>
+                    <h5 className="card-title">Gabriela Anaya</h5>
+                    <p className="card-text">Licenciada en ciencias de la familia.</p>
+                    <p className="card-text">Diplomados en bioética, familias disfuncionales.</p>
+                    <p className="card-text">Experiencia laboral por más de 18 años.</p>
                     <a href="#" class="btn btn-primary">Conoce más</a>
                   </div>
                 </div>
@@ -68,7 +71,7 @@ class Teacher extends Component {
             </div>
           </div>
         </div>
-      </div >
+      </div>
 
     );
   }

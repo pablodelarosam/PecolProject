@@ -108,7 +108,7 @@ app.get("/ListCourses", function(req, res) {
   sess = req.session;
 
   console.log(sess.userid);
-  sql = "SELECT * from  Course where idStudent = " + 1 + " ";
+  sql = "SELECT * from  Course";
   connection.query(sql, function(err, records) {
     // Do something
     console.log("Datos al consultar: " + records);
@@ -136,12 +136,9 @@ app.get("/courseModules/:id", function(req, res) {
     console.log("Datos al consultar: " + records);
 
     return res.send(records);
-
-
     if (err) {
       return res.serverError(err);
     }
-
   });
 
 });
@@ -175,6 +172,27 @@ app.get("/definitions", function(req, res) {
   var paramid = req.param("id");
   console.log(sess.userid);
   sql = "SELECT * from  DEFINITION";
+  connection.query(sql, function(err, records) {
+    // Do something
+    console.log("Datos al consultar: "+records);
+
+    return res.send(records);
+
+
+    if (err) {
+      return res.serverError(err);
+    }
+
+  });
+
+});
+
+
+app.get("/allCourses", function(req, res) {
+  sess = req.session;
+  var paramid = req.param("id");
+  console.log(sess.userid);
+  sql = "SELECT * from  COURSE";
   connection.query(sql, function(err, records) {
     // Do something
     console.log("Datos al consultar: "+records);
