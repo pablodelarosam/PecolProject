@@ -7,6 +7,7 @@ import carmen from './carmen.png' // relative path to image
 import cristi from './imgs/cristi.png'
 import frida from './imgs/frida.png'
 import gabi from './imgs/gabi.png'
+import camionero from './imgs/camionero.jpeg'
 import logoPe from './imgs/xaxa.png'
 import acuerdo from './imgs/acuerdo.jpg'
 import SideBar from './SideBar.js'
@@ -46,21 +47,21 @@ class  Module extends Component {
       <div className="dashboard-top">
         <div>
           <nav className="navbar-sec navbar-expand-lg navbar-light bg-light fixed-top">
-            <a className="navbar-brand" href="#">Navbar</a>
+            <a className="navbar-brand" href="#">Pecol</a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
             </button>
 
-            <Link className="custom-link" to="/activity">ACTIVIDADES
+            <Link className="custom-link" to="/activity">Actividades
             </Link>
 
-            <Link className="custom-link" to="/definition">DEFINICIONES
+            <Link className="custom-link" to="/definition">Definiciones
             </Link>
 
-            <Link className="custom-link" to="/home">ENLANCES
+            <Link className="custom-link" to="/home">Enlaces
             </Link>
 
-            <Link className="custom-link" to="/home">CORREO
+            <Link className="custom-link" to="/home">Correo
             </Link>
 
           </nav>
@@ -84,7 +85,7 @@ class  Module extends Component {
               </div>
 
               <div className="col-sm-6">
-              <img className="image-module" src={"http://www.automotivacion.net/wp-content/uploads/2013/08/Tu-valor-como-persona.jpg"}/>
+              <img className="image-module" src={camionero}/>
               </div>
               </div>
 

@@ -54,21 +54,21 @@ return (
   <div className="dashboard-top">
   <div>
     <nav className="navbar-sec navbar-expand-lg navbar-light bg-light fixed-top">
-      <a className="navbar-brand" href="#">Navbar</a>
+      <a className="navbar-brand" href="#">Pecol</a>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
 
-      <Link className="custom-link" to="/activity">ACTIVIDADES
+      <Link className="custom-link" to="/activity">Actividades
       </Link>
 
-      <Link className="custom-link" to="/definition">DEFINICIONES
+      <Link className="custom-link" to="/definition">Definiciones
       </Link>
 
-      <Link className="custom-link" to="/home">ENLANCES
+      <Link className="custom-link" to="/home">Enlaces
       </Link>
 
-      <Link className="custom-link" to="/home">CORREO
+      <Link className="custom-link" to="/home">Correo
       </Link>
 
     </nav>
