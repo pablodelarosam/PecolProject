@@ -26,37 +26,37 @@ class SideBar extends Component {
   render() {
     return (
       <div className="sidebar">
-        <div className="line">
-          </div>
-          <Link className="nav-link" to="/academicHistory">Historial de actividades
-          </Link>
-
-          <Link className="nav-link" to="/listCourses"> Cursos
-          </Link>
-
-          <Link className="nav-link" to="/advertisement">Avisos
-          </Link>
-
-          <Link className="nav-link" to="/teacher">Profesores
-          </Link>
-
-          <Link className="nav-link" to="/grades">Calificaciones
-          </Link>
-
-          <Link className="nav-link" to="/academicHistory">Historial académico
-          </Link>
-
-          <Link className="nav-link" to="/normateca">Normateca
-          </Link>
-
-
-          <Link className="nav-link" to="/account">Estado de cuenta
-          </Link>
-
-          <Link className="nav-link" to="/home">Salir
-          </Link>
-
+      <div className="line">
         </div>
+        <Link className="nav-link" to="/academicHistory">Historial de actividades
+        </Link>
+
+        <Link className="nav-link" to="/listCourses"> Cursos
+        </Link>
+
+        <Link className="nav-link" to="/advertisement">Avisos
+        </Link>
+
+        <Link className="nav-link" to="/teacher">Profesores
+        </Link>
+
+        <Link className="nav-link" to="/grades">Calificaciones
+        </Link>
+
+        <Link className="nav-link" to="/academicHistory">Historial académico
+        </Link>
+
+        <Link className="nav-link" to="/normateca">Normateca
+        </Link>
+
+
+        <Link className="nav-link" to="/account">Estado de cuenta
+        </Link>
+
+        <Link className="nav-link" to="/home">Salir
+        </Link>
+
+      </div>
       );
   }
 }

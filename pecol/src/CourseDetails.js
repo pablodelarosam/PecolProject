@@ -27,17 +27,22 @@ class CourseDetails extends Component {
   super(props);
   this.state = {
     module:[]
+
   };
 
 }
 
+
+
 componentDidMount() {
-axios.get(`http://localhost:3004/courseModules/3`)
+ const idC = this.props.match.params.id
+  console.log("PROPS", this.props.match.params.id, idC)
+axios.get(`http://localhost:3004/courseModules/${idC}`)
  .then(res => {
    const modules = res.data;
 
    this.setState({module: modules });
-
+     console.log("MODULE", this.state.module[0].idModule)
  })
 }
 
@@ -54,21 +59,21 @@ return (
   <div className="dashboard-top">
   <div>
     <nav className="navbar-sec navbar-expand-lg navbar-light bg-light fixed-top">
-      <a className="navbar-brand" href="#">Navbar</a>
+      <a className="navbar-brand" href="#">Pecol</a>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
 
-      <Link className="custom-link" to="/activity">ACTIVIDADES
+      <Link className="custom-link" to="/activity">Actividades
       </Link>
 
-      <Link className="custom-link" to="/definition">DEFINICIONES
+      <Link className="custom-link" to="/definition">Definiciones
       </Link>
 
-      <Link className="custom-link" to="/links">ENLANCES
+      <Link className="custom-link" to="/home">Enlaces
       </Link>
 
-      <Link className="custom-link" to="/home">CORREO
+      <Link className="custom-link" to="/home">Correo
       </Link>
 
     </nav>
@@ -87,14 +92,14 @@ return (
         <h2>Módulos</h2>
         <div className="container">
           <div className="row">
+          {this.state.module.map((data) =>
 
-
-            <div className="col-sm-6" onClick={this.gotoCourseDetails}>
+            <div className="col-sm-6" key={data.idModule} onClick={this.gotoCourseDetails}>
               <div className="card" style={{
                 width: '18rem'
               }}>
 
-              <h5 class="card-header">El valor de la persona</h5>
+              <h5 class="card-header">{data.nameModule}</h5>
               <div class="card-body">
               <img className="module-img" src={"http://mastermosm.es/conte_ni_dos/uploads/2017/10/propuesta-valor-puzzle.jpg"}/>
               <Link className=" module-button btn btn-primary" to="/module">Ir al módulo</Link>
@@ -103,10 +108,7 @@ return (
               </div>
             </div>
 
-
-
-
-
+          )}
           </div>
         </div>
       </div>

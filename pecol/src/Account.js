@@ -1,4 +1,6 @@
+
 import React, { Component } from 'react';
+
 import logo from './logo.svg';
 import ReactDOM from 'react-dom';
 import './Account.css';
@@ -18,7 +20,9 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
 
+
 import Signup from './Signup.js'
+
 
 import {
   BrowserRouter as Router,
@@ -26,6 +30,7 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
+
 const styles = theme => ({
   root: {
     width: '100%',
@@ -129,7 +134,6 @@ class Account extends Component {
       </div>
 
     );
-  }
 }
-
+}
 export default Account;

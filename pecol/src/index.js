@@ -33,7 +33,7 @@ ReactDOM.render(  <Router>
         <Route path="/advertisement" component={Advertisement} />
         <Route path="/teacher" component={Teacher} />
         <Route path="/listCourses" component={ListCourses} />
-        <Route path="/courseDetails" component={CourseDetails} />
+        <Route path="/courseDetails/:id" component={CourseDetails} />
         <Route path="/grades" component={Grades} />
         <Route path="/academicHistory" component={AcademicHistory} />
         <Route path="/account" component={Account} />

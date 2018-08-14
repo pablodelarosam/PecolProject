@@ -37,12 +37,14 @@ class Advertisement extends Component {
             <SideBar />
           </div>
 
+
           <div className="dashboard_content">
             <div className="col-sm-12 sideBar-left">
               <h2>Avisos</h2>
               <div className="container">
                 <div className="row">
                   <div className="col-sm-6">
+
 
                     <div className="card" style={{
                       width: '18rem'

@@ -14,7 +14,7 @@ var connection = mysql.createConnection({
   host: 'localhost',
   port: 3306,
   user: 'root',
-  password: '',
+  password: 'CraftCode1234.',
   database: 'pecol'
 });
 app.use(session({
@@ -25,6 +25,26 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false
 }));
+
+// Add headers
+app.use(function (req, res, next) {
+
+    // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+    // Set to true if you need the website to include cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+    res.setHeader('Access-Control-Allow-Credentials', true);
+
+    // Pass to next layer of middleware
+    next();
+});
 
 //app.use(require('./routes'));
 
@@ -104,11 +124,11 @@ app.get('/consultar', function(req, res) {
 
 
 //get all courses of a student is already subscripted
-app.get("/ListCourses", function(req, res) {
+app.get("/ListCourses/:id", function(req, res) {
   sess = req.session;
-
+var paramid = req.param("id");
   console.log(sess.userid);
-  sql = "SELECT * from  Course";
+  sql = "select distinct Course.idCOURSE, Course.nameCourse, Course.introCourse, Course.longDescription from SUBSCRIPT INNER JOIN Course INNER JOIN STUDENT where student.idstudent = " + paramid + " ";
   connection.query(sql, function(err, records) {
     // Do something
     console.log("Datos al consultar: " + records);
@@ -209,6 +229,73 @@ app.get("/allCourses", function(req, res) {
 });
 
 
+app.post('/loginPecol', function(req, res, next) {
+  sess = req.session;
+  var flag = true;
+
+
+  if (req.body.username && req.body.password) {
+  console.log("BODYYYY", req.body);
+    sql = "select * from student";
+    connection.query(sql, function(err, rows) {
+      //connection.end();
+      if (!err) {
+        //  res.send('User added to database with ID: ' + rows);
+        for (var i = 0; i < rows.length; i++) {
+            console.log('idStudent: ', rows[i]);
+          if (rows[i].nameStudent == req.body.username && rows[i].password == req.body.password) {
+            console.log('idStudent: ', rows[i]);
+            // currentStudent = rows[i].idStudent;
+             sess.userid = rows[i].idstudent;
+            res.send({
+              idStudent: sess.userid,
+              records: rows[i],
+              status: 200
+            });
+          }
+
+        }
+
+      } else {
+        console.log('Error while performing Query.');
+      }
+
+    });
+    // Already logged in.
+  } else {
+    console.log("Anorhwr one")
+    //res.redirect('/login');
+
+  }
+
+});
+
+
+app.post('/signupStudent', function(req, res, next) {
+  sess = req.session;
+  var idStudent = req.param("id");
+  var nameStudent = req.param("nameStudent");
+  var age = req.param("age");
+  var email = req.param("email");
+  var password = req.param("password");
+  sql = "INSERT INTO student VALUES (" + idStudent + ",'" + nameStudent + "','" + age + "','" + email + "','" + password + "')";
+  connection.query(sql, function(err, result) {
+    if (err)
+      return err;
+    res = result;
+    console.log("Student registered");
+    //res.send("Created "+JSON.stringify(result));
+  });
+  // STUDENT.counter ++;
+  studentID++;
+  return res.send({
+    status: 200
+  });
+
+});
+
+
+
 app.get("/activities/:id", function(req, res) {
   sess = req.session;
   var paramid = req.param("id");
@@ -279,43 +366,43 @@ app.get('/inicio-sesion', function(req, res) {
   //__dirname : It will resolve to your project folder.
 });
 
-app.post('/login', function(req, res, next) {
-  sess = req.session;
-  var flag = true;
-  console.log("BODY", req.body);
-
-  if (req.body.email && req.body.password) {
-
-    sql = "SELECT * from student";
-    connection.query(sql, function(err, rows, fields) {
-      //connection.end();
-      if (!err) {
-        //  res.send('User added to database with ID: ' + rows);
-        for (var i = 0; i < rows.length; i++) {
-          if (rows[i].email == req.body.email && rows[i].password == req.body.password) {
-            console.log('idStudent: ', rows[i].idStudent);
-            currentStudent = rows[i].idStudent;
-            sess.userid = rows[i].idStudent;
-            res.send({
-              idStudent: sess.userid,
-              redirect: '/dia'
-            });
-          }
-
-        }
-
-      } else {
-        console.log('Error while performing Query.');
-      }
-
-    });
-    // Already logged in.
-  } else {
-    res.redirect('/login');
-
-  }
-
-});
+// app.post('/login', function(req, res, next) {
+//   sess = req.session;
+//   var flag = true;
+//   console.log("BODY", req.body);
+//
+//   if (req.body.email && req.body.password) {
+//
+//     sql = "SELECT * from student";
+//     connection.query(sql, function(err, rows, fields) {
+//       //connection.end();
+//       if (!err) {
+//         //  res.send('User added to database with ID: ' + rows);
+//         for (var i = 0; i < rows.length; i++) {
+//           if (rows[i].email == req.body.email && rows[i].password == req.body.password) {
+//             console.log('idStudent: ', rows[i].idStudent);
+//             currentStudent = rows[i].idStudent;
+//             sess.userid = rows[i].idStudent;
+//             res.send({
+//               idStudent: sess.userid,
+//               redirect: '/dia'
+//             });
+//           }
+//
+//         }
+//
+//       } else {
+//         console.log('Error while performing Query.');
+//       }
+//
+//     });
+//     // Already logged in.
+//   } else {
+//     res.redirect('/login');
+//
+//   }
+//
+// });
 
 app.get('/logout', function(req, res, next) {
   //  res.view("/presentacion");

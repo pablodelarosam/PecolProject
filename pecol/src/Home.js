@@ -32,7 +32,9 @@ var FaMission = require('react-icons/lib/fa/flag-o');
 var FaVision = require('react-icons/lib/fa/eye');
 var FaValues = require('react-icons/lib/fa/thumbs-o-up');
 
-var FaMeetings = require('react-icons/lib/fa/eye');
+var FaMeetings = require('react-icons/lib/fa/user');
+var FaSearch = require('react-icons/lib/fa/search');
+var FaTaller = require('react-icons/lib/fa/user');
 
 var styleNone = {
   display: 'none' // 'ms' is the only lowercase vendor prefix
@@ -80,22 +82,15 @@ class Home extends Component {
           <div className="row">
             <div className="col-md-6">
               <h1 className="display-4">Pecol</h1>
-              <p className="lead">Algun buen slogan ponerlo aqui, pero tiene que ser muy bueno</p>
-              <p>Esta parte de abajo deberá ser un poco más corta, pero solo un poco.</p>
+              <p className="lead">Slogan de la empresa</p>
+              <p></p>
               <br/>
               <p className="lead">
-                <Link className="btn btn-success-landing btn-lg" to="#" role="button">Únete</Link>
+                <Link className="btn btn-success-landing btn-lg" to="/signup" role="button">Únete</Link>
                 <Link className="watchCourses" to="/login" style={{
                     textDecoration: 'none'
-                  }}>Ver los cursos
-                  <FaArrowRight/></Link>
+                  }}> Ver los cursos <FaArrowRight/> </Link>
               </p>
-            </div>
-            <div className="col-md-5 introVideo">
-              <video width="500" controls="controls">
-                <source src={introVideo} type="video/mp4"/>
-                Your browser does not support HTML5 video.
-              </video>
             </div>
           </div>
         </div>
@@ -164,8 +159,8 @@ class Home extends Component {
         </div>
         <div className="row">
           <div className="col-lg-4 icons"><FaMeetings/></div>
-          <div className="col-lg-4 icons"><FaMeetings/></div>
-          <div className="col-lg-4 icons"><FaMeetings/></div>
+          <div className="col-lg-4 icons"><FaTaller/></div>
+          <div className="col-lg-4 icons"><FaSearch/></div>
         </div>
         <div className="row">
           <div className="col-lg-4 metTitle">Talleres</div>
@@ -173,11 +168,20 @@ class Home extends Component {
           <div className="col-lg-4 metTitle">Consultoría</div>
         </div>
         <div className="row">
-          <div className="col-lg-4 metText">Hola Hola v Hola Hola Hola Hola Hola Hola Hola Hola Hola Hola v Hola Hola Hola Hola Hola Hola Hola Hola</div>
-          <div className="col-lg-4 metText">Hola Hola v Hola Hola Hola Hola Hola Hola Hola Hola Hola Hola v Hola Hola Hola Hola Hola Hola Hola Hola</div>
-          <div className="col-lg-4 metText">Hola Hola v Hola Hola Hola Hola Hola Hola Hola Hola Hola Hola v Hola Hola Hola Hola Hola Hola Hola Hola</div>
+          <div className="col-lg-4 metText">
+            Nuestros talleres podrán impulsarte a la formación que tanto haz buscado. Fortalécete con nustras dinámicas
+          </div>
+          <div className="col-lg-4 metText">
+            Mensualmente realizamos conferencias con más de 300 participantes las cuales son
+            combinadas con talleres y actividades
+           </div>
+          <div className="col-lg-4 metText">
+            Mensualmente realizamos conferencias con más de 300 participantes las cuales son
+            combinadas con talleres y actividades
+          </div>
         </div>
       </div>
+
 
       <div className="team">
         <div className="row">
@@ -197,18 +201,6 @@ class Home extends Component {
                 <p className="dscr">
                   General manager asdkasdlkasd adsf asdf a df
                 </p>
-                <SocialIcon className="socialMediaIcon" network="facebook" url="http://linkedin.com/in/jaketrent" style={{
-                    height: 25,
-                    width: 25
-                  }}/>
-                <SocialIcon className="socialMediaIcon" network="twitter" url="http://linkedin.com/in/jaketrent" style={{
-                    height: 25,
-                    width: 25
-                  }}/>
-                <SocialIcon className="socialMediaIcon" network="linkedin" url="http://linkedin.com/in/jaketrent" style={{
-                    height: 25,
-                    width: 25
-                  }}/>
               </div>
             </div>
           </div>
@@ -223,18 +215,6 @@ class Home extends Component {
                 <p className="dscr">
                   General manager asdkasdlkasd adsf asdf a df
                 </p>
-                <SocialIcon className="socialMediaIcon" network="facebook" url="http://linkedin.com/in/jaketrent" style={{
-                    height: 25,
-                    width: 25
-                  }}/>
-                <SocialIcon className="socialMediaIcon" network="twitter" url="http://linkedin.com/in/jaketrent" style={{
-                    height: 25,
-                    width: 25
-                  }}/>
-                <SocialIcon className="socialMediaIcon" network="linkedin" url="http://linkedin.com/in/jaketrent" style={{
-                    height: 25,
-                    width: 25
-                  }}/>
               </div>
             </div>
           </div>
@@ -249,18 +229,6 @@ class Home extends Component {
                 <p className="dscr">
                   General manager asdkasdlkasd adsf asdf a df
                 </p>
-                <SocialIcon className="socialMediaIcon" network="facebook" url="http://linkedin.com/in/jaketrent" style={{
-                    height: 25,
-                    width: 25
-                  }}/>
-                <SocialIcon className="socialMediaIcon" network="twitter" url="http://linkedin.com/in/jaketrent" style={{
-                    height: 25,
-                    width: 25
-                  }}/>
-                <SocialIcon className="socialMediaIcon" network="linkedin" url="http://linkedin.com/in/jaketrent" style={{
-                    height: 25,
-                    width: 25
-                  }}/>
               </div>
             </div>
           </div>
@@ -275,18 +243,6 @@ class Home extends Component {
                 <p className="dscr">
                   General manager asdkasdlkasd adsf asdf a df
                 </p>
-                <SocialIcon className="socialMediaIcon" network="facebook" url="http://linkedin.com/in/jaketrent" style={{
-                    height: 25,
-                    width: 25
-                  }}/>
-                <SocialIcon className="socialMediaIcon" network="twitter" url="http://linkedin.com/in/jaketrent" style={{
-                    height: 25,
-                    width: 25
-                  }}/>
-                <SocialIcon className="socialMediaIcon" network="linkedin" url="http://linkedin.com/in/jaketrent" style={{
-                    height: 25,
-                    width: 25
-                  }}/>
               </div>
             </div>
           </div>
@@ -295,18 +251,6 @@ class Home extends Component {
 
       <div className="carousel">
         <Carousel>
-          <div>
-            <img src={car1}/>
-            <p className="legend">Legend 1</p>
-          </div>
-          <div>
-            <img src={car2}/>
-            <p className="legend">Legend 2</p>
-          </div>
-          <div>
-            <img src={car3}/>
-            <p className="legend">Legend 3</p>
-          </div>
           <div>
             <img src={car4}/>
             <p className="legend">Legend 3</p>
@@ -353,7 +297,6 @@ class Home extends Component {
 
       <div className="footer">
         <div className="container text-center">
-          The website footer has become a very common place to let visitors subscribe. Our website standards study found that 24% of top marketing sites have a signup box in the footer.
         </div>
       </div>
     </div>);

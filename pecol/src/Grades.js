@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import ReactDOM from 'react-dom';
@@ -19,6 +20,7 @@ import Paper from '@material-ui/core/Paper';
 
 import Signup from './Signup.js'
 
+
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 
 const styles = theme => ({
@@ -35,7 +37,9 @@ const styles = theme => ({
 let id = 0;
 function createData(name, date, grade) {
   id += 1;
-  return { id, name, date, grade };
+
+  return {id, name, date, grade};
+
 }
 
 const data = [
@@ -54,6 +58,7 @@ class Grades extends Component {
 
     return (
       <div className="dashboard-top">
+
         <div>
           <nav className="navbar-sec navbar-expand-lg navbar-light bg-light fixed-top">
             <a className="navbar-brand" href="#">Navbar</a>
@@ -113,11 +118,15 @@ class Grades extends Component {
                     Última actualización: Hace 2 días
                   </div>
                 </div>
+
               </div>
             </div>
           </div>
         </div>
+
       </div>
+
+
     );
   }
 }

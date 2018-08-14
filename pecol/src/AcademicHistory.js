@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import ReactDOM from 'react-dom';
@@ -15,6 +16,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+
 import Signup from './Signup.js'
 
 import {
@@ -38,7 +40,9 @@ const styles = theme => ({
 let id = 0;
 function createData(name, partial1, partial2, partial3, grade) {
   id += 1;
-  return { id, name, partial1, partial2, partial3, grade };
+
+  return {id, name, partial1, partial2, partial3, grade};
+
 }
 
 const data = [
@@ -50,20 +54,21 @@ const data = [
 
 class AcademicHistory extends Component {
   constructor(props) {
+
     super(props);
   }
 
   render() {
     return (
       <div className="dashboard-top">
-        <div>
-          <nav className="navbar-sec navbar-expand-lg navbar-light bg-light fixed-top">
-            <a className="navbar-brand" href="#">Navbar</a>
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span className="navbar-toggler-icon"></span>
-            </button>
-          </nav>
-        </div>
+          <div>
+            <nav className="navbar-sec navbar-expand-lg navbar-light bg-light fixed-top">
+              <a className="navbar-brand" href="#">Navbar</a>
+              <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
+              </button>
+            </nav>
+          </div>
         <div className="row">
           <div className="col-sm-3 sideBar-left">
             <SideBar />
@@ -121,7 +126,16 @@ class AcademicHistory extends Component {
       </div>
 
     );
-  }
+
+
+
+
+
+}
+
+
+
+
 }
 
 export default AcademicHistory;

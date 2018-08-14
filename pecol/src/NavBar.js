@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import './NavBar.css'
+import './NavBar.css';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class NavBar extends Component {
@@ -15,7 +15,7 @@ class NavBar extends Component {
     return (
       <div className="NavBar">
         <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-          <a className="navbar-brand" href="#">Navbar</a>
+          <a className="navbar-brand" href="/home">Pecol</a>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
