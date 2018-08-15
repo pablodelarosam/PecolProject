@@ -18,7 +18,7 @@
   color: white;
 }
 
-.module-button: hover {
+.module-button :hover {
 
   background-color: #339933;
 
