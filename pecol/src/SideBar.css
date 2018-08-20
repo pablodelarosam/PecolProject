@@ -29,3 +29,17 @@
   text-align: center;
   border-bottom: 3px solid white;
 }
+
+.sideBar p {
+  color: white;
+  text-align: center;
+  font-size: 20px;
+  margin-top: 4%;
+}
+
+p {
+  color: white;
+  text-align: center;
+  font-size: 20px;
+  margin-top: 4%;  
+}

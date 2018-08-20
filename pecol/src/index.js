@@ -20,6 +20,7 @@ import Module from './Module';
 import Definition from './Definition'
 import Activity from './Activity'
 import Links from './Links'
+import CreateTeacher from './CreateTeacher'
 
 
 ReactDOM.render(  <Router>
@@ -32,15 +33,16 @@ ReactDOM.render(  <Router>
         <Route path="/normateca" component={Normateca} />
         <Route path="/advertisement" component={Advertisement} />
         <Route path="/teacher" component={Teacher} />
-        <Route path="/listCourses" component={ListCourses} />
+        <Route path="/listCourses/:id" component={ListCourses} />
         <Route path="/courseDetails/:id" component={CourseDetails} />
         <Route path="/grades" component={Grades} />
         <Route path="/academicHistory" component={AcademicHistory} />
         <Route path="/account" component={Account} />
-        <Route path="/module" component={Module} />
+        <Route path="/module/:id" component={Module} />
         <Route path="/definition" component={Definition} />
-        <Route path="/activity" component={Activity} />
-          <Route path="/links" component={Links} />
+        <Route path="/activity/:id" component={Activity} />
+        <Route path="/links" component={Links} />
+        <Route path="/createTeacher" component={CreateTeacher} />
       </div>
   </Router>,document.getElementById('root'));
 registerServiceWorker();

@@ -29,12 +29,14 @@ class Activity extends Component {
 
 
   componentDidMount() {
-  axios.get(`http://localhost:3004/activities/1`)
+    const idC = this.props.match.params.id
+     console.log("PROPS ACTIVITIES", this.props.match.params.id, idC)
+  axios.get(`http://localhost:3004/activities/${idC}`)
    .then(res => {
      const activities = res.data;
 
-     // this.setState({activity: activities });
-     //   console.log("activity", this.state.activity[0].idActivity)
+      this.setState({activity: activities });
+        console.log("activity", this.state.activity[0])
    })
   }
 
@@ -71,47 +73,36 @@ class Activity extends Component {
             <SideBar />
           </div>
 
-          <div className="dashboard_content">
-            <div className="col-sm-12 sideBar-left">
+
+            <div className="col-sm-9 sideBar-left">
               <h2>Actividades</h2>
               <div className="container">
                 <div className="row">
 
-                  <Link className="custom-link-course" to="/courseDetails">
-                  <div className="col-sm-6"  onClick={this.gotoCourseDetails}>
-                    <div className="card" style={{
-                      width: '400px'
-                    }}>
-                      <img className="card-img-top" src={"https://formasformacion.com/wp-content/uploads/2018/03/5-preguntas-a-evitar-en-una-entrevista-de-trabajo.jpg"} alt="Card image cap" />
-                      <div className="card-body">
-                        <h5 className="card-title">¿Quién soy yo?</h5>
-
-                        <a href="#" class="module-button btn btn-primary">Ir a la actividad</a>
-                      </div>
-                    </div>
-                  </div>
-                  </Link>
+                  {this.state.activity.map((data) =>
 
 
-                  <Link className="custom-link-course" to="/courseDetails">
-                  <div className="col-sm-6" onClick={this.gotoCourseDetails}>
-                    <div className="card" style={{
-                      width: '400px'
-                    }}>
-                      <img className="card-img-top" src={"https://formasformacion.com/wp-content/uploads/2018/03/5-preguntas-a-evitar-en-una-entrevista-de-trabajo.jpg"} alt="Card image cap" />
-                      <div className="card-body">
-                        <h5 className="card-title">Evaluación tema el valor de la PERSONA</h5>
+                                      <div className="col-sm-6" onClick={this.gotoCourseDetails}>
+                                        <div className="card" style={{
+                                          width: '400px'
+                                        }}>
+                                          <img className="card-img-top" src={data.contentImage} alt="Exercise image" />
+                                          <div className="card-body">
+                                            <h5 className="card-title">{data.nameActivity}</h5>
 
-                        <a href="#" class="module-button btn btn-primary">Ir a la actividad</a>
-                      </div>
-                    </div>
-                  </div>
-                  </Link>
+                                            <a href="#" class="module-button btn btn-primary">Ir a la actividad</a>
+                                          </div>
+                                        </div>
+                                      </div>
+
+                  )}
+
+
 
                 </div>
               </div>
             </div>
-          </div>
+
 
           </div>
         </div>

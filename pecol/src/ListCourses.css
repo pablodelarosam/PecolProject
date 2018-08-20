@@ -14,3 +14,16 @@
 .card-custom-courses {
   padding: 5%;
 }
+
+.customgoto {
+  background: #52ca52;
+  padding: 3%;
+  /* margin: auto; */
+  display: block;
+  /* display: inline; */
+  margin: auto;
+  width: 35%;
+  text-align: center;
+  color: white;
+  margin-bottom: 5%;
+}

@@ -29,7 +29,9 @@ class  Module extends Component {
 
 
   componentDidMount() {
-  axios.get(`http://localhost:3004/currentModule/1`)
+    const idC = this.props.match.params.id
+     console.log("PROPS", this.props.match.params.id, idC)
+  axios.get(`http://localhost:3004/currentModule/${idC}`)
    .then(res => {
      const modules = res.data;
 

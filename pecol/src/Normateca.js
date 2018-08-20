@@ -11,6 +11,7 @@ import acuerdo from './imgs/acuerdo.jpg'
 import SideBar from './SideBar.js'
 import NavBar from './NavBar.js'
 import Signup from './Signup.js'
+import axios from 'axios';
 
 import {
   BrowserRouter as Router,
@@ -21,6 +22,20 @@ import {
 class Normateca extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      rulesPecol:[]
+
+    };
+  }
+
+  componentDidMount() {
+    axios.get(`http://localhost:3004/rules`)
+     .then(res => {
+       const rule = res.data;
+       console.log("rules", rule)
+       this.setState({rulesPecol: rule });
+        console.log("rules", this.state.rulesPecol)
+     })
   }
 
   render() {
@@ -43,22 +58,19 @@ class Normateca extends Component {
             <div className="sideBar-left">
               <h2>Normateca</h2>
               <div className="container">
-                <h4> Norma 1 </h4>
-                <p> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p>
-                <hr/>
-                <h4> Norma 2 </h4>
-                <p> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p>
-                <hr/>
-                <h4> Norma 3 </h4>
-                <p> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p>
-                <hr/>
-                <h4> Norma 4 </h4>
-                <p> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p>
+              {this.state.rulesPecol.map((data) => 
+                <div key={data.idrule}>
+                  <h4> {data.title }</h4>
+                  <p> {data.description}</p>
+                  <hr/>
+                  </div>
+                )}
 
-              </div>
+
             </div>
           </div>
         </div>
+      </div>
       </div>
 
     );

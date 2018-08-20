@@ -1,0 +1,15 @@
+.upload-file {
+  margin-top: 10%;
+  text-align: center !important;
+
+}
+
+.upload-file input {
+  display: block;
+  margin: auto !important
+}
+
+
+.MuiFormControl-root-1 {
+  display: block !important;
+}

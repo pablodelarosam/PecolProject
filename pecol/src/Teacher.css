@@ -1,0 +1,12 @@
+input[type=file], input[type=file]::-webkit-file-upload-button { cursor: pointer }
+
+
+.imgteacher {
+  height: 100%;
+    width: 100%;
+}
+
+.card-custom {
+  margin-top: 5%;
+  margin-bottom: 5%;
+}

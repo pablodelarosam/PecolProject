@@ -11,6 +11,7 @@ import logoPe from './imgs/xaxa.png'
 import acuerdo from './imgs/acuerdo.jpg'
 import User from './imgs/user.png'
 import  Signup  from './Signup.js'
+import axios from 'axios';
 import './SideBar.css'
 
 import {
@@ -23,15 +24,28 @@ class SideBar extends Component {
   constructor(props) {
     super(props);
   }
+
+
+  componentDidMount() {
+    console.log("PROPS SIDE BAR", this.props)
+  }
+
+
+
   render() {
     return (
       <div className="sidebar">
+      <div className="student-info">
+
+      <p className="idstudent"> ID: {this.props.idStudent} </p>
+      </div>
       <div className="line">
         </div>
+
         <Link className="nav-link" to="/academicHistory">Historial de actividades
         </Link>
 
-        <Link className="nav-link" to="/listCourses"> Cursos
+        <Link className="nav-link" to={"/listCourses/" + this.props.idStudent}> Cursos
         </Link>
 
         <Link className="nav-link" to="/advertisement">Avisos

@@ -13,6 +13,8 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
+import axios from 'axios';
+import { Redirect } from 'react-router';
 
 const pStyle = {
   width: '18rem'
@@ -22,9 +24,52 @@ class Signup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      autoplay: true
+      autoplay: true,
+      idStudent: "",
+      nameStudent: "",
+      age: "",
+      email: "",
+      passoword: ""
     };
   }
+
+
+  handleChange = event => {
+    console.log(this.state)
+    this.setState({
+      [event.target.id]: event.target.value
+    });
+  }
+
+  componentDidMount() {
+    console.log("State", this.state)
+  }
+
+  handleSubmit = event => {
+  event.preventDefault();
+
+
+axios.post(`http://localhost:3004/signupStudent`, {
+   id: this.state.idStudent,
+   nameStudent: this.state.nameStudent ,
+   age: this.state.age,
+   email: this.state.email ,
+   password: this.state.password
+
+ })
+     .then(res => {
+       console.log("SUCCESS", res);
+       if(res.status == 200) {
+
+         this.setState({ isLoggedIn: !(this.state.isLoggedIn)});
+           console.log('Successfully Login', this.state);
+       //  browserHistory.replace("/login")
+       //  store.set('loggedIn', true);
+       //this.props.history.push("/");
+
+       }
+     })
+ }
 
   render() {
     return (<div className="Signup mainDiv">
@@ -49,16 +94,20 @@ class Signup extends React.Component {
       <div className="row SignupCont">
         <div className="container">
           <h1>Ingrese los datos del usuario </h1>
-          <form>
-            <TextField id="name" label="Nombre" placeholder="Nombre" className="textField" margin="normal" />
+          <form onSubmit={this.handleSubmit}>
+            <TextField id="idStudent" label="Id" placeholder="Id" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idStudent}  />
             <br />
-            <TextField id="age" label="Edad" placeholder="Edad" className="textField" margin="normal" />
+            <TextField id="nameStudent" label="Nombre" placeholder="Nombre" className="textField" margin="normal" onChange={this.handleChange} value={this.state.nameStudent} />
             <br />
-            <TextField id="email" label="E-mail" placeholder="E-mail" className="textField" margin="normal" />
+            <TextField id="age" label="Edad" placeholder="Edad" className="textField" margin="normal" onChange={this.handleChange} value={this.state.age} />
+            <br />
+            <TextField id="email" label="E-mail" placeholder="E-mail" className="textField" margin="normal" onChange={this.handleChange} value={this.state.email} />
+            <br />
+            <TextField id="password" label="Contraseña" type="password" placeholder="Contraseña" className="textField" margin="normal" onChange={this.handleChange} value={this.state.password} />
             <br />
             <br />
             {/*<input type="submit" className="btn btn-success" value="Iniciar sesión" />*/}
-            <Link className="nav-link btn btn-success" to="/listCourses">Registrar</Link>
+            <button className="nav-link btn btn-success" type="submit">Registrar</button>
           </form>
         </div>
       </div>

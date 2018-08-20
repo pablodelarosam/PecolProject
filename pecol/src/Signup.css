@@ -40,3 +40,8 @@ input {
   border-radius: 200px;
   margin-left: 10px;
 }
+
+.idStudent {
+  color: white;
+  font-size: 20px;
+}

@@ -34,7 +34,9 @@ class ListCourses extends Component {
 
 
   componentDidMount() {
- axios.get(`http://localhost:3004/ListCourses/1`)
+    const idC = this.props.match.params.id
+     console.log("PROPS", this.props.match.params.id, idC)
+ axios.get(`http://localhost:3004/ListCourses/${idC}`)
    .then(res => {
      const courses = res.data;
 
@@ -63,7 +65,7 @@ gotoCourseDetails() {
         </div>
         <div className="row">
           <div className="col-sm-3 sideBar-left">
-            <SideBar />
+            <SideBar idStudent={this.props.match.params.id} />
           </div>
 
           <div className="dashboard_content">
@@ -80,9 +82,7 @@ gotoCourseDetails() {
                       <img className="card-img-top" src={human} alt="Card image cap" />
                       <div className="card-body">
                         <h5 className="card-title">{data.nameCourse}</h5>
-                        <p className="card-text card-custom-courses">{data.introCourse}</p>
-                        <button class="btn btn-primary" onClick={this.gotoCourseDetails}>Ir al curso</button>
-                        <Link to={`/courseDetails/${data.idCOURSE}`}> link </Link>
+                        <Link className="customgoto" to={`/courseDetails/${data.idCOURSE}`}> Ir al curso </Link>
                       </div>
                     </div>
                   </div>

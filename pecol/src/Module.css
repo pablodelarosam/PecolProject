@@ -9,6 +9,7 @@
 
 .poar-border {
       border-right: 2px solid green;
+      color: black !important;
 }
 
 .image-module {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import ReactDOM from 'react-dom';
 import './Dashboard.css';
-
+import './Teacher.css'
 import carmen from './carmen.png' // relative path to image
 import cristi from './imgs/cristi.png'
 import frida from './imgs/frida.png'
@@ -13,8 +13,8 @@ import SideBar from './SideBar.js'
 import gabriela from './imgs/gaby.jpeg'
 import teacher from './imgs/teacher.jpg'
 import secondteacher from './imgs/teacher-two.jpg'
-
-
+import axios from 'axios';
+import ImageLoader from 'react-image-file';
 
 import Signup from './Signup.js'
 
@@ -24,13 +24,47 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
+var images = [];
+var convertedImages = []
 class Teacher extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      teacher: []
+    };
 
 
 
   }
+
+  componentDidMount() {
+    axios.get(`http://localhost:3004/teacher`)
+     .then(res => {
+       const teacher = res.data;
+       for(var i = 0; i < teacher.length; i++) {
+
+         images.push(teacher[i].contentImage)
+       }
+       for(var i = 0; i < images.length; i++) {
+         const fileReaderInstance = new FileReader();
+      //   var file = fileReaderInstance.readAsDataURL(images[i]);
+        // console.log("IMAGE 64", file)
+    //     convertedImages.push(this.convertBase64(images[i]))
+       }
+       console.log("teachers", teacher)
+       this.setState({teacher: teacher });
+        console.log("IMAGES", images)
+     })
+  }
+
+  convertBase64 = blob => {
+    var base64data
+    const fileReaderInstance = new FileReader();
+    fileReaderInstance.readAsDataURL(blob);
+
+    console.log(base64data);
+}
+
 
 
 
@@ -56,16 +90,23 @@ class Teacher extends Component {
             <div className="col-sm-12 sideBar-left">
               <h2>Profesores</h2>
               <div className="container">
-                <div className="card" style={{ width: '18rem' }}>
-                  <img className="card-img-top" src={gabriela} alt="Card image cap" />
-                  <div className="card-body">
-                    <h5 className="card-title">Gabriela Anaya</h5>
-                    <p className="card-text">Licenciada en ciencias de la familia.</p>
-                    <p className="card-text">Diplomados en bioética, familias disfuncionales.</p>
-                    <p className="card-text">Experiencia laboral por más de 18 años.</p>
-                    <a href="#" class="btn btn-primary">Conoce más</a>
-                  </div>
+              <div className="row">
+                  {this.state.teacher.map((data) =>
+              <div className="col-sm-6">
+              <div className="card card-custom" style={{ width: '18rem' }} key={data.idteacher}>
+              <img className="imgteacher" src= {data.contentImage} />
+
+                <div className="card-body">
+                  <h5 className="card-title">{data.nameTeacher}</h5>
+                  <p className="card-text">{data.nombreMateria}</p>
+                  <p className="card-text">{data.descriptionSubject}</p>
+
                 </div>
+              </div>
+              </div>
+                  )}
+              </div>
+
                 <br/>
               </div>
             </div>

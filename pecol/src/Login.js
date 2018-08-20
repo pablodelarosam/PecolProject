@@ -30,7 +30,8 @@ export class Login extends Component {
       Redirect: false,
       isLoggedIn: false,
       username: "",
-      password: ""
+      password: "",
+      userID: ""
     };
     this.login = this.login.bind(this);
     console.log("Historu", history)
@@ -45,8 +46,8 @@ export class Login extends Component {
     console.log("username", username.value)
 
     axios.post('http://localhost:3004/loginPecol', {
-    username: username.value,
-    password: password.value
+    username: this.state.username,
+    password: this.state.password
   })
   .then(function (response) {
     console.log("SUCCESS", response);
@@ -80,9 +81,12 @@ axios.post(`http://localhost:3004/loginPecol`, {   username: this.state.username
   password: this.state.password })
      .then(res => {
        console.log("SUCCESS", res);
+         console.log("Userid", res.data.idStudent);
        if(res.status == 200) {
 
-         this.setState({ isLoggedIn: !(this.state.isLoggedIn)});
+         this.setState({ isLoggedIn: !(this.state.isLoggedIn), userID: res.data.idStudent});
+
+          console.log("Userid", this.state.userID)
            console.log('Successfully Login', this.state);
        //  browserHistory.replace("/login")
        //  store.set('loggedIn', true);
@@ -99,8 +103,9 @@ axios.post(`http://localhost:3004/loginPecol`, {   username: this.state.username
   render() {
     const { redirect } = this.state;
 
+
    if(this.state.isLoggedIn === true){
-         return (<Redirect to="/dashboard" />);
+         return (<Redirect to={"/listCourses/"+ this.state.userID} />);
      }else{
        return (<div className="Login mainDiv">
 

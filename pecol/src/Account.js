@@ -81,9 +81,7 @@ class Account extends Component {
           <div className="col-sm-3 sideBar-left">
             <SideBar />
           </div>
-
-          <div className="dashboard_content">
-            <div className="col-sm-12 sideBar-left">
+            <div className="col-sm-9 sideBar-left">
               <h2>Estado de cuenta</h2>
               <div className="container">
                 <div class="card custom-card  ">
@@ -97,10 +95,10 @@ class Account extends Component {
                           <TableRow>
                             <TableCell>Concepto</TableCell>
 
-                            <TableCell numeric>P1</TableCell>
-                            <TableCell numeric>P2</TableCell>
-                            <TableCell numeric>P3</TableCell>
-                            <TableCell numeric>Calificación</TableCell>
+                            <TableCell numeric>Saldo total</TableCell>
+                            <TableCell numeric>Exigible a la fecha</TableCell>
+                            <TableCell numeric>Pago para no generar intereses</TableCell>
+                            <TableCell numeric>Fecha límite</TableCell>
                           </TableRow>
                         </TableHead>
 
@@ -129,7 +127,7 @@ class Account extends Component {
                 </div>
               </div>
             </div>
-          </div>
+
         </div>
       </div>
 

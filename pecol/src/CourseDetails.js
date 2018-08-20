@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import logo from './logo.svg';
 import ReactDOM from 'react-dom';
-import './Dashboard.css';
 import './CourseDetails.css';
 import human from './imgs/human.jpg'
 import carmen from './carmen.png' // relative path to image
@@ -36,13 +35,13 @@ class CourseDetails extends Component {
 
 componentDidMount() {
  const idC = this.props.match.params.id
-  console.log("PROPS", this.props.match.params.id, idC)
+  console.log("PROPS COURSE DETAILS", this.props.match.params.id, idC)
 axios.get(`http://localhost:3004/courseModules/${idC}`)
  .then(res => {
    const modules = res.data;
 
    this.setState({module: modules });
-     console.log("MODULE", this.state.module[0].idModule)
+     console.log("MODULE", this.state.module[0].idMODULE)
  })
 }
 
@@ -102,7 +101,7 @@ return (
               <h5 class="card-header">{data.nameModule}</h5>
               <div class="card-body">
               <img className="module-img" src={"http://mastermosm.es/conte_ni_dos/uploads/2017/10/propuesta-valor-puzzle.jpg"}/>
-              <Link className=" module-button btn btn-primary" to="/module">Ir al módulo</Link>
+              <Link className=" module-button btn btn-primary" to={`/activity/${data.idMODULE}`}>Ir al módulo</Link>
               </div>
 
               </div>

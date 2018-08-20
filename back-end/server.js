@@ -4,9 +4,11 @@ var bodyParser = require('body-parser');
 var cors = require('cors');
 var path = require("path");
 var session = require('express-session');
+var fileUpload = require('express-fileupload')
 var studentID = 1;
 var currentStudent;
-
+var multer  = require('multer')
+var upload = multer({ dest: 'public/images/upload_images' })
 //var mongoose = require('mongoose');
 //var db = mongoose.connect('mongodb://localhost/swag-shop');
 var mysql = require('mysql');
@@ -25,6 +27,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false
 }));
+
 
 // Add headers
 app.use(function (req, res, next) {
@@ -144,6 +147,90 @@ var paramid = req.param("id");
 
 });
 
+
+//get all rules
+app.get("/rules", function(req, res) {
+  sess = req.session;
+var paramid = req.param("id");
+  console.log(sess.userid);
+  sql = "select * from rule ";
+  connection.query(sql, function(err, records) {
+    // Do something
+    console.log("Datos al consultar: " + records);
+
+    return res.send(records);
+
+
+    if (err) {
+      return res.serverError(err);
+    }
+
+  });
+
+});
+
+//Get all teacher
+
+app.get("/teacher", function(req, res) {
+  sess = req.session;
+var paramid = req.param("id");
+  console.log(sess.userid);
+  sql = "select * from teacher ";
+  connection.query(sql, function(err, records) {
+    // Do something
+    console.log("Datos al consultar: " + records);
+
+    return res.send(records);
+
+
+    if (err) {
+      return res.serverError(err);
+    }
+
+  });
+
+});
+
+//Create teachers
+
+app.post("/createTeacher", upload.single('image'), function (req, res, next) {
+  sess = req.session;
+    console.log("BODY" , req.file, req.body)
+  var paramid = req.body.idTeacher
+  var nameTeacher = req.body.nameTeacher
+  var emailTeacher = req.body.emailTeacher
+  var nombreMateria = req.body.nombreMateria
+  var descriptionSubject = req.body.descriptionSubject
+  var mimeType = req.body.mimetype
+
+ var file = req.file;
+ console.log("File obteained", file)
+ var img_name=file.filename;
+ var host = "http://localhost:3004/images/upload_images/"
+  host += img_name
+
+
+      console.log("saved file", img_name)
+
+  sql = "INSERT INTO teacher VALUES (" + paramid + ",'" + nameTeacher + "','" + emailTeacher + "','" + nombreMateria + "','" + descriptionSubject + "','" + host +"')";
+  connection.query(sql, function(err, records) {
+    // Do something
+  console.log("Datos al consultar: " + records);
+
+    return res.send(records);
+
+
+    if (err) {
+      return res.serverError(err);
+    }
+
+  });
+
+
+});
+
+
+
 //Get all the modules of a course of a certain student
 
 app.get("/courseModules/:id", function(req, res) {
@@ -189,6 +276,7 @@ app.get("/currentModule/:id", function(req, res) {
 
 app.get("/definitions", function(req, res) {
   sess = req.session;
+
   var paramid = req.param("id");
   console.log(sess.userid);
   sql = "SELECT * from  DEFINITION";
@@ -290,6 +378,7 @@ app.post('/signupStudent', function(req, res, next) {
   studentID++;
   return res.send({
     status: 200
+
   });
 
 });
@@ -504,13 +593,13 @@ app.get('/dia', function(req, res) {
   //__dirname : It will resolve to your project folder.
 });
 
-app.get('/activities', function(req, res) {
-  //STUDENT.checkAccount(5204);
-
-  res.send('Activities: ' + ACTIVITY.getAllActivities()[0].place);
-  console.log(ACTIVITY.getAllActivities());
-
-});
+// app.get('/activities', function(req, res) {
+//   //STUDENT.checkAccount(5204);
+//
+//   res.send('Activities: ' + ACTIVITY.getAllActivities()[0].place);
+//   console.log(ACTIVITY.getAllActivities());
+//
+// });
 
 /************** Charts Section ******+*/
 
