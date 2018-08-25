@@ -39,6 +39,9 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', 'http://ec2-34-212-223-202.us-west-2.compute.amazonaws.com:3004');
 
 
+    res.setHeader('Access-Control-Allow-Origin', 'http://pecol.net:3004');
+
+
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 
