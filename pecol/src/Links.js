@@ -11,6 +11,9 @@ import logoPe from './imgs/xaxa.png'
 import acuerdo from './imgs/acuerdo.jpg'
 import SideBar from './SideBar.js'
 import Signup from './Signup.js'
+import TextField from '@material-ui/core/TextField';
+import axios from 'axios'
+import FormData from 'form-data'
 import {
   BrowserRouter as Router,
   Link,
@@ -20,6 +23,20 @@ import {
 class Links extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      linkPecol: []
+    }
+  }
+
+
+  componentDidMount() {
+    axios.get(`http://localhost:3004/getLinks`)
+     .then(res => {
+       const rule = res.data;
+       console.log("links", rule)
+       this.setState({linkPecol: rule });
+        console.log("links", this.state.linkPecol)
+     })
   }
 
   render() {
@@ -58,19 +75,15 @@ class Links extends Component {
 
                   <div className="row">
 
-
-                    <div className="col-sm-6" onClick={this.gotoCourseDetails}>
-                        <h3> Tú eres un milagro </h3>
-                  <iframe width="400" height="315" src="https://www.youtube.com/embed/U08mFi_5hzk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                      {this.state.rulesPecol.map((data) =>
+                    <div className="col-sm-6" >
+                        <h3> {data.nombreEnlace} </h3>
+                  <iframe width="400" height="315" src={data.urlEnlace} frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                     </div>
+                  )}
 
 
-                    <div className="col-sm-6" onClick={this.gotoCourseDetails}>
-                    <h3> El elefante encadenado </h3>
-                    <iframe width="400" height="315" src="https://www.youtube.com/embed/X_qClSB0Du4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                    </div>
 
-                  </div>
 
 
 
@@ -83,6 +96,8 @@ class Links extends Component {
               </div>
             </div>
           </div>
+        </div>
+
         </div>
 
 

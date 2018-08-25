@@ -45,7 +45,7 @@ export class Login extends Component {
 
     console.log("username", username.value)
 
-    axios.post('http://localhost:3004/loginPecol', {
+    axios.post('http://ec2-34-212-223-202.us-west-2.compute.amazonaws.com:3004/loginPecol', {
     username: this.state.username,
     password: this.state.password
   })
@@ -77,7 +77,8 @@ export class Login extends Component {
   event.preventDefault();
 
 
-axios.post(`http://localhost:3004/loginPecol`, {   username: this.state.username,
+axios.post(`http://ec2-34-212-223-202.us-west-2.compute.amazonaws.com:3004/loginPecol`, {
+  username: this.state.username,
   password: this.state.password })
      .then(res => {
        console.log("SUCCESS", res);
@@ -105,7 +106,16 @@ axios.post(`http://localhost:3004/loginPecol`, {   username: this.state.username
 
 
    if(this.state.isLoggedIn === true){
-         return (<Redirect to={"/listCourses/"+ this.state.userID} />);
+
+     if(this.state.userID == "admin1") {
+       return (<Redirect to="/stadistics" />);
+     } else {
+       return (<Redirect to={"/listCourses/"+ this.state.userID} />);
+     }
+
+
+
+
      }else{
        return (<div className="Login mainDiv">
 

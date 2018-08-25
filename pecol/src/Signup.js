@@ -49,7 +49,7 @@ class Signup extends React.Component {
   event.preventDefault();
 
 
-axios.post(`http://localhost:3004/signupStudent`, {
+axios.post(`http://ec2-34-212-223-202.us-west-2.compute.amazonaws.com:3004/signupStudent`, {
    id: this.state.idStudent,
    nameStudent: this.state.nameStudent ,
    age: this.state.age,

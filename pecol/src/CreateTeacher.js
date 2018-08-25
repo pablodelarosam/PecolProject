@@ -53,7 +53,7 @@ class CreateTeacher extends Component {
   event.preventDefault();
 
 
-// axios.post(`http://localhost:3004/createTeacher`, {
+// axios.post(`http://ec2-34-212-223-202.us-west-2.compute.amazonaws.com:3004/createTeacher`, {
 //    id: this.state.idTeacher,
 //    nameTeacher: this.state.nameTeacher ,
 //    emailTeacher: this.state.emailTeacher,
@@ -71,9 +71,9 @@ class CreateTeacher extends Component {
   formData.append('nombreMateria', this.state.nombreMateria)
   formData.append('descriptionSubject' , this.state.descriptionSubject)
 
-  // axios.post(`http://localhost:3004/createTeacher`, this.formData)
+  // axios.post(`http://ec2-34-212-223-202.us-west-2.compute.amazonaws.com:3004/createTeacher`, this.formData)
 
-  axios.post(`http://localhost:3004/createTeacher`, formData, {
+  axios.post(`http://ec2-34-212-223-202.us-west-2.compute.amazonaws.com:3004/createTeacher`, formData, {
     headers: {
       'accept': 'application/json',
       'Accept-Language': 'en-US,en;q=0.8',
@@ -93,25 +93,38 @@ class CreateTeacher extends Component {
     return (
       <div className="dashboard-top">
       <div>
-        <nav className="navbar-sec navbar-expand-lg navbar-light bg-light fixed-top">
-          <a className="navbar-brand" href="#">Pecol</a>
-          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
+      <nav className="navbar-sec navbar-expand-lg navbar-light bg-light fixed-top">
+        <a className="navbar-brand" href="#">Pecol</a>
+        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
+        </button>
 
-          <Link className="custom-link" to="/activity">Agregar curso
-          </Link>
 
-          <Link className="custom-link" to="/definition">Agregar módulo
-          </Link>
+        <Link className="custom-link" to="/createStudent">Agregar estudiante
+        </Link>
 
-          <Link className="custom-link" to="/home">Agregar profesor
-          </Link>
+        <Link className="custom-link" to="/createCourse">Agregar curso
+        </Link>
 
-          <Link className="custom-link" to="/home">Correo
-          </Link>
+        <Link className="custom-link" to="/definition">Agregar aviso
+        </Link>
 
-        </nav>
+        <Link className="custom-link" to="/createTeacher">Agregar profesor
+        </Link>
+
+        <Link className="custom-link" to="/createRule">Agregar regla
+        </Link>
+
+        <Link className="custom-link" to="/createRule">Correo
+        </Link>
+
+        <Link className="custom-link" to="/createRule">Funciones módulo
+        </Link>
+
+        <Link className="custom-link" to="/stadistics">Estadísticas
+        </Link>
+
+      </nav>
       </div>
 
         <div className="upload-file">

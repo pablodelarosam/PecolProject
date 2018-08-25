@@ -34,9 +34,9 @@ class CourseDetails extends Component {
 
 
 componentDidMount() {
- const idC = this.props.match.params.id
-  console.log("PROPS COURSE DETAILS", this.props.match.params.id, idC)
-axios.get(`http://localhost:3004/courseModules/${idC}`)
+ const idC = this.props.match.params.idCourse
+  console.log("PROPS COURSE DETAILS", this.props.match.params.idCourse, idC)
+axios.get(`http://ec2-34-212-223-202.us-west-2.compute.amazonaws.com:3004/courseModules/${idC}`)
  .then(res => {
    const modules = res.data;
 
@@ -75,11 +75,13 @@ return (
       <Link className="custom-link" to="/home">Correo
       </Link>
 
+
+
     </nav>
   </div>
   <div className="row">
     <div className="col-sm-3 sideBar-left">
-      <SideBar/>
+        <SideBar idStudent={this.props.match.params.id} />
     </div>
 
     <div className="col-sm-9">

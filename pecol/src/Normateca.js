@@ -58,7 +58,8 @@ class Normateca extends Component {
             <div className="sideBar-left">
               <h2>Normateca</h2>
               <div className="container">
-              {this.state.rulesPecol.map((data) => 
+              {this.state.rulesPecol.map((data) =>
+
                 <div key={data.idrule}>
                   <h4> {data.title }</h4>
                   <p> {data.description}</p>
