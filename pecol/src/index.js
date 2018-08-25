@@ -21,7 +21,11 @@ import Definition from './Definition'
 import Activity from './Activity'
 import Links from './Links'
 import CreateTeacher from './CreateTeacher'
-
+import CreateRule from './CreateRule'
+import CreateStudent from './CreateStudent'
+import CreateCourse from './CreateCourse'
+import CreateLink from './CreateLink'
+import Stadistics from './Stadistics'
 
 ReactDOM.render(  <Router>
       <div>
@@ -34,15 +38,20 @@ ReactDOM.render(  <Router>
         <Route path="/advertisement" component={Advertisement} />
         <Route path="/teacher" component={Teacher} />
         <Route path="/listCourses/:id" component={ListCourses} />
-        <Route path="/courseDetails/:id" component={CourseDetails} />
+        <Route path="/courseDetails/:idStudent/:idCourse" component={CourseDetails} />
         <Route path="/grades" component={Grades} />
         <Route path="/academicHistory" component={AcademicHistory} />
         <Route path="/account" component={Account} />
-        <Route path="/module/:id" component={Module} />
+        <Route path="/module/:idStudent/:idCourse" component={Module} />
         <Route path="/definition" component={Definition} />
         <Route path="/activity/:id" component={Activity} />
         <Route path="/links" component={Links} />
         <Route path="/createTeacher" component={CreateTeacher} />
+        <Route path="/createRule" component={CreateRule} />
+        <Route path="/createStudent" component={CreateStudent} />
+        <Route path="/createCourse" component={CreateCourse} />
+        <Route path="/createLink" component={CreateLink} />
+        <Route path="/stadistics" component={Stadistics} />
       </div>
   </Router>,document.getElementById('root'));
 registerServiceWorker();

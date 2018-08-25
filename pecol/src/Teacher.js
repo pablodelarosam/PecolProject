@@ -38,7 +38,7 @@ class Teacher extends Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:3004/teacher`)
+    axios.get(`http://ec2-34-212-223-202.us-west-2.compute.amazonaws.com:3004/teacher`)
      .then(res => {
        const teacher = res.data;
        for(var i = 0; i < teacher.length; i++) {
@@ -97,9 +97,9 @@ class Teacher extends Component {
               <img className="imgteacher" src= {data.contentImage} />
 
                 <div className="card-body">
-                  <h5 className="card-title">{data.nameTeacher}</h5>
-                  <p className="card-text">{data.nombreMateria}</p>
-                  <p className="card-text">{data.descriptionSubject}</p>
+                  <h5 className="card-title card-teacher">{data.nameTeacher}</h5>
+                  <p className="card-text card-teacher">{data.nombreMateria}</p>
+                  <p className="card-text card-teacher">{data.descriptionSubject}</p>
 
                 </div>
               </div>

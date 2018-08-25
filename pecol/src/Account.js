@@ -93,7 +93,7 @@ class Account extends Component {
                       <Table className={this.props.table}>
                         <TableHead>
                           <TableRow>
-                            <TableCell>Concepto</TableCell>
+                            <TableCell>Alumno</TableCell>
 
                             <TableCell numeric>Saldo total</TableCell>
                             <TableCell numeric>Exigible a la fecha</TableCell>
