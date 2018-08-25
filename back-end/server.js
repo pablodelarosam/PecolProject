@@ -32,6 +32,8 @@ app.use(bodyParser.urlencoded({
 // Add headers
 app.use(function (req, res, next) {
 
+    res.setHeader('Access-Control-Allow-Origin', '*');
+
     // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
 
