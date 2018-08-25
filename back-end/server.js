@@ -13,10 +13,10 @@ var upload = multer({ dest: 'public/images/upload_images' })
 //var db = mongoose.connect('mongodb://localhost/swag-shop');
 var mysql = require('mysql');
 var connection = mysql.createConnection({
-  host: 'localhost',
+  host: 'pecoldbinstance.ckswo7fwkpjx.us-west-2.rds.amazonaws.com',
   port: 3306,
   user: 'root',
-  password: 'CraftCode1234.',
+  password: 'RDorame945$',
   database: 'pecol'
 });
 app.use(session({
@@ -34,6 +34,7 @@ app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.setHeader('Access-Control-Allow-Origin', 'pecol.net');
 
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
