@@ -103,7 +103,7 @@ axios.post(`http://ec2-34-212-223-202.us-west-2.compute.amazonaws.com:3004/signu
  modifyStudent = event => {
    event.preventDefault();
 
-   axios.put(`http://ec2-34-212-223-202.us-west-2.compute.amazonaws.com:3004/modifyStudent`, {
+   axios.put(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/modifyStudent`, {
      idModify: this.state.idModify,
      nameModify: this.state.nameModify ,
      ageModify: this.state.ageModify,
