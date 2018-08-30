@@ -48,10 +48,10 @@ class SideBar extends Component {
         <Link className="nav-link" to={"/listCourses/" + this.props.idStudent}> Cursos
         </Link>
 
-        <Link className="nav-link" to="/advertisement">Avisos
+        <Link className="nav-link" to={"/advertisement/" + this.props.idStudent}>Avisos
         </Link>
 
-        <Link className="nav-link" to="/teacher">Profesores
+        <Link className="nav-link"  to={"/teacher/" + this.props.idStudent}>Profesores
         </Link>
 
         <Link className="nav-link" to="/grades">Calificaciones
@@ -60,11 +60,11 @@ class SideBar extends Component {
         <Link className="nav-link" to="/academicHistory">Historial académico
         </Link>
 
-        <Link className="nav-link" to="/normateca">Normateca
+        <Link className="nav-link"  to={"/normateca/" + this.props.idStudent}>Normateca
         </Link>
 
 
-        <Link className="nav-link" to="/account">Estado de cuenta
+        <Link className="nav-link"  to={"/account/" + this.props.idStudent}>Estado de cuenta
         </Link>
 
         <Link className="nav-link" to="/home">Salir

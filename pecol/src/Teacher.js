@@ -38,7 +38,7 @@ class Teacher extends Component {
   }
 
   componentDidMount() {
-    axios.get(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/teacher`)
+    axios.get(`http://localhost:3004/teacher`)
      .then(res => {
        const teacher = res.data;
        for(var i = 0; i < teacher.length; i++) {
@@ -83,7 +83,7 @@ class Teacher extends Component {
         </div>
         <div className="row">
           <div className="col-sm-3 sideBar-left">
-            <SideBar />
+            <SideBar idStudent={this.props.match.params.id} />
           </div>
 
           <div className="dashboard_content">

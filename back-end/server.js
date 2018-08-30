@@ -12,11 +12,19 @@ var upload = multer({ dest: 'public/images/upload_images' })
 //var mongoose = require('mongoose');
 //var db = mongoose.connect('mongodb://localhost/swag-shop');
 var mysql = require('mysql');
+// var connection = mysql.createConnection({
+//   host: 'pecoldbinstance.ckswo7fwkpjx.us-west-2.rds.amazonaws.com',
+//   port: 3306,
+//   user: 'root',
+//   password: 'RDorame945$',
+//   database: 'pecol'
+// });
+
 var connection = mysql.createConnection({
-  host: 'pecoldbinstance.ckswo7fwkpjx.us-west-2.rds.amazonaws.com',
+  host: 'localhost',
   port: 3306,
   user: 'root',
-  password: 'RDorame945$',
+  password: 'CraftCode1234.',
   database: 'pecol'
 });
 app.use(session({
@@ -36,6 +44,8 @@ app.use(function (req, res, next) {
 
 
     res.setHeader('Access-Control-Allow-Origin', 'http://pecol.net');
+
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
 
 
     // Request methods you wish to allow
@@ -77,22 +87,14 @@ app.get('/actividad', function(req, res) {
 
 
 
-/**************  Check Student Account ******+*/
-app.use(express.static(__dirname + '/public'));
-
-app.get('/consultar', function(req, res) {
-  sess = req.session;
-  res.sendFile(path.join(__dirname + '/consultar.html'));
-  //__dirname : It will resolve to your project folder.
-});
-
 
 //get all courses of a student is already subscripted
 app.get("/ListCourses/:id", function(req, res) {
   sess = req.session;
 var paramid = req.param("id");
   console.log(sess.userid);
-  sql = "select distinct Course.idCOURSE, Course.nameCourse, Course.introCourse, Course.longDescription from SUBSCRIPT INNER JOIN Course INNER JOIN STUDENT where student.idstudent = " + paramid + " ";
+
+  sql = "select distinct Course.idCOURSE, Course.nameCourse, Course.introCourse, Course.longDescription from SUBSCRIPT INNER JOIN COURSE ON Subscript.idCourse = Course.idCOURSE INNER JOIN STUDENT ON SUBSCRIPT.idStudent = STUDENT.idStudent where SUBSCRIPT.idstudent = '" + paramid + "'";
   connection.query(sql, function(err, records) {
     // Do something
     console.log("Datos al consultar: " + records);
@@ -130,6 +132,25 @@ var paramid = req.param("id");
 
 });
 
+app.get("/advertisements", function(req, res) {
+  sess = req.session;
+var paramid = req.param("id");
+  console.log(sess.userid);
+  sql = "select * from advertisement ";
+  connection.query(sql, function(err, records) {
+    // Do something
+    console.log("Datos al consultar: " + records);
+
+    return res.send(records);
+
+
+    if (err) {
+      return res.serverError(err);
+    }
+
+  });
+
+});
 //Get all teacher
 
 app.get("/teacher", function(req, res) {
@@ -189,6 +210,73 @@ app.post("/createTeacher", upload.single('image'), function (req, res, next) {
 
 
 });
+
+app.post("/deleteTeacher", upload.single('image'), function (req, res, next) {
+  sess = req.session;
+  console.log("ID TO DELTE", req.param("idTeacherDelete"))
+  var idTeacher = req.param("idTeacherDelete");
+
+
+  console.log(idStudent, idCOURSE)
+
+  sql =  "DELETE FROM TEACHER where idTeacher = '" + idTeacher + "'";
+  connection.query(sql, function(err, result) {
+    if (err)
+      return err;
+    res = result;
+    console.log("Student registered", result);
+    //res.send("Created "+JSON.stringify(result));
+  });
+  // STUDENT.counter ++;
+  studentID++;
+  return res.send({
+    status: 200
+
+  });
+
+
+});
+
+
+app.post("/modifyTeacher", upload.single('image'), function (req, res, next) {
+  sess = req.session;
+
+
+  var paramid = req.body.idTeacherModify
+  var nameTeacher = req.body.nameTeacherModify
+  var emailTeacher = req.body.emailTeacherModify
+  var nombreMateria = req.body.nameSubjectModify
+  var descriptionSubject = req.body.descriptionSubjectModify
+  var mimeType = req.body.mimetype
+
+ var file = req.file;
+ console.log("File obteained", file)
+ var img_name=file.filename;
+ var host = "http://localhost:3004/images/upload_images/"
+  host += img_name
+
+
+      console.log("saved file", img_name)
+
+
+
+sql = "UPDATE TEACHER SET nameTeacher = '" + nameTeacher + "', emailteacher = '" + emailTeacher + "' , nombreMateria = '" + nombreMateria + "' , descriptionSubject = '" + descriptionSubject +  "' , contentImage = '" + host +  "' WHERE idTeacher = '" + paramid + "' ";
+  connection.query(sql, function(err, rows, fields) {
+    //connection.end();
+    if (!err) {
+      //  res.send('User added to database with ID: ' + rows);
+      console.log('Curso con id ' + idModify + " modificado");
+      return true;
+
+    } else {
+      console.log('Error while performing Query.');
+      return false;
+    }
+
+  });
+
+});
+
 
 //Create Rule
 
@@ -491,12 +579,16 @@ host += img_name
 app.post("/createAccount",  function (req, res, next) {
   sess = req.session;
 
-  var paramid = req.param("idCourseCSubscription");
-  var studentid = req.param("idStudentCSubscription");
+  var totalcredit = req.param("totalCredit");
+  var exigibleCredit = req.param("exigibleCredit");
+  var interests = req.param("interests");
+  var limitDate = req.param("limitDate");
+  var idStudentAccount = req.param("idStudentAccount");
 
 
 
-  sql = "INSERT INTO ACCOUNTSTUDENT VALUES ('" + studentid + "' ,'" + paramid + "')";
+
+  sql = "INSERT INTO ACCOUNTSTUDENT (saldoTotal, saldoExigible, intereses, limitDate, idStudent) VALUES ('" + totalcredit + "' ,'" + exigibleCredit + "' ,'" + interests + "' ,'" + limitDate + "' ,'" + idStudentAccount + "')";
   connection.query(sql, function(err, records) {
     // Do something
   console.log("Datos al consultar: " + records);
@@ -506,6 +598,148 @@ app.post("/createAccount",  function (req, res, next) {
 
     if (err) {
       return res.serverError(err);
+    }
+
+  });
+
+
+});
+
+app.get("/getPersonnelAccount/:id", function(req, res) {
+  sess = req.session;
+  var paramid = req.param("id");
+  console.log(sess.userid);
+  sql = "SELECT * from  ACCOUNTSTUDENT where idStudent = '" + paramid + "'";
+  connection.query(sql, function(err, records) {
+    // Do something
+    console.log("Datos al consultar: " + records);
+
+    return res.send(records);
+
+
+    if (err) {
+      return res.serverError(err);
+    }
+
+  });
+
+});
+
+app.post("/createAdvertisement", upload.single('image'),   function (req, res, next) {
+  sess = req.session;
+
+  var title = req.param("title");
+  var description = req.param("description");
+  var dated = req.param("dated");
+  var image = req.param("image");
+
+
+
+  var mimeType = req.body.mimetype
+
+ var file = req.file;
+ console.log("File obteained", file)
+ var img_name=file.filename;
+ var host = "http://localhost:3004/images/upload_images/"
+  host += img_name
+
+
+
+
+
+  sql = "INSERT INTO ADVERTISEMENT (title,description,dated, image)  VALUES ('" + title + "' , '" + description + "' , '" + dated + "' , '" + host +  "')";
+  console.log("sql",sql)
+  connection.query(sql, function(err, records) {
+    // Do something
+  console.log("Datos al consultar: " + records);
+
+    return res.send(records);
+
+
+    if (err) {
+      return res.serverError(err);
+    }
+
+  });
+
+
+});
+
+app.post("/deleteAdvertisement",  function (req, res, next) {
+  sess = req.session;
+
+  var title = req.param("titleDelete")
+
+
+
+
+
+  sql =  "DELETE FROM ADVERTISEMENT where title = " + title + " ";
+  connection.query(sql, function(err, result) {
+    if (err)
+      return err;
+    res = result;
+    console.log("Student registered"), result;
+    //res.send("Created "+JSON.stringify(result));
+  });
+  // STUDENT.counter ++;
+  studentID++;
+  return res.send({
+    status: 200
+
+  });
+
+
+});
+
+
+app.post("/deleteAccount",  function (req, res, next) {
+  sess = req.session;
+
+  var paramid = req.param("idStudentAccountDelete");
+
+
+
+  sql =  "DELETE FROM ACCOUNTSTUDENT where idStudent = " + paramid + " ";
+  connection.query(sql, function(err, result) {
+    if (err)
+      return err;
+    res = result;
+    console.log("Student registered"), result;
+    //res.send("Created "+JSON.stringify(result));
+  });
+  // STUDENT.counter ++;
+  studentID++;
+  return res.send({
+    status: 200
+
+  });
+
+
+});
+
+app.post("/modifyAccount",  function (req, res, next) {
+  sess = req.session;
+
+  var totalcredit = req.param("totalCreditModify");
+  var exigibleCredit = req.param("exigibleCreditModify");
+  var interests = req.param("interestsModify");
+  var limitDate = req.param("limitDateModify");
+  var idStudentAccount = req.param("idStudentAccountModify");
+
+
+
+sql = "UPDATE ACCOUNTSTUDENT SET saldoTotal = '" + totalcredit + "', saldoExigible = '" + exigibleCredit + "' , intereses = '" + interests + "' , limitDate = '" + limitDate +  "' WHERE idStudent = '" + idStudentAccount + "' ";
+  connection.query(sql, function(err, rows, fields) {
+    //connection.end();
+    if (!err) {
+      //  res.send('User added to database with ID: ' + rows);
+      console.log('Curso con id ' + idModify + " modificado");
+      return true;
+
+    } else {
+      console.log('Error while performing Query.');
+      return false;
     }
 
   });
@@ -572,7 +806,7 @@ app.post('/loginPecol', function(req, res, next) {
       if (!err) {
         //  res.send('User added to database with ID: ' + rows);
         for (var i = 0; i < rows.length; i++) {
-            console.log('idStudent: ', rows[i]);
+          //  console.log('idStudent: ', rows[i]);
           if (rows[i].nameStudent == req.body.username && rows[i].password == req.body.password) {
             console.log('idStudent: ', rows[i]);
             // currentStudent = rows[i].idStudent;
@@ -778,6 +1012,70 @@ app.get("/activities/:id", function(req, res) {
   var paramid = req.param("id");
   console.log(sess.userid);
   sql = "SELECT * from  ACTIVITY where idModule = " + paramid + " ";
+  connection.query(sql, function(err, records) {
+    // Do something
+    console.log("Datos al consultar: "+records);
+
+    return res.send(records);
+
+
+    if (err) {
+      return res.serverError(err);
+    }
+
+  });
+
+});
+
+
+app.post("/createActivites", upload.single('image'),   function (req, res, next) {
+  sess = req.session;
+
+  var title = req.param("idACTIVITY");
+  var description = req.param("nameActivity");
+  var dated = req.param("typeActivity");
+  var image = req.param("idModule");
+
+
+//RDorame945$
+
+  var mimeType = req.body.mimetype
+
+ var file = req.file;
+ console.log("File obteained", file)
+ var img_name=file.filename;
+ var host = "http://localhost:3004/images/upload_images/"
+  host += img_name
+
+
+
+
+
+  sql = "INSERT INTO ACTIVITY VALUES ('" + title + "' , '" + description + "' , '" + dated + "' , '" + image +  "', '" + host +  "', null )";
+  console.log("sql",sql)
+  connection.query(sql, function(err, records) {
+    // Do something
+  console.log("Datos al consultar: " + records);
+
+    return res.send(records);
+
+
+    if (err) {
+      return res.serverError(err);
+    }
+
+  });
+
+
+});
+
+//gET QUESTION AND ANSWER OF CROSSWORD, FREE QUESTION
+
+app.get("/qa/:id", function(req, res) {
+  sess = req.session;
+  var paramid = req.param("id");
+  console.log(sess.userid);
+  sql = "SELECT * from  ACTIVITY where idActivity = '" + paramid + "'";
   connection.query(sql, function(err, records) {
     // Do something
     console.log("Datos al consultar: "+records);
