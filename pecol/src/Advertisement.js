@@ -29,7 +29,7 @@ class Advertisement extends Component {
   componentDidMount() {
     const idC = this.props.match.params.id
      console.log("PROPS", this.props.match.params.id, idC)
- axios.get(`http://localhost:3004/advertisements`)
+ axios.get(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/advertisements`)
    .then(res => {
      const courses = res.data;
 
@@ -56,7 +56,7 @@ class Advertisement extends Component {
           </div>
 
 
-      
+
             <div className="col-sm-9 sideBar-left">
               <h2>Avisos</h2>
               <div className="container">

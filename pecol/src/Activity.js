@@ -31,7 +31,7 @@ class Activity extends Component {
   componentDidMount() {
     const idC = this.props.match.params.idModule
      console.log("PROPS ACTIVITIES", this.props.match.params.id, idC)
-  axios.get(`http://localhost:3004/activities/${idC}`)
+  axios.get(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/activities/${idC}`)
    .then(res => {
      const activities = res.data;
 
@@ -90,7 +90,7 @@ class Activity extends Component {
                                           <div className="card-body">
                                             <h5 className="card-title">{data.nameActivity}</h5>
 
-                                            <Link className=" module-button btn btn-primary" to={`/activityDetails/${this.props.match.params.idStudent}/${data.typeActivity}/${data.idACTIVITY}`}>Ir a la actividad</Link>
+                                      <Link className=" module-button btn btn-primary" to={`/activityDetails/${this.props.match.params.idStudent}/${data.typeActivity}/${data.idACTIVITY}/${data.idModule}`}>Ir a la actividad</Link>
                                           </div>
                                         </div>
                                       </div>

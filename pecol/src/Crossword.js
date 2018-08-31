@@ -23,7 +23,7 @@ class Crossword extends Component {
     super(props);
   }
 
-  componentDidMount(){
+  componentWillMount(){
     console.log("Crossword details", this.props)
 
   }

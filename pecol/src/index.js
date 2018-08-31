@@ -50,7 +50,7 @@ ReactDOM.render(  <Router>
         <Route path="/module/:idStudent/:idCourse" component={Module} />
         <Route path="/definition" component={Definition} />
         <Route path="/activity/:idStudent/:idModule" component={Activity} />
-        <Route path="/activityDetails/:idStudent/:type/:idActivity" component={ActivityDetails} />
+        <Route path="/activityDetails/:idStudent/:type/:idActivity/:idModule" component={ActivityDetails} />
         <Route path="/createActivity" component={CreateActivity} />
         <Route path="/links" component={Links} />
         <Route path="/createTeacher" component={CreateTeacher} />

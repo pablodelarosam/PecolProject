@@ -29,7 +29,7 @@ class Definition extends Component {
 
 
   componentDidMount() {
- axios.get(`http://localhost:3004/definitions`)
+ axios.get(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/definitions`)
    .then(res => {
      const definitions = res.data;
 

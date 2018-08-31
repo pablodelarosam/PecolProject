@@ -45,7 +45,7 @@ export class Login extends Component {
 
     console.log("username", username.value)
 
-    axios.post('http://localhost:3004/loginPecol', {
+    axios.post('http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/loginPecol', {
     username: this.state.username,
     password: this.state.password
   })
@@ -77,7 +77,7 @@ export class Login extends Component {
   event.preventDefault();
 
 
-axios.post(`http://localhost:3004/loginPecol`, {
+axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/loginPecol`, {
   username: this.state.username,
   password: this.state.password })
      .then(res => {
