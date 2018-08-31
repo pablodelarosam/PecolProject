@@ -96,7 +96,7 @@ app.get("/ListCourses/:id", function(req, res) {
   var paramid = req.param("id");
   console.log(sess.userid);
 
-  sql = "SELECT DISTINCT COURSE.idCOURSE, COURSE.nameCourse, COURSE.introCourse, COURSE.longDescription FROM SUBSCRIPT INNER JOIN COURSE ON SUBSCRIPT.idCourse = COURSE.idCOURSE INNER JOIN student ON SUBSCRIPT.idStudent = student.idStudent WHERE SUBSCRIPT.idstudent = '" + paramid + "'";
+  sql = "SELECT DISTINCT course.idCourse, course.nameCourse, course.introCourse, course.longDescription FROM subscript INNER JOIN course ON subscript.idCourse = course.idCourse INNER JOIN student ON subscript.idStudent = student.idStudent WHERE subscript.idStudent = '" + paramid + "'";
 
   connection.query(sql, function(err, records) {
     // Do something
@@ -220,7 +220,7 @@ app.post("/deleteTeacher", upload.single('image'), function(req, res, next) {
   var idTeacher = req.param("idTeacherDelete");
 
 
-  console.log(idStudent, idCOURSE)
+  console.log(idStudent, idCourse)
 
   sql = "DELETE FROM teacher where idTeacher = '" + idTeacher + "'";
   connection.query(sql, function(err, result) {
@@ -263,7 +263,7 @@ app.post("/modifyTeacher", upload.single('image'), function(req, res, next) {
 
 
 
-  sql = "UPDATE teacher SET nameTeacher = '" + nameTeacher + "', emailteacher = '" + emailTeacher + "' , nombreMateria = '" + nombreMateria + "' , descriptionSubject = '" + descriptionSubject + "' , contentImage = '" + host + "' WHERE idTeacher = '" + paramid + "' ";
+  sql = "UPDATE teacher SET nameTeacher = '" + nameTeacher + "', emailTeacher = '" + emailTeacher + "' , nombreMateria = '" + nombreMateria + "' , descriptionSubject = '" + descriptionSubject + "' , contentImage = '" + host + "' WHERE idTeacher = '" + paramid + "' ";
   connection.query(sql, function(err, rows, fields) {
     //connection.end();
     if (!err) {
@@ -315,12 +315,12 @@ app.post("/createRule", upload.single('image'), function(req, res, next) {
 app.post("/createCourse", upload.single('image'), function(req, res, next) {
   sess = req.session;
 
-  var paramid = req.body.idCOURSE
+  var paramid = req.body.idCourse
   var nameCourse = req.body.nameCourse
   var introCourse = req.body.introCourse
 
 
-  sql = "INSERT INTO COURSE VALUES ('" + paramid + "','" + nameCourse + "','" + introCourse + "' , null)";
+  sql = "INSERT INTO course VALUES ('" + paramid + "','" + nameCourse + "','" + introCourse + "' , null)";
   connection.query(sql, function(err, records) {
     // Do something
     console.log("Datos al consultar: " + records);
@@ -345,7 +345,7 @@ app.post("/createSubscription", function(req, res, next) {
 
 
 
-  sql = "INSERT INTO SUBSCRIPT VALUES ('" + studentid + "' ,'" + paramid + "')";
+  sql = "INSERT INTO subscript VALUES ('" + studentid + "' ,'" + paramid + "')";
   connection.query(sql, function(err, records) {
     // Do something
     console.log("Datos al consultar: " + records);
@@ -367,11 +367,11 @@ app.post('/deleteSubscription', function(req, res, next) {
   sess = req.session;
   console.log("ID TO DELTE", req.param("idCourseDSubscription"))
   var idStudent = req.param("idStudentDSubscription");
-  var idCOURSE = req.param("idCourseDSubscription");
+  var idCourse = req.param("idCourseDSubscription");
 
-  console.log(idStudent, idCOURSE)
+  console.log(idStudent, idCourse)
 
-  sql = "DELETE FROM SUBSCRIPT where idStudent = '" + idStudent + "' AND idCourse =  '" + idCOURSE + "'";
+  sql = "DELETE FROM subscript where idStudent = '" + idStudent + "' AND idCourse =  '" + idCourse + "'";
   connection.query(sql, function(err, result) {
     if (err)
       return err;
@@ -399,7 +399,7 @@ app.post("/createLink", upload.single('image'), function(req, res, next) {
 
 
 
-  sql = "INSERT INTO LINK VALUES (" + paramid + ",'" + urlEnlace + "')";
+  sql = "INSERT INTO link VALUES (" + paramid + ",'" + urlEnlace + "')";
   connection.query(sql, function(err, records) {
     // Do something
     console.log("Datos al consultar: " + records);
@@ -422,7 +422,7 @@ app.get("/getLinks", function(req, res) {
   sess = req.session;
   var paramid = req.param("id");
   console.log(sess.userid);
-  sql = "select * from LINK ";
+  sql = "select * from link ";
   connection.query(sql, function(err, records) {
     // Do something
     console.log("Datos al consultar: " + records);
@@ -445,7 +445,7 @@ app.get("/courseModules/:id", function(req, res) {
   sess = req.session;
   var paramid = req.param("id");
   console.log(sess.userid);
-  sql = "SELECT * from  MODULE where idCourse = " + paramid + " ";
+  sql = "SELECT * from  module where idCourse = " + paramid + " ";
   connection.query(sql, function(err, records) {
     // Do something
     console.log("Datos al consultar: " + records);
@@ -464,7 +464,7 @@ app.get("/currentModule/:id", function(req, res) {
   sess = req.session;
   var paramid = req.param("id");
   console.log(sess.userid);
-  sql = "SELECT * from  MODULE where idModule = " + paramid + " ";
+  sql = "SELECT * from  module where idModule = " + paramid + " ";
   connection.query(sql, function(err, records) {
     // Do something
     console.log("Datos al consultar: " + records);
@@ -501,7 +501,7 @@ app.post("/createModule", upload.single('image'), function(req, res, next) {
 
   console.log("saved file", img_name)
 
-  sql = "INSERT INTO MODULE VALUES ('" + paramid + "','" + nameModule + "','" + moduleDescription + "','" + idCourse + "','" + host + "')";
+  sql = "INSERT INTO module VALUES ('" + paramid + "','" + nameModule + "','" + moduleDescription + "','" + idCourse + "','" + host + "')";
   connection.query(sql, function(err, records) {
     // Do something
     console.log("Datos al consultar: " + records);
@@ -526,7 +526,7 @@ app.post('/deleteModule', function(req, res, next) {
 
   console.log(idStudent)
 
-  sql = "DELETE FROM MODULE where idMODULE = '" + idStudent + "'";
+  sql = "DELETE FROM module where idModule = '" + idStudent + "'";
   connection.query(sql, function(err, result) {
     if (err)
       return err;
@@ -559,7 +559,7 @@ app.put('/modifyModule', upload.single('image'), function(req, res, next) {
   var host = "http://localhost:3004/images/upload_images/"
   host += img_name
 
-  sql = "UPDATE MODULE SET nameModule = '" + nameModule + "', moduleDescription = '" + moduleDescription + "' , idCourse = '" + idCourse + "', contentImage = '" + host + "' WHERE idModule = '" + paramid + "' ";
+  sql = "UPDATE module SET nameModule = '" + nameModule + "', moduleDescription = '" + moduleDescription + "' , idCourse = '" + idCourse + "', contentImage = '" + host + "' WHERE idModule = '" + paramid + "' ";
   connection.query(sql, function(err, result) {
     if (err)
       return err;
@@ -589,7 +589,7 @@ app.post("/createAccount", function(req, res, next) {
 
 
 
-  sql = "INSERT INTO ACCOUNTSTUDENT (saldoTotal, saldoExigible, intereses, limitDate, idStudent) VALUES ('" + totalcredit + "' ,'" + exigibleCredit + "' ,'" + interests + "' ,'" + limitDate + "' ,'" + idStudentAccount + "')";
+  sql = "INSERT INTO accountStudent (saldoTotal, saldoExigible, intereses, limitDate, idStudent) VALUES ('" + totalcredit + "' ,'" + exigibleCredit + "' ,'" + interests + "' ,'" + limitDate + "' ,'" + idStudentAccount + "')";
   connection.query(sql, function(err, records) {
     // Do something
     console.log("Datos al consultar: " + records);
@@ -610,7 +610,7 @@ app.get("/getPersonnelAccount/:id", function(req, res) {
   sess = req.session;
   var paramid = req.param("id");
   console.log(sess.userid);
-  sql = "SELECT * from  ACCOUNTSTUDENT where idStudent = '" + paramid + "'";
+  sql = "SELECT * from  accountStudent where idStudent = '" + paramid + "'";
   connection.query(sql, function(err, records) {
     // Do something
     console.log("Datos al consultar: " + records);
@@ -648,7 +648,7 @@ app.post("/createAdvertisement", upload.single('image'), function(req, res, next
 
 
 
-  sql = "INSERT INTO advertisement (title,description,dated, image)  VALUES ('" + title + "' , '" + description + "' , '" + dated + "' , '" + host + "')";
+  sql = "INSERT INTO advertisement (title, description, date, image)  VALUES ('" + title + "' , '" + description + "' , '" + dated + "' , '" + host + "')";
   console.log("sql", sql)
   connection.query(sql, function(err, records) {
     // Do something
@@ -675,7 +675,7 @@ app.post("/deleteAdvertisement", function(req, res, next) {
 
 
 
-  sql = "DELETE FROM ADVERTISEMENT where title = " + title + " ";
+  sql = "DELETE FROM advertisement where title = " + title + " ";
   connection.query(sql, function(err, result) {
     if (err)
       return err;
@@ -701,7 +701,7 @@ app.post("/deleteAccount", function(req, res, next) {
 
 
 
-  sql = "DELETE FROM ACCOUNTSTUDENT where idstudent = " + paramid + " ";
+  sql = "DELETE FROM accountStudent where idStudent = " + paramid + " ";
   connection.query(sql, function(err, result) {
     if (err)
       return err;
@@ -729,7 +729,7 @@ app.post("/modifyAccount", function(req, res, next) {
 
 
 
-  sql = "UPDATE ACCOUNTSTUDENT SET saldoTotal = '" + totalcredit + "', saldoExigible = '" + exigibleCredit + "' , intereses = '" + interests + "' , limitDate = '" + limitDate + "' WHERE idstudent = '" + idStudentAccount + "' ";
+  sql = "UPDATE accountStudent SET saldoTotal = '" + totalcredit + "', saldoExigible = '" + exigibleCredit + "' , intereses = '" + interests + "' , limitDate = '" + limitDate + "' WHERE idStudent = '" + idStudentAccount + "' ";
   connection.query(sql, function(err, rows, fields) {
     //connection.end();
     if (!err) {
@@ -755,7 +755,7 @@ app.get("/definitions", function(req, res) {
 
   var paramid = req.param("id");
   console.log(sess.userid);
-  sql = "SELECT * from  DEFINITION";
+  sql = "SELECT * from  definition";
   connection.query(sql, function(err, records) {
     // Do something
     console.log("Datos al consultar: " + records);
@@ -776,7 +776,7 @@ app.get("/allCourses", function(req, res) {
   sess = req.session;
   var paramid = req.param("id");
   console.log(sess.userid);
-  sql = "SELECT * from  COURSE";
+  sql = "SELECT * from  course";
   connection.query(sql, function(err, records) {
     // Do something
     console.log("Datos al consultar: " + records);
@@ -810,7 +810,7 @@ app.post('/loginPecol', function(req, res, next) {
           if (rows[i].nameStudent == req.body.username && rows[i].password == req.body.password) {
             console.log('idStudent: ', rows[i]);
             // currentStudent = rows[i].idStudent;
-            sess.userid = rows[i].idstudent;
+            sess.userid = rows[i].idStudent;
             res.send({
               idStudent: sess.userid,
               records: rows[i],
@@ -865,7 +865,7 @@ app.post('/deleteStudent', function(req, res, next) {
   console.log("ID TO DELTE", req.param("idDelete"))
   var idStudent = req.param("idDelete");
 
-  sql = "DELETE FROM student where idstudent = '" + idStudent + "' ";
+  sql = "DELETE FROM student where idStudent = '" + idStudent + "' ";
   connection.query(sql, function(err, result) {
     if (err)
       return err;
@@ -887,7 +887,7 @@ app.post('/deleteRule', function(req, res, next) {
   console.log("ID TO DELTE", req.param("idDelete"))
   var idRule = req.param("idDelete");
 
-  sql = "DELETE FROM rule where idrule = " + idRule + " ";
+  sql = "DELETE FROM rule where idRule = " + idRule + " ";
   connection.query(sql, function(err, result) {
     if (err)
       return err;
@@ -910,7 +910,7 @@ app.post('/deleteCourse', function(req, res, next) {
   console.log("ID TO DELTE", req.param("idDelete"))
   var idStudent = req.param("idDelete");
 
-  sql = "DELETE FROM COURSE where idCOURSE = '" + idStudent + "' ";
+  sql = "DELETE FROM course where idCourse = '" + idStudent + "' ";
   connection.query(sql, function(err, result) {
     if (err)
       return err;
@@ -932,7 +932,7 @@ app.put('/modifyCourse', function(req, res, next) {
   var nameCourse = req.param("nameModify")
 
 
-  sql = "UPDATE COURSE SET nameCourse = '" + nameCourse + "' WHERE idCOURSE = '" + idModify + "' ";
+  sql = "UPDATE course SET nameCourse = '" + nameCourse + "' WHERE idCourse = '" + idModify + "' ";
   connection.query(sql, function(err, rows, fields) {
     //connection.end();
     if (!err) {
@@ -957,7 +957,7 @@ app.put('/modifyRule', function(req, res, next) {
   var nameCourse = req.param("nameModify")
   var desc = req.param("descriptionModify")
 
-  sql = "UPDATE rule SET title = '" + nameCourse + "', description = '" + desc + "' WHERE idrule = '" + idModify + "' ";
+  sql = "UPDATE rule SET title = '" + nameCourse + "', description = '" + desc + "' WHERE idRule = '" + idModify + "' ";
   connection.query(sql, function(err, rows, fields) {
     //connection.end();
     if (!err) {
@@ -985,7 +985,7 @@ app.put('/modifyStudent', function(req, res, next) {
   var emailModify = req.param("emailModify");
   var passwordModify = req.param("passwordModify");
 
-  sql = "UPDATE student SET nameStudent = '" + nameStudent + "', age = " + ageModify + " , email = '" + emailModify + "', password = '" + passwordModify + "' WHERE idstudent = '" + idModify + "' ";
+  sql = "UPDATE student SET nameStudent = '" + nameStudent + "', age = " + ageModify + " , email = '" + emailModify + "', password = '" + passwordModify + "' WHERE idStudent = '" + idModify + "' ";
   connection.query(sql, function(err, rows, fields) {
     //connection.end();
     if (!err) {
@@ -1008,7 +1008,7 @@ app.get("/activities/:id", function(req, res) {
   sess = req.session;
   var paramid = req.param("id");
   console.log(sess.userid);
-  sql = "SELECT * from  ACTIVITY where idModule = " + paramid + " ";
+  sql = "SELECT * from  activity where idModule = " + paramid + " ";
   connection.query(sql, function(err, records) {
     // Do something
     console.log("Datos al consultar: " + records);
@@ -1028,7 +1028,7 @@ app.get("/activities/:id", function(req, res) {
 app.post("/createActivites", upload.single('image'), function(req, res, next) {
   sess = req.session;
 
-  var title = req.param("idACTIVITY");
+  var title = req.param("idActivity");
   var description = req.param("nameActivity");
   var dated = req.param("typeActivity");
   var image = req.param("idModule");
@@ -1048,7 +1048,7 @@ app.post("/createActivites", upload.single('image'), function(req, res, next) {
 
 
 
-  sql = "INSERT INTO ACTIVITY VALUES ('" + title + "' , '" + description + "' , '" + dated + "' , '" + image + "', '" + host + "', null )";
+  sql = "INSERT INTO activity VALUES ('" + title + "' , '" + description + "' , '" + dated + "' , '" + image + "', '" + host + "', null )";
   console.log("sql", sql)
   connection.query(sql, function(err, records) {
     // Do something
@@ -1072,7 +1072,7 @@ app.get("/qa/:id", function(req, res) {
   sess = req.session;
   var paramid = req.param("id");
   console.log(sess.userid);
-  sql = "SELECT * from  ACTIVITY where idActivity = '" + paramid + "'";
+  sql = "SELECT * from  activity where idActivity = '" + paramid + "'";
   connection.query(sql, function(err, records) {
     // Do something
     console.log("Datos al consultar: " + records);
@@ -1091,7 +1091,7 @@ app.get("/qa/:id", function(req, res) {
 
 app.get("/getActivity/:id", function(req, res) {
   var id = req.param("id");
-  sql = "SELECT *, DATE_FORMAT(startDate, '%Y-%m-%dT%H:%i') AS cStartDate, DATE_FORMAT(endDate, '%Y-%m-%dT%H:%i') AS cEndDate from ACTIVITY where idActivity = " + id + " ";
+  sql = "SELECT *, DATE_FORMAT(startDate, '%Y-%m-%dT%H:%i') AS cStartDate, DATE_FORMAT(endDate, '%Y-%m-%dT%H:%i') AS cEndDate from activity where idActivity = " + id + " ";
   connection.query(sql, function(err, records) {
     // Do something
     console.log(records);
@@ -1252,7 +1252,7 @@ app.get('/eliminar-estudiante', function(req, res) {
 
 app.delete('/student/delete/:id', function(req, res) {
   var id = req.param("id");
-  sql = "DELETE FROM ACTIVITY where idStudent = " + id;
+  sql = "DELETE FROM activity where idStudent = " + id;
   connection.query(sql, function(err, result) {
     if (err)
       throw err;
@@ -1409,7 +1409,7 @@ var ACTIVITY = (function() {
   return {
     checkAccount: function(id) {
 
-      sql = "SELECT * from ACTIVITY where idActivity = " + id + " ";
+      sql = "SELECT * from activity where idActivity = " + id + " ";
       connection.query(sql, function(err, rows, fields) {
         //connection.end();
         if (!err) {
@@ -1427,7 +1427,7 @@ var ACTIVITY = (function() {
 
     modificarRating: function(id, g) {
       console.log("Modiifcando actividad");
-      sql = "UPDATE ACTIVITY SET grade = " + g + " WHERE idActivity = " + id + " order by grade LIMIT 1";
+      sql = "UPDATE activity SET grade = " + g + " WHERE idActivity = " + id + " order by grade LIMIT 1";
       connection.query(sql, function(err, rows, fields) {
         //connection.end();
         if (!err) {
@@ -1445,7 +1445,7 @@ var ACTIVITY = (function() {
 
     modificarActividad: function(id, idS, n, p, s, e, t, f, g) {
       console.log("Modiifcando actividad");
-      sql = "UPDATE ACTIVITY SET idStudent= '" + idS + "', nameAct = '" + n + "', place='" + p + "', startDate = '" + s + "', endDate = '" + e + "', type = '" + t + "', frecuency = '" + f + "', grade = '" + g + "' WHERE idActivity = " + id;
+      sql = "UPDATE activity SET idStudent= '" + idS + "', nameAct = '" + n + "', place='" + p + "', startDate = '" + s + "', endDate = '" + e + "', type = '" + t + "', frecuency = '" + f + "', grade = '" + g + "' WHERE idActivity = " + id;
       connection.query(sql, function(err, rows, fields) {
         //connection.end();
         if (!err) {
@@ -1463,7 +1463,7 @@ var ACTIVITY = (function() {
 
     registerActivity: function(id, n, p, s, e, t, f) {
 
-      sql = "INSERT INTO ACTIVITY VALUES (" + activityID + ", " + id + ", '" + n + "','" + p + "','" + s + "','" + e + "','" + t + "','" + f + "', " + 0 + ")";
+      sql = "INSERT INTO activity VALUES (" + activityID + ", " + id + ", '" + n + "','" + p + "','" + s + "','" + e + "','" + t + "','" + f + "', " + 0 + ")";
       console.log(sql);
       connection.query(sql, function(err, result) {
         if (err)
@@ -1477,7 +1477,7 @@ var ACTIVITY = (function() {
 
     deleteActivity: function(id) {
 
-      sql = "delete from ACTIVITY where idActivity = " + id + " ";
+      sql = "delete from activity where idActivity = " + id + " ";
       connection.query(sql, function(err, result) {
         if (err)
           throw err;
@@ -1486,7 +1486,7 @@ var ACTIVITY = (function() {
     },
 
     getAllActivities: function() {
-      sql = "SELECT * FROM ACTIVITY";
+      sql = "SELECT * FROM activity";
       connection.query(sql, function(err, rows, fields) {
         //connection.end();
         if (!err) {
