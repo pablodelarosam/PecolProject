@@ -43,9 +43,9 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
 
 
-    res.setHeader('Access-Control-Allow-Origin', 'http://pecol.net');
+     res.setHeader('Access-Control-Allow-Origin', 'http://pecol.net');
 
-    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+     // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
 
 
     // Request methods you wish to allow
@@ -1525,6 +1525,16 @@ app.post('/contact', function(req, res) {
     res.send("Created " + JSON.stringify(result));
   });
   //res.send("Received"+req.body)
+});
+
+var http=require('http');
+
+var server=http.createServer(function(req,res){
+    res.end('test');
+});
+
+server.on('listening',function(){
+    console.log('ok, server is running');
 });
 
 app.listen(3004, function() {

@@ -76,7 +76,6 @@ export class Login extends Component {
   handleSubmit = event => {
   event.preventDefault();
 
-
 axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/loginPecol`, {
   username: this.state.username,
   password: this.state.password })
