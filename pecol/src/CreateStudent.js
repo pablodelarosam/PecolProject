@@ -57,7 +57,7 @@ class CreateStudent extends Component {
   event.preventDefault();
 
 
-axios.post(`http://ec2-34-212-223-202.us-west-2.compute.amazonaws.com:3004/signupStudent`, {
+axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/signupStudent`, {
    id: this.state.id,
    nameStudent: this.state.nameStudent ,
    age: this.state.age,
