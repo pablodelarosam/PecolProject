@@ -526,7 +526,7 @@ app.post('/deleteModule', function(req, res, next) {
 
   console.log(idStudent)
 
-  sql = "DELETE FROM MODULE where idModule = '" + idStudent + "'";
+  sql = "DELETE FROM MODULE where idMODULE = '" + idStudent + "'";
   connection.query(sql, function(err, result) {
     if (err)
       return err;
@@ -538,9 +538,7 @@ app.post('/deleteModule', function(req, res, next) {
   studentID++;
   return res.send({
     status: 200
-
   });
-
 });
 
 
@@ -650,7 +648,7 @@ app.post("/createAdvertisement", upload.single('image'), function(req, res, next
 
 
 
-  sql = "INSERT INTO ADVERTISEMENT (title,description,dated, image)  VALUES ('" + title + "' , '" + description + "' , '" + dated + "' , '" + host + "')";
+  sql = "INSERT INTO advertisement (title,description,dated, image)  VALUES ('" + title + "' , '" + description + "' , '" + dated + "' , '" + host + "')";
   console.log("sql", sql)
   connection.query(sql, function(err, records) {
     // Do something
@@ -703,7 +701,7 @@ app.post("/deleteAccount", function(req, res, next) {
 
 
 
-  sql = "DELETE FROM ACCOUNTSTUDENT where idStudent = " + paramid + " ";
+  sql = "DELETE FROM ACCOUNTSTUDENT where idstudent = " + paramid + " ";
   connection.query(sql, function(err, result) {
     if (err)
       return err;
@@ -715,7 +713,6 @@ app.post("/deleteAccount", function(req, res, next) {
   studentID++;
   return res.send({
     status: 200
-
   });
 
 
@@ -732,7 +729,7 @@ app.post("/modifyAccount", function(req, res, next) {
 
 
 
-  sql = "UPDATE ACCOUNTSTUDENT SET saldoTotal = '" + totalcredit + "', saldoExigible = '" + exigibleCredit + "' , intereses = '" + interests + "' , limitDate = '" + limitDate + "' WHERE idStudent = '" + idStudentAccount + "' ";
+  sql = "UPDATE ACCOUNTSTUDENT SET saldoTotal = '" + totalcredit + "', saldoExigible = '" + exigibleCredit + "' , intereses = '" + interests + "' , limitDate = '" + limitDate + "' WHERE idstudent = '" + idStudentAccount + "' ";
   connection.query(sql, function(err, rows, fields) {
     //connection.end();
     if (!err) {
@@ -890,7 +887,7 @@ app.post('/deleteRule', function(req, res, next) {
   console.log("ID TO DELTE", req.param("idDelete"))
   var idRule = req.param("idDelete");
 
-  sql = "DELETE FROM rule where idRule = " + idRule + " ";
+  sql = "DELETE FROM rule where idrule = " + idRule + " ";
   connection.query(sql, function(err, result) {
     if (err)
       return err;
@@ -960,7 +957,7 @@ app.put('/modifyRule', function(req, res, next) {
   var nameCourse = req.param("nameModify")
   var desc = req.param("descriptionModify")
 
-  sql = "UPDATE rule SET title = '" + nameCourse + "', description = '" + desc + "' WHERE idRule = '" + idModify + "' ";
+  sql = "UPDATE rule SET title = '" + nameCourse + "', description = '" + desc + "' WHERE idrule = '" + idModify + "' ";
   connection.query(sql, function(err, rows, fields) {
     //connection.end();
     if (!err) {
@@ -988,7 +985,7 @@ app.put('/modifyStudent', function(req, res, next) {
   var emailModify = req.param("emailModify");
   var passwordModify = req.param("passwordModify");
 
-  sql = "UPDATE student SET nameStudent = '" + nameStudent + "', age = " + ageModify + " , email = '" + emailModify + "', password = '" + passwordModify + "' WHERE idStudent = '" + idModify + "' ";
+  sql = "UPDATE student SET nameStudent = '" + nameStudent + "', age = " + ageModify + " , email = '" + emailModify + "', password = '" + passwordModify + "' WHERE idstudent = '" + idModify + "' ";
   connection.query(sql, function(err, rows, fields) {
     //connection.end();
     if (!err) {
