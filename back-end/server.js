@@ -94,7 +94,7 @@ app.get("/ListCourses/:id", function(req, res) {
 var paramid = req.param("id");
   console.log(sess.userid);
 
-  sql = "select distinct Course.idCOURSE, Course.nameCourse, Course.introCourse, Course.longDescription from SUBSCRIPT INNER JOIN COURSE ON Subscript.idCourse = Course.idCOURSE INNER JOIN STUDENT ON SUBSCRIPT.idStudent = STUDENT.idStudent where SUBSCRIPT.idstudent = '" + paramid + "'";
+  sql = "SELECT DISTINCT COURSE.idCOURSE, COURSE.nameCourse, COURSE.introCourse, COURSE.longDescription FROM SUBSCRIPT INNER JOIN COURSE ON SUBSCRIPT.idCourse = COURSE.idCOURSE INNER JOIN student ON SUBSCRIPT.idStudent = student.idStudent WHERE SUBSCRIPT.idstudent = '" + paramid + "'";
   connection.query(sql, function(err, records) {
     // Do something
     console.log("Datos al consultar: " + records);
@@ -289,7 +289,7 @@ app.post("/createRule", upload.single('image'), function (req, res, next) {
 
 
 
-  sql = "INSERT INTO RULE VALUES (" + paramid + ",'" + nameRule + "','" + descriptionRule +"')";
+  sql = "INSERT INTO RULE VALUES ('" + paramid + "','" + nameRule + "','" + descriptionRule +"')";
   connection.query(sql, function(err, records) {
     // Do something
   console.log("Datos al consultar: " + records);
