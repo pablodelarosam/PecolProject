@@ -41,7 +41,7 @@ class ListCourses extends Component {
      const courses = res.data;
 
      this.setState({course: courses });
-    //   console.log("course", this.state.course[0].idCOURSE)
+       console.log("course", this.state.course[0])
    })
 }
 

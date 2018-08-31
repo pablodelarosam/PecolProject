@@ -30,7 +30,15 @@ class CreateTeacher extends Component {
       nameTeacher: "",
       emailTeacher: "",
       nombreMateria: "",
-      descriptionSubject: ""
+      descriptionSubject: "",
+      idTeacherDelete: "",
+      fileSelectedModify: "",
+      idTeacherModify: "",
+      contentImageModify: "",
+      descriptionSubjectModify: "",
+      nameSubjectModify: "",
+      emailTeacherModify: "",
+      nameTeacherModify: ""
     };
   }
 
@@ -38,6 +46,13 @@ class CreateTeacher extends Component {
     console.log("event", event.target.files[0])
     this.setState({
       fileSelected : event.target.files[0]
+    })
+  };
+
+  fileSelectedHandlerModify = event => {
+    console.log("event", event.target.files[0])
+    this.setState({
+      fileSelectedModify : event.target.files[0]
     })
   };
 
@@ -51,17 +66,6 @@ class CreateTeacher extends Component {
 
   handleSubmit = event => {
   event.preventDefault();
-
-
-// axios.post(`http://ec2-34-212-223-202.us-west-2.compute.amazonaws.com:3004/createTeacher`, {
-//    id: this.state.idTeacher,
-//    nameTeacher: this.state.nameTeacher ,
-//    emailTeacher: this.state.emailTeacher,
-//    nombreMateria: this.state.nombreMateria ,
-//    descriptionSubject: this.state.descriptionSubject,
-//    fileSelected: this.state.fileSelected.name,
-//    mimeType: this.state.fileSelected.type
-//  })
 
  const formData = new FormData();
   formData.append("image", this.state.fileSelected, this.state.fileSelected.name)
@@ -88,6 +92,57 @@ class CreateTeacher extends Component {
     });
   };
 
+  deleteTeacher = event => {
+      event.preventDefault();
+
+      axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteTeacher`, {
+        idTeacherDelete: this.state.idTeacherDelete
+
+       })
+           .then(res => {
+             console.log("SUCCESS", res);
+             if(res.status == 200) {
+
+
+             //  browserHistory.replace("/login")
+             //  store.set('loggedIn', true);
+             //this.props.history.push("/");
+
+             }
+           })
+  }
+
+  modifyTeacher = event => {
+      event.preventDefault();
+
+      const formData = new FormData();
+       formData.append("image", this.state.fileSelectedModify, this.state.fileSelectedModify.name)
+       formData.append('idTeacherModify', this.state.idTeacherModify)
+       formData.append('nameTeacherModify', this.state.nameTeacherModify)
+       formData.append('emailTeacherModify', this.state.emailTeacherModify)
+       formData.append('nameSubjectModify', this.state.nameSubjectModify)
+       formData.append('descriptionSubjectModify', this.state.descriptionSubjectModify)
+
+
+       // axios.post(`http://ec2-34-212-223-202.us-west-2.compute.amazonaws.com:3004/createTeacher`, this.formData)
+
+       axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/modifyTeacher`, formData, {
+         headers: {
+           'accept': 'application/json',
+           'Accept-Language': 'en-US,en;q=0.8',
+           'Content-Type': `multipart/form-data; boundary=${formData._boundary}`,
+         }
+       })
+         .then((response) => {
+           //handle success
+           console.log("success upload")
+         }).catch((error) => {
+           //handle error
+         });
+
+
+  }
+
 
   render() {
     return (
@@ -99,14 +154,13 @@ class CreateTeacher extends Component {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-
         <Link className="custom-link" to="/createStudent">Agregar estudiante
         </Link>
 
         <Link className="custom-link" to="/createCourse">Agregar curso
         </Link>
 
-        <Link className="custom-link" to="/definition">Agregar aviso
+        <Link className="custom-link" to="/createAdvertisement">Agregar aviso
         </Link>
 
         <Link className="custom-link" to="/createTeacher">Agregar profesor
@@ -118,7 +172,7 @@ class CreateTeacher extends Component {
         <Link className="custom-link" to="/createRule">Correo
         </Link>
 
-        <Link className="custom-link" to="/createRule">Funciones módulo
+        <Link className="custom-link" to="/createRule">Módulo
         </Link>
 
         <Link className="custom-link" to="/stadistics">Estadísticas
@@ -126,24 +180,64 @@ class CreateTeacher extends Component {
 
       </nav>
       </div>
+  <div className="upload-file">
+      <div className="row">
 
-        <div className="upload-file">
+      <div className="col-sm-6">
 
+      <h3> Eliminar maestro </h3>
 
-        <form onSubmit={this.handleSubmit}>
-        <TextField id="idTeacher" placeholder="Id" onChange={this.handleChange} value={this.state.id} />
-        <TextField id="nameTeacher" placeholder="Nombre" onChange={this.handleChange} value={this.state.nameTeacher}/>
-        <TextField id="emailTeacher" placeholder="Email" onChange={this.handleChange} value={this.state.emailTeacher}/>
-        <TextField id="nombreMateria" placeholder="Materia" onChange={this.handleChange} value={this.state.nombreMateria} />
-        <TextField id="descriptionSubject" placeholder="Descripción" onChange={this.handleChange} value={this.state.descriptionSubject} />
-        <input type="file" onChange={this.fileSelectedHandler} />
-
-        <button type="submit"> Registrar </button>
-
-        </form>
+      <form onSubmit={this.deleteTeacher}>
+      <TextField id="idTeacherDelete" placeholder="Id" onChange={this.handleChange} value={this.state.idTeacherDelete} />
 
 
-        </div>
+      <button type="submit"> Eliminar </button>
+
+      </form>
+
+            <h3> Modificar maestro </h3>
+
+            <form onSubmit={this.modifyTeacher}>
+            <TextField id="idTeacherModify" placeholder="Id" onChange={this.handleChange} value={this.state.idTeacherModify} />
+            <TextField id="nameTeacherModify" placeholder="Nombre" onChange={this.handleChange} value={this.state.nameTeacherModify}/>
+            <TextField id="emailTeacherModify" placeholder="Email" onChange={this.handleChange} value={this.state.emailTeacherModify}/>
+            <TextField id="nameSubjectModify" placeholder="Materia" onChange={this.handleChange} value={this.state.nameSubjectModify} />
+            <TextField id="descriptionSubjectModify" placeholder="Descripción" onChange={this.handleChange} value={this.state.descriptionSubjectModify} />
+            <input type="file" onChange={this.fileSelectedHandlerModify} />
+
+            <button type="submit"> Modificar </button>
+
+            </form>
+
+      </div>
+
+      <div className="col-sm-6">
+
+      <div className="upload-file">
+
+      <h3> Crear profesor </h3>
+
+
+      <form onSubmit={this.handleSubmit}>
+      <TextField id="idTeacher" placeholder="Id" onChange={this.handleChange} value={this.state.id} />
+      <TextField id="nameTeacher" placeholder="Nombre" onChange={this.handleChange} value={this.state.nameTeacher}/>
+      <TextField id="emailTeacher" placeholder="Email" onChange={this.handleChange} value={this.state.emailTeacher}/>
+      <TextField id="nombreMateria" placeholder="Materia" onChange={this.handleChange} value={this.state.nombreMateria} />
+      <TextField id="descriptionSubject" placeholder="Descripción" onChange={this.handleChange} value={this.state.descriptionSubject} />
+      <input type="file" onChange={this.fileSelectedHandler} />
+
+      <button type="submit"> Registrar </button>
+
+      </form>
+
+
+      </div>
+
+      </div>
+
+      </div>
+
+</div>
 
 
 

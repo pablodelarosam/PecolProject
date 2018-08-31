@@ -51,7 +51,13 @@ class CreateCourse extends Component {
       exigibleCredit: "",
       interests: "",
       limitDate: "",
-      idStudentAccount: ""
+      idStudentAccount: "",
+      idStudentAccountDelete: "",
+      totalCreditModify: "",
+      exigibleCreditModify: "",
+      interestsModify: "",
+      limitDateModify: "",
+      idStudentAccountModify: ""
 
 
     };
@@ -306,6 +312,54 @@ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/creat
       })
  }
 
+ deleteAccount = event => {
+   event.preventDefault();
+
+
+ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteAccount`, {
+   idStudentAccountDelete: this.state.idStudentAccountDelete
+
+  })
+      .then(res => {
+        console.log("SUCCESS", res);
+        if(res.status == 200) {
+
+
+        //  browserHistory.replace("/login")
+        //  store.set('loggedIn', true);
+        //this.props.history.push("/");
+
+        }
+      })
+ }
+
+ modifyAccount = event => {
+   event.preventDefault();
+
+
+ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/modifyAccount`, {
+   totalCreditModify: this.state.totalCreditModify,
+   exigibleCreditModify: this.state.exigibleCreditModify,
+   interestsModify: this.state.interestsModify,
+   limitDateModify: this.state.limitDateModify ,
+   idStudentAccountModify: this.state.idStudentAccountModify
+
+
+
+  })
+      .then(res => {
+        console.log("SUCCESS", res);
+        if(res.status == 200) {
+
+
+        //  browserHistory.replace("/login")
+        //  store.set('loggedIn', true);
+        //this.props.history.push("/");
+
+        }
+      })
+ }
+
   render() {
     return (
       <div className="dashboard-top">
@@ -323,7 +377,7 @@ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/creat
           <Link className="custom-link" to="/createCourse">Agregar curso
           </Link>
 
-          <Link className="custom-link" to="/definition">Agregar aviso
+          <Link className="custom-link" to="/createAdvertisement">Agregar aviso
           </Link>
 
           <Link className="custom-link" to="/createTeacher">Agregar profesor
@@ -335,7 +389,7 @@ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/creat
           <Link className="custom-link" to="/createRule">Correo
           </Link>
 
-          <Link className="custom-link" to="/createRule">Funciones módulo
+          <Link className="custom-link" to="/createRule">Módulo
           </Link>
 
           <Link className="custom-link" to="/stadistics">Estadísticas
@@ -504,6 +558,41 @@ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/creat
 
   <div className="row divide-row">
   <div className="col-sm-6">
+
+    <h4> Borrar cuenta </h4>
+
+    <form onSubmit={this.deleteAccount} className="formCourse">
+      <TextField id="idStudentAccountDelete" label="Id " placeholder="ID de estudiante" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idStudentAccountDelete}  />
+      <br />
+
+
+
+      {/*<input type="submit" className="btn btn-success" value="Iniciar sesión" />*/}
+      <button className="nav-link btn btn-success" type="submit">Borrar cuenta</button>
+    </form>
+
+
+      <h4> Modificar cuenta </h4>
+
+      <form onSubmit={this.modifyAccount} className="formCourse">
+      <TextField id="idStudentAccountModify" label="Id" placeholder="Id del estudiante" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idStudentAccountModify}  />
+      <br />
+        <TextField id="totalCreditModify" label="Crédito " placeholder="Crédito total" className="textField" margin="normal" onChange={this.handleChange} value={this.state.totalCreditModify}  />
+        <br />
+        <TextField id="exigibleCreditModify" label="Crédito exigible" placeholder="Crédito exigible" className="textField" margin="normal" onChange={this.handleChange} value={this.state.exigibleCreditModify}  />
+        <br />
+        <TextField id="interestsModify" label="Intereses" placeholder="Intereses" className="textField" margin="normal" onChange={this.handleChange} value={this.state.interestsModify}  />
+        <br />
+        <TextField id="limitDateModify" label="Fecha límite" placeholder="Fecha límite" className="textField" margin="normal" onChange={this.handleChange} value={this.state.limitDateModify}  />
+        <br />
+
+
+
+
+        {/*<input type="submit" className="btn btn-success" value="Iniciar sesión" />*/}
+        <button className="nav-link btn btn-success" type="submit">Modificar cuenta</button>
+
+        </form>
 
   </div>
 

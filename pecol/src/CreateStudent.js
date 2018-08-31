@@ -82,8 +82,7 @@ axios.post(`http://ec2-34-212-223-202.us-west-2.compute.amazonaws.com:3004/signu
  deleteStudent = event => {
    event.preventDefault();
 
-
-   axios.post(`http://ec2-34-212-223-202.us-west-2.compute.amazonaws.com:3004/deleteStudent`, {
+   axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteStudent`, {
       idDelete: this.state.idDelete,
 
 
@@ -142,7 +141,7 @@ axios.post(`http://ec2-34-212-223-202.us-west-2.compute.amazonaws.com:3004/signu
         <Link className="custom-link" to="/createCourse">Agregar curso
         </Link>
 
-        <Link className="custom-link" to="/definition">Agregar aviso
+        <Link className="custom-link" to="/createAdvertisement">Agregar aviso
         </Link>
 
         <Link className="custom-link" to="/createTeacher">Agregar profesor
@@ -154,7 +153,7 @@ axios.post(`http://ec2-34-212-223-202.us-west-2.compute.amazonaws.com:3004/signu
         <Link className="custom-link" to="/createRule">Correo
         </Link>
 
-        <Link className="custom-link" to="/createRule">Funciones módulo
+        <Link className="custom-link" to="/createRule">Módulo
         </Link>
 
         <Link className="custom-link" to="/stadistics">Estadísticas

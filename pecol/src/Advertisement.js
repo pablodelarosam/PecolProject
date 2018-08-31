@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import ReactDOM from 'react-dom';
 import './Dashboard.css';
+import './Advertisement.css';
 
 import carmen from './carmen.png' // relative path to image
 import cristi from './imgs/cristi.png'
@@ -12,12 +13,29 @@ import acuerdo from './imgs/acuerdo.jpg'
 import SideBar from './SideBar.js'
 import human from './imgs/human.jpg'
 import Signup from './Signup.js'
+import axios from 'axios';
 
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 class Advertisement extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      advertisement: []
+    }
 
+  }
+
+
+  componentDidMount() {
+    const idC = this.props.match.params.id
+     console.log("PROPS", this.props.match.params.id, idC)
+ axios.get(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/advertisements`)
+   .then(res => {
+     const courses = res.data;
+
+     this.setState({advertisement: courses });
+    //   console.log("course", this.state.course[0].idCOURSE)
+   })
   }
 
   render() {
@@ -34,45 +52,38 @@ class Advertisement extends Component {
         </div>
         <div className="row">
           <div className="col-sm-3 sideBar-left">
-            <SideBar />
+            <SideBar idStudent={this.props.match.params.id} />
           </div>
 
 
-          <div className="dashboard_content">
-            <div className="col-sm-12 sideBar-left">
+
+            <div className="col-sm-9 sideBar-left">
               <h2>Avisos</h2>
               <div className="container">
                 <div className="row">
-                  <div className="col-sm-6">
+                  {this.state.advertisement.map((data) =>
+                    <div className="col-sm-6">
 
 
-                    <div className="card" style={{
-                      width: '18rem'
-                    }}>
-                      <img className="card-img-top" src={human} alt="Card image cap" />
-                      <div className="card-body">
-                        <h5 className="card-title">Aviso 1</h5>
-                        <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Leer más</a>
+                      <div className="card custom-card" style={{
+                        width: '18rem'
+                      }}>
+                        <img className="card-img-top" src={data.image} alt="Card image cap" />
+                        <div className="card-body">
+                          <h5 className="card-title">{data.title}</h5>
+                          <p className="card-text">{data.description}</p>
+
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="col-sm-6">
-                    <div className="card" style={{
-                      width: '18rem'
-                    }}>
-                      <img className="card-img-top" src={human} alt="Card image cap" />
-                      <div className="card-body">
-                        <h5 className="card-title">Aviso 2</h5>
-                        <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Leer más</a>
-                      </div>
-                    </div>
-                  </div>
+
+                  )}
+
+
                 </div>
               </div>
             </div>
-          </div>
+
         </div>
       </div>
 

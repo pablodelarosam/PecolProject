@@ -22,7 +22,7 @@ import Paper from '@material-ui/core/Paper';
 
 
 import Signup from './Signup.js'
-
+import axios from 'axios';
 
 import {
   BrowserRouter as Router,
@@ -57,9 +57,24 @@ const data = [
 class Account extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      account: []
+    }
 
 
 
+  }
+
+  componentDidMount() {
+    const idC = this.props.match.params.id
+     console.log("PROPS", this.props.match.params.id, idC)
+ axios.get(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/getPersonnelAccount/${idC}`)
+   .then(res => {
+     const accounts = res.data;
+
+     this.setState({account: accounts });
+    //   console.log("course", this.state.course[0].idCOURSE)
+   })
   }
 
 
@@ -79,7 +94,7 @@ class Account extends Component {
         </div>
         <div className="row">
           <div className="col-sm-3 sideBar-left">
-            <SideBar />
+            <SideBar idStudent= {this.props.match.params.id} />
           </div>
             <div className="col-sm-9 sideBar-left">
               <h2>Estado de cuenta</h2>
@@ -103,16 +118,16 @@ class Account extends Component {
                         </TableHead>
 
                         <TableBody>
-                          {data.map(n => {
+                          {this.state.account.map(n => {
                             return (
-                              <TableRow key={n.id}>
+                              <TableRow key={n.idStudent}>
                                 <TableCell component="th" scope="row">
-                                  {n.name}
+                                  {n.idStudent}
                                 </TableCell>
-                                <TableCell numeric>{n.partial1}</TableCell>
-                                <TableCell numeric>{n.partial2}</TableCell>
-                                <TableCell numeric>{n.partial3}</TableCell>
-                                <TableCell numeric>{n.grade}</TableCell>
+                                <TableCell numeric>{n.saldoTotal}</TableCell>
+                                <TableCell numeric>{n.saldoExigible}</TableCell>
+                                <TableCell numeric>{n.intereses}</TableCell>
+                                <TableCell numeric>{n.limitDate}</TableCell>
 
                               </TableRow>
                             );

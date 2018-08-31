@@ -43,14 +43,13 @@ class Stadistics extends Component {
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
             </button>
-
             <Link className="custom-link" to="/createStudent">Agregar estudiante
             </Link>
 
             <Link className="custom-link" to="/createCourse">Agregar curso
             </Link>
 
-            <Link className="custom-link" to="/definition">Agregar módulo
+            <Link className="custom-link" to="/createAdvertisement">Agregar aviso
             </Link>
 
             <Link className="custom-link" to="/createTeacher">Agregar profesor
@@ -59,18 +58,29 @@ class Stadistics extends Component {
             <Link className="custom-link" to="/createRule">Agregar regla
             </Link>
 
+            <Link className="custom-link" to="/createRule">Correo
+            </Link>
+
+            <Link className="custom-link" to="/createRule">Módulo
+            </Link>
+
             <Link className="custom-link" to="/stadistics">Estadísticas
             </Link>
+
 
           </nav>
         </div>
 
         <div className="container stadistics">
           <h2>Estadísticas</h2>
+          <div className="upload-file">
+
 
           <button onClick={this.downloadStadistics}>
             Descargar estadísticas
           </button>
+
+          </div>
 
         </div>
 

@@ -35,6 +35,7 @@ class CourseDetails extends Component {
 
 componentDidMount() {
  const idC = this.props.match.params.idCourse
+ const idStu = this.props.match.params.idStudent
   console.log("PROPS COURSE DETAILS", this.props.match.params.idCourse, idC)
 axios.get(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/courseModules/${idC}`)
  .then(res => {
@@ -103,7 +104,7 @@ return (
               <h5 class="card-header">{data.nameModule}</h5>
               <div class="card-body">
               <img className="module-img" src={"http://mastermosm.es/conte_ni_dos/uploads/2017/10/propuesta-valor-puzzle.jpg"}/>
-              <Link className=" module-button btn btn-primary" to={`/activity/${data.idMODULE}`}>Ir al módulo</Link>
+              <Link className=" module-button btn btn-primary" to={`/activity/${this.props.match.params.idStudent}/${data.idMODULE}`}>Ir al módulo</Link>
               </div>
 
               </div>
