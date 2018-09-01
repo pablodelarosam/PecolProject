@@ -799,7 +799,7 @@ app.post('/loginPecol', function(req, res, next) {
 
 
   if (req.body.username && req.body.password) {
-    console.log("BODYYYY", req.body);
+  console.log("BODYYYY", req.body);
     sql = "select * from student";
     connection.query(sql, function(err, rows) {
       //connection.end();
@@ -810,7 +810,7 @@ app.post('/loginPecol', function(req, res, next) {
           if (rows[i].nameStudent == req.body.username && rows[i].password == req.body.password) {
             console.log('idStudent: ', rows[i]);
             // currentStudent = rows[i].idStudent;
-            sess.userid = rows[i].idstudent;
+             sess.userid = rows[i].idstudent;
             res.send({
               idStudent: sess.userid,
               records: rows[i],
@@ -833,6 +833,7 @@ app.post('/loginPecol', function(req, res, next) {
   }
 
 });
+
 
 
 app.post('/signupStudent', function(req, res, next) {
