@@ -810,7 +810,7 @@ app.post('/loginPecol', function(req, res, next) {
           if (rows[i].nameStudent == req.body.username && rows[i].password == req.body.password) {
             console.log('idStudent: ', rows[i]);
             // currentStudent = rows[i].idStudent;
-            sess.userid = rows[i].idStudent;
+            sess.userid = rows[i].idstudent;
             res.send({
               idStudent: sess.userid,
               records: rows[i],
