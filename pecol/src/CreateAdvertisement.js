@@ -70,7 +70,7 @@ class CreateAdvertisement extends Component {
 
   // axios.post(`http://ec2-34-212-223-202.us-west-2.compute.amazonaws.com:3004/createTeacher`, this.formData)
 
-  axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createAdvertisement`, formData, {
+  axios.post(`http://localhost:3004/createAdvertisement`, formData, {
     headers: {
       'accept': 'application/json',
       'Accept-Language': 'en-US,en;q=0.8',
@@ -88,8 +88,8 @@ class CreateAdvertisement extends Component {
   deleteAdvertisement = event => {
       event.preventDefault();
 
-      axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteAdvertisement`, {
-        idTeacherDelete: this.state.idTeacherDelete
+      axios.post(`http://localhost:3004/deleteAdvertisement`, {
+        titleDelete: this.state.titleDelete
 
        })
            .then(res => {
@@ -152,7 +152,7 @@ class CreateAdvertisement extends Component {
 
       <h3> Eliminar aviso </h3>
 
-      <form onSubmit={this.deleteTeacher}>
+      <form onSubmit={this.deleteAdvertisement}>
       <TextField id="titleDelete" placeholder="Título del aviso" onChange={this.handleChange} value={this.state.titleDelete} />
 
 

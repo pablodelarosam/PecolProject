@@ -57,7 +57,7 @@ class CreateStudent extends Component {
   event.preventDefault();
 
 
-axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/signupStudent`, {
+axios.post(`http://localhost:3004/signupStudent`, {
    id: this.state.id,
    nameStudent: this.state.nameStudent ,
    age: this.state.age,
@@ -82,7 +82,7 @@ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/signu
  deleteStudent = event => {
    event.preventDefault();
 
-   axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteStudent`, {
+   axios.post(`http://localhost:3004/deleteStudent`, {
       idDelete: this.state.idDelete,
 
 
@@ -102,7 +102,7 @@ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/signu
  modifyStudent = event => {
    event.preventDefault();
 
-   axios.put(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/modifyStudent`, {
+   axios.put(`http://localhost:3004/modifyStudent`, {
      idModify: this.state.idModify,
      nameModify: this.state.nameModify ,
      ageModify: this.state.ageModify,

@@ -71,7 +71,7 @@ class CreateActivity extends Component {
 
   // axios.post(`http://ec2-34-212-223-202.us-west-2.compute.amazonaws.com:3004/createTeacher`, this.formData)
 
-  axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createActivites`, formData, {
+  axios.post(`http://localhost:3004/createActivites`, formData, {
     headers: {
       'accept': 'application/json',
       'Accept-Language': 'en-US,en;q=0.8',
@@ -89,7 +89,7 @@ class CreateActivity extends Component {
   deleteAdvertisement = event => {
       event.preventDefault();
 
-      axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteAdvertisement`, {
+      axios.post(`http://localhost:3004/deleteAdvertisement`, {
         idTeacherDelete: this.state.idTeacherDelete
 
        })

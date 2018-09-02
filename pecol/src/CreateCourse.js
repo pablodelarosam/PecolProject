@@ -79,7 +79,7 @@ class CreateCourse extends Component {
   event.preventDefault();
 
 
-axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createCourse`, {
+axios.post(`http://localhost:3004/createCourse`, {
   idCOURSE: this.state.idCOURSE,
   nameCourse: this.state.nameCourse,
   introCourse: this.state.introCourse
@@ -103,7 +103,7 @@ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/creat
  event.preventDefault();
 
 
-axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createSubscription`, {
+axios.post(`http://localhost:3004/createSubscription`, {
  idStudentCSubscription: this.state.idStudentCSubscription,
  idCourseCSubscription: this.state.idCourseCSubscription
 
@@ -126,7 +126,7 @@ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/creat
    event.preventDefault();
 
 
-   axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteCourse`, {
+   axios.post(`http://localhost:3004/deleteCourse`, {
      idDelete: this.state.idDelete,
 
 
@@ -149,7 +149,7 @@ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/creat
    event.preventDefault();
 
 
-   axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteSubscription`, {
+   axios.post(`http://localhost:3004/deleteSubscription`, {
      idStudentDSubscription: this.state.idStudentDSubscription,
      idCourseDSubscription: this.state.idCourseDSubscription,
 
@@ -170,7 +170,7 @@ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/creat
  modifyCourse = event => {
    event.preventDefault();
 
-   axios.put(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/modifyCourse`, {
+   axios.put(`http://localhost:3004/modifyCourse`, {
      idModify: this.state.idModify,
      nameModify: this.state.nameModify
 
@@ -200,9 +200,9 @@ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/creat
     formData.append('idCourseModule', this.state.idCourseModule)
 
 
-    // axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createTeacher`, this.formData)
+    // axios.post(`http://localhost:3004/createTeacher`, this.formData)
 
-    axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createModule`, formData, {
+    axios.post(`http://localhost:3004/createModule`, formData, {
       headers: {
         'accept': 'application/json',
         'Accept-Language': 'en-US,en;q=0.8',
@@ -231,9 +231,9 @@ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/creat
     formData.append('idCourseModule', this.state.idModifyModuleCourse)
 
 
-    // axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createTeacher`, this.formData)
+    // axios.post(`http://localhost:3004/createTeacher`, this.formData)
 
-    axios.put(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/modifyModule`, formData, {
+    axios.put(`http://localhost:3004/modifyModule`, formData, {
       headers: {
         'accept': 'application/json',
         'Accept-Language': 'en-US,en;q=0.8',
@@ -255,7 +255,7 @@ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/creat
    event.preventDefault();
 
 
-   axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteModule`, {
+   axios.post(`http://localhost:3004/deleteModule`, {
      idDeleteModule: this.state.idDeleteModule,
 
 
@@ -291,7 +291,7 @@ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/creat
    event.preventDefault();
 
 
- axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createAccount`, {
+ axios.post(`http://localhost:3004/createAccount`, {
    totalCredit: this.state.totalCredit,
    exigibleCredit: this.state.exigibleCredit,
    interests: this.state.introCourse,
@@ -316,7 +316,7 @@ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/creat
    event.preventDefault();
 
 
- axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteAccount`, {
+ axios.post(`http://localhost:3004/deleteAccount`, {
    idStudentAccountDelete: this.state.idStudentAccountDelete
 
   })
@@ -337,7 +337,7 @@ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/creat
    event.preventDefault();
 
 
- axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/modifyAccount`, {
+ axios.post(`http://localhost:3004/modifyAccount`, {
    totalCreditModify: this.state.totalCreditModify,
    exigibleCreditModify: this.state.exigibleCreditModify,
    interestsModify: this.state.interestsModify,
@@ -602,15 +602,15 @@ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/creat
   <h4> Crear cuenta </h4>
 
   <form onSubmit={this.createAccount} className="formCourse">
-    <TextField id="totalCredit" label="Id " placeholder="ID de módulo" className="textField" margin="normal" onChange={this.handleChange} value={this.state.totalCredit}  />
+    <TextField id="totalCredit" label="Crédito total " placeholder="Crédito total" className="textField" margin="normal" onChange={this.handleChange} value={this.state.totalCredit}  />
     <br />
-    <TextField id="exigibleCredit" label="Nombre" placeholder="Nombre de módulo" className="textField" margin="normal" onChange={this.handleChange} value={this.state.exigibleCredit}  />
+    <TextField id="exigibleCredit" label="Crédito exigible" placeholder="Crédito exigible" className="textField" margin="normal" onChange={this.handleChange} value={this.state.exigibleCredit}  />
     <br />
-    <TextField id="interests" label="Nombre" placeholder="Curso asociado" className="textField" margin="normal" onChange={this.handleChange} value={this.state.interests}  />
+    <TextField id="interests" label="Intereses" placeholder="Intereses" className="textField" margin="normal" onChange={this.handleChange} value={this.state.interests}  />
     <br />
-    <TextField id="limitDate" label="Nombre" placeholder="Curso asociado" className="textField" margin="normal" onChange={this.handleChange} value={this.state.limitDate}  />
+    <TextField id="limitDate" label="Fecha límite" placeholder="Fecha límite" className="textField" margin="normal" onChange={this.handleChange} value={this.state.limitDate}  />
     <br />
-    <TextField id="idStudentAccount" label="Nombre" placeholder="Curso asociado" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idStudentAccount}  />
+    <TextField id="idStudentAccount" label="Id del estudiante asociado" placeholder="Id del estudiante asociado" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idStudentAccount}  />
     <br />
 
 

@@ -36,7 +36,7 @@ class ListCourses extends Component {
   componentDidMount() {
     const idC = this.props.match.params.id
      console.log("PROPS", this.props.match.params.id, idC)
- axios.get(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/ListCourses/${idC}`)
+ axios.get(`http://localhost:3004/ListCourses/${idC}`)
    .then(res => {
      const courses = res.data;
 
@@ -82,7 +82,7 @@ gotoCourseDetails() {
                       <img className="card-img-top" src={human} alt="Card image cap" />
                       <div className="card-body">
                         <h5 className="card-title">{data.nameCourse}</h5>
-                        <Link className="customgoto" to={`/courseDetails/${this.props.match.params.id}/${data.idCOURSE}`}> Ir al curso </Link>
+                        <Link className="customgoto" to={`/courseDetails/${this.props.match.params.id}/${data.idCourse}`}> Ir al curso </Link>
                       </div>
                     </div>
                   </div>
