@@ -52,9 +52,9 @@ class CreateRule extends Component {
   formData.append('descriptionRule', this.state.descriptionRule)
 
 
-  // axios.post(`http://localhost:3004/createTeacher`, this.formData)
+  // axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createTeacher`, this.formData)
 
-  axios.post(`http://localhost:3004/createRule`, formData, {
+  axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createRule`, formData, {
     headers: {
       'accept': 'application/json',
       'Accept-Language': 'en-US,en;q=0.8',
@@ -74,7 +74,7 @@ class CreateRule extends Component {
     event.preventDefault();
 
 
-    axios.post(`http://localhost:3004/deleteRule`, {
+    axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteRule`, {
       idDelete: this.state.idDelete,
 
 
@@ -95,7 +95,7 @@ class CreateRule extends Component {
   modifyRule = event => {
     event.preventDefault();
 
-    axios.put(`http://localhost:3004/modifyRule`, {
+    axios.put(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/modifyRule`, {
       idModify: this.state.idModify,
       nameModify: this.state.nameModify,
       descriptionModify: this.state.descriptionModify

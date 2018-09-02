@@ -79,7 +79,7 @@ class CreateCourse extends Component {
   event.preventDefault();
 
 
-axios.post(`http://localhost:3004/createCourse`, {
+axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createCourse`, {
   idCOURSE: this.state.idCOURSE,
   nameCourse: this.state.nameCourse,
   introCourse: this.state.introCourse
@@ -103,7 +103,7 @@ axios.post(`http://localhost:3004/createCourse`, {
  event.preventDefault();
 
 
-axios.post(`http://localhost:3004/createSubscription`, {
+axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createSubscription`, {
  idStudentCSubscription: this.state.idStudentCSubscription,
  idCourseCSubscription: this.state.idCourseCSubscription
 
@@ -126,7 +126,7 @@ axios.post(`http://localhost:3004/createSubscription`, {
    event.preventDefault();
 
 
-   axios.post(`http://localhost:3004/deleteCourse`, {
+   axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteCourse`, {
      idDelete: this.state.idDelete,
 
 
@@ -149,7 +149,7 @@ axios.post(`http://localhost:3004/createSubscription`, {
    event.preventDefault();
 
 
-   axios.post(`http://localhost:3004/deleteSubscription`, {
+   axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteSubscription`, {
      idStudentDSubscription: this.state.idStudentDSubscription,
      idCourseDSubscription: this.state.idCourseDSubscription,
 
@@ -170,7 +170,7 @@ axios.post(`http://localhost:3004/createSubscription`, {
  modifyCourse = event => {
    event.preventDefault();
 
-   axios.put(`http://localhost:3004/modifyCourse`, {
+   axios.put(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/modifyCourse`, {
      idModify: this.state.idModify,
      nameModify: this.state.nameModify
 
@@ -200,9 +200,9 @@ axios.post(`http://localhost:3004/createSubscription`, {
     formData.append('idCourseModule', this.state.idCourseModule)
 
 
-    // axios.post(`http://localhost:3004/createTeacher`, this.formData)
+    // axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createTeacher`, this.formData)
 
-    axios.post(`http://localhost:3004/createModule`, formData, {
+    axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createModule`, formData, {
       headers: {
         'accept': 'application/json',
         'Accept-Language': 'en-US,en;q=0.8',
@@ -231,9 +231,9 @@ axios.post(`http://localhost:3004/createSubscription`, {
     formData.append('idCourseModule', this.state.idModifyModuleCourse)
 
 
-    // axios.post(`http://localhost:3004/createTeacher`, this.formData)
+    // axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createTeacher`, this.formData)
 
-    axios.put(`http://localhost:3004/modifyModule`, formData, {
+    axios.put(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/modifyModule`, formData, {
       headers: {
         'accept': 'application/json',
         'Accept-Language': 'en-US,en;q=0.8',
@@ -255,7 +255,7 @@ axios.post(`http://localhost:3004/createSubscription`, {
    event.preventDefault();
 
 
-   axios.post(`http://localhost:3004/deleteModule`, {
+   axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteModule`, {
      idDeleteModule: this.state.idDeleteModule,
 
 
@@ -291,7 +291,7 @@ axios.post(`http://localhost:3004/createSubscription`, {
    event.preventDefault();
 
 
- axios.post(`http://localhost:3004/createAccount`, {
+ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createAccount`, {
    totalCredit: this.state.totalCredit,
    exigibleCredit: this.state.exigibleCredit,
    interests: this.state.introCourse,
@@ -316,7 +316,7 @@ axios.post(`http://localhost:3004/createSubscription`, {
    event.preventDefault();
 
 
- axios.post(`http://localhost:3004/deleteAccount`, {
+ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteAccount`, {
    idStudentAccountDelete: this.state.idStudentAccountDelete
 
   })
@@ -337,7 +337,7 @@ axios.post(`http://localhost:3004/createSubscription`, {
    event.preventDefault();
 
 
- axios.post(`http://localhost:3004/modifyAccount`, {
+ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/modifyAccount`, {
    totalCreditModify: this.state.totalCreditModify,
    exigibleCreditModify: this.state.exigibleCreditModify,
    interestsModify: this.state.interestsModify,

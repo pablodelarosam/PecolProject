@@ -43,9 +43,9 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
 
      //
-     // res.setHeader('Access-Control-Allow-Origin', 'http://pecol.net');
+     res.setHeader('Access-Control-Allow-Origin', 'http://pecol.net');
 
-      res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+      // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
 
 
     // Request methods you wish to allow
@@ -189,7 +189,7 @@ app.post("/createTeacher", upload.single('image'), function (req, res, next) {
  var file = req.file;
  console.log("File obteained", file)
  var img_name=file.filename;
- var host = "http://localhost:3004/images/upload_images/"
+ var host = "http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/images/upload_images/"
   host += img_name
 
 
@@ -253,7 +253,7 @@ app.post("/modifyTeacher", upload.single('image'), function (req, res, next) {
  var file = req.file;
  console.log("File obteained", file)
  var img_name=file.filename;
- var host = "http://localhost:3004/images/upload_images/"
+ var host = "http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/images/upload_images/"
   host += img_name
 
 
@@ -494,7 +494,7 @@ app.post("/createModule", upload.single('image'), function (req, res, next) {
  var file = req.file;
  console.log("File obteained", file)
  var img_name=file.filename;
- var host = "http://localhost:3004/images/upload_images/"
+ var host = "http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/images/upload_images/"
   host += img_name
 
 
@@ -558,7 +558,7 @@ var mimeType = req.body.mimetype
 var file = req.file;
 console.log("File obteained", file)
 var img_name=file.filename;
-var host = "http://localhost:3004/images/upload_images/"
+var host = "http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/images/upload_images/"
 host += img_name
 
   sql =  "UPDATE module SET nameModule = '" + nameModule + "', moduleDescription = '" + moduleDescription + "' , idCourse = '" + idCourse + "', contentImage = '" + host + "' WHERE idModule = '" + paramid + "' ";
@@ -643,7 +643,7 @@ app.post("/createAdvertisement", upload.single('image'),   function (req, res, n
  var file = req.file;
  console.log("File obteained", file)
  var img_name=file.filename;
- var host = "http://localhost:3004/images/upload_images/"
+ var host = "http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/images/upload_images/"
   host += img_name
 
 
@@ -1047,7 +1047,7 @@ app.post("/createActivites", upload.single('image'),   function (req, res, next)
  var file = req.file;
  console.log("File obteained", file)
  var img_name=file.filename;
- var host = "http://localhost:3004/images/upload_images/"
+ var host = "http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/images/upload_images/"
   host += img_name
 
 
