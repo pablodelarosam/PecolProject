@@ -187,7 +187,7 @@ app.post("/createTeacher", upload.single('image'), function (req, res, next) {
   var mimeType = req.body.mimetype
 
  var file = req.file;
- console.log("File obteained", file)
+ console.log("File obteaineddd", file)
  var img_name=file.filename;
  var host = "http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/images/upload_images/"
   host += img_name

@@ -51,7 +51,7 @@ class Teacher extends Component {
         // console.log("IMAGE 64", file)
     //     convertedImages.push(this.convertBase64(images[i]))
        }
-       console.log("teachers", teacher)
+       console.log("teacherss", teacher)
        this.setState({teacher: teacher });
         console.log("IMAGES", images)
      })
