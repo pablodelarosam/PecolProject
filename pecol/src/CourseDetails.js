@@ -42,7 +42,7 @@ axios.get(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/course
    const modules = res.data;
 
    this.setState({module: modules });
-     console.log("MODULE", this.state.module[0].idMODULE)
+     console.log("MODULE", this.state.module[0])
  })
 }
 
@@ -82,7 +82,7 @@ return (
   </div>
   <div className="row">
     <div className="col-sm-3 sideBar-left">
-        <SideBar idStudent={this.props.match.params.id} />
+        <SideBar idStudent={this.props.match.params.idStudent} />
     </div>
 
     <div className="col-sm-9">
@@ -103,8 +103,8 @@ return (
 
               <h5 class="card-header">{data.nameModule}</h5>
               <div class="card-body">
-              <img className="module-img" src={"http://mastermosm.es/conte_ni_dos/uploads/2017/10/propuesta-valor-puzzle.jpg"}/>
-              <Link className=" module-button btn btn-primary" to={`/activity/${this.props.match.params.idStudent}/${data.idMODULE}`}>Ir al módulo</Link>
+              <img className="module-img" src={data.contentImage}/>
+              <Link className=" module-button btn btn-primary" to={`/activity/${this.props.match.params.idStudent}/${data.idModule}`}>Ir al módulo</Link>
               </div>
 
               </div>

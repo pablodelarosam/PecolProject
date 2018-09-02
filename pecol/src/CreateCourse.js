@@ -602,15 +602,15 @@ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/creat
   <h4> Crear cuenta </h4>
 
   <form onSubmit={this.createAccount} className="formCourse">
-    <TextField id="totalCredit" label="Id " placeholder="ID de módulo" className="textField" margin="normal" onChange={this.handleChange} value={this.state.totalCredit}  />
+    <TextField id="totalCredit" label="Crédito total " placeholder="Crédito total" className="textField" margin="normal" onChange={this.handleChange} value={this.state.totalCredit}  />
     <br />
-    <TextField id="exigibleCredit" label="Nombre" placeholder="Nombre de módulo" className="textField" margin="normal" onChange={this.handleChange} value={this.state.exigibleCredit}  />
+    <TextField id="exigibleCredit" label="Crédito exigible" placeholder="Crédito exigible" className="textField" margin="normal" onChange={this.handleChange} value={this.state.exigibleCredit}  />
     <br />
-    <TextField id="interests" label="Nombre" placeholder="Curso asociado" className="textField" margin="normal" onChange={this.handleChange} value={this.state.interests}  />
+    <TextField id="interests" label="Intereses" placeholder="Intereses" className="textField" margin="normal" onChange={this.handleChange} value={this.state.interests}  />
     <br />
-    <TextField id="limitDate" label="Nombre" placeholder="Curso asociado" className="textField" margin="normal" onChange={this.handleChange} value={this.state.limitDate}  />
+    <TextField id="limitDate" label="Fecha límite" placeholder="Fecha límite" className="textField" margin="normal" onChange={this.handleChange} value={this.state.limitDate}  />
     <br />
-    <TextField id="idStudentAccount" label="Nombre" placeholder="Curso asociado" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idStudentAccount}  />
+    <TextField id="idStudentAccount" label="Id del estudiante asociado" placeholder="Id del estudiante asociado" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idStudentAccount}  />
     <br />
 
 

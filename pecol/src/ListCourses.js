@@ -82,7 +82,7 @@ gotoCourseDetails() {
                       <img className="card-img-top" src={human} alt="Card image cap" />
                       <div className="card-body">
                         <h5 className="card-title">{data.nameCourse}</h5>
-                        <Link className="customgoto" to={`/courseDetails/${this.props.match.params.id}/${data.idCOURSE}`}> Ir al curso </Link>
+                        <Link className="customgoto" to={`/courseDetails/${this.props.match.params.id}/${data.idCourse}`}> Ir al curso </Link>
                       </div>
                     </div>
                   </div>

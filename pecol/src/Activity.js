@@ -70,7 +70,7 @@ class Activity extends Component {
         </div>
         <div className="row">
           <div className="col-sm-3 sideBar-left">
-            <SideBar />
+            <SideBar idStudent={this.props.match.params.idStudent} />
           </div>
 
 
@@ -90,7 +90,7 @@ class Activity extends Component {
                                           <div className="card-body">
                                             <h5 className="card-title">{data.nameActivity}</h5>
 
-                                      <Link className=" module-button btn btn-primary" to={`/activityDetails/${this.props.match.params.idStudent}/${data.typeActivity}/${data.idACTIVITY}/${data.idModule}`}>Ir a la actividad</Link>
+                                      <Link className=" module-button btn btn-primary" to={`/activityDetails/${this.props.match.params.idStudent}/${data.typeActivity}/${data.idActivity}/${data.idModule}`}>Ir a la actividad</Link>
                                           </div>
                                         </div>
                                       </div>

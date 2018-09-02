@@ -89,7 +89,7 @@ class CreateAdvertisement extends Component {
       event.preventDefault();
 
       axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteAdvertisement`, {
-        idTeacherDelete: this.state.idTeacherDelete
+        titleDelete: this.state.titleDelete
 
        })
            .then(res => {
@@ -152,7 +152,7 @@ class CreateAdvertisement extends Component {
 
       <h3> Eliminar aviso </h3>
 
-      <form onSubmit={this.deleteTeacher}>
+      <form onSubmit={this.deleteAdvertisement}>
       <TextField id="titleDelete" placeholder="Título del aviso" onChange={this.handleChange} value={this.state.titleDelete} />
 
 
