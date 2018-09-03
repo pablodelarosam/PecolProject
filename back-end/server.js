@@ -45,7 +45,7 @@ app.use(function (req, res, next) {
      //
       res.setHeader('Access-Control-Allow-Origin', 'http://pecol.net');
 
-      //   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+      ///   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
 
 
     // Request methods you wish to allow
@@ -244,7 +244,7 @@ var paramid = req.param("id");
     // Do something
     console.log("Datos al consultar: " + records);
 
-    
+
 
 
     if (err) {
@@ -266,7 +266,7 @@ var paramid = req.param("id");
     // Do something
     console.log("Datos al consultar: " + records);
 
-   
+
 
 
     if (err) {
@@ -289,7 +289,7 @@ var paramid = req.param("id");
     // Do something
     console.log("Datos al consultar: " + records);
 
-    
+
 
 
     if (err) {
