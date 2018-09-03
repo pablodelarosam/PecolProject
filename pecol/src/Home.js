@@ -4,10 +4,10 @@ import ReactDOM from 'react-dom';
 import './App.css';
 import NavBar from './NavBar.js'
 import './Home.css'
-import carmen from './carmen.png' // relative path to image
-import cristi from './imgs/cristi.png'
-import frida from './imgs/frida.png'
-import gabi from './imgs/gabi.png'
+import carmen from './fz.jpeg' // relative path to image
+import cristi from './imgs/ca.jpeg'
+import frida from './imgs/fz.jpeg'
+import gabi from './imgs/gb.jpeg'
 import landingBG from './imgs/BG.jpg'
 import logoPe from './imgs/pecol-logo.png'
 import acuerdo from './imgs/acuerdo.jpg'
@@ -82,7 +82,7 @@ class Home extends Component {
           <div className="row">
             <div className="col-md-6">
               <h1 className="display-4">Pecol</h1>
-              <p className="lead">Slogan de la empresa</p>
+              <p className="lead">PERSONA, CONCIENCIA Y LIBERTAD</p>
               <p></p>
               <br/>
               <p className="lead">
@@ -190,62 +190,63 @@ class Home extends Component {
           </h1>
         </div>
         <div className="row teamComplete">
-          <div className="col-lg-3">
+          <div className="col-lg-4">
             <div className="teammate t1">
-              <img src={carmen} alt="Card image cap"/>
-              <div className="teammate-text">
-                <h4>Carmen Tommasi</h4>
-                <p className="position">
-                  General manager
-                </p>
-                <p className="dscr">
-                  General manager asdkasdlkasd adsf asdf a df
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-3">
-            <div className="teammate t2">
-              <img src={cristi} alt="Card image cap"/>
-              <div className="teammate-text">
-                <h4>Carmen Tommasi</h4>
-                <p className="position">
-                  General manager
-                </p>
-                <p className="dscr">
-                  General manager asdkasdlkasd adsf asdf a df
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-3">
-            <div className="teammate t3">
-              <img src={frida} alt="Card image cap"/>
-              <div className="teammate-text">
-                <h4>Carmen Tommasi</h4>
-                <p className="position">
-                  General manager
-                </p>
-                <p className="dscr">
-                  General manager asdkasdlkasd adsf asdf a df
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-3">
-            <div className="teammate t4">
               <img src={gabi} alt="Card image cap"/>
               <div className="teammate-text">
-                <h4>Carmen Tommasi</h4>
-                <p className="position">
-                  General manager
+                <h4>Gabriela Anaya </h4>
+                <p className="position cli">
+                Licenciatura en Ciencias de la familia.
+
                 </p>
-                <p className="dscr">
-                  General manager asdkasdlkasd adsf asdf a df
+                <p className="dscr cl">
+                <p className="dscr cl">•	Consejo en Bifam.</p>
+                <p className="dscr cl">•	Prevención en A.C.</p>
+                <p className="dscr cl">•	Talleres y cursos de desarrollo humano a empresas.</p>
+                <p className="dscr cl">•	Programas de prevención de transnacionales, Ford y Coppel.</p>
+                <p className="dscr cl">•	Prevención en de adicciones en la SEP (Edo. Mex) y Conalep II Q. Roo.</p>
+
                 </p>
               </div>
             </div>
           </div>
+          <div className="col-lg-4">
+            <div className="teammate t2">
+              <img src={frida} alt="Card image cap"/>
+              <div className="teammate-text">
+                <h4>Frida Schulz </h4>
+                <p className="position cli">
+                  Maestra en Derecho, Valores y Medio Ambiente a nivel superior.
+                </p>
+                <div className="dscr cl">
+              <p className="dscr cl">  •	Voluntariado en A.C. </p>
+              <p className="dscr cl">  •	Talleres y cursos de desarrollo humano y Capacitación a empresas. </p>
+              <p className="dscr cl">  •	Programas de prevención en adicciones, Conalep II; Q. Roo, Mx.</p>
+              <p className="dscr cl">  •	Consultoría Familiar.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-lg-4">
+            <div className="teammate t3">
+              <img src={cristi} alt="Card image cap"/>
+              <div className="teammate-text">
+                <h4>Cristina Arenzana </h4>
+                <p className="position cli">
+                Maestría en Ciencias de la Familia.
+
+                </p>
+                <p className="dscr cl">
+                <p className="dscr cl">•	Voluntariado en A.C.</p>
+                <p className="dscr cl">•	Talleres y cursos de desarrollo humano y Capacitación a empresas.</p>
+                <p className="dscr cl">•	Programas de prevención en de adicciones en Conalep II, Q. Roo, Mx</p>
+                <p className="dscr cl">•	Consultoría Familiar.</p>
+
+                </p>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
 
@@ -253,15 +254,15 @@ class Home extends Component {
         <Carousel>
           <div>
             <img src={car4}/>
-            <p className="legend">Legend 3</p>
+            <p className="legend"></p>
           </div>
           <div>
             <img src={car5}/>
-            <p className="legend">Legend 3</p>
+            <p className="legend"></p>
           </div>
           <div>
             <img src={car6}/>
-            <p className="legend">Legend 3</p>
+            <p className="legend"></p>
           </div>
         </Carousel>
       </div>

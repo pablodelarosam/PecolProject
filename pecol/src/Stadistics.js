@@ -79,6 +79,13 @@ class Stadistics extends Component {
             Descargar estadísticas
           </button>
 
+          <Link to="/allstudent"> Ver todos los alumnos </Link>
+            <Link to="/allteacher">  Ver todos los maestros</Link>
+            <Link to="/allCourses">  Ver todos los cursos</Link>
+              <Link to="/allmodules"> Ver todos los modulos </Link>
+                <Link to="/alllinks">  Ver todos los enlaces</Link>
+                  <Link to="/alladvises">  Ver todos los avisos</Link>
+
           </div>
 
         </div>

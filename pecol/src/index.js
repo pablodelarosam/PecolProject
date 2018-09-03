@@ -32,6 +32,11 @@ import MultipleQuestion from './MultipleQuestion'
 import ActivityDetails from './ActivityDetails'
 import CreateActivity from './CreateActivity'
 import CreateModule from './CreateModule'
+import AllStudent from './AllStudent'
+import AllTeacher from './AllTeacher'
+import AllCourse from './AllCourses'
+import AllModule from './AllModule'
+import AllLink from './AllLink'
 
 ReactDOM.render(  <Router>
       <div>
@@ -62,6 +67,11 @@ ReactDOM.render(  <Router>
         <Route path="/createModule" component={CreateModule} />
         <Route path="/stadistics" component={Stadistics} />
         <Route path="/createAdvertisement" component={CreateAdvertisement} />
+          <Route path="/allstudent" component={AllStudent} />
+            <Route path="/allteacher" component={AllTeacher} />
+            <Route path="/allCourses" component={AllCourse} />
+            <Route path="/allModules" component={AllModule} />
+              <Route path="/alllinks" component={AllLink} />
       </div>
   </Router>,document.getElementById('root'));
 registerServiceWorker();
