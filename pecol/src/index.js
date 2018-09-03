@@ -31,6 +31,7 @@ import Crossword from './Crossword'
 import MultipleQuestion from './MultipleQuestion'
 import ActivityDetails from './ActivityDetails'
 import CreateActivity from './CreateActivity'
+import CreateModule from './CreateModule'
 
 ReactDOM.render(  <Router>
       <div>
@@ -47,17 +48,18 @@ ReactDOM.render(  <Router>
         <Route path="/grades" component={Grades} />
         <Route path="/academicHistory" component={AcademicHistory} />
         <Route path="/account/:id" component={Account} />
-        <Route path="/module/:idStudent/:idCourse" component={Module} />
+        <Route path="/module/:idStudent/:idModule/:idCourse" component={Module} />
         <Route path="/definition" component={Definition} />
-        <Route path="/activity/:idStudent/:idModule" component={Activity} />
+        <Route path="/activity/:idStudent/:idModule/:idCourse" component={Activity} />
         <Route path="/activityDetails/:idStudent/:type/:idActivity/:idModule" component={ActivityDetails} />
         <Route path="/createActivity" component={CreateActivity} />
-        <Route path="/links" component={Links} />
+        <Route path="/links/:idStudent/:idModule/:idCourse" component={Links} />
         <Route path="/createTeacher" component={CreateTeacher} />
         <Route path="/createRule" component={CreateRule} />
         <Route path="/createStudent" component={CreateStudent} />
         <Route path="/createCourse" component={CreateCourse} />
         <Route path="/createLink" component={CreateLink} />
+        <Route path="/createModule" component={CreateModule} />
         <Route path="/stadistics" component={Stadistics} />
         <Route path="/createAdvertisement" component={CreateAdvertisement} />
       </div>

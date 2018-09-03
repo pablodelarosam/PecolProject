@@ -43,9 +43,9 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
 
      //
-     // res.setHeader('Access-Control-Allow-Origin', 'http://pecol.net');
+      res.setHeader('Access-Control-Allow-Origin', 'http://pecol.net');
 
-       res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+       // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
 
 
     // Request methods you wish to allow
@@ -398,12 +398,12 @@ app.post('/deleteSubscription', function(req, res, next) {
 app.post("/createLink", upload.single('image'), function (req, res, next) {
   sess = req.session;
 
-  var paramid = req.body.nombreEnlace
+  var paramid = req.body.nameEnlace
   var urlEnlace = req.body.urlEnlace
 
 
 
-  sql = "INSERT INTO LINK VALUES (" + paramid + ",'" + urlEnlace + "')";
+  sql = "INSERT INTO link VALUES ('" + paramid + "','" + urlEnlace + "')";
   connection.query(sql, function(err, records) {
     // Do something
   console.log("Datos al consultar: " + records);
@@ -468,7 +468,7 @@ app.get("/currentModule/:id", function(req, res) {
   sess = req.session;
   var paramid = req.param("id");
   console.log(sess.userid);
-  sql = "SELECT * from  Module where idModule = " + paramid + " ";
+  sql = "SELECT * from  module where idModule = '" + paramid + "'";
   connection.query(sql, function(err, records) {
     // Do something
     console.log("Datos al consultar: " + records);
@@ -1083,7 +1083,8 @@ app.get("/qa/:id", function(req, res) {
   sess = req.session;
   var paramid = req.param("id");
   console.log(sess.userid);
-  sql = "SELECT * from  ACTIVITY where idActivity = '" + paramid + "'";
+
+  sql = "  SELECT * FROM activity INNER JOIN question_answer ON activity.idActivity = question_answer.idActivity where activity.idActivity = '" + paramid + "'";
   connection.query(sql, function(err, records) {
     // Do something
     console.log("Datos al consultar: "+records);
@@ -1098,6 +1099,40 @@ app.get("/qa/:id", function(req, res) {
   });
 
 });
+
+app.post("/createNormalGrade", upload.single('image'),   function (req, res, next) {
+  sess = req.session;
+
+  var grade = req.param("grade");
+  var nameActivity = req.param("nameActivity");
+  var typeActivity = req.param("typeActivity");
+  var idStudent = req.param("idStudent");
+
+
+
+
+
+  sql = "INSERT INTO normalGrade VALUES (" + grade + " , '" + nameActivity + "' , '" + idStudent + "' , '" + typeActivity +  "' )";
+  console.log("sql",sql)
+  connection.query(sql, function(err, records) {
+    // Do something
+  console.log("Datos al consultar: " + records);
+
+
+
+    if (err) {
+      return res.serverError(err);
+    }
+
+
+        return res.send(records);
+
+  });
+
+
+});
+
+
 
 
 app.get("/getActivity/:id", function(req, res) {

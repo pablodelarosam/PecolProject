@@ -49,10 +49,8 @@ class Links extends Component {
             <span className="navbar-toggler-icon"></span>
           </button>
 
-          <Link className="custom-link" to="/activity">ACTIVIDADES
-          </Link>
 
-          <Link className="custom-link" to="/definition">DEFINICIONES
+          <Link className="custom-link" to={`/module/${this.props.match.params.idStudent}/${this.props.match.params.idCourse}`}>INFORMACIÓN
           </Link>
 
           <Link className="custom-link" to="/links">ENLANCES
@@ -65,7 +63,7 @@ class Links extends Component {
         </div>
         <div className="row">
           <div className="col-sm-3 sideBar-left">
-            <SideBar />
+            <SideBar idStudent={this.props.match.params.idStudent} />
           </div>
 
           <div className="dashboard_content">
@@ -75,7 +73,7 @@ class Links extends Component {
 
                   <div className="row">
 
-                      {this.state.rulesPecol.map((data) =>
+                      {this.state.linkPecol.map((data) =>
                     <div className="col-sm-6" >
                         <h3> {data.nombreEnlace} </h3>
                   <iframe width="400" height="315" src={data.urlEnlace} frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>

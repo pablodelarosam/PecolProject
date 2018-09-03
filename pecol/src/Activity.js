@@ -30,8 +30,8 @@ class Activity extends Component {
 
   componentDidMount() {
     const idC = this.props.match.params.idModule
-     console.log("PROPS ACTIVITIES", this.props.match.params.id, idC)
-  axios.get(`http://localhost:3004/activities/${idC}`)
+     console.log("PROPS ACTIVITIES", this.props.match.params.id, idC, this.props)
+  axios.get(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/activities/${idC}`)
    .then(res => {
      const activities = res.data;
 
@@ -54,13 +54,14 @@ class Activity extends Component {
               <span className="navbar-toggler-icon"></span>
             </button>
 
-            <Link className="custom-link" to="/activity">ACTIVIDADES
+            <Link className="custom-link" to={`/activity/${this.props.match.params.idStudent}/${this.props.match.params.idModule}/${this.props.match.params.idCourse}`}>ACTIVIDADES
             </Link>
 
-            <Link className="custom-link" to="/definition">DEFINICIONES
+            <Link className="custom-link" to={`/module/${this.props.match.params.idStudent}/${this.props.match.params.idModule}/${this.props.match.params.idCourse}`}>INFORMACIÓN
             </Link>
 
-            <Link className="custom-link" to="/home">ENLANCES
+
+            <Link className="custom-link" to={`/links/${this.props.match.params.idStudent}/${this.props.match.params.idModule}/${this.props.match.params.idCourse}`}>ENLANCES
             </Link>
 
             <Link className="custom-link" to="/home">CORREO

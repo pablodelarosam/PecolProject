@@ -389,7 +389,7 @@ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/creat
           <Link className="custom-link" to="/createRule">Correo
           </Link>
 
-          <Link className="custom-link" to="/createRule">Módulo
+          <Link className="custom-link" to="/createModule">Módulo
           </Link>
 
           <Link className="custom-link" to="/stadistics">Estadísticas

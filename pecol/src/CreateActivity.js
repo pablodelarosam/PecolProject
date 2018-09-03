@@ -117,29 +117,7 @@ class CreateActivity extends Component {
         </button>
 
 
-        <Link className="custom-link" to="/createStudent">Agregar estudiante
-        </Link>
 
-        <Link className="custom-link" to="/createCourse">Agregar curso
-        </Link>
-
-        <Link className="custom-link" to="/createAdvertisement">Agregar aviso
-        </Link>
-
-        <Link className="custom-link" to="/createTeacher">Agregar profesor
-        </Link>
-
-        <Link className="custom-link" to="/createRule">Agregar regla
-        </Link>
-
-        <Link className="custom-link" to="/createRule">Correo
-        </Link>
-
-        <Link className="custom-link" to="/createRule">Módulo
-        </Link>
-
-        <Link className="custom-link" to="/stadistics">Estadísticas
-        </Link>
 
       </nav>
       </div>
@@ -148,15 +126,7 @@ class CreateActivity extends Component {
 
       <div className="col-sm-6">
 
-      <h3> Eliminar aviso </h3>
-
-      <form onSubmit={this.deleteTeacher}>
-      <TextField id="titleDelete" placeholder="Título del aviso" onChange={this.handleChange} value={this.state.titleDelete} />
-
-
-      <button type="submit"> Eliminar </button>
-
-      </form>
+  
 
 
 

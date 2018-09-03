@@ -61,12 +61,11 @@ class Stadistics extends Component {
             <Link className="custom-link" to="/createRule">Correo
             </Link>
 
-            <Link className="custom-link" to="/createRule">Módulo
+            <Link className="custom-link" to="/createModule">Módulo
             </Link>
 
             <Link className="custom-link" to="/stadistics">Estadísticas
             </Link>
-
 
           </nav>
         </div>

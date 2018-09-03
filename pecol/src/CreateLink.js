@@ -83,7 +83,7 @@ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/creat
         <Link className="custom-link" to="/createCourse">Agregar curso
         </Link>
 
-        <Link className="custom-link" to="/definition">Agregar aviso
+        <Link className="custom-link" to="/createAdvertisement">Agregar aviso
         </Link>
 
         <Link className="custom-link" to="/createTeacher">Agregar profesor
@@ -95,7 +95,7 @@ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/creat
         <Link className="custom-link" to="/createRule">Correo
         </Link>
 
-        <Link className="custom-link" to="/createRule">Funciones módulo
+        <Link className="custom-link" to="/createModule">Módulo
         </Link>
 
         <Link className="custom-link" to="/stadistics">Estadísticas

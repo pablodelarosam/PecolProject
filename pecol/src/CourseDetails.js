@@ -37,7 +37,7 @@ componentDidMount() {
  const idC = this.props.match.params.idCourse
  const idStu = this.props.match.params.idStudent
   console.log("PROPS COURSE DETAILS", this.props.match.params.idCourse, idC)
-axios.get(`http://localhost:3004/courseModules/${idC}`)
+axios.get(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/courseModules/${idC}`)
  .then(res => {
    const modules = res.data;
 
@@ -64,13 +64,13 @@ return (
         <span className="navbar-toggler-icon"></span>
       </button>
 
-      <Link className="custom-link" to="/activity">Actividades
+      <Link className="custom-link" to={`/activity/${this.props.match.params.idStudent}/${this.props.match.params.idModule}`}>ACTIVIDADES
       </Link>
 
-      <Link className="custom-link" to="/definition">Definiciones
+      <Link className="custom-link" to={`/module/${this.props.match.params.idStudent}/${this.props.match.params.idModule}`}>INFORMACIÓN
       </Link>
 
-      <Link className="custom-link" to="/home">Enlaces
+      <Link className="custom-link" to="/links">Enlaces
       </Link>
 
       <Link className="custom-link" to="/home">Correo
@@ -104,7 +104,7 @@ return (
               <h5 class="card-header">{data.nameModule}</h5>
               <div class="card-body">
               <img className="module-img" src={data.contentImage}/>
-              <Link className=" module-button btn btn-primary" to={`/activity/${this.props.match.params.idStudent}/${data.idModule}`}>Ir al módulo</Link>
+              <Link className=" module-button btn btn-primary" to={`/activity/${this.props.match.params.idStudent}/${data.idModule}/${data.idCourse}`}>Ir al módulo</Link>
               </div>
 
               </div>

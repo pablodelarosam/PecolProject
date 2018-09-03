@@ -30,57 +30,13 @@ class ActivityDetails extends Component {
   }
 
   componentWillMount() {
-    const type = this.props.match.params.type
-    const idStu = this.props.match.params.idStudent
-    const idActivity = this.props.match.params.idActivity
-    const module = this.props.match.params.idModule
-    console.log("id module", module)
 
-    axios.get(`http://localhost:3004/qa/${idActivity}`)
-      .then(res => {
-        const qas = res.data;
-
-        this.setState({qa: qas });
-
-       //   console.log("course", this.state.course[0].idCOURSE)
-      })
-
-
-      axios.get(`http://localhost:3004/activities/${module}`)
-       .then(res => {
-         const activities = res.data;
-
-          this.setState({activites: activities });
-            console.log("activites", this.state.activites[0])
-       })
 
 
   }
 
   componentWillUnmount() {
-    const type = this.props.match.params.type
-    const idStu = this.props.match.params.idStudent
-    const idActivity = this.props.match.params.idActivity
-    const module = this.props.match.params.idModule
-    console.log("id module", module)
 
-    axios.get(`http://localhost:3004/qa/${idActivity}`)
-      .then(res => {
-        const qas = res.data;
-
-        this.setState({qa: qas });
-
-       //   console.log("course", this.state.course[0].idCOURSE)
-      })
-
-
-      axios.get(`http://localhost:3004/activities/${module}`)
-       .then(res => {
-         const activities = res.data;
-
-          this.setState({activites: activities });
-            console.log("activites", this.state.activites[0])
-       })
 
   }
 
@@ -90,7 +46,7 @@ class ActivityDetails extends Component {
     console.log("ALL Questions", this.props.match.params.idActivity)
     if(type == "Crucigrama"){
           return (
-      <Crossword idActivity={this.props.match.params.idActivity} />
+      <Crossword idActivity={this.props.match.params.idActivity} idStudent={this.props.match.params.idStudent} idModule={this.props.match.params.idModule} />
 
     )
     } else if(type == "Libre") {
