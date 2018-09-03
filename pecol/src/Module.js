@@ -32,7 +32,7 @@ class  Module extends Component {
     const idStudent = this.props.match.params.idStudent
     const idC = this.props.match.params.idCourse
      console.log("PROPS", this.props.match.params.idCourse, idC)
-  axios.get(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/currentModule/${idC}`)
+  axios.get(`http://localhost:3004/currentModule/${idC}`)
    .then(res => {
      const modules = res.data;
 

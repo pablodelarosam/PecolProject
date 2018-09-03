@@ -2,7 +2,7 @@ input[type=file], input[type=file]::-webkit-file-upload-button { cursor: pointer
 
 
 .imgteacher {
-  height: 100%;
+  height: 400px;
     width: 100%;
 }
 

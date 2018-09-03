@@ -26,7 +26,7 @@ class CreateCourse extends Component {
   constructor(props) {
       super(props);
     this.state = {
-      idCOURSE: "",
+      idCourse: "",
       nameCourse: "",
       introCourse: "",
       idDelete: "",
@@ -80,7 +80,7 @@ class CreateCourse extends Component {
 
 
 axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createCourse`, {
-  idCOURSE: this.state.idCOURSE,
+  idCourse: this.state.idCourse,
   nameCourse: this.state.nameCourse,
   introCourse: this.state.introCourse
 
@@ -432,7 +432,7 @@ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/creat
             <h4> Crear curso </h4>
 
           <form onSubmit={this.handleSubmit} className="formCourse">
-            <TextField id="idCOURSE" label="Id" placeholder="Id de curso" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idCOURSE}  />
+            <TextField id="idCourse" label="Id" placeholder="Id de curso" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idCourse}  />
             <br />
             <TextField id="nameCourse" label="Nombre" placeholder="Nombre de curso" className="textField" margin="normal" onChange={this.handleChange} value={this.state.nameCourse} />
             <br />

@@ -86,8 +86,8 @@ class Teacher extends Component {
             <SideBar idStudent={this.props.match.params.id} />
           </div>
 
-          <div className="dashboard_content">
-            <div className="col-sm-12 sideBar-left">
+
+            <div className="col-sm-9 sideBar-left">
               <h2>Profesores</h2>
               <div className="container">
               <div className="row">
@@ -110,7 +110,7 @@ class Teacher extends Component {
                 <br/>
               </div>
             </div>
-          </div>
+
         </div>
       </div>
 

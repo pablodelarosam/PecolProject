@@ -43,9 +43,9 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
 
      //
-     res.setHeader('Access-Control-Allow-Origin', 'http://pecol.net');
+     // res.setHeader('Access-Control-Allow-Origin', 'http://pecol.net');
 
-      // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+       res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
 
 
     // Request methods you wish to allow
@@ -193,6 +193,7 @@ app.post("/createTeacher", upload.single('image'), function (req, res, next) {
   host += img_name
 
 
+
       console.log("saved file", img_name)
 
   sql = "INSERT INTO teacher VALUES (" + paramid + ",'" + nameTeacher + "','" + emailTeacher + "','" + nombreMateria + "','" + descriptionSubject + "','" + host +"')";
@@ -324,12 +325,14 @@ app.post("/createCourse", upload.single('image'), function (req, res, next) {
     // Do something
   console.log("Datos al consultar: " + records);
 
-    return res.send(records);
+
 
 
     if (err) {
       return res.serverError(err);
     }
+
+
 
   });
 
@@ -1051,7 +1054,7 @@ app.post("/createActivites", upload.single('image'),   function (req, res, next)
   host += img_name
 
 
-
+"http://localhost:3004/images/upload_images/"
 
 
   sql = "INSERT INTO ACTIVITY VALUES ('" + title + "' , '" + description + "' , '" + dated + "' , '" + image +  "', '" + host +  "', null )";
