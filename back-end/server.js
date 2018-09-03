@@ -122,12 +122,13 @@ var paramid = req.param("id");
     // Do something
     console.log("Datos al consultar: " + records);
 
-    return res.send(records);
+    
 
 
     if (err) {
       return res.serverError(err);
     }
+	return res.send(records);
 
   });
 
@@ -142,12 +143,14 @@ var paramid = req.param("id");
     // Do something
     console.log("Datos al consultar: " + records);
 
-    return res.send(records);
+   
 
 
     if (err) {
       return res.serverError(err);
     }
+
+    return res.send(records);
 
   });
 
@@ -163,12 +166,14 @@ var paramid = req.param("id");
     // Do something
     console.log("Datos al consultar: " + records);
 
-    return res.send(records);
+    
 
 
     if (err) {
       return res.serverError(err);
     }
+
+	return res.send(records);
 
   });
 
@@ -297,12 +302,13 @@ app.post("/createRule", upload.single('image'), function (req, res, next) {
     // Do something
   console.log("Datos al consultar: " + records);
 
-    return res.send(records);
+   
 
 
     if (err) {
       return res.serverError(err);
     }
+    return res.send(records);
 
   });
 
@@ -354,12 +360,13 @@ app.post("/createSubscription",  function (req, res, next) {
     // Do something
   console.log("Datos al consultar: " + records);
 
-    return res.send(records);
+    
 
 
     if (err) {
       return res.serverError(err);
     }
+    return res.send(records);
 
   });
 
@@ -408,12 +415,14 @@ app.post("/createLink", upload.single('image'), function (req, res, next) {
     // Do something
   console.log("Datos al consultar: " + records);
 
-    return res.send(records);
+    
 
 
     if (err) {
       return res.serverError(err);
     }
+
+	return res.send(records);
 
   });
 
@@ -431,12 +440,14 @@ var paramid = req.param("id");
     // Do something
     console.log("Datos al consultar: " + records);
 
-    return res.send(records);
+    
 
 
     if (err) {
       return res.serverError(err);
     }
+    
+   return res.send(records);
 
   });
 
@@ -601,13 +612,13 @@ app.post("/createAccount",  function (req, res, next) {
     // Do something
   console.log("Datos al consultar: " + records);
 
-    return res.send(records);
+    
 
 
     if (err) {
       return res.serverError(err);
     }
-
+   return res.send(records);
   });
 
 
@@ -1056,7 +1067,7 @@ app.post("/createActivites", upload.single('image'),   function (req, res, next)
   host += img_name
 
 
-"http://localhost:3004/images/upload_images/"
+//"http://localhost:3004/images/upload_images/"
 
 
   sql = "INSERT INTO activity VALUES ('" + title + "' , '" + description + "' , '" + dated + "' , '" + image +  "', '" + host +  "', null )";
@@ -1065,12 +1076,13 @@ app.post("/createActivites", upload.single('image'),   function (req, res, next)
     // Do something
   console.log("Datos al consultar: " + records);
 
-    return res.send(records);
+  
 
 
     if (err) {
       return res.serverError(err);
     }
+	return res.send(records);
 
   });
 
@@ -1089,12 +1101,13 @@ app.get("/qa/:id", function(req, res) {
     // Do something
     console.log("Datos al consultar: "+records);
 
-    return res.send(records);
+   
 
 
     if (err) {
       return res.serverError(err);
     }
+	return res.send(records);
 
   });
 
@@ -1142,12 +1155,13 @@ app.get("/getActivity/:id", function(req, res) {
     // Do something
     console.log(records);
 
-    return res.send(records);
+   
 
 
     if (err) {
       return res.serverError(err);
     }
+	return res.send(records);
 
   });
 
