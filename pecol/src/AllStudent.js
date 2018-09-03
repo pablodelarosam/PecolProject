@@ -66,7 +66,7 @@ class AllStudent extends Component {
   componentDidMount() {
     const idC = this.props.match.params.id
      console.log("PROPS", this.props.match.params.id, idC)
- axios.get(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/allStudent`)
+ axios.get(`http://localhost:3004/allStudent`)
    .then(res => {
      const accounts = res.data;
 
