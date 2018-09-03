@@ -334,6 +334,8 @@ app.post("/createCourse", upload.single('image'), function (req, res, next) {
 
 
 
+   return res.send(records);
+
   });
 
 
@@ -706,7 +708,7 @@ app.post("/deleteAccount",  function (req, res, next) {
 
 
 
-  sql =  "DELETE FROM ACCOUNTSTUDENT where idStudent = " + paramid + " ";
+  sql =  "DELETE FROM accountStudent where idStudent = " + paramid + " ";
   connection.query(sql, function(err, result) {
     if (err)
       return err;
@@ -1057,7 +1059,7 @@ app.post("/createActivites", upload.single('image'),   function (req, res, next)
 "http://localhost:3004/images/upload_images/"
 
 
-  sql = "INSERT INTO ACTIVITY VALUES ('" + title + "' , '" + description + "' , '" + dated + "' , '" + image +  "', '" + host +  "', null )";
+  sql = "INSERT INTO activity VALUES ('" + title + "' , '" + description + "' , '" + dated + "' , '" + image +  "', '" + host +  "', null )";
   console.log("sql",sql)
   connection.query(sql, function(err, records) {
     // Do something
