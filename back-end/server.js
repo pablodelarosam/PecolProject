@@ -244,12 +244,14 @@ var paramid = req.param("id");
     // Do something
     console.log("Datos al consultar: " + records);
 
-    return res.send(records);
+    
 
 
     if (err) {
       return res.serverError(err);
     }
+
+	return res.send(records);
 
   });
 
@@ -264,12 +266,14 @@ var paramid = req.param("id");
     // Do something
     console.log("Datos al consultar: " + records);
 
-    return res.send(records);
+   
 
 
     if (err) {
       return res.serverError(err);
     }
+
+return res.send(records);
 
   });
 
@@ -285,12 +289,13 @@ var paramid = req.param("id");
     // Do something
     console.log("Datos al consultar: " + records);
 
-    return res.send(records);
+    
 
 
     if (err) {
       return res.serverError(err);
     }
+	return res.send(records);
 
   });
 
