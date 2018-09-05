@@ -14,6 +14,8 @@ import Signup from './Signup.js'
 import Crossword from './Crossword.js'
 import MultipleQuestion from './MultipleQuestion.js'
 import axios from 'axios';
+import VideoActivity from './VideoActivity.js'
+import Presentation from './Presentation.js'
 import {
   BrowserRouter as Router,
   Link,
@@ -51,9 +53,17 @@ class ActivityDetails extends Component {
     )
     } else if(type == "Libre") {
 
+    } else if(type == "Video") {
+      return(
+      <VideoActivity idActivity={this.props.match.params.idActivity} idStudent={this.props.match.params.idStudent} idModule={this.props.match.params.idModule} />
+)
     } else if(type == "Multiple") {
       return (
-      <MultipleQuestion/>
+      <MultipleQuestion idActivity={this.props.match.params.idActivity} idStudent={this.props.match.params.idStudent} idModule={this.props.match.params.idModule}  />
+    )
+  } else if(type == "Presentation") {
+      return (
+      <Presentation idActivity={this.props.match.params.idActivity} idStudent={this.props.match.params.idStudent} idModule={this.props.match.params.idModule}/>
     )
     }
 

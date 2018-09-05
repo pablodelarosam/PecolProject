@@ -11,22 +11,49 @@ import logoPe from './imgs/xaxa.png'
 import acuerdo from './imgs/acuerdo.jpg'
 import SideBar from './SideBar.js'
 import Signup from './Signup.js'
+import axios from 'axios';
 import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
 class Stadistics extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      grades: []
+    }
+  }
+
+  componentDidMount(){
+
+    axios.get(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/getAllGrades`)
+     .then(res => {
+       const rule = res.data;
+       console.log("links", rule)
+       this.setState({grades: rule });
+        console.log("links", this.state.linkPecol)
+     })
+
   }
 
   downloadStadistics = () => {
+
     const rows = [
       [
-        "Total alumnos", "Usuarios activos esta semana ", "some other info"
-      ],
-      ["15", "5", "more info"]
+        "Calificacion", "Nombre de actividad", "Id de estudiante", "Tipo de actividad"
+      ]
     ];
     let csvContent = "data:text/csv;charset=utf-8,";
+
     rows.forEach(function(rowArray) {
       let row = rowArray.join(",");
+      csvContent += row + "\r\n";
+    });
+
+    this.state.grades.forEach(function(rowArray) {
+      console.log("rowarray", rowArray)
+      var result = Object.keys(rowArray).map(function(key) {
+  return [Number(key), rowArray[key]];
+});
+
+      let row = result.join(",");
       csvContent += row + "\r\n";
     });
 
@@ -84,7 +111,6 @@ class Stadistics extends Component {
             <Link to="/allCourses">  Ver todos los cursos</Link>
               <Link to="/allmodules"> Ver todos los modulos </Link>
                 <Link to="/alllinks">  Ver todos los enlaces</Link>
-                  <Link to="/alladvises">  Ver todos los avisos</Link>
 
           </div>
 

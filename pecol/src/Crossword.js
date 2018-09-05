@@ -43,7 +43,7 @@ class Crossword extends Component {
       })
 
 
-      axios.get(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/activities/${this.props.idModule}`)
+      axios.get(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/activitiesOne/${this.props.idModule}/${this.props.idActivity}`)
        .then(res => {
          const activities = res.data;
 

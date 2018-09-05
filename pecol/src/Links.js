@@ -49,15 +49,19 @@ class Links extends Component {
             <span className="navbar-toggler-icon"></span>
           </button>
 
-
-          <Link className="custom-link" to={`/module/${this.props.match.params.idStudent}/${this.props.match.params.idCourse}`}>INFORMACIÓN
+          <Link className="custom-link" to={`/activity/${this.props.match.params.idStudent}/${this.props.match.params.idModule}/${this.props.match.params.idCourse}`}>ACTIVIDADES
           </Link>
 
-          <Link className="custom-link" to="/links">ENLANCES
+          <Link className="custom-link" to={`/module/${this.props.match.params.idStudent}/${this.props.match.params.idModule}/${this.props.match.params.idCourse}`}>INFORMACIÓN
+          </Link>
+
+
+          <Link className="custom-link" to={`/links/${this.props.match.params.idStudent}/${this.props.match.params.idModule}/${this.props.match.params.idCourse}`}>ENLANCES
           </Link>
 
           <Link className="custom-link" to="/home">CORREO
           </Link>
+
 
         </nav>
         </div>

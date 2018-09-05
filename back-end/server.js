@@ -45,7 +45,7 @@ app.use(function (req, res, next) {
      //
       res.setHeader('Access-Control-Allow-Origin', 'http://pecol.net');
 
-      ///   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    //    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
 
 
     // Request methods you wish to allow
@@ -558,12 +558,14 @@ var paramid = req.param("id");
     // Do something
     console.log("Datos al consultar: " + records);
 
-    return res.send(records);
+
 
 
     if (err) {
       return res.serverError(err);
     }
+
+    return res.send(records);
 
   });
 
@@ -941,9 +943,10 @@ app.post('/loginPecol', function(req, res, next) {
       if (!err) {
         //  res.send('User added to database with ID: ' + rows);
         for (var i = 0; i < rows.length; i++) {
-          //  console.log('idStudent: ', rows[i]);
-          if (rows[i].nameStudent == req.body.username && rows[i].password == req.body.password) {
-            console.log('idStudent: ', rows[i]);
+           console.log('idStudent: ', rows[i].nameStudent, rows[i].password);
+           console.log('idStudent: ', rows[i]);
+          if (rows[i].password == req.body.password) {
+
             // currentStudent = rows[i].idStudent;
              sess.userid = rows[i].idstudent;
             res.send({
@@ -1142,11 +1145,56 @@ connection.query(sql, function(err, rows, fields) {
 
 
 
+
+
 app.get("/activities/:id", function(req, res) {
+
   sess = req.session;
   var paramid = req.param("id");
   console.log(sess.userid);
-  sql = "SELECT * from  activity where idModule = " + paramid + " ";
+  sql = "SELECT * from  activityPecol where idModule = '" + paramid + "' ";
+  connection.query(sql, function(err, records) {
+    // Do something
+    console.log("Datos al consultar: "+records);
+
+    return res.send(records);
+
+
+    if (err) {
+      return res.serverError(err);
+    }
+
+  });
+
+});
+
+
+app.get("/getAllGrades", function(req, res) {
+  sess = req.session;
+  var paramid = req.param("id");
+  console.log(sess.userid);
+  sql = "SELECT * from  normalGrade ";
+  connection.query(sql, function(err, records) {
+    // Do something
+    console.log("Datos al consultar: "+records);
+
+    return res.send(records);
+
+
+    if (err) {
+      return res.serverError(err);
+    }
+
+  });
+
+});
+
+app.get("/activitiesOne/:id/:idAct", function(req, res) {
+  sess = req.session;
+  var paramid = req.param("id");
+  var paramact = req.param("idAct")
+  console.log(sess.userid);
+  sql = "SELECT * from  activityPecol where idModule = '" + paramid + "' AND idActivity = '" + paramact + "' ";
   connection.query(sql, function(err, records) {
     // Do something
     console.log("Datos al consultar: "+records);
@@ -1170,6 +1218,7 @@ app.post("/createActivites", upload.single('image'),   function (req, res, next)
   var description = req.param("nameActivity");
   var dated = req.param("typeActivity");
   var image = req.param("idModule");
+  var order = req.param("order");
 
 
 //RDorame945$
@@ -1185,7 +1234,7 @@ app.post("/createActivites", upload.single('image'),   function (req, res, next)
 
 
 
-  sql = "INSERT INTO activity VALUES ('" + title + "' , '" + description + "' , '" + dated + "' , '" + image +  "', '" + host +  "', null )";
+  sql = "INSERT INTO activityPecol VALUES ('" + title + "' , '" + description + "' , '" + dated + "' , '" + image +  "', '" + host +  "', " + order  +  " )";
   console.log("sql",sql)
   connection.query(sql, function(err, records) {
     // Do something
@@ -1210,7 +1259,7 @@ app.get("/qa/:id", function(req, res) {
   var paramid = req.param("id");
   console.log(sess.userid);
 
-  sql = "  SELECT * FROM activity INNER JOIN question_answer ON activity.idActivity = question_answer.idActivity where activity.idActivity = '" + paramid + "'";
+  sql = "  SELECT * FROM activityPecol INNER JOIN question_answer ON activityPecol.idActivity = question_answer.idActivity where activityPecol.idActivity = '" + paramid + "'";
   connection.query(sql, function(err, records) {
     // Do something
     console.log("Datos al consultar: "+records);
@@ -1221,6 +1270,53 @@ app.get("/qa/:id", function(req, res) {
     if (err) {
       return res.serverError(err);
     }
+
+  });
+
+});
+
+app.get("/getVideo/:id", function(req, res) {
+  sess = req.session;
+  var paramid = req.param("id");
+  console.log(sess.userid);
+
+  sql = "  SELECT * FROM video_actividad where idActivity = '" + paramid + "'";
+  connection.query(sql, function(err, records) {
+    // Do something
+    console.log("Datos al consultar video: "+records);
+
+
+
+
+    if (err) {
+      return res.serverError(err);
+    }
+
+      return res.send(records);
+
+  });
+
+});
+
+
+app.get("/getPresentation/:id", function(req, res) {
+  sess = req.session;
+  var paramid = req.param("id");
+  console.log(sess.userid);
+
+  sql = "  SELECT * FROM presentation_actividad where idActivity = '" + paramid + "'";
+  connection.query(sql, function(err, records) {
+    // Do something
+    console.log("Datos al consultar video: "+records);
+
+
+
+
+    if (err) {
+      return res.serverError(err);
+    }
+
+      return res.send(records);
 
   });
 
