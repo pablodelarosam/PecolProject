@@ -40,8 +40,7 @@ app.use(bodyParser.urlencoded({
 // Add headers
 app.use(function (req, res, next) {
 
-    res.setHeader('Access-Control-Allow-Origin', '*');
-
+    
      //
       res.setHeader('Access-Control-Allow-Origin', 'http://pecol.net');
 
@@ -941,7 +940,7 @@ app.post('/loginPecol', function(req, res, next) {
       if (!err) {
         //  res.send('User added to database with ID: ' + rows);
         for (var i = 0; i < rows.length; i++) {
-          //  console.log('idStudent: ', rows[i]);
+            console.log('idStudent: ', rows[i]);
           if (rows[i].nameStudent == req.body.username && rows[i].password == req.body.password) {
             console.log('idStudent: ', rows[i]);
             // currentStudent = rows[i].idStudent;
@@ -1191,12 +1190,13 @@ app.post("/createActivites", upload.single('image'),   function (req, res, next)
     // Do something
   console.log("Datos al consultar: " + records);
 
-    return res.send(records);
+    
 
 
     if (err) {
       return res.serverError(err);
     }
+	return res.send(records);
 
   });
 
