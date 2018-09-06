@@ -28,7 +28,8 @@ class CreateActivity extends Component {
       idACTIVITY: "",
       nameActivity: "",
       typeActivity: "",
-      idModule: ""
+      idModule: "",
+      "numero": ""
 
     };
   }
@@ -65,6 +66,7 @@ class CreateActivity extends Component {
   formData.append('nameActivity', this.state.nameActivity)
   formData.append('typeActivity', this.state.typeActivity)
   formData.append('idModule', this.state.idModule)
+  formData.append('order', this.state.numero)
 
 
 
@@ -126,7 +128,7 @@ class CreateActivity extends Component {
 
       <div className="col-sm-6">
 
-  
+
 
 
 
@@ -144,6 +146,7 @@ class CreateActivity extends Component {
       <TextField id="nameActivity" placeholder="Nombre de la actividad" onChange={this.handleChange} value={this.state.nameActivity}/>
         <TextField id="typeActivity" placeholder="Tipo de la actividad" onChange={this.handleChange} value={this.state.typeActivity}/>
           <TextField id="idModule" placeholder="Id del módulo vinculado" onChange={this.handleChange} value={this.state.idModule}/>
+            <TextField id="numero" placeholder="Número" onChange={this.handleChange} value={this.state.numero}/>
       <input type="file" onChange={this.fileSelectedHandler} />
 
       <button type="submit"> Crear actividad </button>
