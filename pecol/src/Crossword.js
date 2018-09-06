@@ -118,7 +118,7 @@ class Crossword extends Component {
                       <h2>Crucigrama</h2>
                       {this.state.activites.map((data) =>
                         <div>
-                        <img src={data.contentImage}/>
+                        <img className="cross-img" src={data.contentImage}/>
 
                         </div>
                       )}
@@ -127,7 +127,7 @@ class Crossword extends Component {
                         {this.state.qa.map((data) =>
                         <div className="col-sm-6">
 
-                          <p className="qc"> {data.questionCrossword} </p>
+
 
                         </div>
                       )}
@@ -137,15 +137,16 @@ class Crossword extends Component {
 
 
                       <div className="row">
-                        <form onSubmit={this.handleSubmit}>
+                        <form className="form-cross" onSubmit={this.handleSubmit}>
                         {this.state.qa.map((data, index) =>
                         <div className="col-sm-6">
 
-                        <input className="ia"  ref={index} id={`answer-${index}`} name={`answer-${index}`} placeholder={`Respuesta ${index}`} type="text" onChange={this.handleChange}   />
+                        <input className="ia"  ref={index} id={`answer-${index}`} name={`answer-${index}`} placeholder={`Respuesta ${index + 1}`} type="text" onChange={this.handleChange}   />
 
                         </div>
                       )}
-                          <button type="submit"> Enviar respuestas </button>
+                          <button type="submit" className="sub-cross"> Enviar respuestas </button>
+
                       </form>
 
 

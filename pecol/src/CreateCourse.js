@@ -88,14 +88,17 @@ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/creat
      .then(res => {
        console.log("SUCCESS", res);
        if(res.status == 200) {
-
+         alert("Se ha creado el curso correctamente");
 
        //  browserHistory.replace("/login")
        //  store.set('loggedIn', true);
        //this.props.history.push("/");
 
        }
-     })
+     }).catch((error) => {
+       //handle error
+       alert("Hubo un problema, intente nuevamente");
+     });
  }
 
 
@@ -112,13 +115,18 @@ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/creat
       console.log("SUCCESS", res);
       if(res.status == 200) {
 
+         alert("Se ha dado de alta el alumno correctamente");
+
 
       //  browserHistory.replace("/login")
       //  store.set('loggedIn', true);
       //this.props.history.push("/");
 
       }
-    })
+    }).catch((error) => {
+      //handle error
+      alert("Hubo un problema, intente nuevamente");
+    });
 }
 
 
@@ -136,12 +144,16 @@ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/creat
           console.log("SUCCESS", res);
           if(res.status == 200) {
               console.log("Student deleted successfully")
+               alert("Se ha eliminado el curso correctamente");
           //  browserHistory.replace("/login")
           //  store.set('loggedIn', true);
           //this.props.history.push("/");
 
           }
-        })
+        }).catch((error) => {
+          //handle error
+          alert("Hubo un problema, intente nuevamente");
+        });
  }
 
 
@@ -159,12 +171,16 @@ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/creat
           console.log("SUCCESS", res);
           if(res.status == 200) {
               console.log("Student deleted successfully")
+              alert("Se ha dado de baja el alumno del curso correctamente")
           //  browserHistory.replace("/login")
           //  store.set('loggedIn', true);
           //this.props.history.push("/");
 
           }
-        })
+        }).catch((error) => {
+          //handle error
+          alert("Hubo un problema, intente nuevamente");
+        });
  }
 
  modifyCourse = event => {
@@ -180,12 +196,16 @@ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/creat
           console.log("SUCCESS", res);
           if(res.status == 200) {
               console.log("Student modified successfully")
+               alert("Se ha modificado el curso correctamente");
           //  browserHistory.replace("/login")
           //  store.set('loggedIn', true);
           //this.props.history.push("/");
 
           }
-        })
+        }).catch((error) => {
+          //handle error
+          alert("Hubo un problema, intente nuevamente");
+        });
 
  }
 
@@ -212,8 +232,10 @@ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/creat
       .then((response) => {
         //handle success
         console.log("success upload")
+        alert("Se ha creado el módulo correctamente");
       }).catch((error) => {
         //handle error
+          alert("Hubo un problema, intente nuevamente");
       });
 
 
@@ -243,8 +265,10 @@ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/creat
       .then((response) => {
         //handle success
         console.log("success upload")
+          alert("Se ha modificado el módulo correctamente");
       }).catch((error) => {
         //handle error
+          alert("Hubo un problema, intente nuevamente");
       });
 
 
@@ -268,9 +292,13 @@ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/creat
           //  browserHistory.replace("/login")
           //  store.set('loggedIn', true);
           //this.props.history.push("/");
+          alert("Se ha eliminado el módulo correctamente");
 
           }
-        })
+        }).catch((error) => {
+          //handle error
+            alert("Hubo un problema, intente nuevamente");
+        });
  }
 
  fileSelectedHandler = event => {
@@ -303,13 +331,18 @@ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/creat
         console.log("SUCCESS", res);
         if(res.status == 200) {
 
+              alert("Se ha creado la cuenta correctamente");
+
 
         //  browserHistory.replace("/login")
         //  store.set('loggedIn', true);
         //this.props.history.push("/");
 
         }
-      })
+      }).catch((error) => {
+        //handle error
+          alert("Hubo un problema, intente nuevamente");
+      });
  }
 
  deleteAccount = event => {
@@ -324,13 +357,18 @@ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/creat
         console.log("SUCCESS", res);
         if(res.status == 200) {
 
+            alert("Se ha eliminado la cuenta correctamente");
+
 
         //  browserHistory.replace("/login")
         //  store.set('loggedIn', true);
         //this.props.history.push("/");
 
         }
-      })
+      }).catch((error) => {
+        //handle error
+          alert("Hubo un problema, intente nuevamente");
+      });
  }
 
  modifyAccount = event => {
@@ -351,13 +389,16 @@ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/creat
         console.log("SUCCESS", res);
         if(res.status == 200) {
 
-
+alert("Se ha modificado la cuenta correctamente");
         //  browserHistory.replace("/login")
         //  store.set('loggedIn', true);
         //this.props.history.push("/");
 
         }
-      })
+      }).catch((error) => {
+        //handle error
+          alert("Hubo un problema, intente nuevamente");
+      });
  }
 
   render() {

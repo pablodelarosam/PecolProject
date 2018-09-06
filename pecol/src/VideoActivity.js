@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import ReactDOM from 'react-dom';
 import './Dashboard.css';
+import './VideoActivity.css';
 import NavBar from './NavBar.js'
 import carmen from './carmen.png' // relative path to image
 import cristi from './imgs/cristi.png'
@@ -54,9 +55,9 @@ class VideoActivity extends Component {
                   <div className="row">
 
                       {this.state.linkPecol.map((data) =>
-                    <div className="col-sm-6" >
+                    <div className="col-sm-12" >
 
-                  <iframe width="400" height="315" src={data.urlVideo} frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                  <iframe className="iframe" width="800" height="500" src={data.urlVideo} frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                     </div>
                   )}
 

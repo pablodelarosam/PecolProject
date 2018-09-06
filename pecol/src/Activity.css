@@ -11,18 +11,24 @@
   margin-bottom: 4%;
 }
 
+.activities {
+      display: grid !important;
+}
+
 .module-button {
 display: block;
   margin: auto;
   background-color: #339933;
   color: white;
+  width: 32%;
+margin-right: 65% !important;
 }
 
 .module-button:hover {
-
-  background-color: #339933;
-
+  background-color: #1aaf1a9e;
 }
+
+
 
 h5 {
   margin: 3%;

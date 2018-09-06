@@ -86,15 +86,12 @@ class  Module extends Component {
 
 
 
-              <div className="col-sm-6">
+              <div className="col-sm-12">
                 <h2>{data.nameModule}</h2>
-              <p className="poar-border"> {data.moduleDescription}</p>
+              <p className="poar-border desmo"> {data.moduleDescription}</p>
 
               </div>
 
-              <div className="col-sm-6">
-              <img className="image-module" src={data.contentImage}/>
-              </div>
 
               </div>
       )}

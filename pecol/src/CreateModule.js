@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import ReactDOM from 'react-dom';
 import './Dashboard.css';
+import './CreateModule.css';
 import NavBar from './NavBar.js'
 import carmen from './carmen.png' // relative path to image
 import cristi from './imgs/cristi.png'
@@ -57,8 +58,10 @@ class CreateModule extends Component {
     .then((response) => {
       //handle success
       console.log("success upload")
+      alert("Se ha creado el enlace correctamente")
     }).catch((error) => {
       //handle error
+      alert("Se ha presentado un error, intente más tarde")
     });
   };
 
@@ -109,11 +112,11 @@ class CreateModule extends Component {
               <form onSubmit={this.handleSubmit}>
               <TextField id="nameEnlace" placeholder="nombre" onChange={this.handleChange} value={this.state.nameEnlace} />
               <TextField id="urlEnlace" placeholder="url" onChange={this.handleChange} value={this.state.urlEnlace}/>
-              <button type="submit"> Crear enlace </button>
+              <button type="submit" className="link-button"> Crear enlace </button>
 
               </form>
 
-              <Link to="/createActivity"> Actividades </Link>
+              <Link to="/createActivity" className="act"> Actividades </Link>
 
               </div>
 

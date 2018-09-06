@@ -63,9 +63,14 @@ class CreateRule extends Component {
   })
     .then((response) => {
       //handle success
+
+        //handle error
+          alert("Se ha creado la regla correctamente");
+
       console.log("success upload")
     }).catch((error) => {
       //handle error
+      alert("Hubo un problema, intente nuevamente");
     });
   };
 
@@ -84,12 +89,16 @@ class CreateRule extends Component {
            console.log("SUCCESS", res);
            if(res.status == 200) {
                console.log("ruLE deleted successfully")
+               alert("Se ha eliminado la regla correctamente");
            //  browserHistory.replace("/login")
            //  store.set('loggedIn', true);
            //this.props.history.push("/");
 
            }
-         })
+         }).catch((error) => {
+           //handle error
+           alert("Hubo un problema, intente nuevamente");
+         });
   }
 
   modifyRule = event => {
@@ -105,6 +114,7 @@ class CreateRule extends Component {
            console.log("SUCCESS", res);
            if(res.status == 200) {
                console.log("Student modified successfully")
+                alert("Se ha modificado la regla correctamente");
            //  browserHistory.replace("/login")
            //  store.set('loggedIn', true);
            //this.props.history.push("/");
