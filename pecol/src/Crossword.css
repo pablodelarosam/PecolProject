@@ -11,3 +11,29 @@
 .ia {
   margin: auto;
 }
+
+.form-cross {
+      display: contents;
+}
+
+
+.form-cross input {
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
+.sub-cross {
+      margin-top: 8%;
+      color: white;
+      background: #339933;
+      padding: 1%;
+}
+
+.cross-img {
+  display: block;
+  margin: auto;
+  text-align: center;
+  width: 500px;
+  height: 700px;
+
+}

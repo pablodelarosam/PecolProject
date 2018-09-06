@@ -71,12 +71,16 @@ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/signu
 
          this.setState({ isLoggedIn: !(this.state.isLoggedIn)});
            console.log('Successfully Login', this.state);
+           alert("Se ha registrado el estudiante correctamente");
        //  browserHistory.replace("/login")
        //  store.set('loggedIn', true);
        //this.props.history.push("/");
 
        }
-     })
+     }).catch((error) => {
+       //handle error
+       alert("Hubo un problema, intente nuevamente");
+     });
  }
 
  deleteStudent = event => {
@@ -91,12 +95,16 @@ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/signu
           console.log("SUCCESS", res);
           if(res.status == 200) {
               console.log("Student deleted successfully")
+              alert("Se ha eliminado el estudiante correctamente");
           //  browserHistory.replace("/login")
           //  store.set('loggedIn', true);
           //this.props.history.push("/");
 
           }
-        })
+        }).catch((error) => {
+          //handle error
+          alert("Hubo un problema, intente nuevamente");
+        });
  }
 
  modifyStudent = event => {
@@ -115,12 +123,16 @@ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/signu
           console.log("SUCCESS", res);
           if(res.status == 200) {
               console.log("Student modified successfully")
+              alert("Se ha modificado el estudiante correctamente");
           //  browserHistory.replace("/login")
           //  store.set('loggedIn', true);
           //this.props.history.push("/");
 
           }
-        })
+        }).catch((error) => {
+          //handle error
+          alert("Hubo un problema, intente nuevamente");
+        });
 
  }
 

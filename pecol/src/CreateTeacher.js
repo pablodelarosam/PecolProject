@@ -87,8 +87,10 @@ class CreateTeacher extends Component {
     .then((response) => {
       //handle success
       console.log("success upload")
+      alert("Se ha agregado el profesor correctamente");
     }).catch((error) => {
       //handle error
+      alert("Hubo un problema, intente nuevamente");
     });
   };
 
@@ -102,14 +104,17 @@ class CreateTeacher extends Component {
            .then(res => {
              console.log("SUCCESS", res);
              if(res.status == 200) {
-
+               alert("Se ha eliminado el profesor correctamente");
 
              //  browserHistory.replace("/login")
              //  store.set('loggedIn', true);
              //this.props.history.push("/");
 
              }
-           })
+           }).catch((error) => {
+             //handle error
+             alert("Hubo un problema, intente nuevamente");
+           });
   }
 
   modifyTeacher = event => {
@@ -136,8 +141,10 @@ class CreateTeacher extends Component {
          .then((response) => {
            //handle success
            console.log("success upload")
+           alert("Se ha modificado el profesor correctamente");
          }).catch((error) => {
            //handle error
+           alert("Hubo un problema, intente nuevamente");
          });
 
 

@@ -78,23 +78,20 @@ class Activity extends Component {
             <div className="col-sm-9 sideBar-left">
               <h2>Actividades</h2>
               <div className="container">
-                <div className="row">
+                <div className="row activities">
 
                   {this.state.activity.map((data) =>
 
 
-                                      <div className="col-sm-6" onClick={this.gotoCourseDetails}>
-                                        <div className="card" style={{
-                                          width: '400px'
-                                        }}>
-                                          <img className="card-img-top" src={data.contentImage} alt="Exercise image" />
-                                          <div className="card-body">
+
+                                        <div className="" >
+                                          <div className="">
                                             <h5 className="card-title">{data.nameActivity}</h5>
 
                                       <Link className=" module-button btn btn-primary" to={`/activityDetails/${this.props.match.params.idStudent}/${data.typeActivity}/${data.idActivity}/${data.idModule}`}>Ir a la actividad</Link>
                                           </div>
                                         </div>
-                                      </div>
+
 
                   )}
 

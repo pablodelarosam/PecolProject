@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import ReactDOM from 'react-dom';
 import './Dashboard.css';
+import './MultipleQuestion.css';
 import NavBar from './NavBar.js'
 import carmen from './carmen.png' // relative path to image
 import cristi from './imgs/cristi.png'
@@ -113,7 +114,7 @@ class MultipleQuestion extends Component {
               <h2>Evaluación</h2>
               {this.state.activites.map((data) =>
                 <div>
-                <img src={data.contentImage}/>
+                <img className="cross-img" src={data.contentImage}/>
 
                 </div>
               )}
@@ -132,7 +133,7 @@ class MultipleQuestion extends Component {
 
 
               <div className="row">
-                <form onSubmit={this.handleSubmit}>
+                <form className="form-cross" onSubmit={this.handleSubmit}>
                 {this.state.qa.map((data, index) =>
                 <div className="col-sm-6">
 
@@ -140,7 +141,7 @@ class MultipleQuestion extends Component {
 
                 </div>
               )}
-                  <button type="submit"> Enviar respuestas </button>
+                  <button type="submit" className="sub-cross"> Enviar respuestas </button>
               </form>
 
 

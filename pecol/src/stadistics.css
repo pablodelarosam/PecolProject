@@ -1,3 +1,18 @@
 .stadistics {
   margin-top: 5%;
 }
+
+
+.links {
+  margin-top: 5%;
+}
+
+.links a {
+  color: green;
+  background-color: white;
+  border: 3px solid green;
+  border-color: green;
+  border-radius: 54%;
+  padding: 2%;
+  text-decoration: none;
+}

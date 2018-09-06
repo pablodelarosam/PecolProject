@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import ReactDOM from 'react-dom';
 import './Dashboard.css';
+import './Presentation.css';
 import NavBar from './NavBar.js'
 import carmen from './carmen.png' // relative path to image
 import cristi from './imgs/cristi.png'
@@ -54,9 +55,9 @@ class Presentation extends Component {
                   <div className="row">
 
                       {this.state.linkPecol.map((data) =>
-                    <div className="col-sm-6" >
-
-                    <a href={data.urlPresentation}> Descargar presentación </a>
+                    <div className="col-sm-12" >
+                    <button className="linkde">
+                    <a className="linka" href={data.urlPresentation} > Descargar presentación </a> </button>
                     </div>
                   )}
 

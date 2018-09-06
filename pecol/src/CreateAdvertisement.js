@@ -79,9 +79,11 @@ class CreateAdvertisement extends Component {
   })
     .then((response) => {
       //handle success
+        alert("Se ha creado el aviso correctamente");
       console.log("success upload")
     }).catch((error) => {
       //handle error
+        alert("Hubo un problema, intente nuevamente");
     });
   };
 
@@ -95,6 +97,7 @@ class CreateAdvertisement extends Component {
            .then(res => {
              console.log("SUCCESS", res);
              if(res.status == 200) {
+                 alert("Se ha eliminado el aviso correctamente");
 
 
              //  browserHistory.replace("/login")
@@ -102,7 +105,10 @@ class CreateAdvertisement extends Component {
              //this.props.history.push("/");
 
              }
-           })
+           }).catch((error) => {
+             //handle error
+               alert("Hubo un problema, intente nuevamente");
+           });
   }
 
 
