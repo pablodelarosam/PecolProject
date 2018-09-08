@@ -57,7 +57,7 @@ gotoCourseDetails() {
       <div className="dashboard-top">
         <div>
           <nav className="navbar-sec navbar-expand-lg navbar-light bg-light fixed-top">
-            <a className="navbar-brand" href="#">Navbar</a>
+            <Link className="navbar-brand" to="/home">Pecol</Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
             </button>

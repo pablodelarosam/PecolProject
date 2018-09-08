@@ -137,7 +137,7 @@ class MultipleQuestion extends Component {
                 {this.state.qa.map((data, index) =>
                 <div className="col-sm-6">
 
-                <input className="ia"  ref={index} id={`answer-${index}`} name={`answer-${index}`} placeholder={`Respuesta ${index}`} type="text" onChange={this.handleChange}   />
+                <input className="ia"  ref={index} id={`answer-${index}`} name={`answer-${index}`} placeholder={`Respuesta ${index + 1}`} type="text" onChange={this.handleChange}   />
 
                 </div>
               )}

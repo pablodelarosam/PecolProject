@@ -13,9 +13,14 @@
 
 .module-button {
 
-  margin: auto;
-  background-color: #339933;
-  color: white;
+
+  display: block;
+    /* margin: auto; */
+    background-color: #339933;
+    color: white;
+    margin-right: 58% !important;
+    margin-left: 5%;
+
 }
 
 .module-button:hover {

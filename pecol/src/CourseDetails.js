@@ -59,7 +59,7 @@ return (
   <div className="dashboard-top">
   <div>
     <nav className="navbar-sec navbar-expand-lg navbar-light bg-light fixed-top">
-      <a className="navbar-brand" href="#">Pecol</a>
+    <Link className="navbar-brand" to="/home">Pecol</Link>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
@@ -67,11 +67,7 @@ return (
       <Link className="custom-link" to={`/activity/${this.props.match.params.idStudent}/${this.props.match.params.idModule}`}>ACTIVIDADES
       </Link>
 
-      <Link className="custom-link" to={`/module/${this.props.match.params.idStudent}/${this.props.match.params.idModule}`}>INFORMACIÓN
-      </Link>
 
-      <Link className="custom-link" to="/links">Enlaces
-      </Link>
 
       <Link className="custom-link" to="/home">Correo
       </Link>
@@ -104,7 +100,9 @@ return (
               <h5 class="card-header">{data.nameModule}</h5>
               <div class="card-body">
               <img className="module-img" src={data.contentImage}/>
-              <Link className=" module-button btn btn-primary" to={`/activity/${this.props.match.params.idStudent}/${data.idModule}/${data.idCourse}`}>Ir al módulo</Link>
+              <Link className="module-button btn btn-primary" to={`/activity/${this.props.match.params.idStudent}/${data.idModule}/${data.idCourse}`} style={{
+                width: '18rem'
+              }}>Ir al módulo</Link>
               </div>
 
               </div>

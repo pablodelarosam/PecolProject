@@ -37,7 +37,7 @@ class Stadistics extends Component {
 
     const rows = [
       [
-        "Calificacion", "Nombre de actividad", "Id de estudiante", "Tipo de actividad"
+        "Calificacion", " ",  "Nombre de actividad", " ",  "Id de estudiante", " ",  "Tipo de actividad"
       ]
     ];
     let csvContent = "data:text/csv;charset=utf-8,";

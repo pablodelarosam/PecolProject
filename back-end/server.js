@@ -737,7 +737,7 @@ app.post("/createAdvertisement", upload.single('image'),   function (req, res, n
   var mimeType = req.body.mimetype
 
  var file = req.file;
- console.log("File obteained", file)
+ console.log("File obteained", file, mimeType)
  var img_name=file.filename;
  var host = "http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/images/upload_images/"
   host += img_name
@@ -747,7 +747,7 @@ app.post("/createAdvertisement", upload.single('image'),   function (req, res, n
 
 
   sql = "INSERT INTO advertisement (title,description,dated, image)  VALUES ('" + title + "' , '" + description + "' , '" + dated + "' , '" + host +  "')";
-  console.log("sql",sql)
+  console.log("sql",sql, host, img_name)
   connection.query(sql, function(err, records) {
     // Do something
   console.log("Datos al consultar: " + records);
@@ -894,6 +894,7 @@ app.post('/loginPecol', function(req, res, next) {
     sql = "select * from student";
     connection.query(sql, function(err, rows) {
       //connection.end();
+      console.log("ERRor", err , "rows", rows)
       if (!err) {
         //  res.send('User added to database with ID: ' + rows);
         for (var i = 0; i < rows.length; i++) {

@@ -49,7 +49,7 @@ class Activity extends Component {
       <div className="dashboard-top">
         <div>
           <nav className="navbar-sec navbar-expand-lg navbar-light bg-light fixed-top">
-            <a className="navbar-brand" href="#">Navbar</a>
+          <Link className="navbar-brand" to="/home">Pecol</Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
             </button>
@@ -57,12 +57,6 @@ class Activity extends Component {
             <Link className="custom-link" to={`/activity/${this.props.match.params.idStudent}/${this.props.match.params.idModule}/${this.props.match.params.idCourse}`}>ACTIVIDADES
             </Link>
 
-            <Link className="custom-link" to={`/module/${this.props.match.params.idStudent}/${this.props.match.params.idModule}/${this.props.match.params.idCourse}`}>INFORMACIÓN
-            </Link>
-
-
-            <Link className="custom-link" to={`/links/${this.props.match.params.idStudent}/${this.props.match.params.idModule}/${this.props.match.params.idCourse}`}>ENLANCES
-            </Link>
 
             <Link className="custom-link" to="/home">CORREO
             </Link>

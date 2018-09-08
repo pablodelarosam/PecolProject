@@ -8,6 +8,7 @@ import carmen from './fz.jpeg' // relative path to image
 import cristi from './imgs/ca.jpeg'
 import frida from './imgs/fz.jpeg'
 import gabi from './imgs/gb.jpeg'
+import ca from './carmen.png'
 import landingBG from './imgs/BG.jpg'
 import logoPe from './imgs/pecol-logo.png'
 import acuerdo from './imgs/acuerdo.jpg'
@@ -15,8 +16,14 @@ import car1 from './imgs/car/1.jpg'
 import car2 from './imgs/car/2.jpg'
 import car3 from './imgs/car/3.jpeg'
 import car4 from './imgs/car/4.jpeg'
+import pe1 from './imgs/pe1.jpeg'
+import pe2 from './imgs/pe2.jpeg'
+import pe3 from './imgs/pe3.jpeg'
 import car5 from './imgs/car/5.jpeg'
 import car6 from './imgs/car/6.jpeg'
+import fb from './imgs/facebook.png'
+import mail from './imgs/mail.png'
+import inst from './imgs/int.png'
 import introVideo from './vids/video.mp4'
 import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 import {Carousel} from 'react-responsive-carousel';
@@ -86,10 +93,7 @@ class Home extends Component {
               <p></p>
               <br/>
               <p className="lead">
-                <Link className="btn btn-success-landing btn-lg" to="/signup" role="button">Únete</Link>
-                <Link className="watchCourses" to="/login" style={{
-                    textDecoration: 'none'
-                  }}> Ver los cursos <FaArrowRight/> </Link>
+            <p className="lead">NUESTRO COMPROMISO ES QUE SEAS LA MEJOR VERSIÓN DE TI...</p>
               </p>
             </div>
           </div>
@@ -158,27 +162,23 @@ class Home extends Component {
           </h1>
         </div>
         <div className="row">
-          <div className="col-lg-4 icons"><FaMeetings/></div>
-          <div className="col-lg-4 icons"><FaTaller/></div>
-          <div className="col-lg-4 icons"><FaSearch/></div>
+          <div className="col-lg-6 icons"><FaMeetings/></div>
+          <div className="col-lg-6 icons"><FaTaller/></div>
+
         </div>
         <div className="row">
-          <div className="col-lg-4 metTitle">Talleres</div>
-          <div className="col-lg-4 metTitle">Conferencias</div>
-          <div className="col-lg-4 metTitle">Consultoría</div>
+          <div className="col-lg-6 metTitle">Talleres</div>
+          <div className="col-lg-6 metTitle">Conferencias y consultoría</div>
         </div>
         <div className="row">
-          <div className="col-lg-4 metText">
+          <div className="col-lg-6 metText">
             Nuestros talleres podrán impulsarte a la formación que tanto haz buscado. Fortalécete con nustras dinámicas
           </div>
-          <div className="col-lg-4 metText">
+          <div className="col-lg-6 metText">
             Mensualmente realizamos conferencias con más de 300 participantes las cuales son
             combinadas con talleres y actividades
            </div>
-          <div className="col-lg-4 metText">
-            Mensualmente realizamos conferencias con más de 300 participantes las cuales son
-            combinadas con talleres y actividades
-          </div>
+
         </div>
       </div>
 
@@ -247,22 +247,38 @@ class Home extends Component {
             </div>
           </div>
 
+
+          <div className="col-lg-4">
+            <div className="teammate t1">
+              <img src={ca} alt="Card image cap"/>
+              <div className="teammate-text">
+                <h4>Carmen Tomassi </h4>
+                <p className="position cli">
+                Licenciatura en Neurolinguística y Psicopedagogia
+
+                </p>
+                <p className="dscr cl">
+                <p className="dscr cl">•	Maestría en ciencias de la familia.</p>
+                <p className="dscr cl">•	Diplomado en inteligencia emocional.</p>
+
+                </p>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
 
       <div className="carousel">
         <Carousel>
           <div>
-            <img src={car4}/>
-            <p className="legend"></p>
+            <img src={pe1}/>
           </div>
           <div>
-            <img src={car5}/>
-            <p className="legend"></p>
+            <img src={pe2}/>
           </div>
           <div>
-            <img src={car6}/>
-            <p className="legend"></p>
+            <img src={pe3}/>
           </div>
         </Carousel>
       </div>
@@ -298,6 +314,27 @@ class Home extends Component {
 
       <div className="footer">
         <div className="container text-center">
+        <div className="row">
+        <div className="col-sm-4">
+
+        <a href="https://www.facebook.com/PECOLoriginal/"> <img  className="net" src={fb}/> </a>
+
+        </div>
+
+        <div className="col-sm-4">
+
+          <a href="http://picbear.online/pecolmx"> <img  className="net" src={inst}/> </a>
+
+        </div>
+
+        <div className="col-sm-4">
+
+         <img  className="net" src={mail}/>
+         infopecol@gmail.com
+
+        </div>
+
+        </div>
         </div>
       </div>
     </div>);
