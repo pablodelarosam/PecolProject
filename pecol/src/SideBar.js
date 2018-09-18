@@ -52,7 +52,11 @@ class SideBar extends Component {
         <Link className="nav-link"  to={"/teacher/" + this.props.idStudent}>Profesores
         </Link>
 
-      
+        <Link className="nav-link"  to={"/messagesPersonnelStudent/" + this.props.idStudent}>Correo
+        </Link>
+
+
+
 
         <Link className="nav-link"  to={"/normateca/" + this.props.idStudent}>Normateca
         </Link>

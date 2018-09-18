@@ -39,6 +39,9 @@ import AllTeacher from './AllTeacher'
 import AllCourse from './AllCourses'
 import AllModule from './AllModule'
 import AllLink from './AllLink'
+import FormFirebase from './Form.js'
+import FormFirebaseStudent from './FormStudentMessage.js'
+import AllChat from './AllChat.js'
 
 ReactDOM.render(  <Router>
       <div>
@@ -70,10 +73,13 @@ ReactDOM.render(  <Router>
         <Route path="/stadistics" component={Stadistics} />
         <Route path="/createAdvertisement" component={CreateAdvertisement} />
           <Route path="/allstudent" component={AllStudent} />
+          <Route path="/messagesPersonnel/:id" component={FormFirebase} />
+          <Route path="/messagesPersonnelStudent/:id" component={FormFirebaseStudent} />
             <Route path="/allteacher" component={AllTeacher} />
             <Route path="/allCourses" component={AllCourse} />
             <Route path="/allModules" component={AllModule} />
-              <Route path="/alllinks" component={AllLink} />
+            <Route path="/alllinks" component={AllLink} />
+            <Route path="/allChat" component={AllChat} />
       </div>
   </Router>,document.getElementById('root'));
 registerServiceWorker();

@@ -427,7 +427,7 @@ alert("Se ha modificado la cuenta correctamente");
           <Link className="custom-link" to="/createRule">Agregar regla
           </Link>
 
-          <Link className="custom-link" to="/createRule">Correo
+          <Link className="custom-link" to="/messagesPersonnel">Correo
           </Link>
 
           <Link className="custom-link" to="/createModule">Módulo

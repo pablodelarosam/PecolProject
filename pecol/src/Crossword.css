@@ -37,3 +37,14 @@
   height: 700px;
 
 }
+
+
+/* MOBILE*/
+
+@media screen and (max-width:680px){
+
+  .cross-img {
+    width: 400px;
+  }
+
+}

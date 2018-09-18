@@ -55,18 +55,6 @@ class  Information extends Component {
               <span className="navbar-toggler-icon"></span>
             </button>
 
-            <Link className="custom-link" to={`/activity/${this.props.idStudent}/${this.props.idModule}/${this.props.idCourse}`}>ACTIVIDADES
-            </Link>
-
-            <Link className="custom-link" to={`/module/${this.props.idStudent}/${this.props.idModule}/${this.props.idCourse}`}>INFORMACIÓN
-            </Link>
-
-
-            <Link className="custom-link" to={`/links/${this.props.idStudent}/${this.props.idModule}/${this.props.idCourse}`}>ENLANCES
-            </Link>
-
-            <Link className="custom-link" to="/home">CORREO
-            </Link>
 
 
           </nav>

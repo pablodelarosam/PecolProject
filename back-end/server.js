@@ -9,6 +9,7 @@ var studentID = 1;
 var currentStudent;
 var multer  = require('multer')
 var upload = multer({ dest: 'public/images/upload_images' })
+var nodemailer = require('nodemailer');
 //var mongoose = require('mongoose');
 //var db = mongoose.connect('mongodb://localhost/swag-shop');
 var mysql = require('mysql');
@@ -43,9 +44,9 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
 
      //
-      res.setHeader('Access-Control-Allow-Origin', 'http://pecol.net');
+    //  res.setHeader('Access-Control-Allow-Origin', 'http://pecol.net');
 
-     //res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
 
 
     // Request methods you wish to allow
@@ -117,6 +118,28 @@ var paramid = req.param("id");
 
   sql = "SELECT * FROM student";
 
+  connection.query(sql, function(err, records) {
+    // Do something
+    console.log("Datos al consultar: " + records);
+
+
+
+    if (err) {
+      return res.serverError(err);
+    }
+
+
+        return res.send(records);
+
+  });
+
+});
+
+app.get("/student/:id", function(req, res) {
+var paramid = req.param("id");
+
+  sql = "SELECT * FROM student where idstudent = " + "'" +  paramid + "'" ;
+console.log("query", sql)
   connection.query(sql, function(err, records) {
     // Do something
     console.log("Datos al consultar: " + records);
@@ -412,6 +435,41 @@ app.post("/createRule", upload.single('image'), function (req, res, next) {
 
   });
 
+
+});
+
+
+app.post("/sendEmail", upload.single('image'), function (req, res, next) {
+
+  var name = req.body.name
+  var email = req.body.email
+  var subject = req.body.subject
+  var textm = req.body.textm
+
+
+  var transporter = nodemailer.createTransport({
+  service: 'hotmail',
+  auth: {
+    user: 'pablo.rosam@hotmail.com',
+    pass: 'CraftCode1234.'
+  }
+});
+
+var mailOptions = {
+  from: 'pablo.rosam@hotmail.com',
+  to: 'pablo.rosam@hotmail.com',
+  subject: subject,
+  html: '<h1> ' + name + ' </h1> <p> ' + email + ' </p> <p> ' + textm + ' </p>'
+};
+
+transporter.sendMail(mailOptions, function(error, info){
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('Email sent: ' + info.response);
+    return res.send(200)
+  }
+});
 
 });
 

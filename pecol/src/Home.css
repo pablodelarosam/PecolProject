@@ -345,3 +345,11 @@
 .net {
   width: 18%;
 }
+
+
+/* MOBILE*/
+
+@media screen and (max-width:680px){
+
+  
+}

@@ -27,3 +27,14 @@
   color: white;
   margin-bottom: 5%;
 }
+
+
+/* MOBILE*/
+
+@media screen and (max-width:680px){
+
+  .dashboard_content {
+    margin: auto;
+  }
+
+}
