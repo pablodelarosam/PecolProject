@@ -27,10 +27,10 @@ class NavBarDash extends Component {
             <Link className="nav-link nav-dash-links" to="/createRule">Correos</Link>
             <Link className="nav-link nav-dash-links" to="/createModule">Módulos</Link>
             <Link className="nav-link nav-dash-links" to="/stadistics">Estadísticas</Link>
-            <li class="nav-link dropdown">
+            <li className="nav-link dropdown">
               <Link className="nav-link nav-dash-links" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" to={"#"}>Opciones</Link>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <Link class="dropdown-item" to={"/"} href="#">Salir</Link>
+              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                <Link className="dropdown-item" to={"/"} href="#">Salir</Link>
               </div>
             </li>
           </div>

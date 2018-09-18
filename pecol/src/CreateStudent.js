@@ -13,12 +13,6 @@ import {
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 import {confirmAlert} from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
-/* import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper'; */
 import NavBarAdmin from './NavBarAdmin.js'
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
@@ -183,8 +177,7 @@ class CreateStudent extends Component {
         {
           label: 'Si',
           onClick: () => {
-            axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteStudent`,
-              {idDelete: id}).then(res => {
+            axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteStudent`, {idDelete: id}).then(res => {
               console.log("SUCCESS", res);
               if (res.status == 200) {
                 console.log("Student deleted successfully")

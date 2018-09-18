@@ -127,7 +127,7 @@ class CreateCourse extends Component {
     });
   }
 
-  handleChange = (event, value) => {
+  handleChange1 = (event, value) => {
     this.setState({index: value});
   };
   handleChangeIndex = index => {
@@ -498,7 +498,7 @@ class CreateCourse extends Component {
             </div>
             <br/>
 
-            <Tabs value={index} fullWidth="fullWidth" onChange={this.handleChange} style={styles.tabs}>
+            <Tabs value={index} fullWidth="fullWidth" onChange={this.handleChange1} style={styles.tabs}>
               <Tab label="Inscripciones"/>
               <Tab label="Módulos"/>
               <Tab label="Cuentas"/>
@@ -506,7 +506,7 @@ class CreateCourse extends Component {
             <SwipeableViews index={index} onChangeIndex={this.handleChangeIndex}>
               <div style={Object.assign({}, styles.slide, styles.slide1)}>
                 <div className="row">
-                  <div className="formAdmin" id="delStudentFromCourse">
+                  <div className="formAdmin col-md-6">
                     <form onSubmit={this.deleteSubscription} className="">
                       <h4>
                         Eliminar alumno de un curso
@@ -527,6 +527,8 @@ class CreateCourse extends Component {
                       <button className="nav-link btn btn-success" type="submit">Dar de baja a alumno</button>
                     </form>
                     <br/>
+                  </div>
+                  <div className="formAdmin col-md-6">
                     <form onSubmit={this.createSubscription} className="">
                       <h4>
                         Inscribir alumno a un curso
@@ -553,36 +555,7 @@ class CreateCourse extends Component {
               </div>
               <div style={Object.assign({}, styles.slide, styles.slide2)}>
                 <div className="row">
-                  <div className="formAdmin">
-                    <form onSubmit={this.deleteModule} className="">
-                      <h4>
-                        Eliminar módulo
-                      </h4>
-                      <TextField id="idDeleteModule" label="ID módulo" placeholder="ID del módulo" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idDeleteModule}/>
-                      <br/>
-                      <br/>
-                      <button className="nav-link btn btn-success" type="submit">Eliminar módulo</button>
-                    </form>
-                    <br/>
-                    <form onSubmit={this.modifyModule} className="">
-                      <h4>
-                        Modificar módulo
-                      </h4>
-                      <TextField id="idModifyModule" label="ID módulo" placeholder="ID del módulo" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idModifyModule}/>
-                      <br/>
-                      <TextField id="nameModifyModule" label="Nombre módulo" placeholder="Nombre del módulo" className="textField" margin="normal" onChange={this.handleChange} value={this.state.nameModifyModule}/>
-                      <br/>
-                      <textarea style={{
-                          color: 'black'
-                        }} className="textField" id="moduleModifyDescription" label="Descripción módulo" placeholder="Descripción del módulo" margin="normal" onChange={this.handleChange} value={this.state.moduleModifyDescription}/>
-                      <br/>
-                      <TextField id="idModifyModuleCourse" label="Curso asociado" placeholder="Curso asociado" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idModifyModuleCourse}/>
-                      <br/>
-                      <input type="file" onChange={this.fileSelectedHandlerModify}/>
-                      <br/>
-                      <button className="nav-link btn btn-success" type="submit">Modificar módulo</button>
-                    </form>
-                    <br/>
+                  <div className="formAdmin col-md-4">
                     <form onSubmit={this.createModule} className="">
                       <h4>
                         Crear módulo
@@ -603,12 +576,48 @@ class CreateCourse extends Component {
                     </form>
                     <br/>
                   </div>
+
+                  <div className="formAdmin col-md-4">
+                    <form onSubmit={this.modifyModule} className="">
+                      <h4>
+                        Modificar módulo
+                      </h4>
+                      <TextField id="idModifyModule" label="ID módulo" placeholder="ID del módulo" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idModifyModule}/>
+                      <br/>
+                      <TextField id="nameModifyModule" label="Nombre módulo" placeholder="Nombre del módulo" className="textField" margin="normal" onChange={this.handleChange} value={this.state.nameModifyModule}/>
+                      <br/>
+                      <textarea style={{
+                          color: 'black'
+                        }} className="textField" id="moduleModifyDescription" label="Descripción módulo" placeholder="Descripción del módulo" margin="normal" onChange={this.handleChange} value={this.state.moduleModifyDescription}/>
+                      <br/>
+                      <TextField id="idModifyModuleCourse" label="Curso asociado" placeholder="Curso asociado" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idModifyModuleCourse}/>
+                      <br/>
+                      <input type="file" onChange={this.fileSelectedHandlerModify}/>
+                      <br/>
+                      <button className="nav-link btn btn-success" type="submit">Modificar módulo</button>
+                    </form>
+                    <br/>
+                  </div>
+
+                  <div className="formAdmin col-md-4">
+                    <form onSubmit={this.deleteModule} className="">
+                      <h4>
+                        Eliminar módulo
+                      </h4>
+                      <TextField id="idDeleteModule" label="ID módulo" placeholder="ID del módulo" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idDeleteModule}/>
+                      <br/>
+                      <br/>
+                      <button className="nav-link btn btn-success" type="submit">Eliminar módulo</button>
+                    </form>
+                    <br/>
+                  </div>
+
                 </div>
                 <br/>
               </div>
               <div style={Object.assign({}, styles.slide, styles.slide3)}>
                 <div className="row">
-                  <div className="formAdmin">
+                  <div className="formAdmin col-md-4">
                     <form onSubmit={this.deleteAccount} className="">
                       <h4>
                         Borrar cuenta
@@ -618,7 +627,9 @@ class CreateCourse extends Component {
                       <button className="nav-link btn btn-success" type="submit">Borrar cuenta</button>
                     </form>
                     <br/>
+                  </div>
 
+                  <div className="formAdmin col-md-4">
                     <form onSubmit={this.modifyAccount} className="">
                       <h4>
                         Modificar cuenta
@@ -636,7 +647,9 @@ class CreateCourse extends Component {
                       <button className="nav-link btn btn-success" type="submit">Modificar cuenta</button>
                     </form>
                     <br/>
+                  </div>
 
+                  <div className="formAdmin col-md-4">
                     <form onSubmit={this.createAccount} className="">
                       <h4>
                         Crear cuenta
