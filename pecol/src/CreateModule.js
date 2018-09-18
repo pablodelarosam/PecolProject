@@ -191,6 +191,16 @@ class CreateModule extends Component {
 
   }
 
+  fileSelectedHandler = event => {
+    console.log("event", event.target.files[0])
+    this.setState({fileSelected: event.target.files[0]})
+  };
+
+  fileSelectedHandlerModify = event => {
+    console.log("event", event.target.files[0])
+    this.setState({fileSelectedModify: event.target.files[0]})
+  };
+
   deleteModule = event => {
     event.preventDefault();
 
