@@ -8,7 +8,7 @@ import carmen from './fz.jpeg' // relative path to image
 import cristi from './imgs/ca.jpeg'
 import frida from './imgs/fz.jpeg'
 import gabi from './imgs/gb.jpeg'
-import ca from './carmen.png'
+import ca from './imgs/carmen.jpeg'
 import landingBG from './imgs/BG.jpg'
 import logoPe from './imgs/pecol-logo.png'
 import acuerdo from './imgs/acuerdo.jpg'
@@ -44,7 +44,7 @@ var FaSearch = require('react-icons/lib/fa/search');
 var FaTaller = require('react-icons/lib/fa/user');
 
 var styleNone = {
-  display: 'none' // 'ms' is the only lowercase vendor prefix
+  display: 'block' // 'ms' is the only lowercase vendor prefix
 };
 
 var {
@@ -87,14 +87,10 @@ class Home extends Component {
       <div className="landingDiv">
         <div className="jumbotron">
           <div className="row">
-            <div className="col-md-6">
+            <div className="col-md-12">
               <h1 className="display-4">Pecol</h1>
               <p className="lead">PERSONA, CONCIENCIA Y LIBERTAD</p>
-              <p></p>
-              <br/>
-              <p className="lead">
-            <p className="lead">NUESTRO COMPROMISO ES QUE SEAS LA MEJOR VERSIÓN DE TI...</p>
-              </p>
+              <p className="lead slogan2">NUESTRO COMPROMISO ES QUE SEAS LA MEJOR VERSIÓN DE TI...</p>
             </div>
           </div>
         </div>
@@ -102,15 +98,15 @@ class Home extends Component {
 
       <div className="bannerNews">
         <p className="bannerNewsFont">
-          <span className="">
+          <span className="col-sm-4">
             <FaGlobe/>
             Talleres y pláticas
           </span>
-          <span className="col-md-6">
+          <span className="col-sm-4">
             <FaGlobe/>
             Hemos formado a mas de mil personas
           </span>
-          <span className="col-md-6">
+          <span className="col-sm-4">
             <FaGlobe/>
             Consultoría familiar
           </span>
@@ -118,70 +114,71 @@ class Home extends Component {
       </div>
 
       <div className="missionVV">
-        <div className="iconContainer">
-          <button onClick={(e) => this.activateText(1, e)} className="btn missionDiv">
-            <FaMission/>
-          </button>
-          <button onClick={(e) => this.activateText(2, e)} className="btn visionDiv">
-            <FaVision/>
-          </button>
-          <button onClick={(e) => this.activateText(3, e)} className="btn valuesDiv">
-            <FaValues/>
-          </button>
-        </div>
-        <div className="container fontContainer">
-          <p id="missionText" className="missionFont">
-            <h1>Misión</h1>
-            Impulsar al individuo, que reconozca su valor como ser humano con el fin
-            <br/>
-            de tomar decisiones asertivas de manera responsable e integra
-          </p>
-          <p id="visionText" className="visionFont" style={styleNone}>
-            <h1>Visión</h1>
-            Transformar al ser humano promoviendo su autoconocimiento y desarrollando
-            <br/>
-            su liderazgo, mismos que le permitan identificarse como el creador único de
-            <br/>
-            su crecimiento personal y profesional así como un extraordinario ambiente de trabajo.
-          </p>
-          <p id="valuesText" className="valuesFont" style={styleNone}>
-            <h1>Valores</h1>
-            Dignidad de la persona.
-            <br/>
-            Valores universales.
-            <br/>
-            Transcendencia generacional
-          </p>
+        <div className="row col-md-12">
+          <div className="col-md-4">
+            <div className="row">
+              <p id="missionText" className="missionFont">
+                <h1>Misión</h1>
+                Impulsar al individuo, que reconozca su valor como ser humano con el fin
+                <br/>
+                de tomar decisiones asertivas de manera responsable e integra
+              </p>
+            </div>
+          </div>
+          <div className="col-md-4">
+            <div className="row">
+              <p id="visionText" className="visionFont" style={styleNone}>
+                <h1>Visión</h1>
+                Transformar al ser humano promoviendo su autoconocimiento y desarrollando
+                <br/>
+                su liderazgo, mismos que le permitan identificarse como el creador único de
+                <br/>
+                su crecimiento personal y profesional así como un extraordinario ambiente de trabajo.
+              </p>
+            </div>
+          </div>
+          <div className="col-md-4">
+            <div className="row">
+              <p id="valuesText" className="valuesFont" style={styleNone}>
+                <h1>Valores</h1>
+                Dignidad de la persona.
+                <br/>
+                Valores universales.
+                <br/>
+                Transcendencia generacional
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 
       <div className="methodology">
-        <div className="row">
-          <h1>
-            ¿Cómo trabajaremos para ti?
-          </h1>
-        </div>
-        <div className="row">
-          <div className="col-lg-6 icons"><FaMeetings/></div>
-          <div className="col-lg-6 icons"><FaTaller/></div>
-
-        </div>
-        <div className="row">
-          <div className="col-lg-6 metTitle">Talleres</div>
-          <div className="col-lg-6 metTitle">Conferencias y consultoría</div>
-        </div>
-        <div className="row">
-          <div className="col-lg-6 metText">
-            Nuestros talleres podrán impulsarte a la formación que tanto haz buscado. Fortalécete con nustras dinámicas
+        <h1>
+          ¿Cómo trabajaremos para ti?
+        </h1>
+        <div className="row col-md-12">
+          <div className="col-md-6">
+            <div className="row">
+              <div className="metTitle">Talleres</div>
+            </div>
+            <div className="row">
+              <div className="metText">
+                Nuestros talleres podrán impulsarte a la formación que tanto haz buscado. Fortalécete con nuestras dinámicas
+              </div>
+            </div>
           </div>
-          <div className="col-lg-6 metText">
-            Mensualmente realizamos conferencias con más de 300 participantes las cuales son
-            combinadas con talleres y actividades
-           </div>
-
+          <div className="col-md-6">
+            <div className="row">
+              <div className="metTitle">Conferencias y consultoría</div>
+            </div>
+            <div className="row">
+              <div className="metText">
+                Mensualmente realizamos conferencias con más de 300 participantes las cuales son combinadas con talleres y actividades
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-
 
       <div className="team">
         <div className="row">
@@ -190,82 +187,88 @@ class Home extends Component {
           </h1>
         </div>
         <div className="row teamComplete">
-          <div className="col-lg-4">
+          <div className="col-lg-3">
             <div className="teammate t1">
               <img src={gabi} alt="Card image cap"/>
               <div className="teammate-text">
-                <h4>Gabriela Anaya </h4>
+                <h4>Gabriela Anaya
+                </h4>
                 <p className="position cli">
-                Licenciatura en Ciencias de la familia.
-
+                  Licenciatura en Ciencias de la familia.
                 </p>
-                <p className="dscr cl">
-                <p className="dscr cl">•	Consejo en Bifam.</p>
-                <p className="dscr cl">•	Prevención en A.C.</p>
-                <p className="dscr cl">•	Talleres y cursos de desarrollo humano a empresas.</p>
-                <p className="dscr cl">•	Programas de prevención de transnacionales, Ford y Coppel.</p>
-                <p className="dscr cl">•	Prevención en de adicciones en la SEP (Edo. Mex) y Conalep II Q. Roo.</p>
 
+                <p className="dscr cl">
+                  <p className="dscr cl">• Consejo en Bifam.</p>
+                  <p className="dscr cl">• Prevención en A.C.</p>
+                  <p className="dscr cl">• Talleres y cursos de desarrollo humano a empresas.</p>
+                  <p className="dscr cl">• Programas de prevención de transnacionales, Ford y Coppel.</p>
+                  <p className="dscr cl">• Prevención en de adicciones en la SEP (Edo. Mex) y Conalep II Q. Roo.</p>
                 </p>
               </div>
             </div>
           </div>
-          <div className="col-lg-4">
+          <div className="col-lg-3">
             <div className="teammate t2">
               <img src={frida} alt="Card image cap"/>
               <div className="teammate-text">
-                <h4>Frida Schulz </h4>
+                <h4>Frida Schulz
+                </h4>
                 <p className="position cli">
                   Maestra en Derecho, Valores y Medio Ambiente a nivel superior.
                 </p>
                 <div className="dscr cl">
-              <p className="dscr cl">  •	Voluntariado en A.C. </p>
-              <p className="dscr cl">  •	Talleres y cursos de desarrollo humano y Capacitación a empresas. </p>
-              <p className="dscr cl">  •	Programas de prevención en adicciones, Conalep II; Q. Roo, Mx.</p>
-              <p className="dscr cl">  •	Consultoría Familiar.</p>
+                  <p className="dscr cl">
+                    • Voluntariado en A.C.
+                  </p>
+                  <p className="dscr cl">
+                    • Talleres y cursos de desarrollo humano y Capacitación a empresas.
+                  </p>
+                  <p className="dscr cl">
+                    • Programas de prevención en adicciones, Conalep II; Q. Roo, Mx.</p>
+                  <p className="dscr cl">
+                    • Consultoría Familiar.</p>
                 </div>
               </div>
             </div>
           </div>
-          <div className="col-lg-4">
+          <div className="col-lg-3">
             <div className="teammate t3">
               <img src={cristi} alt="Card image cap"/>
               <div className="teammate-text">
-                <h4>Cristina Arenzana </h4>
+                <h4>Cristina Arenzana
+                </h4>
                 <p className="position cli">
-                Maestría en Ciencias de la Familia.
+                  Maestría en Ciencias de la Familia.
 
                 </p>
                 <p className="dscr cl">
-                <p className="dscr cl">•	Voluntariado en A.C.</p>
-                <p className="dscr cl">•	Talleres y cursos de desarrollo humano y Capacitación a empresas.</p>
-                <p className="dscr cl">•	Programas de prevención en de adicciones en Conalep II, Q. Roo, Mx</p>
-                <p className="dscr cl">•	Consultoría Familiar.</p>
+                  <p className="dscr cl">• Voluntariado en A.C.</p>
+                  <p className="dscr cl">• Talleres y cursos de desarrollo humano y Capacitación a empresas.</p>
+                  <p className="dscr cl">• Programas de prevención en de adicciones en Conalep II, Q. Roo, Mx</p>
+                  <p className="dscr cl">• Consultoría Familiar.</p>
 
                 </p>
               </div>
             </div>
           </div>
-
-
-          <div className="col-lg-4">
+          <div className="col-lg-3">
             <div className="teammate t1">
               <img src={ca} alt="Card image cap"/>
               <div className="teammate-text">
-                <h4>Carmen Tomassi </h4>
+                <h4>Carmen Tomassi
+                </h4>
                 <p className="position cli">
-                Licenciatura en Neurolinguística y Psicopedagogia
+                  Licenciatura en Neurolinguística y Psicopedagogia
 
                 </p>
                 <p className="dscr cl">
-                <p className="dscr cl">•	Maestría en ciencias de la familia.</p>
-                <p className="dscr cl">•	Diplomado en inteligencia emocional.</p>
+                  <p className="dscr cl">• Maestría en ciencias de la familia.</p>
+                  <p className="dscr cl">• Diplomado en inteligencia emocional.</p>
 
                 </p>
               </div>
             </div>
           </div>
-
         </div>
       </div>
 
@@ -290,51 +293,56 @@ class Home extends Component {
               ¿Tienes alguna pregunta?
             </h2>
           </div>
-          <div className="row">
-            <label>
-              <input className="input-form" type="text" name="name" placeholder="Nombre"/>
-            </label>
-            <label>
-              <input className="input-form" type="text" name="name" placeholder="E-mail"/>
-            </label>
-          </div>
-          <div className="row">
-            <label>
-              <input className="input-form2" type="text" name="name" placeholder="Asunto"/>
-            </label>
+
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="pwd">Nombre:</label>
+            <div class="col-sm-10">
+              <input className="col-sm-offset-2 form-control col-md-12" type="text" name="name"/>
+            </div>
           </div>
 
-          <div className="row">
-            <label>
-              <textarea className="input-form3" type="text" name="name" placeholder="Escribe lo que necesites agregar"/>
-            </label>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="pwd">Email:</label>
+            <div class="col-sm-10">
+              <input className="form-control col-md-12" type="text" name="name" placeholder="E-mail"/>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="pwd">Asunto:</label>
+            <div class="col-sm-10">
+              <input className="form-control col-md-12" type="text" name="name" placeholder="Asunto"/>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="pwd">Asunto:</label>
+            <div class="col-sm-10">
+              <textarea className="form-control col-md-12" type="text" name="name" placeholder="Escribe lo que necesites agregar"/>
+            </div>
           </div>
         </div>
       </div>
 
       <div className="footer">
         <div className="container text-center">
-        <div className="row">
-        <div className="col-sm-4">
+          <div className="row">
+            <div className="col-sm-4">
+              <a href="https://www.facebook.com/PECOLoriginal/">
+                <img className="net" src={fb}/>
+              </a>
+            </div>
+            <div className="col-sm-4">
+              <a href="http://picbear.online/pecolmx">
+                <img className="net" src={inst}/>
+              </a>
+            </div>
 
-        <a href="https://www.facebook.com/PECOLoriginal/"> <img  className="net" src={fb}/> </a>
-
-        </div>
-
-        <div className="col-sm-4">
-
-          <a href="http://picbear.online/pecolmx"> <img  className="net" src={inst}/> </a>
-
-        </div>
-
-        <div className="col-sm-4">
-
-         <img  className="net" src={mail}/>
-         infopecol@gmail.com
-
-        </div>
-
-        </div>
+            <div className="col-sm-4">
+              <img className="net" src={mail}/>
+              infopecol17@gmail.com
+            </div>
+          </div>
         </div>
       </div>
     </div>);

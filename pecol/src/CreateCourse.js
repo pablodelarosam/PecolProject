@@ -1,31 +1,56 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import logo from './logo.svg';
+import Tab from '@material-ui/core/Tab';
+import Tabs from '@material-ui/core/Tabs';
+import Select from '@material-ui/core/Select';
+import SwipeableViews from 'react-swipeable-views';
 import ReactDOM from 'react-dom';
-import './CreateCourse.css';
-import './CreateRule.css'
-import NavBar from './NavBar.js'
-import carmen from './carmen.png' // relative path to image
-import cristi from './imgs/cristi.png'
-import frida from './imgs/frida.png'
-import gabi from './imgs/gabi.png'
-import logoPe from './imgs/xaxa.png'
-import acuerdo from './imgs/acuerdo.jpg'
-import SideBar from './SideBar.js'
-import Signup from './Signup.js'
+import './CreateStudent.css';
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td
+} from 'react-super-responsive-table';
+import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
+import {confirmAlert} from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
+import NavBarAdmin from './NavBarAdmin.js'
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import axios from 'axios'
 import FormData from 'form-data'
-import {
-  BrowserRouter as Router,
-  Link,
-  Route,
-  Switch,
-} from 'react-router-dom';
+import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
+var styleNone = {
+  display: 'none' // 'ms' is the only lowercase vendor prefix
+};
+const styles = {
+  tabs: {
+    background: '#fff'
+  },
+  slide: {
+    padding: 15,
+    minHeight: 100
+  },
+  slide1: {
+    backgroundColor: '#FFF'
+  },
+  slide2: {
+    backgroundColor: '#FFF'
+  },
+  slide3: {
+    backgroundColor: '#FFF'
+  }
+};
+
 class CreateCourse extends Component {
   constructor(props) {
-      super(props);
+    super(props);
     this.state = {
+      index: 0,
+      student: [],
       idCourse: "",
       nameCourse: "",
       introCourse: "",
@@ -59,11 +84,42 @@ class CreateCourse extends Component {
       limitDateModify: "",
       idStudentAccountModify: ""
 
-
     };
   }
+  componentDidMount() {
+    const idC = this.props.match.params.id
+    console.log("PROPS", this.props.match.params.id, idC)
+    axios.get(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/AllCourses`).then(res => {
+      const accounts = res.data;
 
+      this.setState({student: accounts});
+      //   console.log("course", this.state.course[0].idCOURSE)
+    })
+  }
+  handleSubmit = event => {
+    event.preventDefault();
 
+    axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createCourse`, {
+      idCourse: this.state.idCourse,
+      nameCourse: this.state.nameCourse,
+      introCourse: this.state.introCourse
+
+    }).then(res => {
+      console.log("SUCCESS", res);
+      if (res.status == 200) {
+        alert("Se ha creado el curso correctamente");
+        window.location.reload();
+
+        //  browserHistory.replace("/login")
+        //  store.set('loggedIn', true);
+        //this.props.history.push("/");
+
+      }
+    }).catch((error) => {
+      //handle error
+      alert("Hubo un problema, intente nuevamente");
+    });
+  }
   handleChange = event => {
     console.log(this.state)
     this.setState({
@@ -71,154 +127,48 @@ class CreateCourse extends Component {
     });
   }
 
-  componentDidMount() {
-    console.log("State", this.state)
-  }
+  handleChange = (event, value) => {
+    this.setState({index: value});
+  };
+  handleChangeIndex = index => {
+    this.setState({index});
+  };
+  createSubscription = event => {
+    event.preventDefault();
 
-  handleSubmit = event => {
-  event.preventDefault();
+    var e = document.getElementById("idCourseCSubscription");
+    var selectedCourse = e.options[e.selectedIndex].value;
+    alert(selectedCourse);
 
+    axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createSubscription`, {
+      idStudentCSubscription: this.state.idStudentCSubscription,
+      idCourseCSubscription: selectedCourse
 
-axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createCourse`, {
-  idCourse: this.state.idCourse,
-  nameCourse: this.state.nameCourse,
-  introCourse: this.state.introCourse
-
- })
-     .then(res => {
-       console.log("SUCCESS", res);
-       if(res.status == 200) {
-         alert("Se ha creado el curso correctamente");
-
-       //  browserHistory.replace("/login")
-       //  store.set('loggedIn', true);
-       //this.props.history.push("/");
-
-       }
-     }).catch((error) => {
-       //handle error
-       alert("Hubo un problema, intente nuevamente");
-     });
- }
-
-
- createSubscription = event => {
- event.preventDefault();
-
-
-axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createSubscription`, {
- idStudentCSubscription: this.state.idStudentCSubscription,
- idCourseCSubscription: this.state.idCourseCSubscription
-
-})
-    .then(res => {
+    }).then(res => {
       console.log("SUCCESS", res);
-      if(res.status == 200) {
+      if (res.status == 200) {
 
-         alert("Se ha dado de alta el alumno correctamente");
+        alert("Se ha dado de alta el alumno correctamente");
 
-
-      //  browserHistory.replace("/login")
-      //  store.set('loggedIn', true);
-      //this.props.history.push("/");
+        //  browserHistory.replace("/login")
+        //  store.set('loggedIn', true);
+        //this.props.history.push("/");
 
       }
     }).catch((error) => {
       //handle error
       alert("Hubo un problema, intente nuevamente");
     });
-}
+  }
+  createModule = event => {
+    event.preventDefault();
 
-
- deleteCourse = event => {
-   event.preventDefault();
-
-
-   axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteCourse`, {
-     idDelete: this.state.idDelete,
-
-
-
-    })
-        .then(res => {
-          console.log("SUCCESS", res);
-          if(res.status == 200) {
-              console.log("Student deleted successfully")
-               alert("Se ha eliminado el curso correctamente");
-          //  browserHistory.replace("/login")
-          //  store.set('loggedIn', true);
-          //this.props.history.push("/");
-
-          }
-        }).catch((error) => {
-          //handle error
-          alert("Hubo un problema, intente nuevamente");
-        });
- }
-
-
- deleteSubscription = event => {
-   event.preventDefault();
-
-
-   axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteSubscription`, {
-     idStudentDSubscription: this.state.idStudentDSubscription,
-     idCourseDSubscription: this.state.idCourseDSubscription,
-
-
-    })
-        .then(res => {
-          console.log("SUCCESS", res);
-          if(res.status == 200) {
-              console.log("Student deleted successfully")
-              alert("Se ha dado de baja el alumno del curso correctamente")
-          //  browserHistory.replace("/login")
-          //  store.set('loggedIn', true);
-          //this.props.history.push("/");
-
-          }
-        }).catch((error) => {
-          //handle error
-          alert("Hubo un problema, intente nuevamente");
-        });
- }
-
- modifyCourse = event => {
-   event.preventDefault();
-
-   axios.put(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/modifyCourse`, {
-     idModify: this.state.idModify,
-     nameModify: this.state.nameModify
-
-
-    })
-        .then(res => {
-          console.log("SUCCESS", res);
-          if(res.status == 200) {
-              console.log("Student modified successfully")
-               alert("Se ha modificado el curso correctamente");
-          //  browserHistory.replace("/login")
-          //  store.set('loggedIn', true);
-          //this.props.history.push("/");
-
-          }
-        }).catch((error) => {
-          //handle error
-          alert("Hubo un problema, intente nuevamente");
-        });
-
- }
-
- createModule = event => {
-   event.preventDefault();
-
-   const formData = new FormData();
+    const formData = new FormData();
     formData.append("image", this.state.fileSelected, this.state.fileSelected.name)
     formData.append('idModule', this.state.idModule)
     formData.append('nameModule', this.state.nameModule)
     formData.append('moduleDescription', this.state.moduleDescription)
     formData.append('idCourseModule', this.state.idCourseModule)
-
 
     // axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createTeacher`, this.formData)
 
@@ -226,32 +176,102 @@ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/creat
       headers: {
         'accept': 'application/json',
         'Accept-Language': 'en-US,en;q=0.8',
-        'Content-Type': `multipart/form-data; boundary=${formData._boundary}`,
+        'Content-Type': `multipart/form-data; boundary=${formData._boundary}`
       }
-    })
-      .then((response) => {
-        //handle success
-        console.log("success upload")
-        alert("Se ha creado el módulo correctamente");
-      }).catch((error) => {
-        //handle error
-          alert("Hubo un problema, intente nuevamente");
-      });
+    }).then((response) => {
+      //handle success
+      console.log("success upload")
+      alert("Se ha creado el módulo correctamente");
+    }).catch((error) => {
+      //handle error
+      alert("Hubo un problema, intente nuevamente");
+    });
 
+  }
+  createAccount = event => {
+    event.preventDefault();
 
+    axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createAccount`, {
+      totalCredit: this.state.totalCredit,
+      exigibleCredit: this.state.exigibleCredit,
+      interests: this.state.introCourse,
+      limitDate: this.state.limitDate,
+      idStudentAccount: this.state.idStudentAccount
 
- }
+    }).then(res => {
+      console.log("SUCCESS", res);
+      if (res.status == 200) {
 
- modifyModule = event => {
-   event.preventDefault();
+        alert("Se ha creado la cuenta correctamente");
 
-   const formData = new FormData();
+        //  browserHistory.replace("/login")
+        //  store.set('loggedIn', true);
+        //this.props.history.push("/");
+
+      }
+    }).catch((error) => {
+      //handle error
+      alert("Hubo un problema, intente nuevamente");
+    });
+  }
+  modifyAccount = event => {
+    event.preventDefault();
+
+    axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/modifyAccount`, {
+      totalCreditModify: this.state.totalCreditModify,
+      exigibleCreditModify: this.state.exigibleCreditModify,
+      interestsModify: this.state.interestsModify,
+      limitDateModify: this.state.limitDateModify,
+      idStudentAccountModify: this.state.idStudentAccountModify
+
+    }).then(res => {
+      console.log("SUCCESS", res);
+      if (res.status == 200) {
+
+        alert("Se ha modificado la cuenta correctamente");
+        //  browserHistory.replace("/login")
+        //  store.set('loggedIn', true);
+        //this.props.history.push("/");
+
+      }
+    }).catch((error) => {
+      //handle error
+      alert("Hubo un problema, intente nuevamente");
+    });
+  }
+  modifyCourse = event => {
+    event.preventDefault();
+
+    axios.put(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/modifyCourse`, {
+      idModify: this.state.idModify,
+      nameModify: this.state.nameModify
+
+    }).then(res => {
+      console.log("SUCCESS", res);
+      if (res.status == 200) {
+        console.log("Student modified successfully")
+        alert("Se ha modificado el curso correctamente");
+        window.location.reload();
+        //  browserHistory.replace("/login")
+        //  store.set('loggedIn', true);
+        //this.props.history.push("/");
+
+      }
+    }).catch((error) => {
+      //handle error
+      alert("Hubo un problema, intente nuevamente");
+    });
+
+  }
+  modifyModule = event => {
+    event.preventDefault();
+
+    const formData = new FormData();
     formData.append("image", this.state.fileSelectedModify, this.state.fileSelectedModify.name)
     formData.append('idModule', this.state.idModifyModule)
     formData.append('nameModule', this.state.nameModifyModule)
     formData.append('moduleDescription', this.state.moduleModifyDescription)
     formData.append('idCourseModule', this.state.idModifyModuleCourse)
-
 
     // axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createTeacher`, this.formData)
 
@@ -259,421 +279,403 @@ axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/creat
       headers: {
         'accept': 'application/json',
         'Accept-Language': 'en-US,en;q=0.8',
-        'Content-Type': `multipart/form-data; boundary=${formData._boundary}`,
+        'Content-Type': `multipart/form-data; boundary=${formData._boundary}`
       }
-    })
-      .then((response) => {
-        //handle success
-        console.log("success upload")
-          alert("Se ha modificado el módulo correctamente");
-      }).catch((error) => {
-        //handle error
-          alert("Hubo un problema, intente nuevamente");
-      });
+    }).then((response) => {
+      //handle success
+      console.log("success upload")
+      alert("Se ha modificado el módulo correctamente");
+    }).catch((error) => {
+      //handle error
+      alert("Hubo un problema, intente nuevamente");
+    });
 
+  }
+  deleteModule = event => {
+    event.preventDefault();
 
+    axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteModule`, {idDeleteModule: this.state.idDeleteModule}).then(res => {
+      console.log("SUCCESS", res);
+      if (res.status == 200) {
+        console.log("Student deleted successfully")
+        //  browserHistory.replace("/login")
+        //  store.set('loggedIn', true);
+        //this.props.history.push("/");
+        alert("Se ha eliminado el módulo correctamente");
 
- }
+      }
+    }).catch((error) => {
+      //handle error
+      alert("Hubo un problema, intente nuevamente");
+    });
+  }
+  deleteCourse = event => {
+    event.preventDefault();
 
- deleteModule = event => {
-   event.preventDefault();
+    axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteCourse`, {idDelete: this.state.idDelete}).then(res => {
+      console.log("SUCCESS", res);
+      if (res.status == 200) {
+        console.log("Student deleted successfully")
+        alert("Se ha eliminado el curso correctamente");
+        //  browserHistory.replace("/login")
+        //  store.set('loggedIn', true);
+        //this.props.history.push("/");
 
+      }
+    }).catch((error) => {
+      //handle error
+      alert("Hubo un problema, intente nuevamente");
+    });
+  }
+  deleteAccount = event => {
+    event.preventDefault();
 
-   axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteModule`, {
-     idDeleteModule: this.state.idDeleteModule,
+    axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteAccount`, {idStudentAccountDelete: this.state.idStudentAccountDelete}).then(res => {
+      console.log("SUCCESS", res);
+      if (res.status == 200) {
 
+        alert("Se ha eliminado la cuenta correctamente");
 
+        //  browserHistory.replace("/login")
+        //  store.set('loggedIn', true);
+        //this.props.history.push("/");
 
-    })
-        .then(res => {
-          console.log("SUCCESS", res);
-          if(res.status == 200) {
-              console.log("Student deleted successfully")
-          //  browserHistory.replace("/login")
-          //  store.set('loggedIn', true);
-          //this.props.history.push("/");
-          alert("Se ha eliminado el módulo correctamente");
+      }
+    }).catch((error) => {
+      //handle error
+      alert("Hubo un problema, intente nuevamente");
+    });
+  }
+  deleteSubscription = event => {
+    event.preventDefault();
 
+    var e = document.getElementById("idCourseDSubscription");
+    var selectedCourse = e.options[e.selectedIndex].value;
+
+    axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteSubscription`, {
+      idStudentDSubscription: this.state.idStudentDSubscription,
+      idCourseDSubscription: selectedCourse
+    }).then(res => {
+      console.log("SUCCESS", res);
+      if (res.status == 200) {
+        console.log("Student deleted successfully")
+        alert("Se ha dado de baja el alumno del curso correctamente")
+        //  browserHistory.replace("/login")
+        //  store.set('loggedIn', true);
+        //this.props.history.push("/");
+
+      }
+    }).catch((error) => {
+      //handle error
+      alert("Hubo un problema, intente nuevamente");
+    });
+  }
+  fileSelectedHandler = event => {
+    console.log("event", event.target.files[0])
+    this.setState({fileSelected: event.target.files[0]})
+  };
+  fileSelectedHandlerModify = event => {
+    console.log("event", event.target.files[0])
+    this.setState({fileSelectedModify: event.target.files[0]})
+  };
+
+  changeView(id) {
+    switch (id) {
+      case 1:
+        document.getElementById("create").style.display = "block";
+        document.getElementById("modify").style.display = "none";
+        break;
+      case 2:
+        document.getElementById("create").style.display = "none";
+        document.getElementById("modify").style.display = "block";
+        break;
+    }
+  }
+  deleteSTD(id) {
+    confirmAlert({
+      title: 'Confirmar acción',
+      message: '¿Deseas borrar este registro?',
+      buttons: [
+        {
+          label: 'Si',
+          onClick: () => {
+            axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteCourse`, {idStudentAccountDelete: id}).then(res => {
+              console.log("SUCCESS", res);
+              if (res.status == 200) {
+                console.log("Student deleted successfully")
+                alert("Se ha eliminado el curso correctamente");
+                //  browserHistory.replace("/login")
+                //  store.set('loggedIn', true);
+                //this.props.history.push("/");
+                window.location.reload()
+
+              }
+            }).catch((error) => {
+              //handle error
+              alert("Hubo un problema, intente nuevamente");
+            });
           }
-        }).catch((error) => {
-          //handle error
-            alert("Hubo un problema, intente nuevamente");
-        });
- }
-
- fileSelectedHandler = event => {
-   console.log("event", event.target.files[0])
-   this.setState({
-     fileSelected : event.target.files[0]
-   })
- };
-
- fileSelectedHandlerModify = event => {
-   console.log("event", event.target.files[0])
-   this.setState({
-     fileSelectedModify : event.target.files[0]
-   })
- };
-
- createAccount = event => {
-   event.preventDefault();
-
-
- axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createAccount`, {
-   totalCredit: this.state.totalCredit,
-   exigibleCredit: this.state.exigibleCredit,
-   interests: this.state.introCourse,
-   limitDate: this.state.limitDate ,
-   idStudentAccount: this.state.idStudentAccount
-
-  })
-      .then(res => {
-        console.log("SUCCESS", res);
-        if(res.status == 200) {
-
-              alert("Se ha creado la cuenta correctamente");
-
-
-        //  browserHistory.replace("/login")
-        //  store.set('loggedIn', true);
-        //this.props.history.push("/");
-
+        }, {
+          label: 'No'
         }
-      }).catch((error) => {
-        //handle error
-          alert("Hubo un problema, intente nuevamente");
-      });
- }
-
- deleteAccount = event => {
-   event.preventDefault();
-
-
- axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteAccount`, {
-   idStudentAccountDelete: this.state.idStudentAccountDelete
-
-  })
-      .then(res => {
-        console.log("SUCCESS", res);
-        if(res.status == 200) {
-
-            alert("Se ha eliminado la cuenta correctamente");
-
-
-        //  browserHistory.replace("/login")
-        //  store.set('loggedIn', true);
-        //this.props.history.push("/");
-
-        }
-      }).catch((error) => {
-        //handle error
-          alert("Hubo un problema, intente nuevamente");
-      });
- }
-
- modifyAccount = event => {
-   event.preventDefault();
-
-
- axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/modifyAccount`, {
-   totalCreditModify: this.state.totalCreditModify,
-   exigibleCreditModify: this.state.exigibleCreditModify,
-   interestsModify: this.state.interestsModify,
-   limitDateModify: this.state.limitDateModify ,
-   idStudentAccountModify: this.state.idStudentAccountModify
-
-
-
-  })
-      .then(res => {
-        console.log("SUCCESS", res);
-        if(res.status == 200) {
-
-alert("Se ha modificado la cuenta correctamente");
-        //  browserHistory.replace("/login")
-        //  store.set('loggedIn', true);
-        //this.props.history.push("/");
-
-        }
-      }).catch((error) => {
-        //handle error
-          alert("Hubo un problema, intente nuevamente");
-      });
- }
+      ]
+    })
+  }
 
   render() {
-    return (
-      <div className="dashboard-top">
+    const {index} = this.state;
+    return (<div className="dashboard-top">
       <div>
-        <nav className="navbar-sec navbar-expand-lg navbar-light bg-light fixed-top">
-          <a className="navbar-brand" href="#">Pecol</a>
-          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
+        <NavBarAdmin/>
+      </div>
+      <div className="mainContent">
+        <div className="col-sm-12">
+          <div className="container">
+            <h2>
+              Administrar cursos
+              <a className="btn btn-success" onClick={(e) => this.changeView(1, e)}>+</a>
+            </h2>
+            <div className="row">
+              <Table>
+                <Thead>
+                  <Tr>
+                    <Th>ID</Th>
+                    <Th>Nombre</Th>
+                    <Th>Introducción</Th>
+                    <Th></Th>
+                    <Th></Th>
+                  </Tr>
+                </Thead>
+                <Tbody>
+                  {
+                    this.state.student.map(n => {
+                      return (<Tr>
+                        <Td>{n.idCourse}</Td>
+                        <Td>{n.nameCourse}</Td>
+                        <Td>{n.introCourse}</Td>
+                        <Td>
+                          <a className="btn btn-info" onClick={(e) => this.changeView(2, e)}>Modificar</a>
+                        </Td>
+                        <Td>
+                          <a className="btn btn-danger" onClick={(e) => this.deleteSTD(n.idCourse, e)}>Borrar</a>
+                        </Td>
+                      </Tr>);
+                    })
+                  }
+                </Tbody>
+              </Table>
+            </div>
+            <div className="row">
+              <div className="formAdmin" id="modify" style={styleNone}>
+                <form onSubmit={this.modifyCourse} className="">
+                  <h4>
+                    Modificar curso
+                  </h4>
+                  <TextField id="idModify" label="ID" placeholder="Curso a modificar" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idModify}/>
+                  <br/>
+                  <TextField id="nameModify" label="Nombre" placeholder="Nombre del curso" className="textField" margin="normal" onChange={this.handleChange} value={this.state.nameModify}/>
 
+                  <br/> {/* <input type="submit" className="btn btn-success" value="Iniciar sesión" /> */}
+                  <button className="nav-link btn btn-success" type="submit">Modificar curso</button>
+                </form>
+              </div>
+              <div className="formAdmin" id="create" style={styleNone}>
+                <form onSubmit={this.handleSubmit} className="">
+                  <h4>
+                    Crear curso
+                  </h4>
+                  <TextField id="idCourse" label="ID" placeholder="ID de curso" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idCourse}/>
+                  <br/>
+                  <TextField id="nameCourse" label="Nombre" placeholder="Nombre de curso" className="textField" margin="normal" onChange={this.handleChange} value={this.state.nameCourse}/>
+                  <br/>
+                  <TextField id="introCourse" label="Edad" placeholder="Intro de curso" className="textField" margin="normal" onChange={this.handleChange} value={this.state.introCourse}/>
+                  <br/>
 
-          <Link className="custom-link" to="/createStudent">Agregar estudiante
-          </Link>
+                  <br/> {/* <input type="submit" className="btn btn-success" value="Iniciar sesión" /> */}
+                  <button className="nav-link btn btn-success" type="submit">Crear curso</button>
+                </form>
+              </div>
+            </div>
+            <br/>
 
-          <Link className="custom-link" to="/createCourse">Agregar curso
-          </Link>
+            <Tabs value={index} fullWidth="fullWidth" onChange={this.handleChange} style={styles.tabs}>
+              <Tab label="Inscripciones"/>
+              <Tab label="Módulos"/>
+              <Tab label="Cuentas"/>
+            </Tabs>
+            <SwipeableViews index={index} onChangeIndex={this.handleChangeIndex}>
+              <div style={Object.assign({}, styles.slide, styles.slide1)}>
+                <div className="row">
+                  <div className="formAdmin" id="delStudentFromCourse">
+                    <form onSubmit={this.deleteSubscription} className="">
+                      <h4>
+                        Eliminar alumno de un curso
+                      </h4>
+                      <TextField id="idStudentDSubscription" label="ID estudiante" placeholder="ID del estudiante" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idStudentDSubscription}/>
+                      <br/>
+                      <h7>Curso</h7>
+                      <br></br>
+                      <select id="idCourseDSubscription" onChange={this.handleChange} value={this.state.idCourseDSubscription}>
+                        {
+                          this.state.student.map(n => {
+                            return (<option value={n.idCourse}>{n.nameCourse}</option>);
+                          })
+                        }
+                      </select>
+                      <br/>
+                      <br/> {/* <input type="submit" className="btn btn-success" value="Iniciar sesión" /> */}
+                      <button className="nav-link btn btn-success" type="submit">Dar de baja a alumno</button>
+                    </form>
+                    <br/>
+                    <form onSubmit={this.createSubscription} className="">
+                      <h4>
+                        Inscribir alumno a un curso
+                      </h4>
+                      <TextField id="idStudentCSubscription" label="ID estudiante" placeholder="ID del estudiante" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idStudentCSubscription}/>
+                      <br/>
+                      <h7>Curso</h7>
+                      <br></br>
+                      <select id="idCourseCSubscription" onChange={this.handleChange} value={this.state.idCourseDSubscription}>
+                        {
+                          this.state.student.map(n => {
+                            return (<option value={n.idCourse}>{n.nameCourse}</option>);
+                          })
+                        }
+                      </select>
+                      <br/>
 
-          <Link className="custom-link" to="/createAdvertisement">Agregar aviso
-          </Link>
+                      <br/> {/* <input type="submit" className="btn btn-success" value="Iniciar sesión" /> */}
+                      <button className="nav-link btn btn-success" type="submit">Inscribir alumno</button>
+                    </form>
+                  </div>
+                </div>
+                <br/>
+              </div>
+              <div style={Object.assign({}, styles.slide, styles.slide2)}>
+                <div className="row">
+                  <div className="formAdmin">
+                    <form onSubmit={this.deleteModule} className="">
+                      <h4>
+                        Eliminar módulo
+                      </h4>
+                      <TextField id="idDeleteModule" label="ID módulo" placeholder="ID del módulo" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idDeleteModule}/>
+                      <br/>
+                      <br/>
+                      <button className="nav-link btn btn-success" type="submit">Eliminar módulo</button>
+                    </form>
+                    <br/>
+                    <form onSubmit={this.modifyModule} className="">
+                      <h4>
+                        Modificar módulo
+                      </h4>
+                      <TextField id="idModifyModule" label="ID módulo" placeholder="ID del módulo" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idModifyModule}/>
+                      <br/>
+                      <TextField id="nameModifyModule" label="Nombre módulo" placeholder="Nombre del módulo" className="textField" margin="normal" onChange={this.handleChange} value={this.state.nameModifyModule}/>
+                      <br/>
+                      <textarea style={{
+                          color: 'black'
+                        }} className="textField" id="moduleModifyDescription" label="Descripción módulo" placeholder="Descripción del módulo" margin="normal" onChange={this.handleChange} value={this.state.moduleModifyDescription}/>
+                      <br/>
+                      <TextField id="idModifyModuleCourse" label="Curso asociado" placeholder="Curso asociado" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idModifyModuleCourse}/>
+                      <br/>
+                      <input type="file" onChange={this.fileSelectedHandlerModify}/>
+                      <br/>
+                      <button className="nav-link btn btn-success" type="submit">Modificar módulo</button>
+                    </form>
+                    <br/>
+                    <form onSubmit={this.createModule} className="">
+                      <h4>
+                        Crear módulo
+                      </h4>
+                      <TextField id="idModule" label="ID " placeholder="ID de módulo" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idModule}/>
+                      <br/>
+                      <TextField id="nameModule" label="Nombre" placeholder="Nombre de módulo" className="textField" margin="normal" onChange={this.handleChange} value={this.state.nameModule}/>
+                      <br/>
+                      <textarea style={{
+                          color: 'black'
+                        }} className="textField" id="moduleDescription" label="ID" placeholder="Descripción" margin="normal" onChange={this.handleChange} value={this.state.moduleDescription}/>
+                      <br/>
+                      <TextField id="idCourseModule" label="Nombre" placeholder="Curso asociado" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idCourseModule}/>
+                      <br/>
+                      <input type="file" onChange={this.fileSelectedHandler}/>
+                      <br/>
+                      <button className="nav-link btn btn-success" type="submit">Crear módulo</button>
+                    </form>
+                    <br/>
+                  </div>
+                </div>
+                <br/>
+              </div>
+              <div style={Object.assign({}, styles.slide, styles.slide3)}>
+                <div className="row">
+                  <div className="formAdmin">
+                    <form onSubmit={this.deleteAccount} className="">
+                      <h4>
+                        Borrar cuenta
+                      </h4>
+                      <TextField id="idStudentAccountDelete" label="ID " placeholder="ID de estudiante" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idStudentAccountDelete}/>
+                      <br/> {/* <input type="submit" className="btn btn-success" value="Iniciar sesión" /> */}
+                      <button className="nav-link btn btn-success" type="submit">Borrar cuenta</button>
+                    </form>
+                    <br/>
 
-          <Link className="custom-link" to="/createTeacher">Agregar profesor
-          </Link>
+                    <form onSubmit={this.modifyAccount} className="">
+                      <h4>
+                        Modificar cuenta
+                      </h4>
+                      <TextField id="idStudentAccountModify" label="ID" placeholder="ID del estudiante" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idStudentAccountModify}/>
+                      <br/>
+                      <TextField id="totalCreditModify" label="Crédito " placeholder="Crédito total" className="textField" margin="normal" onChange={this.handleChange} value={this.state.totalCreditModify}/>
+                      <br/>
+                      <TextField id="exigibleCreditModify" label="Crédito exigible" placeholder="Crédito exigible" className="textField" margin="normal" onChange={this.handleChange} value={this.state.exigibleCreditModify}/>
+                      <br/>
+                      <TextField id="interestsModify" label="Intereses" placeholder="Intereses" className="textField" margin="normal" onChange={this.handleChange} value={this.state.interestsModify}/>
+                      <br/>
+                      <TextField id="limitDateModify" label="Fecha límite" placeholder="Fecha límite" className="textField" margin="normal" onChange={this.handleChange} value={this.state.limitDateModify}/>
+                      <br/> {/* <input type="submit" className="btn btn-success" value="Iniciar sesión" /> */}
+                      <button className="nav-link btn btn-success" type="submit">Modificar cuenta</button>
+                    </form>
+                    <br/>
 
-          <Link className="custom-link" to="/createRule">Agregar regla
-          </Link>
-
-          <Link className="custom-link" to="/createRule">Correo
-          </Link>
-
-          <Link className="custom-link" to="/createModule">Módulo
-          </Link>
-
-          <Link className="custom-link" to="/stadistics">Estadísticas
-          </Link>
-
-        </nav>
+                    <form onSubmit={this.createAccount} className="">
+                      <h4>
+                        Crear cuenta
+                      </h4>
+                      <TextField id="totalCredit" label="Crédito total " placeholder="Crédito total" className="textField" margin="normal" onChange={this.handleChange} value={this.state.totalCredit}/>
+                      <br/>
+                      <TextField id="exigibleCredit" label="Crédito exigible" placeholder="Crédito exigible" className="textField" margin="normal" onChange={this.handleChange} value={this.state.exigibleCredit}/>
+                      <br/>
+                      <TextField id="interests" label="Intereses" placeholder="Intereses" className="textField" margin="normal" onChange={this.handleChange} value={this.state.interests}/>
+                      <br/>
+                      <TextField id="limitDate" label="Fecha límite" placeholder="Fecha límite" className="textField" margin="normal" onChange={this.handleChange} value={this.state.limitDate}/>
+                      <br/>
+                      <TextField id="idStudentAccount" label="ID estudiante" placeholder="ID estudiante" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idStudentAccount}/>
+                      <br/> {/* <input type="submit" className="btn btn-success" value="Iniciar sesión" /> */}
+                      <button className="nav-link btn btn-success" type="submit">Crear cuenta</button>
+                    </form>
+                    <br/>
+                  </div>
+                </div>
+                <br/>
+              </div>
+            </SwipeableViews>
+          </div>
+        </div>
       </div>
 
-        <div className="upload-file">
+      <div className="upload-file">
 
         <div className="row divide-row">
-          <div className="col-sm-6">
-          <h4> Eliminar curso </h4>
-          <form onSubmit={this.deleteCourse} className="formCourse">
-            <TextField id="idDelete" label="Id" placeholder="Curso a eliminar" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idDelete}  />
-            <br />
 
+          <div className="col-sm-6"></div>
 
-            <br />
-            {/*<input type="submit" className="btn btn-success" value="Iniciar sesión" />*/}
-            <button className="nav-link btn btn-success" type="submit">Crear curso</button>
-          </form>
-
-            <h4> Modificar curso </h4>
-            <form onSubmit={this.modifyCourse} className="formCourse">
-              <TextField id="idModify" label="Id" placeholder="Curso a modificar" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idModify}  />
-              <br />
-              <TextField id="nameModify" label="Nombre" placeholder="Nombre del curso" className="textField" margin="normal" onChange={this.handleChange} value={this.state.nameModify}  />
-
-
-              <br />
-              {/*<input type="submit" className="btn btn-success" value="Iniciar sesión" />*/}
-              <button className="nav-link btn btn-success" type="submit">Modificar curso</button>
-            </form>
-
-          </div>
-
-          <div className="col-sm-6">
-
-            <h4> Crear curso </h4>
-
-          <form onSubmit={this.handleSubmit} className="formCourse">
-            <TextField id="idCourse" label="Id" placeholder="Id de curso" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idCourse}  />
-            <br />
-            <TextField id="nameCourse" label="Nombre" placeholder="Nombre de curso" className="textField" margin="normal" onChange={this.handleChange} value={this.state.nameCourse} />
-            <br />
-            <TextField id="introCourse" label="Edad" placeholder="Intro de curso" className="textField" margin="normal" onChange={this.handleChange} value={this.state.introCourse} />
-            <br />
-
-            <br />
-            {/*<input type="submit" className="btn btn-success" value="Iniciar sesión" />*/}
-            <button className="nav-link btn btn-success" type="submit">Crear curso</button>
-          </form>
-
-
-
-          </div>
-          </div>
-          <div>
-            <h3> Inscripciones </h3>
-          </div>
-            <div className="row divide-row">
-
-
-
-              <div className="col-sm-6">
-                <h4> Eliminar alumno de un curso </h4>
-
-                <form onSubmit={this.deleteSubscription} className="formCourse">
-                  <TextField id="idStudentDSubscription" label="Id" placeholder="Id del estudiante" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idStudentDSubscription}  />
-                  <br />
-                  <TextField id="idCourseDSubscription" label="Nombre" placeholder="Id del curso" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idCourseDSubscription}  />
-
-
-                  <br />
-                  {/*<input type="submit" className="btn btn-success" value="Iniciar sesión" />*/}
-                  <button className="nav-link btn btn-success" type="submit">Dar de baja a alumno</button>
-                </form>
-              </div>
-
-              <div className="col-sm-6">
-                <h4> Inscribir alumno a un curso </h4>
-
-                <form onSubmit={this.createSubscription} className="formCourse">
-                  <TextField id="idStudentCSubscription" label="Id" placeholder="Estudiante a inscribir" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idStudentCSubscription}  />
-                  <br />
-                  <TextField id="idCourseCSubscription" label="Nombre" placeholder="Curso a inscribir" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idCourseCSubscription}  />
-
-
-                  <br />
-                  {/*<input type="submit" className="btn btn-success" value="Iniciar sesión" />*/}
-                  <button className="nav-link btn btn-success" type="submit">Inscribir alumno</button>
-                </form>
-              </div>
-
-            </div>
-
-            <div>
-              <h3> Módulo </h3>
-            </div>
-
-
-            <div className="row divide-row">
-
-
-
-              <div className="col-sm-6">
-                <h4> Eliminar un módulo </h4>
-
-                <form onSubmit={this.deleteModule} className="formCourse">
-                  <TextField id="idDeleteModule" label="Id" placeholder="Id del estudiante" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idDeleteModule}  />
-                  <br />
-
-
-                  <br />
-                  {/*<input type="submit" className="btn btn-success" value="Iniciar sesión" />*/}
-                  <button className="nav-link btn btn-success" type="submit">Eliminar módulo</button>
-                </form>
-
-                <h4> Modificar un módulo </h4>
-
-                <form onSubmit={this.modifyModule} className="formCourse">
-                <TextField id="idModifyModule" label="Id " placeholder="ID de módulo" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idModifyModule}  />
-                <br />
-                <TextField id="nameModifyModule" label="Nombre" placeholder="Nombre de módulo" className="textField" margin="normal" onChange={this.handleChange} value={this.state.nameModifyModule}  />
-                <br />
-                <textarea style={{color:'black'}} className="texta" id="moduleModifyDescription" label="Id" placeholder="Descripción" className="textField" margin="normal" onChange={this.handleChange} value={this.state.moduleModifyDescription}  />
-                <br />
-                <TextField id="idModifyModuleCourse" label="Nombre" placeholder="Curso asociado" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idModifyModuleCourse}  />
-                <br />
-                <input type="file" onChange={this.fileSelectedHandlerModify} />
-
-
-                {/*<input type="submit" className="btn btn-success" value="Iniciar sesión" />*/}
-                <button className="nav-link btn btn-success" type="submit">Modificar módulo</button>
-                </form>
-
-
-              </div>
-
-              <div className="col-sm-6">
-                <h4> Crear módulo </h4>
-
-                <form onSubmit={this.createModule} className="formCourse">
-                  <TextField id="idModule" label="Id " placeholder="ID de módulo" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idModule}  />
-                  <br />
-                  <TextField id="nameModule" label="Nombre" placeholder="Nombre de módulo" className="textField" margin="normal" onChange={this.handleChange} value={this.state.nameModule}  />
-                  <br />
-                  <textarea style={{color:'black'}} className="texta" id="moduleDescription" label="Id" placeholder="Descripción" className="textField" margin="normal" onChange={this.handleChange} value={this.state.moduleDescription}  />
-                  <br />
-                  <TextField id="idCourseModule" label="Nombre" placeholder="Curso asociado" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idCourseModule}  />
-                  <br />
-                  <input type="file" onChange={this.fileSelectedHandler} />
-
-
-                  {/*<input type="submit" className="btn btn-success" value="Iniciar sesión" />*/}
-                  <button className="nav-link btn btn-success" type="submit">Crear módulo</button>
-                </form>
-              </div>
-
-            </div>
-
-            <div>
-              <h3> Cuenta </h3>
-            </div>
-
-  <div className="row divide-row">
-  <div className="col-sm-6">
-
-    <h4> Borrar cuenta </h4>
-
-    <form onSubmit={this.deleteAccount} className="formCourse">
-      <TextField id="idStudentAccountDelete" label="Id " placeholder="ID de estudiante" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idStudentAccountDelete}  />
-      <br />
-
-
-
-      {/*<input type="submit" className="btn btn-success" value="Iniciar sesión" />*/}
-      <button className="nav-link btn btn-success" type="submit">Borrar cuenta</button>
-    </form>
-
-
-      <h4> Modificar cuenta </h4>
-
-      <form onSubmit={this.modifyAccount} className="formCourse">
-      <TextField id="idStudentAccountModify" label="Id" placeholder="Id del estudiante" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idStudentAccountModify}  />
-      <br />
-        <TextField id="totalCreditModify" label="Crédito " placeholder="Crédito total" className="textField" margin="normal" onChange={this.handleChange} value={this.state.totalCreditModify}  />
-        <br />
-        <TextField id="exigibleCreditModify" label="Crédito exigible" placeholder="Crédito exigible" className="textField" margin="normal" onChange={this.handleChange} value={this.state.exigibleCreditModify}  />
-        <br />
-        <TextField id="interestsModify" label="Intereses" placeholder="Intereses" className="textField" margin="normal" onChange={this.handleChange} value={this.state.interestsModify}  />
-        <br />
-        <TextField id="limitDateModify" label="Fecha límite" placeholder="Fecha límite" className="textField" margin="normal" onChange={this.handleChange} value={this.state.limitDateModify}  />
-        <br />
-
-
-
-
-        {/*<input type="submit" className="btn btn-success" value="Iniciar sesión" />*/}
-        <button className="nav-link btn btn-success" type="submit">Modificar cuenta</button>
-
-        </form>
-
-  </div>
-
-
-  <div className="col-sm-6">
-
-  <h4> Crear cuenta </h4>
-
-  <form onSubmit={this.createAccount} className="formCourse">
-    <TextField id="totalCredit" label="Crédito total " placeholder="Crédito total" className="textField" margin="normal" onChange={this.handleChange} value={this.state.totalCredit}  />
-    <br />
-    <TextField id="exigibleCredit" label="Crédito exigible" placeholder="Crédito exigible" className="textField" margin="normal" onChange={this.handleChange} value={this.state.exigibleCredit}  />
-    <br />
-    <TextField id="interests" label="Intereses" placeholder="Intereses" className="textField" margin="normal" onChange={this.handleChange} value={this.state.interests}  />
-    <br />
-    <TextField id="limitDate" label="Fecha límite" placeholder="Fecha límite" className="textField" margin="normal" onChange={this.handleChange} value={this.state.limitDate}  />
-    <br />
-    <TextField id="idStudentAccount" label="Id del estudiante asociado" placeholder="Id del estudiante asociado" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idStudentAccount}  />
-    <br />
-
-
-
-    {/*<input type="submit" className="btn btn-success" value="Iniciar sesión" />*/}
-    <button className="nav-link btn btn-success" type="submit">Crear cuenta</button>
-  </form>
-
-  </div>
-
-  </div>
-
-
-
+          <div className="col-sm-6"></div>
 
         </div>
 
-
-
       </div>
 
-    );
+    </div>);
   }
 }
 

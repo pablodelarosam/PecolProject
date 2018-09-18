@@ -1,47 +1,64 @@
-.card-login {
-  width: 100%;
-}
+@media only screen and (min-width: 601px) {
+  .card-login {
+    width: 100%;
+  }
 
-.SignupCont{
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 150px;
-  text-align: center;
-}
+  .rg-container button{
+    width: 100%;
+    margin-left: -40px
+  }
 
-.NavBar{
-  margin-bottom: 55px;
-}
 
-.textField{
-  color: white;
-  width: 200px;
-}
+  .rg-container{
+    width: 50%;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 50px
+  }
 
-input {
-  display: block;
-}
+  .rg-container form{
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 35px
+  }
 
-.mainDiv {
-  height: 700px;
-}
+  .NavBar{
+    margin-bottom: 55px;
+  }
 
-.btn-success {
-  background-color: #66A418;
-  border: none;
-  color: white !important;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  padding-left: 20px;
-  padding-right: 20px;
-  border-radius: 200px;
-  margin-left: 10px;
-}
+  .textField{
+    color: white;
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-.idStudent {
-  color: white;
-  font-size: 20px;
+  input {
+    display: block;
+  }
+
+  .mainDiv {
+    height: 700px;
+  }
+
+  .btn-success {
+    background-color: #66A418;
+    border: none;
+    color: white !important;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 200px;
+    margin-left: 10px;
+  }
+
+  .idStudent {
+    color: white;
+    font-size: 20px;
+  }
 }

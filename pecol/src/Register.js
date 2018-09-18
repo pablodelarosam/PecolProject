@@ -49,14 +49,15 @@ class Signup extends React.Component {
 
       <div className="row LoginCont">
         <div className="container">
-          <h1>Ingrese su cuenta de usuario </h1>
+          <h1>Ingrese su cuenta de usuario
+          </h1>
           <form>
             <TextField id="username" label="Usuario" placeholder="Usuario" className="textField" margin="normal"/>
             <br/>
             <TextField id="password" label="Contraseña" type="password" placeholder="Contraseña" className="textField" margin="normal"/>
             <br/>
             <br/>
-            <input type="submit" className="btn" value="Iniciar sesión"/>
+            <input type="submit" className="btn btn-info" value="Iniciar sesión"/>
           </form>
         </div>
       </div>

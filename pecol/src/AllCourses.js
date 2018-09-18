@@ -1,9 +1,8 @@
-
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import logo from './logo.svg';
 import ReactDOM from 'react-dom';
 import './AcademicHistory.css';
-import carmen from './carmen.png' // relative path to image
+import carmen from './carmen.jpeg' // relative path to image
 import cristi from './imgs/cristi.png'
 import frida from './imgs/frida.png'
 import gabi from './imgs/gabi.png'
@@ -20,12 +19,7 @@ import axios from 'axios';
 
 import Signup from './Signup.js'
 
-import {
-  BrowserRouter as Router,
-  Link,
-  Route,
-  Switch,
-} from 'react-router-dom';
+import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
 
 const styles = theme => ({
   root: {
@@ -42,16 +36,18 @@ let id = 0;
 function createData(name, partial1, partial2, partial3, grade) {
   id += 1;
 
-  return {id, name, partial1, partial2, partial3, grade};
+  return {
+    id,
+    name,
+    partial1,
+    partial2,
+    partial3,
+    grade
+  };
 
 }
 
-const data = [
-  createData('La excelencia del liderazgo a través de los valores', 9.0, 9.0, 9.0, 9.0),
-
-];
-
-
+const data = [createData('La excelencia del liderazgo a través de los valores', 9.0, 9.0, 9.0, 9.0)];
 
 class AllCourses extends Component {
   constructor(props) {
@@ -61,92 +57,78 @@ class AllCourses extends Component {
     }
   }
 
-
   componentDidMount() {
     const idC = this.props.match.params.id
-     console.log("PROPS", this.props.match.params.id, idC)
- axios.get(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/AllCourses`)
-   .then(res => {
-     const accounts = res.data;
+    console.log("PROPS", this.props.match.params.id, idC)
+    axios.get(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/AllCourses`).then(res => {
+      const accounts = res.data;
 
-     this.setState({student: accounts });
-    //   console.log("course", this.state.course[0].idCOURSE)
-   })
+      this.setState({student: accounts});
+      //   console.log("course", this.state.course[0].idCOURSE)
+    })
   }
 
   render() {
-    return (
-      <div className="dashboard-top">
-          <div>
-            <nav className="navbar-sec navbar-expand-lg navbar-light bg-light fixed-top">
-              <a className="navbar-brand" href="#">Navbar</a>
-              <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
-              </button>
-            </nav>
-          </div>
-        <div className="row">
+    return (<div className="dashboard-top">
+      <div>
+        <nav className="navbar-sec navbar-expand-lg navbar-light bg-light fixed-top">
+          <a className="navbar-brand" href="#">Navbar</a>
+          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+        </nav>
+      </div>
+      <div className="row">
 
+        <div className="dashboard_content">
+          <div className="col-sm-12 sideBar-left allt">
+            <h2>Cursos</h2>
+            <div className="container">
+              <div class="card custom-card  ">
 
-          <div className="dashboard_content">
-            <div className="col-sm-12 sideBar-left allt">
-              <h2>Cursos</h2>
-              <div className="container">
-                <div class="card custom-card  ">
+                <div class="card-body">
+                  <Paper className={this.props.root}>
+                    <Table className={this.props.table}>
+                      <TableHead>
+                        <TableRow>
+                          <TableCell>ID</TableCell>
 
-                  <div class="card-body">
-                    <Paper className={this.props.root}>
-                      <Table className={this.props.table}>
-                        <TableHead>
-                          <TableRow>
-                            <TableCell>ID</TableCell>
+                          <TableCell numeric="numeric">Nombre</TableCell>
+                          <TableCell numeric="numeric">Introducción</TableCell>
+                          <TableCell numeric="numeric">Descripción</TableCell>
+                        </TableRow>
+                      </TableHead>
 
-                            <TableCell numeric>Nombre</TableCell>
-                            <TableCell numeric>Introducción</TableCell>
-                            <TableCell numeric>Descripción</TableCell>
-                          </TableRow>
-                        </TableHead>
+                      <TableBody>
+                        {
+                          this.state.student.map(n => {
+                            return (<TableRow key={n.idCourse}>
+                              <TableCell component="th" scope="row">
+                                {n.idCourse}
+                              </TableCell>
 
-                        <TableBody>
-                          {this.state.student.map(n => {
-                            return (
-                              <TableRow key={n.idCourse}>
-                                <TableCell component="th" scope="row">
-                                  {n.idCourse}
-                                </TableCell>
+                              <TableCell numeric="numeric">{n.nameCourse}</TableCell>
 
-                                <TableCell numeric>{n.nameCourse}</TableCell>
+                              <TableCell numeric="numeric">{n.introCourse}</TableCell>
+                              <TableCell numeric="numeric">{n.longDescription}</TableCell>
 
-                                <TableCell numeric>{n.introCourse}</TableCell>
-                                <TableCell numeric>{n.longDescription}</TableCell>
+                            </TableRow>);
+                          })
+                        }
+                      </TableBody>
 
-                              </TableRow>
-                            );
-                          })}
-                        </TableBody>
-
-                      </Table>
-                    </Paper>
-                  </div>
-                  <div class="card-footer text-muted">
-                  </div>
+                    </Table>
+                  </Paper>
                 </div>
+                <div class="card-footer text-muted"></div>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>);
 
-    );
-
-
-
-
-
-}
-
-
-
+  }
 
 }
 

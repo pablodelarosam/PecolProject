@@ -1,5 +1,35 @@
-.custom-card {
-  margin-bottom: 3%;
-  margin-top: 3%;
-  width: 100%;
+@media only screen and (min-width: 601px) {
+  .custom-card {
+    margin-bottom: 3%;
+    margin-top: 3%;
+    width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .academicHistory {
+    margin-top: 50px;
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .custom-card {
+    margin-bottom: 3%;
+    margin-top: 3%;
+    width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .academicHistory {
+    margin-top: 50px;
+    width: 100%;
+  }
+  .card-body {
+    width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  table {
+    max-width: 300px;
+  }
 }

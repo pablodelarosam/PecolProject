@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import './Dashboard.css';
 import './CreateModule.css';
 import NavBar from './NavBar.js'
-import carmen from './carmen.png' // relative path to image
+import carmen from './carmen.jpeg' // relative path to image
 import cristi from './imgs/cristi.png'
 import frida from './imgs/frida.png'
 import gabi from './imgs/gabi.png'
