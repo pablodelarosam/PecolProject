@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import ReactDOM from 'react-dom';
 import './Definition.css';
 import NavBar from './NavBar.js'
-import carmen from './carmen.png' // relative path to image
+import carmen from './carmen.jpeg' // relative path to image
 import cristi from './imgs/cristi.png'
 import frida from './imgs/frida.png'
 import gabi from './imgs/gabi.png'

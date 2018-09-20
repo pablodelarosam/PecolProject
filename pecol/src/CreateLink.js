@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import './Dashboard.css';
 import './CreateRule.css'
 import NavBar from './NavBar.js'
-import carmen from './carmen.png' // relative path to image
+import carmen from './carmen.jpeg' // relative path to image
 import cristi from './imgs/cristi.png'
 import frida from './imgs/frida.png'
 import gabi from './imgs/gabi.png'
@@ -47,7 +47,7 @@ class CreateLink extends Component {
   event.preventDefault();
 
 
-axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createLink`, {
+axios.post(`http://localhost:3004/createLink`, {
   nombreEnlace: this.state.nombreEnlace,
   urlEnlace: this.state.urlEnlace,
 

@@ -1,26 +1,24 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import logo from './logo.svg';
 import ReactDOM from 'react-dom';
-import './CreateTeacher.css';
-import NavBar from './NavBar.js'
-import carmen from './carmen.png' // relative path to image
-import cristi from './imgs/cristi.png'
-import frida from './imgs/frida.png'
-import gabi from './imgs/gabi.png'
-import logoPe from './imgs/xaxa.png'
-import acuerdo from './imgs/acuerdo.jpg'
-import SideBar from './SideBar.js'
-import Signup from './Signup.js'
+import './CreateStudent.css';
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td
+} from 'react-super-responsive-table';
+import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
+import {confirmAlert} from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import NavBarAdmin from './NavBarAdmin.js'
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import axios from 'axios'
 import FormData from 'form-data'
-import {
-  BrowserRouter as Router,
-  Link,
-  Route,
-  Switch,
-} from 'react-router-dom';
+import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
 class CreateAdvertisement extends Component {
   constructor(props) {
     super(props);
@@ -36,16 +34,12 @@ class CreateAdvertisement extends Component {
 
   fileSelectedHandler = event => {
     console.log("event", event.target.files[0])
-    this.setState({
-      fileSelected : event.target.files[0]
-    })
+    this.setState({fileSelected: event.target.files[0]})
   };
 
   fileSelectedHandlerModify = event => {
     console.log("event", event.target.files[0])
-    this.setState({
-      fileSelectedModify : event.target.files[0]
-    })
+    this.setState({fileSelectedModify: event.target.files[0]})
   };
 
   handleChange = event => {
@@ -55,152 +49,92 @@ class CreateAdvertisement extends Component {
     });
   }
 
-
   handleSubmit = event => {
-  event.preventDefault();
+    event.preventDefault();
 
- const formData = new FormData();
-  formData.append("image", this.state.fileSelected, this.state.fileSelected.name)
-  formData.append('title', this.state.title)
-  formData.append('description', this.state.description)
-  formData.append('dated', this.state.dated)
+    const formData = new FormData();
+    formData.append("image", this.state.fileSelected, this.state.fileSelected.name)
+    formData.append('title', this.state.title)
+    formData.append('description', this.state.description)
+    formData.append('dated', this.state.dated)
 
+    // axios.post(`http://ec2-34-212-223-202.us-west-2.compute.amazonaws.com:3004/createTeacher`, this.formData)
 
-
-
-  // axios.post(`http://ec2-34-212-223-202.us-west-2.compute.amazonaws.com:3004/createTeacher`, this.formData)
-
-  axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createAdvertisement`, formData, {
-    headers: {
-      'accept': 'application/json',
-      'Accept-Language': 'en-US,en;q=0.8',
-      'Content-Type': `multipart/form-data; boundary=${formData._boundary}`,
-    }
-  })
-    .then((response) => {
+    axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createAdvertisement`, formData, {
+      headers: {
+        'accept': 'application/json',
+        'Accept-Language': 'en-US,en;q=0.8',
+        'Content-Type': `multipart/form-data; boundary=${formData._boundary}`
+      }
+    }).then((response) => {
       //handle success
-        alert("Se ha creado el aviso correctamente");
+      alert("Se ha creado el aviso correctamente");
       console.log("success upload")
     }).catch((error) => {
       //handle error
-        alert("Hubo un problema, intente nuevamente");
+      alert("Hubo un problema, intente nuevamente");
     });
   };
 
   deleteAdvertisement = event => {
-      event.preventDefault();
+    event.preventDefault();
 
-      axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteAdvertisement`, {
-        titleDelete: this.state.titleDelete
+    axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteAdvertisement`, {titleDelete: this.state.titleDelete}).then(res => {
+      console.log("SUCCESS", res);
+      if (res.status == 200) {
+        alert("Se ha eliminado el aviso correctamente");
 
-       })
-           .then(res => {
-             console.log("SUCCESS", res);
-             if(res.status == 200) {
-                 alert("Se ha eliminado el aviso correctamente");
+        //  browserHistory.replace("/login")
+        //  store.set('loggedIn', true);
+        //this.props.history.push("/");
 
-
-             //  browserHistory.replace("/login")
-             //  store.set('loggedIn', true);
-             //this.props.history.push("/");
-
-             }
-           }).catch((error) => {
-             //handle error
-               alert("Hubo un problema, intente nuevamente");
-           });
+      }
+    }).catch((error) => {
+      //handle error
+      alert("Hubo un problema, intente nuevamente");
+    });
   }
 
-
-
-
   render() {
-    return (
-      <div className="dashboard-top">
+    return (<div className="dashboard-top">
       <div>
-      <nav className="navbar-sec navbar-expand-lg navbar-light bg-light fixed-top">
-        <a className="navbar-brand" href="#">Pecol</a>
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
 
-
-        <Link className="custom-link" to="/createStudent">Agregar estudiante
-        </Link>
-
-        <Link className="custom-link" to="/createCourse">Agregar curso
-        </Link>
-
-        <Link className="custom-link" to="/createAdvertisement">Agregar aviso
-        </Link>
-
-        <Link className="custom-link" to="/createTeacher">Agregar profesor
-        </Link>
-
-        <Link className="custom-link" to="/createRule">Agregar regla
-        </Link>
-
-        <Link className="custom-link" to="/messagesPersonnel">Correo
-        </Link>
-
-        <Link className="custom-link" to="/createModule">Módulo
-        </Link>
-
-        <Link className="custom-link" to="/stadistics">Estadísticas
-        </Link>
-
-      </nav>
+        <NavBarAdmin/>
       </div>
-  <div className="upload-file">
-      <div className="row">
+      <div className="mainContent">
+        <div className="col-sm-12">
+          <div className="container">
+            <h2>Administrar anuncios</h2>
+            <div className="row">
+              <div className="formAdmin col-md-6">
+                <form onSubmit={this.deleteAdvertisement}>
+                  <h3>Eliminar aviso</h3>
+                  <TextField margin="normal" className="textField" id="titleDelete" placeholder="Título del aviso" onChange={this.handleChange} value={this.state.titleDelete}/>
+                  <br/>
+                  <br/>
+                  <button className="nav-link btn btn-success" type="submit">Eliminar</button>
+                </form>
+              </div>
+              <div className="formAdmin col-md-6">
+                <form onSubmit={this.handleSubmit}>
+                  <h3>Crear aviso</h3>
+                  <TextField margin="normal" className="textField" id="title" placeholder="Título del aviso" onChange={this.handleChange} value={this.state.title}/>
+                  <br/>
+                  <TextField margin="normal" className="textField" id="description" placeholder="Descripción" onChange={this.handleChange} value={this.state.description}/>
+                  <br/>
+                  <TextField margin="normal" className="textField" id="dated" placeholder="Fecha" onChange={this.handleChange} value={this.state.dated}/>
+                  <br/>
+                  <input type="file" onChange={this.fileSelectedHandler}/>
+                  <br/>
+                  <button className="nav-link btn btn-success" type="submit">Crear</button>
 
-      <div className="col-sm-6">
-
-      <h3> Eliminar aviso </h3>
-
-      <form onSubmit={this.deleteAdvertisement}>
-      <TextField id="titleDelete" placeholder="Título del aviso" onChange={this.handleChange} value={this.state.titleDelete} />
-
-
-      <button type="submit"> Eliminar </button>
-
-      </form>
-
-
-
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <div className="col-sm-6">
-
-
-
-      <h3> Crear aviso </h3>
-
-
-      <form onSubmit={this.handleSubmit}>
-      <TextField id="title" placeholder="Título del aviso" onChange={this.handleChange} value={this.state.title} />
-      <TextField id="description" placeholder="Descripción" onChange={this.handleChange} value={this.state.description}/>
-      <TextField id="dated" placeholder="Fecha" onChange={this.handleChange} value={this.state.dated}/>
-      <input type="file" onChange={this.fileSelectedHandler} />
-
-      <button type="submit"> Crear </button>
-
-      </form>
-
-
-
-
-      </div>
-
-      </div>
-</div>
-
-
-
-
-      </div>
-
-    );
+    </div>);
   }
 }
 

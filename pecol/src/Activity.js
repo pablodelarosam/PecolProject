@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import ReactDOM from 'react-dom';
 import './Activity.css';
 import NavBar from './NavBar.js'
-import carmen from './carmen.png' // relative path to image
+import carmen from './carmen.jpeg' // relative path to image
 import cristi from './imgs/cristi.png'
 import frida from './imgs/frida.png'
 import gabi from './imgs/gabi.png'
@@ -31,7 +31,7 @@ class Activity extends Component {
   componentDidMount() {
     const idC = this.props.match.params.idModule
      console.log("PROPS ACTIVITIES", this.props.match.params.id, idC, this.props)
-  axios.get(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/activities/${idC}`)
+  axios.get(`http://localhost:3004/activities/${idC}`)
    .then(res => {
      const activities = res.data;
 

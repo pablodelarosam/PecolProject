@@ -14,7 +14,7 @@ import {withStyles} from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
-import { Redirect } from 'react-router';
+import {Redirect} from 'react-router';
 
 const history = Router;
 
@@ -38,33 +38,31 @@ export class Login extends Component {
 
   }
 
-
-  login() {
+  login() {
     var username = document.getElementById("username");
     var password = document.getElementById("password");
 
     console.log("username", username.value)
 
-    axios.post('http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/loginPecol', {
-    username: this.state.username,
-    password: this.state.password
-  })
-  .then(function (response) {
-    console.log("SUCCESS", response);
-    if(response.status == 200) {
-         console.log('Successfully Login', this.state);
-      this.setState({ isLoggedIn: !(this.state.isLoggedIn)});
-    //  browserHistory.replace("/login")
-    //  store.set('loggedIn', true);
-    //this.props.history.push("/");
+    axios.post('http://localhost:3004/loginPecol', {
+      username: this.state.username,
+      password: this.state.password
+    }).then(function(response) {
+      console.log("SUCCESS", response);
+      if (response.status == 200) {
+        console.log('Successfully Login', this.state);
+        this.setState({
+          isLoggedIn: !(this.state.isLoggedIn)
+        });
+        //  browserHistory.replace("/login")
+        //  store.set('loggedIn', true);
+        //this.props.history.push("/");
 
-    }
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
+      }
+    }).catch(function(error) {
+      console.log(error);
+    });
   }
-
 
   handleChange = event => {
     console.log(this.state)
@@ -74,88 +72,83 @@ export class Login extends Component {
   }
 
   handleSubmit = event => {
-  event.preventDefault();
+    event.preventDefault();
 
-axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/loginPecol`, {
-  username: this.state.username,
-  password: this.state.password })
-     .then(res => {
-       console.log("SUCCESS", res);
-         console.log("Userid", res.data.idStudent);
-       if(res.status == 200) {
+    axios.post('http://localhost:3004/loginPecol', {
+      username: this.state.username,
+      password: this.state.password
+    }).then(res => {
+      console.log("SUCCESS", res);
+      console.log("Userid", res.data.idStudent);
+      if (res.status == 200) {
 
-         this.setState({ isLoggedIn: !(this.state.isLoggedIn), userID: res.data.idStudent});
+        this.setState({
+          isLoggedIn: !(this.state.isLoggedIn),
+          userID: res.data.idStudent
+        });
 
-          console.log("Userid", this.state.userID)
-           console.log('Successfully Login', this.state);
-       //  browserHistory.replace("/login")
-       //  store.set('loggedIn', true);
-       //this.props.history.push("/");
+        console.log("Userid", this.state.userID)
+        console.log('Successfully Login', this.state);
+        //  browserHistory.replace("/login")
+        //  store.set('loggedIn', true);
+        //this.props.history.push("/");
 
-       }
-     })
- }
-
-
-
-
+      }
+    })
+  }
 
   render() {
-    const { redirect } = this.state;
+    const {redirect} = this.state;
 
+    if (this.state.isLoggedIn === true) {
 
-   if(this.state.isLoggedIn === true){
+      if (this.state.userID == "admin1") {
+        return (<Redirect to="/stadistics"/>);
+      } else {
+        return (<Redirect to={"/listCourses/" + this.state.userID}/>);
+      }
 
-     if(this.state.userID == "admin1") {
-       return (<Redirect to="/stadistics" />);
-     } else {
-       return (<Redirect to={"/listCourses/"+ this.state.userID} />);
-     }
+    } else {
+      return (<div className="Login mainDiv">
 
+        <div className="NavBar">
+          <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+            <a className="navbar-brand" href="/home">Pecol</a>
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span className="navbar-toggler-icon"></span>
+            </button>
 
+            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul className="navbar-nav mr-auto"></ul>
+              <div className="form-inline my-2 my-lg-0">
+                <Link className="nav-link" to="/login">Escuelas y empresas</Link>
+                <Link className="nav-link btn btn-success" to="/signup">Registro</Link>
+              </div>
+            </div>
+          </nav>
+        </div>
 
+        <div className="row">
+          <div className="rg-container">
+            <h1>Ingrese su cuenta de usuario
+            </h1>
+            <form onSubmit={this.handleSubmit}>
+              <TextField id="username" label="Usuario" placeholder="Usuario" className="textField" margin="normal" onChange={this.handleChange} value={this.state.username}/>
+              <br/>
+              <TextField id="password" label="Contraseña" type="password" placeholder="Contraseña" className="textField" onChange={this.handleChange} margin="normal" value={this.state.password}/>
+              <br/>
+              <br/> {/* <input type="submit" className="btn btn-success" value="Iniciar sesión" /> */}
+              <button type="submit" className="btn btn-info">
+                Iniciar sesión
+              </button>
+            </form>
 
-     }else{
-       return (<div className="Login mainDiv">
+          </div>
 
-         <div className="NavBar">
-           <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-             <a className="navbar-brand" href="/home">Pecol</a>
-             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-               <span className="navbar-toggler-icon"></span>
-             </button>
+        </div>
 
-             <div className="collapse navbar-collapse" id="navbarSupportedContent">
-               <ul className="navbar-nav mr-auto"></ul>
-               <div className="form-inline my-2 my-lg-0">
-                 <Link className="nav-link" to="/login">Escuelas y empresas</Link>
-                 <Link className="nav-link btn btn-success" to="/signup">Registro</Link>
-               </div>
-             </div>
-           </nav>
-         </div>
-
-         <div className="row LoginCont">
-           <div className="container">
-             <h1>Ingrese su cuenta de usuario </h1>
-             <form onSubmit={this.handleSubmit}>
-               <TextField id="username" label="Usuario" placeholder="Usuario" className="textField" margin="normal" onChange={this.handleChange} value={this.state.username}/>
-               <br/>
-               <TextField id="password" label="Contraseña" type="password" placeholder="Contraseña" className="textField" onChange={this.handleChange} margin="normal" value={this.state.password}/>
-               <br/>
-               <br/>
-                 {/*<input type="submit" className="btn btn-success" value="Iniciar sesión" />*/}
-     <button type="submit"> Iniciar sesión </button>
-             </form>
-
-           </div>
-
-         </div>
-
-       </div>);
-     }
-
-
+      </div>);
+    }
 
   }
 }

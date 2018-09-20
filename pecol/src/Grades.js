@@ -4,7 +4,7 @@ import logo from './logo.svg';
 import ReactDOM from 'react-dom';
 import './Grades.css';
 
-import carmen from './carmen.png' // relative path to image
+import carmen from './carmen.jpeg' // relative path to image
 import cristi from './imgs/cristi.png'
 import frida from './imgs/frida.png'
 import gabi from './imgs/gabi.png'

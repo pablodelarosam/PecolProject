@@ -1,101 +1,110 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import logo from './logo.svg';
 import ReactDOM from 'react-dom';
 import './ListCourses.css';
+import NavBarDash from './NavBarDash.js';
 import axios from 'axios';
-import carmen from './carmen.png' // relative path to image
-import cristi from './imgs/cristi.png'
-import frida from './imgs/frida.png'
-import gabi from './imgs/gabi.png'
-import logoPe from './imgs/xaxa.png'
-import acuerdo from './imgs/acuerdo.jpg'
-import SideBar from './SideBar.js'
 import human from './imgs/human.jpg'
 
+import PropTypes from 'prop-types';
+import {withStyles} from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import SideBar from './SideBar.js'
+import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
+const styles = {
+  card: {
+    maxWidth: 345
+  },
+  media: {
+    height: 0,
+    paddingTop: '56.25%', // 16:9
+  }
+};
 
-
-import {
-  BrowserRouter as Router,
-  Link,
-  Route,
-  Switch,
-} from 'react-router-dom';
 class ListCourses extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      course:[]
+      course: []
     };
   }
 
-
-
-
-
-
   componentDidMount() {
     const idC = this.props.match.params.id
-     console.log("PROPS", this.props.match.params.id, idC)
- axios.get(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/ListCourses/${idC}`)
-   .then(res => {
-     const courses = res.data;
+    console.log("PROPS", this.props.match.params.id, idC)
+    axios.get(`http://localhost:3004/ListCourses/${idC}`).then(res => {
+      const courses = res.data;
+      this.setState({course: courses});
+      console.log("course", this.state.course[0])
+    })
+  }
 
-     this.setState({course: courses });
-       console.log("course", this.state.course[0])
-   })
-}
-
-gotoCourseDetails() {
-  console.log("clicked")
-}
-
+  gotoCourseDetails() {
+    console.log("clicked")
+  }
 
   render() {
 
-
     return (
-      <div className="dashboard-top">
-        <div>
-          <nav className="navbar-sec navbar-expand-lg navbar-light bg-light fixed-top">
-            <Link className="navbar-brand" to="/home">Pecol</Link>
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span className="navbar-toggler-icon"></span>
-            </button>
-          </nav>
-        </div>
-        <div className="row">
-          <div className="col-sm-3 sideBar-left">
-            <SideBar idStudent={this.props.match.params.id} />
-          </div>
 
-          <div className="dashboard_content">
-            <div className="col-sm-12 sideBar-left">
+
+      <div className="dashboard-top">
+      <div>
+        <div className="navbar-sec navbar-expand-lg navbar-light bg-light fixed-top">
+        <Link className="navbar-brand" to="/home">Pecol</Link>
+
+
+
+
+
+        </div>
+      </div>
+
+      <div className="row">
+        <div className="col-sm-3 sideBar-left">
+            <SideBar idStudent={this.props.match.params.id} />
+        </div>
+
+        <div className="col-sm-9">
+
+
+          <div className="mainContent">
+            <div className="col-sm-12">
               <h2>Cursos</h2>
               <div className="container">
                 <div className="row">
-                {this.state.course.map((data, index) =>
-
-                  <div className="col-sm-6" key={data.idCOURSE} >
-                    <div className="card" style={{
-                      width: '18rem'
-                    }}>
-                      <img className="card-img-top" src={human} alt="Card image cap" />
-                      <div className="card-body">
-                        <h5 className="card-title">{data.nameCourse}</h5>
-                        <Link className="customgoto" to={`/courseDetails/${this.props.match.params.id}/${data.idCourse}`}> Ir al curso </Link>
+                  {
+                    this.state.course.map((data, index) => <div className="col-sm-12" key={data.idCOURSE}>
+                      <div className="card col-md-4 course-card">
+                        <img className="card-img-top" src={human} alt="Card image cap"/>
+                        <div className="card-body">
+                          <h5 className="card-title">{data.nameCourse}</h5>
+                          <Link className="customgoto" to={`/courseDetails/${this.props.match.params.id}/${data.idCourse}`}>
+                            Ir al curso
+                          </Link>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-
-                )}
+                        </div>
+                  )
+                  }
                 </div>
               </div>
             </div>
           </div>
+
+
         </div>
       </div>
+</div>
 
-    );
+
+
+  );
   }
 }
 

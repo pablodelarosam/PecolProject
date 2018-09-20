@@ -1,15 +1,15 @@
 .custom-link-course {
   color: black !important;
-
 }
 
 .custom-link-course a:hover {
   text-decoration: none;
-
-
 }
 
-
+.mainContent{
+  margin-top: 100px;
+  width: 100%;
+}
 
 .card-custom-courses {
   padding: 5%;
@@ -28,6 +28,11 @@
   margin-bottom: 5%;
 }
 
+.course-card{
+  margin-bottom: 10px;
+
+}
+
 
 /* MOBILE*/
 
@@ -36,5 +41,6 @@
   .dashboard_content {
     margin: auto;
   }
+
 
 }

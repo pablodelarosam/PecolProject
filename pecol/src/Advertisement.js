@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import logo from './logo.svg';
 import ReactDOM from 'react-dom';
 import './Dashboard.css';
 import './Advertisement.css';
+import NavBarDash from './NavBarDash.js';
 
-import carmen from './carmen.png' // relative path to image
+import carmen from './carmen.jpeg' // relative path to image
 import cristi from './imgs/cristi.png'
 import frida from './imgs/frida.png'
 import gabi from './imgs/gabi.png'
@@ -15,7 +16,7 @@ import human from './imgs/human.jpg'
 import Signup from './Signup.js'
 import axios from 'axios';
 
-import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
 class Advertisement extends Component {
   constructor(props) {
     super(props);
@@ -25,70 +26,57 @@ class Advertisement extends Component {
 
   }
 
-
   componentDidMount() {
     const idC = this.props.match.params.id
-     console.log("PROPS", this.props.match.params.id, idC)
- axios.get(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/advertisements`)
-   .then(res => {
-     const courses = res.data;
+    console.log("PROPS", this.props.match.params.id, idC)
+    axios.get(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/advertisements`).then(res => {
+      const courses = res.data;
 
-     this.setState({advertisement: courses });
-    //   console.log("course", this.state.course[0].idCOURSE)
-   })
+      this.setState({advertisement: courses});
+      //   console.log("course", this.state.course[0].idCOURSE)
+    })
   }
 
   render() {
 
-    return (
-      <div className="dashboard-top">
-        <div>
-          <nav className="navbar-sec navbar-expand-lg navbar-light bg-light fixed-top">
-          <Link className="navbar-brand" to="/home">Pecol</Link>
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span className="navbar-toggler-icon"></span>
-            </button>
-          </nav>
-        </div>
-        <div className="row">
-          <div className="col-sm-3 sideBar-left">
-            <SideBar idStudent={this.props.match.params.id} />
-          </div>
-
-
-
-            <div className="col-sm-9 sideBar-left">
+    return (<div className="dashboard-top">
+      <div>
+        <NavBarDash idStudent={this.props.match.params.id}/>
+      </div>
+      <div className="row">
+        <div className="mainContent">
+          <div className="announcements">
+            <div className="col-sm-12">
               <h2>Avisos</h2>
               <div className="container">
                 <div className="row">
-                  {this.state.advertisement.map((data) =>
-                    <div className="col-sm-6">
-
-
-                      <div className="card custom-card" style={{
-                        width: '18rem'
-                      }}>
-                        <img className="card-img-top" src={data.image} alt="Card image cap" />
-                        <div className="card-body">
-                          <h5 className="card-title">{data.title}</h5>
-                          <p className="rd card-text">{data.description}</p>
-
+                  {
+                    this.state.advertisement.map((data) => <div className="row">
+                      <div className="col-lg-3">
+                        <img className="card-img-top" src={data.image} alt="Card image cap"/>
+                      </div>
+                      <div className="col-lg-9">
+                        <div className="row">
+                          <h1>
+                            {data.title}
+                          </h1>
+                        </div>
+                        <div className="row">
+                          <h4>
+                            {data.description}
+                          </h4>
                         </div>
                       </div>
-                    </div>
-
-                  )}
-
-
+                    </div>)
+                  }
                 </div>
               </div>
             </div>
-
+          </div>
         </div>
       </div>
+    </div>);
+  }
+}
 
-          );
-        }
-      }
-
-      export default Advertisement;
+export default Advertisement;

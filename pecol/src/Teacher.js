@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import logo from './logo.svg';
 import ReactDOM from 'react-dom';
 import './Dashboard.css';
-import './Teacher.css'
+import './Teacher.css';
+import NavBarDash from './NavBarDash.js';
 import carmen from './carmen.png' // relative path to image
 import cristi from './imgs/cristi.png'
 import frida from './imgs/frida.png'
@@ -18,12 +19,7 @@ import ImageLoader from 'react-image-file';
 
 import Signup from './Signup.js'
 
-import {
-  BrowserRouter as Router,
-  Link,
-  Route,
-  Switch,
-} from 'react-router-dom';
+import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
 var images = [];
 var convertedImages = []
 class Teacher extends Component {
@@ -33,28 +29,25 @@ class Teacher extends Component {
       teacher: []
     };
 
-
-
   }
 
   componentDidMount() {
-    axios.get(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/teacher`)
-     .then(res => {
-       const teacher = res.data;
-       for(var i = 0; i < teacher.length; i++) {
+    axios.get(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/teacher`).then(res => {
+      const teacher = res.data;
+      for (var i = 0; i < teacher.length; i++) {
 
-         images.push(teacher[i].contentImage)
-       }
-       for(var i = 0; i < images.length; i++) {
-         const fileReaderInstance = new FileReader();
-      //   var file = fileReaderInstance.readAsDataURL(images[i]);
+        images.push(teacher[i].contentImage)
+      }
+      for (var i = 0; i < images.length; i++) {
+        const fileReaderInstance = new FileReader();
+        //   var file = fileReaderInstance.readAsDataURL(images[i]);
         // console.log("IMAGE 64", file)
-    //     convertedImages.push(this.convertBase64(images[i]))
-       }
-       console.log("teacherss", teacher)
-       this.setState({teacher: teacher });
-        console.log("IMAGES", images)
-     })
+        //     convertedImages.push(this.convertBase64(images[i]))
+      }
+      console.log("teacherss", teacher)
+      this.setState({teacher: teacher});
+      console.log("IMAGES", images)
+    })
   }
 
   convertBase64 = blob => {
@@ -63,58 +56,47 @@ class Teacher extends Component {
     fileReaderInstance.readAsDataURL(blob);
 
     console.log(base64data);
-}
-
-
-
+  }
 
   render() {
 
-
-    return (
-      <div className="dashboard-top">
-        <div>
-          <nav className="navbar-sec navbar-expand-lg navbar-light bg-light fixed-top">
-            <a className="navbar-brand" href="#">Navbar</a>
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span className="navbar-toggler-icon"></span>
-            </button>
-          </nav>
-        </div>
-        <div className="row">
-          <div className="col-sm-3 sideBar-left">
-            <SideBar idStudent={this.props.match.params.id} />
-          </div>
-
-
-            <div className="col-sm-9 sideBar-left">
+    return (<div className="dashboard-top">
+      <div>
+        <NavBarDash idStudent={this.props.match.params.id}/>
+      </div>
+      <div className="row">
+        <div className="mainContent">
+          <div className="teachers">
+            <div className="col-sm-12">
               <h2>Profesores</h2>
               <div className="container">
-              <div className="row">
-                  {this.state.teacher.map((data) =>
-              <div className="col-sm-6">
-              <div className="card card-custom" style={{ width: '18rem' }} key={data.idteacher}>
-              <img className="imgteacher" src= {data.contentImage} />
-
-                <div className="card-body">
-                  <h5 className="card-title card-teacher">{data.nameTeacher}</h5>
-                  <p className="card-text card-teacher">{data.nombreMateria}</p>
-                  <p className="card-text card-teacher">{data.descriptionSubject}</p>
-
+                <div className="row">
+                  {
+                    this.state.teacher.map((data) => <div className="row">
+                      <div className="col-lg-3">
+                        <img className="card-img-top" src={data.contentImage}/>
+                      </div>
+                      <div className="col-lg-9">
+                        <div className="row">
+                          <h1>{data.nameTeacher}</h1>
+                        </div>
+                        <div className="row">
+                          <h4>{data.nombreMateria}</h4>
+                        </div>
+                        <div className="row">
+                          <h4>{data.descriptionSubject}</h4>
+                        </div>
+                      </div>
+                    </div>)
+                  }
+                  <br/>
                 </div>
               </div>
-              </div>
-                  )}
-              </div>
-
-                <br/>
-              </div>
             </div>
-
+          </div>
         </div>
       </div>
-
-    );
+    </div>);
   }
 }
 

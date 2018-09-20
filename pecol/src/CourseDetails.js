@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import ReactDOM from 'react-dom';
 import './CourseDetails.css';
 import human from './imgs/human.jpg'
-import carmen from './carmen.png' // relative path to image
+import carmen from './carmen.jpeg' // relative path to image
 import cristi from './imgs/cristi.png'
 import frida from './imgs/frida.png'
 import gabi from './imgs/gabi.png'
@@ -37,7 +37,7 @@ componentDidMount() {
  const idC = this.props.match.params.idCourse
  const idStu = this.props.match.params.idStudent
   console.log("PROPS COURSE DETAILS", this.props.match.params.idCourse, idC)
-axios.get(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/courseModules/${idC}`)
+axios.get(`http://localhost:3004/courseModules/${idC}`)
  .then(res => {
    const modules = res.data;
 
@@ -58,23 +58,14 @@ console.log("clicked")
 return (
   <div className="dashboard-top">
   <div>
-    <nav className="navbar-sec navbar-expand-lg navbar-light bg-light fixed-top">
+    <div className="navbar-sec navbar-expand-lg navbar-light bg-light fixed-top">
     <Link className="navbar-brand" to="/home">Pecol</Link>
-      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span className="navbar-toggler-icon"></span>
-      </button>
-
-      <Link className="custom-link" to={`/activity/${this.props.match.params.idStudent}/${this.props.match.params.idModule}`}>ACTIVIDADES
-      </Link>
 
 
 
-      <Link className="custom-link" to="/home">Correo
-      </Link>
 
 
-
-    </nav>
+    </div>
   </div>
   <div className="row">
     <div className="col-sm-3 sideBar-left">
