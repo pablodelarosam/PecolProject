@@ -412,6 +412,214 @@ sql = "UPDATE teacher SET nameTeacher = '" + nameTeacher + "', emailTeacher = '"
 });
 
 
+app.post("/createPresentation", upload.single('image'), function (req, res, next) {
+
+  var url = req.body.urlPresentation
+  var activityiD = req.body.activityID
+
+  // sql = "INSERT INTO student VALUES ('" + idStudent + "','" + nameStudent + "','" + age + "','" + email + "','" + password + "')";
+
+
+  sql = "INSERT INTO presentation_actividad VALUES ('" + url + "','" + activityiD  + "')";
+  connection.query(sql, function(err, records) {
+    // Do something
+  console.log("Datos al consultar: " + records);
+
+
+      if (err) {
+        return res.serverError(err);
+      }
+
+    return res.send(records);
+
+
+
+  });
+
+
+});
+
+
+
+app.post('/deletePresentation', function(req, res, next) {
+  console.log("ID TO DELTE")
+  var url = req.body.idActivityPresentationDelete;
+
+  sql =  "DELETE FROM presentation_actividad where idActivity = '" + url + "'";
+  connection.query(sql, function(err, result) {
+    if (err)
+      return err;
+    res = result;
+    console.log("Student registered"), result;
+    //res.send("Created "+JSON.stringify(result));
+  });
+  // STUDENT.counter ++;
+  studentID++;
+  return res.send({
+    status: 200
+
+  });
+
+});
+
+
+//Create activity videos
+
+app.post("/createVideo", upload.single('image'), function (req, res, next) {
+
+  var url = req.body.urlVideo
+  var activityiD = req.body.idACTIVITY
+
+  // sql = "INSERT INTO student VALUES ('" + idStudent + "','" + nameStudent + "','" + age + "','" + email + "','" + password + "')";
+
+
+  sql = "INSERT INTO video_actividad VALUES ('" + url + "','" + activityiD  + "')";
+  connection.query(sql, function(err, records) {
+    // Do something
+  console.log("Datos al consultar: " + records);
+
+
+      if (err) {
+        return res.serverError(err);
+      }
+
+    return res.send(records);
+
+
+
+  });
+
+
+});
+
+
+app.post('/deleteVideo', function(req, res, next) {
+  console.log("ID TO DELTE")
+  var url = req.body.urlVideo;
+  console.log("urlvidoe", url)
+
+  sql =  "DELETE FROM video_actividad where idActivity = '" + url + "'";
+  console.log("sel", sql)
+  connection.query(sql, function(err, result) {
+    if (err)
+      return err;
+    res = result;
+    console.log("Student registered"), result;
+    //res.send("Created "+JSON.stringify(result));
+  });
+  // STUDENT.counter ++;
+  studentID++;
+  return res.send({
+    status: 200
+
+  });
+
+});
+
+
+// Create crossword
+
+app.post("/createCrossword", upload.single('image'), function (req, res, next) {
+
+  var clue = req.body.question
+  var activityiD = req.body.idACTIVITYQuestion
+
+  // sql = "INSERT INTO student VALUES ('" + idStudent + "','" + nameStudent + "','" + age + "','" + email + "','" + password + "')";
+
+
+  sql = "INSERT INTO question_answer VALUES ('" + clue + "','" + clue  + "','" + activityID + "')";
+  connection.query(sql, function(err, records) {
+    // Do something
+  console.log("Datos al consultar: " + records);
+
+
+      if (err) {
+        return res.serverError(err);
+      }
+
+    return res.send(records);
+
+
+
+  });
+
+
+});
+
+
+app.post('/deleteCrossword', function(req, res, next) {
+  console.log("ID TO DELTE")
+  var url = req.param("idactivityquestion");
+
+  sql =  "DELETE FROM question_answer where idActivity = '" + url + "'";
+  connection.query(sql, function(err, result) {
+    if (err)
+      return err;
+    res = result;
+    console.log("Student registered"), result;
+    //res.send("Created "+JSON.stringify(result));
+  });
+  // STUDENT.counter ++;
+  studentID++;
+  return res.send({
+    status: 200
+
+  });
+
+});
+
+
+//MultipleQuestion
+
+app.post("/createMultiple", upload.single('image'), function (req, res, next) {
+
+  var clue = req.body.multipleQuestion
+  var activityiD = req.body.activityID
+
+  // sql = "INSERT INTO student VALUES ('" + idStudent + "','" + nameStudent + "','" + age + "','" + email + "','" + password + "')";
+
+
+  sql = "INSERT INTO question_answer VALUES ('" + clue + "','" + clue  + "','" + activityID + "')";
+  connection.query(sql, function(err, records) {
+    // Do something
+  console.log("Datos al consultar: " + records);
+
+
+      if (err) {
+        return res.serverError(err);
+      }
+
+    return res.send(records);
+
+
+
+  });
+
+
+});
+
+app.post('/deleteMultiple', function(req, res, next) {
+  console.log("ID TO DELTE")
+  var url = req.param("question");
+
+  sql =  "DELETE FROM question_answer where questionCrossword = '" + question + "'";
+  connection.query(sql, function(err, result) {
+    if (err)
+      return err;
+    res = result;
+    console.log("Student registered"), result;
+    //res.send("Created "+JSON.stringify(result));
+  });
+  // STUDENT.counter ++;
+  studentID++;
+  return res.send({
+    status: 200
+
+  });
+
+});
+
+
 //Create Rule
 
 app.post("/createRule", upload.single('image'), function (req, res, next) {
@@ -452,14 +660,14 @@ app.post("/sendEmail", upload.single('image'), function (req, res, next) {
   var transporter = nodemailer.createTransport({
   service: 'hotmail',
   auth: {
-    user: 'pablo.rosam@hotmail.com',
-    pass: 'CraftCode1234.'
+    user: 'infopecol17@gmail.com',
+    pass: 'pecol2017'
   }
 });
 
 var mailOptions = {
-  from: 'pablo.rosam@hotmail.com',
-  to: 'pablo.rosam@hotmail.com',
+  from: 'infopecol17@gmail.com',
+  to: 'pecol2017',
   subject: subject,
   html: '<h1> ' + name + ' </h1> <p> ' + email + ' </p> <p> ' + textm + ' </p>'
 };
