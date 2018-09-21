@@ -29,8 +29,6 @@ class CreateActivityDetails extends Component {
       idACTIVITYQuestion: "",
       question: "",
       idactivityquestion: ""
-
-
     };
   }
 
@@ -59,7 +57,6 @@ class CreateActivityDetails extends Component {
     formData.append('idACTIVITY', this.state.idACTIVITY)
     formData.append('urlVideo', this.state.urlVideo)
 
-
     // axios.post(`http://ec2-34-212-223-202.us-west-2.compute.amazonaws.com:3004/createTeacher`, this.formData)
 
     axios.post(`http://localhost:3004/createVideo`, formData, {
@@ -76,7 +73,6 @@ class CreateActivityDetails extends Component {
     });
   };
 
-
   handleSubmitPresentation = event => {
     event.preventDefault();
 
@@ -84,7 +80,6 @@ class CreateActivityDetails extends Component {
     formData.append("image", this.state.fileSelected)
     formData.append('idACTIVITYPresentation', this.state.idACTIVITYPresentation)
     formData.append('urlPresentation', this.state.urlPresentation)
-
 
     // axios.post(`http://ec2-34-212-223-202.us-west-2.compute.amazonaws.com:3004/createTeacher`, this.formData)
 
@@ -109,7 +104,6 @@ class CreateActivityDetails extends Component {
     formData.append("image", this.state.fileSelected)
     formData.append('idACTIVITYQuestion', this.state.idACTIVITYQuestion)
     formData.append('question', this.state.question)
-
 
     // axios.post(`http://ec2-34-212-223-202.us-west-2.compute.amazonaws.com:3004/createTeacher`, this.formData)
 
@@ -157,7 +151,6 @@ class CreateActivityDetails extends Component {
     })
   }
 
-
   deleteQuestion = event => {
     event.preventDefault();
 
@@ -191,8 +184,6 @@ class CreateActivityDetails extends Component {
 
           <div className="col-sm-6">
 
-
-
             <form onSubmit={this.handleSubmit}>
               <h3>
                 Crear video
@@ -218,62 +209,56 @@ class CreateActivityDetails extends Component {
 
           </div>
 
-<div>
-          <form onSubmit={this.handleSubmitPresentation}>
-            <h3>
-              Crear presentación
-            </h3>
-            <TextField id="idACTIVITYPresentation" placeholder="ID de la actividad" onChange={this.handleChange} value={this.state.idACTIVITYPresentation}/>
-            <TextField id="urlPresentation" placeholder="url de la presentacion" onChange={this.handleChange} value={this.state.urlPresentation}/>
-            <button type="submit">
-              Crear presentación
-            </button>
+          <div>
+            <form onSubmit={this.handleSubmitPresentation}>
+              <h3>
+                Crear presentación
+              </h3>
+              <TextField id="idACTIVITYPresentation" placeholder="ID de la actividad" onChange={this.handleChange} value={this.state.idACTIVITYPresentation}/>
+              <TextField id="urlPresentation" placeholder="url de la presentacion" onChange={this.handleChange} value={this.state.urlPresentation}/>
+              <button type="submit">
+                Crear presentación
+              </button>
 
-          </form>
+            </form>
 
-          <form>
-            <h3>
-              Borrar presentación
-            </h3>
-            <TextField id="idACTIVITYPresentationDelete" placeholder="ID de la actividad" onChange={this.handleChange} value={this.state.idACTIVITYPresentationDelete}/>
-            <button type="submit" onClick={this.deletePresentation}>
-              Borrar presentación
-            </button>
+            <form>
+              <h3>
+                Borrar presentación
+              </h3>
+              <TextField id="idACTIVITYPresentationDelete" placeholder="ID de la actividad" onChange={this.handleChange} value={this.state.idACTIVITYPresentationDelete}/>
+              <button type="submit" onClick={this.deletePresentation}>
+                Borrar presentación
+              </button>
 
-          </form>
+            </form>
 
           </div>
 
-
-
-
           <div>
 
-          <form onSubmit={this.handleSubmitQuestionFree}>
-            <h3>
-              Crucigrama y Evaluación
-            </h3>
-            <TextField id="idACTIVITYQuestion" placeholder="ID de la actividad" onChange={this.handleChange} value={this.state.idACTIVITYQuestion}/>
-            <TextField id="question" placeholder="pista o pregunta" onChange={this.handleChange} value={this.state.question}/>
-            <button type="submit">
-              Agregar pregunta o pista
-            </button>
+            <form onSubmit={this.handleSubmitQuestionFree}>
+              <h3>
+                Crucigrama y Evaluación
+              </h3>
+              <TextField id="idACTIVITYQuestion" placeholder="ID de la actividad" onChange={this.handleChange} value={this.state.idACTIVITYQuestion}/>
+              <TextField id="question" placeholder="pista o pregunta" onChange={this.handleChange} value={this.state.question}/>
+              <button type="submit">
+                Agregar pregunta o pista
+              </button>
 
-          </form>
+            </form>
 
+            <form>
+              <h3>
+                Crucigrama y Evaluación
+              </h3>
+              <TextField id="idactivityquestion" placeholder="ID de la actividad" onChange={this.handleChange} value={this.state.idactivityquestion}/>
+              <button type="submit" onClick={this.deleteQuestion}>
+                Borrar preguntas
+              </button>
 
-          <form>
-            <h3>
-              Crucigrama y Evaluación
-            </h3>
-            <TextField id="idactivityquestion" placeholder="ID de la actividad" onChange={this.handleChange} value={this.state.idactivityquestion}/>
-            <button type="submit" onClick={this.deleteQuestion}>
-              Borrar preguntas
-            </button>
-
-          </form>
-
-
+            </form>
 
           </div>
 

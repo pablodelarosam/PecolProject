@@ -91,11 +91,11 @@ class CreateCourse extends Component {
     console.log("PROPS", this.props.match.params.id, idC)
     axios.get(`http://localhost:3004/AllCourses`).then(res => {
       const accounts = res.data;
-
       this.setState({student: accounts});
       //   console.log("course", this.state.course[0].idCOURSE)
     })
   }
+  
   handleSubmit = event => {
     event.preventDefault();
 

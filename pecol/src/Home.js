@@ -28,10 +28,8 @@ import introVideo from './vids/video.mp4'
 import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 import {Carousel} from 'react-responsive-carousel';
 import styles from 'react-responsive-carousel/lib/styles/carousel.min.css';
-import firebase from 'firebase';
-import firebaseConfig from './config';
+
 import Signup from './Signup.js'
- import axios from 'axios';
 
 var FaArrowRight = require('react-icons/lib/fa/arrow-right');
 
@@ -53,68 +51,13 @@ var {
   SocialIcon
 } = require('react-social-icons');
 
-
-
-const config = {
-  apiKey: "AIzaSyDXu72fg2m3VXrVKlfuoXgx_KvuBjlFV0Y",
-  authDomain: "pecol-307dd.firebaseapp.com",
-  databaseURL: "https://pecol-307dd.firebaseio.com",
-  projectId: "pecol-307dd",
-  storageBucket: "pecol-307dd.appspot.com",
-  messagingSenderId: "299288601847"
-}
-
-firebase.initializeApp(config)
-
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      autoplay: true,
-      nameM: "",
-      email: "",
-      textm: "",
-      subject: ""
+      autoplay: true
     };
   }
-
-  sendEmail() {
-
-      console.log("state", this.state)
-        axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/sendEmail`, {
-          name: this.state.nameM,
-          email: this.state.email,
-          subject: this.state.subject,
-          textm: this.state.textm
-
-
-         })
-             .then(res => {
-               console.log("SUCCESS", res);
-                alert("Se ha enviado el mensaje correctamente");
-               if(res.status == 200) {
-                   console.log("ruLE deleted successfully")
-
-               //  browserHistory.replace("/login")
-               //  store.set('loggedIn', true);
-               //this.props.history.push("/");
-
-               }
-             }).catch((error) => {
-               //handle error
-               alert("Hubo un problema, intente nuevamente");
-             });
-  }
-
-
-
-
-    handleChange = event => {
-      console.log(this.state)
-      this.setState({
-        [event.target.id]: event.target.value
-      });
-    }
 
   activateText(id) {
     switch (id) {
@@ -237,10 +180,6 @@ class Home extends Component {
         </div>
       </div>
 
-
-{/*
-=======
->>>>>>> 1e930b19fd18600fb51e23cef4968205a56e8f5d
       <div className="team">
         <div className="row">
           <h1>
@@ -332,7 +271,7 @@ class Home extends Component {
           </div>
         </div>
       </div>
-      */}
+
       <div className="carousel">
         <Carousel>
           <div>
@@ -355,28 +294,33 @@ class Home extends Component {
             </h2>
           </div>
 
-          <div className="row">
-            <label>
-              <input id="nameM"  className="input-form" type="text" name="name" placeholder="Nombre" onChange={this.handleChange} value={this.state.nameM}/>
-            </label>
-            <label>
-              <input id="email"  className="input-form" type="text" name="email" placeholder="E-mail" onChange={this.handleChange} value={this.state.email} />
-            </label>
-          </div>
-          <div className="row">
-            <label>
-              <input id="subject"  className="input-form2" type="text" name="textm" placeholder="Asunto" onChange={this.handleChange} value={this.state.subject}/>
-            </label>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="pwd">Nombre:</label>
+            <div class="col-sm-10">
+              <input className="col-sm-offset-2 form-control col-md-12" type="text" name="name"/>
+            </div>
           </div>
 
-          <div className="row">
-            <label>
-              <textarea id="textm"  className="input-form3" type="text" name="name" placeholder="Escribe lo que necesites agregar" onChange={this.handleChange} value={this.state.textm}/>
-            </label>
-
-
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="pwd">Email:</label>
+            <div class="col-sm-10">
+              <input className="form-control col-md-12" type="text" name="name" placeholder="E-mail"/>
+            </div>
           </div>
-            <button onClick={this.sendEmail.bind(this)}> Enviar mensaje </button>
+
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="pwd">Asunto:</label>
+            <div class="col-sm-10">
+              <input className="form-control col-md-12" type="text" name="name" placeholder="Asunto"/>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="pwd">Asunto:</label>
+            <div class="col-sm-10">
+              <textarea className="form-control col-md-12" type="text" name="name" placeholder="Escribe lo que necesites agregar"/>
+            </div>
+          </div>
         </div>
       </div>
 

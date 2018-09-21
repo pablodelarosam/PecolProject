@@ -26,6 +26,7 @@ class NavBarDash extends Component {
             <Link className="nav-link nav-dash-links" to="/createRule">Reglas</Link>
             <Link className="nav-link nav-dash-links" to="/allChat">Correos</Link>
             <Link className="nav-link nav-dash-links" to="/createModule">Módulos</Link>
+            <Link className="nav-link nav-dash-links" to="/createActivity">Actividades</Link>
             <Link className="nav-link nav-dash-links" to="/stadistics">Estadísticas</Link>
             <li className="nav-link dropdown">
               <Link className="nav-link nav-dash-links" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" to={"#"}>Opciones</Link>
