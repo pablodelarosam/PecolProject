@@ -36,7 +36,7 @@ class Crossword extends Component {
     axios.get(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/qa/${this.props.idActivity}`)
       .then(res => {
         const qas = res.data;
-
+        console.log("w", res.data)
         this.setState({qa: qas });
 
        //   console.log("course", this.state.course[0].idCOURSE)

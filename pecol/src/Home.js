@@ -28,8 +28,11 @@ import introVideo from './vids/video.mp4'
 import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 import {Carousel} from 'react-responsive-carousel';
 import styles from 'react-responsive-carousel/lib/styles/carousel.min.css';
-
+import firebase from 'firebase';
+import firebaseConfig from './config';
 import Signup from './Signup.js'
+ import axios from 'axios';
+
 
 var FaArrowRight = require('react-icons/lib/fa/arrow-right');
 
@@ -51,12 +54,66 @@ var {
   SocialIcon
 } = require('react-social-icons');
 
+const config = {
+  apiKey: "AIzaSyDXu72fg2m3VXrVKlfuoXgx_KvuBjlFV0Y",
+  authDomain: "pecol-307dd.firebaseapp.com",
+  databaseURL: "https://pecol-307dd.firebaseio.com",
+  projectId: "pecol-307dd",
+  storageBucket: "pecol-307dd.appspot.com",
+  messagingSenderId: "299288601847"
+}
+
+firebase.initializeApp(config)
+
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      autoplay: true
+      autoplay: true,
+      nameM: "",
+      email: "",
+      textm: "",
+      subject: ""
     };
+  }
+
+
+  sendEmail() {
+
+    console.log("state", this.state)
+      axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/sendEmail`, {
+        name: this.state.nameM,
+        email: this.state.email,
+        subject: this.state.subject,
+        textm: this.state.textm
+
+
+       })
+           .then(res => {
+             console.log("SUCCESS", res);
+              alert("Se ha enviado el mensaje correctamente");
+             if(res.status == 200) {
+                 console.log("ruLE deleted successfully")
+
+             //  browserHistory.replace("/login")
+             //  store.set('loggedIn', true);
+             //this.props.history.push("/");
+
+             }
+           }).catch((error) => {
+             //handle error
+             alert("Hubo un problema, intente nuevamente");
+           });
+}
+
+
+
+
+  handleChange = event => {
+    console.log(this.state)
+    this.setState({
+      [event.target.id]: event.target.value
+    });
   }
 
   activateText(id) {
@@ -180,97 +237,7 @@ class Home extends Component {
         </div>
       </div>
 
-      <div className="team">
-        <div className="row">
-          <h1>
-            Nuestro equipo
-          </h1>
-        </div>
-        <div className="row teamComplete">
-          <div className="col-lg-3">
-            <div className="teammate t1">
-              <img src={gabi} alt="Card image cap"/>
-              <div className="teammate-text">
-                <h4>Gabriela Anaya
-                </h4>
-                <p className="position cli">
-                  Licenciatura en Ciencias de la familia.
-                </p>
 
-                <p className="dscr cl">
-                  <p className="dscr cl">• Consejo en Bifam.</p>
-                  <p className="dscr cl">• Prevención en A.C.</p>
-                  <p className="dscr cl">• Talleres y cursos de desarrollo humano a empresas.</p>
-                  <p className="dscr cl">• Programas de prevención de transnacionales, Ford y Coppel.</p>
-                  <p className="dscr cl">• Prevención en de adicciones en la SEP (Edo. Mex) y Conalep II Q. Roo.</p>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-3">
-            <div className="teammate t2">
-              <img src={frida} alt="Card image cap"/>
-              <div className="teammate-text">
-                <h4>Frida Schulz
-                </h4>
-                <p className="position cli">
-                  Maestra en Derecho, Valores y Medio Ambiente a nivel superior.
-                </p>
-                <div className="dscr cl">
-                  <p className="dscr cl">
-                    • Voluntariado en A.C.
-                  </p>
-                  <p className="dscr cl">
-                    • Talleres y cursos de desarrollo humano y Capacitación a empresas.
-                  </p>
-                  <p className="dscr cl">
-                    • Programas de prevención en adicciones, Conalep II; Q. Roo, Mx.</p>
-                  <p className="dscr cl">
-                    • Consultoría Familiar.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-3">
-            <div className="teammate t3">
-              <img src={cristi} alt="Card image cap"/>
-              <div className="teammate-text">
-                <h4>Cristina Arenzana
-                </h4>
-                <p className="position cli">
-                  Maestría en Ciencias de la Familia.
-
-                </p>
-                <p className="dscr cl">
-                  <p className="dscr cl">• Voluntariado en A.C.</p>
-                  <p className="dscr cl">• Talleres y cursos de desarrollo humano y Capacitación a empresas.</p>
-                  <p className="dscr cl">• Programas de prevención en de adicciones en Conalep II, Q. Roo, Mx</p>
-                  <p className="dscr cl">• Consultoría Familiar.</p>
-
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="col-lg-3">
-            <div className="teammate t1">
-              <img src={ca} alt="Card image cap"/>
-              <div className="teammate-text">
-                <h4>Carmen Tomassi
-                </h4>
-                <p className="position cli">
-                  Licenciatura en Neurolinguística y Psicopedagogia
-
-                </p>
-                <p className="dscr cl">
-                  <p className="dscr cl">• Maestría en ciencias de la familia.</p>
-                  <p className="dscr cl">• Diplomado en inteligencia emocional.</p>
-
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <div className="carousel">
         <Carousel>
@@ -297,30 +264,31 @@ class Home extends Component {
           <div class="form-group">
             <label class="control-label col-sm-2" for="pwd">Nombre:</label>
             <div class="col-sm-10">
-              <input className="col-sm-offset-2 form-control col-md-12" type="text" name="name"/>
+              <input id="nameM" className="col-sm-offset-2 form-control col-md-12" type="text" name="name" placeholder="Nombre" onChange={this.handleChange} value={this.state.nameM} />
             </div>
           </div>
 
           <div class="form-group">
             <label class="control-label col-sm-2" for="pwd">Email:</label>
             <div class="col-sm-10">
-              <input className="form-control col-md-12" type="text" name="name" placeholder="E-mail"/>
+              <input id="email" className="form-control col-md-12" type="text" name="name" placeholder="E-mail" onChange={this.handleChange} value={this.state.email} />
             </div>
           </div>
 
           <div class="form-group">
             <label class="control-label col-sm-2" for="pwd">Asunto:</label>
             <div class="col-sm-10">
-              <input className="form-control col-md-12" type="text" name="name" placeholder="Asunto"/>
+              <input id="subject"  className="form-control col-md-12" type="text" name="name" placeholder="Asunto" onChange={this.handleChange} value={this.state.subject}/>
             </div>
           </div>
 
           <div class="form-group">
-            <label class="control-label col-sm-2" for="pwd">Asunto:</label>
+            <label class="control-label col-sm-2" for="pwd">Descripción:</label>
             <div class="col-sm-10">
-              <textarea className="form-control col-md-12" type="text" name="name" placeholder="Escribe lo que necesites agregar"/>
+              <textarea id="textm"  className="form-control col-md-12" type="text" name="name" placeholder="Escribe lo que necesites agregar" onChange={this.handleChange} value={this.state.textm} />
             </div>
           </div>
+          <button onClick={this.sendEmail.bind(this)}> Enviar mensaje </button>
         </div>
       </div>
 

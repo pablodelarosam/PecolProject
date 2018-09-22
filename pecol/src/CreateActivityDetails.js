@@ -59,7 +59,7 @@ class CreateActivityDetails extends Component {
 
     // axios.post(`http://ec2-34-212-223-202.us-west-2.compute.amazonaws.com:3004/createTeacher`, this.formData)
 
-    axios.post(`http://localhost:3004/createVideo`, formData, {
+    axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createVideo`, formData, {
       headers: {
         'accept': 'application/json',
         'Accept-Language': 'en-US,en;q=0.8',
@@ -83,7 +83,7 @@ class CreateActivityDetails extends Component {
 
     // axios.post(`http://ec2-34-212-223-202.us-west-2.compute.amazonaws.com:3004/createTeacher`, this.formData)
 
-    axios.post(`http://localhost:3004/createPresentation`, formData, {
+    axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createPresentation`, formData, {
       headers: {
         'accept': 'application/json',
         'Accept-Language': 'en-US,en;q=0.8',
@@ -107,7 +107,7 @@ class CreateActivityDetails extends Component {
 
     // axios.post(`http://ec2-34-212-223-202.us-west-2.compute.amazonaws.com:3004/createTeacher`, this.formData)
 
-    axios.post(`http://localhost:3004/createCrossword`, formData, {
+    axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createCrossword`, formData, {
       headers: {
         'accept': 'application/json',
         'Accept-Language': 'en-US,en;q=0.8',
@@ -124,7 +124,7 @@ class CreateActivityDetails extends Component {
   deleteVideo = event => {
     event.preventDefault();
 
-    axios.post(`http://localhost:3004/deleteVideo`, {urlVideo: this.state.urlVideoDelete}).then(res => {
+    axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteVideo`, {urlVideo: this.state.urlVideoDelete}).then(res => {
       console.log("SUCCESS", res);
       if (res.status == 200) {
 
@@ -139,7 +139,7 @@ class CreateActivityDetails extends Component {
   deletePresentation = event => {
     event.preventDefault();
 
-    axios.post(`http://localhost:3004/deleteVideo`, {idActivityPresentationDelete: this.state.idACTIVITYPresentationDelete}).then(res => {
+    axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteVideo`, {idActivityPresentationDelete: this.state.idACTIVITYPresentationDelete}).then(res => {
       console.log("SUCCESS", res);
       if (res.status == 200) {
 
@@ -154,7 +154,7 @@ class CreateActivityDetails extends Component {
   deleteQuestion = event => {
     event.preventDefault();
 
-    axios.post(`http://localhost:3004/deleteCrossword`, {idactivityquestion: this.state.idactivityquestion}).then(res => {
+    axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteCrossword`, {idactivityquestion: this.state.idactivityquestion}).then(res => {
       console.log("SUCCESS", res);
       if (res.status == 200) {
 

@@ -89,17 +89,17 @@ class CreateCourse extends Component {
   componentDidMount() {
     const idC = this.props.match.params.id
     console.log("PROPS", this.props.match.params.id, idC)
-    axios.get(`http://localhost:3004/AllCourses`).then(res => {
+    axios.get(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/AllCourses`).then(res => {
       const accounts = res.data;
       this.setState({student: accounts});
       //   console.log("course", this.state.course[0].idCOURSE)
     })
   }
-  
+
   handleSubmit = event => {
     event.preventDefault();
 
-    axios.post(`http://localhost:3004/createCourse`, {
+    axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createCourse`, {
       idCourse: this.state.idCourse,
       nameCourse: this.state.nameCourse,
       introCourse: this.state.introCourse
@@ -140,7 +140,7 @@ class CreateCourse extends Component {
     var selectedCourse = e.options[e.selectedIndex].value;
     alert(selectedCourse);
 
-    axios.post(`http://localhost:3004/createSubscription`, {
+    axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createSubscription`, {
       idStudentCSubscription: this.state.idStudentCSubscription,
       idCourseCSubscription: selectedCourse
 
@@ -170,9 +170,9 @@ class CreateCourse extends Component {
     formData.append('moduleDescription', this.state.moduleDescription)
     formData.append('idCourseModule', this.state.idCourseModule)
 
-    // axios.post(`http://localhost:3004/createTeacher`, this.formData)
+    // axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createTeacher`, this.formData)
 
-    axios.post(`http://localhost:3004/createModule`, formData, {
+    axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createModule`, formData, {
       headers: {
         'accept': 'application/json',
         'Accept-Language': 'en-US,en;q=0.8',
@@ -191,7 +191,7 @@ class CreateCourse extends Component {
   createAccount = event => {
     event.preventDefault();
 
-    axios.post(`http://localhost:3004/createAccount`, {
+    axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createAccount`, {
       totalCredit: this.state.totalCredit,
       exigibleCredit: this.state.exigibleCredit,
       interests: this.state.introCourse,
@@ -217,7 +217,7 @@ class CreateCourse extends Component {
   modifyAccount = event => {
     event.preventDefault();
 
-    axios.post(`http://localhost:3004/modifyAccount`, {
+    axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/modifyAccount`, {
       totalCreditModify: this.state.totalCreditModify,
       exigibleCreditModify: this.state.exigibleCreditModify,
       interestsModify: this.state.interestsModify,
@@ -242,7 +242,7 @@ class CreateCourse extends Component {
   modifyCourse = event => {
     event.preventDefault();
 
-    axios.put(`http://localhost:3004/modifyCourse`, {
+    axios.put(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/modifyCourse`, {
       idModify: this.state.idModify,
       nameModify: this.state.nameModify
 
@@ -273,9 +273,9 @@ class CreateCourse extends Component {
     formData.append('moduleDescription', this.state.moduleModifyDescription)
     formData.append('idCourseModule', this.state.idModifyModuleCourse)
 
-    // axios.post(`http://localhost:3004/createTeacher`, this.formData)
+    // axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createTeacher`, this.formData)
 
-    axios.put(`http://localhost:3004/modifyModule`, formData, {
+    axios.put(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/modifyModule`, formData, {
       headers: {
         'accept': 'application/json',
         'Accept-Language': 'en-US,en;q=0.8',
@@ -294,7 +294,7 @@ class CreateCourse extends Component {
   deleteModule = event => {
     event.preventDefault();
 
-    axios.post(`http://localhost:3004/deleteModule`, {idDeleteModule: this.state.idDeleteModule}).then(res => {
+    axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteModule`, {idDeleteModule: this.state.idDeleteModule}).then(res => {
       console.log("SUCCESS", res);
       if (res.status == 200) {
         console.log("Student deleted successfully")
@@ -312,7 +312,7 @@ class CreateCourse extends Component {
   deleteCourse = event => {
     event.preventDefault();
 
-    axios.post(`http://localhost:3004/deleteCourse`, {idDelete: this.state.idDelete}).then(res => {
+    axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteCourse`, {idDelete: this.state.idDelete}).then(res => {
       console.log("SUCCESS", res);
       if (res.status == 200) {
         console.log("Student deleted successfully")
@@ -330,7 +330,7 @@ class CreateCourse extends Component {
   deleteAccount = event => {
     event.preventDefault();
 
-    axios.post(`http://localhost:3004/deleteAccount`, {idStudentAccountDelete: this.state.idStudentAccountDelete}).then(res => {
+    axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteAccount`, {idStudentAccountDelete: this.state.idStudentAccountDelete}).then(res => {
       console.log("SUCCESS", res);
       if (res.status == 200) {
 
@@ -352,7 +352,7 @@ class CreateCourse extends Component {
     var e = document.getElementById("idCourseDSubscription");
     var selectedCourse = e.options[e.selectedIndex].value;
 
-    axios.post(`http://localhost:3004/deleteSubscription`, {
+    axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteSubscription`, {
       idStudentDSubscription: this.state.idStudentDSubscription,
       idCourseDSubscription: selectedCourse
     }).then(res => {
@@ -399,7 +399,7 @@ class CreateCourse extends Component {
         {
           label: 'Si',
           onClick: () => {
-            axios.post(`http://localhost:3004/deleteCourse`, {idStudentAccountDelete: id}).then(res => {
+            axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteCourse`, {idStudentAccountDelete: id}).then(res => {
               console.log("SUCCESS", res);
               if (res.status == 200) {
                 console.log("Student deleted successfully")
