@@ -95,7 +95,7 @@ class CreateCourse extends Component {
       //   console.log("course", this.state.course[0].idCOURSE)
     })
   }
-  
+
   handleSubmit = event => {
     event.preventDefault();
 

@@ -28,8 +28,10 @@ import introVideo from './vids/video.mp4'
 import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 import {Carousel} from 'react-responsive-carousel';
 import styles from 'react-responsive-carousel/lib/styles/carousel.min.css';
-
+import firebase from 'firebase';
+import firebaseConfig from './config';
 import Signup from './Signup.js'
+ import axios from 'axios';
 
 var FaArrowRight = require('react-icons/lib/fa/arrow-right');
 
@@ -51,13 +53,68 @@ var {
   SocialIcon
 } = require('react-social-icons');
 
+
+
+const config = {
+  apiKey: "AIzaSyDXu72fg2m3VXrVKlfuoXgx_KvuBjlFV0Y",
+  authDomain: "pecol-307dd.firebaseapp.com",
+  databaseURL: "https://pecol-307dd.firebaseio.com",
+  projectId: "pecol-307dd",
+  storageBucket: "pecol-307dd.appspot.com",
+  messagingSenderId: "299288601847"
+}
+
+firebase.initializeApp(config)
+
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      autoplay: true
+      autoplay: true,
+      nameM: "",
+      email: "",
+      textm: "",
+      subject: ""
     };
   }
+
+  sendEmail() {
+
+      console.log("state", this.state)
+        axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/sendEmail`, {
+          name: this.state.nameM,
+          email: this.state.email,
+          subject: this.state.subject,
+          textm: this.state.textm
+
+
+         })
+             .then(res => {
+               console.log("SUCCESS", res);
+                alert("Se ha enviado el mensaje correctamente");
+               if(res.status == 200) {
+                   console.log("ruLE deleted successfully")
+
+               //  browserHistory.replace("/login")
+               //  store.set('loggedIn', true);
+               //this.props.history.push("/");
+
+               }
+             }).catch((error) => {
+               //handle error
+               alert("Hubo un problema, intente nuevamente");
+             });
+  }
+
+
+
+
+    handleChange = event => {
+      console.log(this.state)
+      this.setState({
+        [event.target.id]: event.target.value
+      });
+    }
 
   activateText(id) {
     switch (id) {
@@ -180,6 +237,10 @@ class Home extends Component {
         </div>
       </div>
 
+
+{/*
+=======
+>>>>>>> 1e930b19fd18600fb51e23cef4968205a56e8f5d
       <div className="team">
         <div className="row">
           <h1>
@@ -196,7 +257,6 @@ class Home extends Component {
                 <p className="position cli">
                   Licenciatura en Ciencias de la familia.
                 </p>
-
                 <p className="dscr cl">
                   <p className="dscr cl">• Consejo en Bifam.</p>
                   <p className="dscr cl">• Prevención en A.C.</p>
@@ -239,14 +299,12 @@ class Home extends Component {
                 </h4>
                 <p className="position cli">
                   Maestría en Ciencias de la Familia.
-
                 </p>
                 <p className="dscr cl">
                   <p className="dscr cl">• Voluntariado en A.C.</p>
                   <p className="dscr cl">• Talleres y cursos de desarrollo humano y Capacitación a empresas.</p>
                   <p className="dscr cl">• Programas de prevención en de adicciones en Conalep II, Q. Roo, Mx</p>
                   <p className="dscr cl">• Consultoría Familiar.</p>
-
                 </p>
               </div>
             </div>
@@ -259,19 +317,17 @@ class Home extends Component {
                 </h4>
                 <p className="position cli">
                   Licenciatura en Neurolinguística y Psicopedagogia
-
                 </p>
                 <p className="dscr cl">
                   <p className="dscr cl">• Maestría en ciencias de la familia.</p>
                   <p className="dscr cl">• Diplomado en inteligencia emocional.</p>
-
                 </p>
               </div>
             </div>
           </div>
         </div>
       </div>
-
+      */}
       <div className="carousel">
         <Carousel>
           <div>
@@ -321,6 +377,8 @@ class Home extends Component {
               <textarea className="form-control col-md-12" type="text" name="name" placeholder="Escribe lo que necesites agregar"/>
             </div>
           </div>
+
+          <button onClick={this.sendEmail.bind(this)} className="btn btn-success"> Enviar mensaje </button>
         </div>
       </div>
 
