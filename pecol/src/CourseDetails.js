@@ -37,7 +37,7 @@ componentDidMount() {
  const idC = this.props.match.params.idCourse
  const idStu = this.props.match.params.idStudent
   console.log("PROPS COURSE DETAILS", this.props.match.params.idCourse, idC)
-axios.get(`http://localhost:3004/courseModules/${idC}`)
+axios.get(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/courseModules/${idC}`)
  .then(res => {
    const modules = res.data;
 

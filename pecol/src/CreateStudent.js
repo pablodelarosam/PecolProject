@@ -16,6 +16,12 @@ import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
 import NavBarAdmin from './NavBarAdmin.js'
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
+import SwipeableViews from 'react-swipeable-views';
+import XLSX from 'xlsx';
+import Tab from '@material-ui/core/Tab';
+import Tabs from '@material-ui/core/Tabs';
+import Select from '@material-ui/core/Select';
+import Dropzone from 'react-dropzone';
 import axios from 'axios'
 import FormData from 'form-data'
 import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
@@ -30,6 +36,7 @@ const styles = theme => ({
     minWidth: 700
   }
 });
+const rABS = true;
 var styleNone = {
   display: 'none' // 'ms' is the only lowercase vendor prefix
 };
@@ -51,6 +58,7 @@ class CreateStudent extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      index: 0,
       student: [],
       autoplay: true,
       id: "",
@@ -63,15 +71,176 @@ class CreateStudent extends Component {
       nameModify: "",
       ageModify: "",
       emailModify: "",
-      passwordModify: ""
+      passwordModify: "",
+      files: []
     };
   }
+
+  //EXCEL
+  onDrop(files) {
+    this.setState({files});
+    confirmAlert({
+      title: 'Menu',
+      message: '¿Cómo desea registrar a los usuarios?',
+      buttons: [
+        {
+          label: 'Simple',
+          onClick: () => {
+            confirmAlert({
+              title: 'Confirmar acción',
+              message: '¿Estas seguro(a)?',
+              buttons: [
+                {
+                  label: 'Si',
+                  onClick: () => {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                      var data = e.target.result;
+                      if (!rABS)
+                        data = new Uint8Array(data);
+                      var workbook = XLSX.read(data, {
+                        type: rABS
+                          ? 'binary'
+                          : 'array'
+                      });
+
+                      /* DO SOMETHING WITH workbook HERE */
+                      var sheetName = workbook.SheetNames[3];
+                      var worksheet = workbook.Sheets[sheetName];
+                      var json = XLSX.utils.sheet_to_json(worksheet, {raw: true})
+                      var i = 0;
+                      for (i; i < json.length; i++) {
+                        var id = json[i]["ID ESTUDIANTE"];
+                        var name = json[i]["NOMBRE"];
+                        var age = json[i]["EDAD"];
+                        var email = json[i]["EMAIL"];
+                        var password = json[i]["CLAVE"];
+
+                        console.log(id + " " + name + " " + age + " " + email);
+
+                        axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/signupStudent`, {
+                          id: id,
+                          nameStudent: name,
+                          age: age,
+                          email: email,
+                          password: password
+
+                        }).then(res => {
+                          console.log("SUCCESS", res);
+                          if (res.status == 200) {}
+                        }).catch((error) => {
+                          //handle error
+                        
+                        });
+
+                      }
+                    };
+                    if (rABS) {
+                      reader.readAsBinaryString(files[0]);
+                    } else {
+                      reader.readAsArrayBuffer(files[0]);
+                    }
+                  }
+                }, {
+                  label: 'No'
+                }
+              ]
+            })
+          }
+        }, {
+          label: 'Con inscripción',
+          onClick: () => {
+            confirmAlert({
+              title: 'Confirmar acción',
+              message: '¿Estas seguro(a)?',
+              buttons: [
+                {
+                  label: 'Si',
+                  onClick: () => {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                      var data = e.target.result;
+                      if (!rABS)
+                        data = new Uint8Array(data);
+                      var workbook = XLSX.read(data, {
+                        type: rABS
+                          ? 'binary'
+                          : 'array'
+                      });
+
+                      /* DO SOMETHING WITH workbook HERE */
+                      var sheetName = workbook.SheetNames[1];
+                      var worksheet = workbook.Sheets[sheetName];
+                      var json = XLSX.utils.sheet_to_json(worksheet, {raw: true})
+                      var i = 0;
+                      for (i; i < json.length; i++) {
+                        var id = json[i]["ID ESTUDIANTE"];
+                        var name = json[i]["NOMBRE"];
+                        var age = json[i]["EDAD"];
+                        var email = json[i]["EMAIL"];
+                        var password = json[i]["CLAVE"];
+                        var course = json[i]["CURSO"];
+
+                        console.log(id + " " + name + " " + age + " " + email + " " + course);
+
+                        axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/signupStudent`, {
+                          id: id,
+                          nameStudent: name,
+                          age: age,
+                          email: email,
+                          password: password
+
+                        }).then(res => {
+                          console.log("SUCCESS", res);
+                          if (res.status == 200) {
+                            axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createSubscription`, {
+                              idStudentCSubscription: id,
+                              idCourseCSubscription: course
+                            }).then(res => {
+                              console.log("SUCCESS", res);
+                              if (res.status == 200) {}
+                            }).catch((error) => {
+                            });
+                          }
+                        }).catch((error) => {
+                        });
+
+                      }
+                    };
+                    if (rABS) {
+                      reader.readAsBinaryString(files[0]);
+                    } else {
+                      reader.readAsArrayBuffer(files[0]);
+                    }
+                  }
+                }, {
+                  label: 'No'
+                }
+              ]
+            })
+          }
+        }, {
+          label: 'Cancelar',
+          onClick: () => {}
+        }
+      ]
+    })
+  }
+
   handleChange = event => {
     console.log(this.state)
     this.setState({
       [event.target.id]: event.target.value
     });
   }
+
+  handleChange1 = (event, value) => {
+    this.setState({index: value});
+  };
+
+  handleChangeIndex = index => {
+    this.setState({index});
+  };
   componentDidMount() {
     const idC = this.props.match.params.id
     console.log("PROPS", this.props.match.params.id, idC)
@@ -200,6 +369,7 @@ class CreateStudent extends Component {
     })
   }
   render() {
+    const {index} = this.state;
     return (<div className="dashboard-top">
       <div>
 
@@ -277,23 +447,54 @@ class CreateStudent extends Component {
               }
 
               <div className="formAdmin" id="create" style={styleNone}>
-                <form onSubmit={this.handleSubmit}>
-                  <h4>
-                    Crear estudiante
-                  </h4>
-                  <TextField id="id" label="Id" placeholder="Id" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idStudent}/>
-                  <br/>
-                  <TextField id="nameStudent" label="Nombre" placeholder="Nombre" className="textField" margin="normal" onChange={this.handleChange} value={this.state.nameStudent}/>
-                  <br/>
-                  <TextField id="age" label="Edad" placeholder="Edad" className="textField" margin="normal" onChange={this.handleChange} value={this.state.age}/>
-                  <br/>
-                  <TextField id="email" label="E-mail" placeholder="E-mail" className="textField" margin="normal" onChange={this.handleChange} value={this.state.email}/>
-                  <br/>
-                  <TextField id="password" label="Contraseña" type="password" placeholder="Contraseña" className="textField" margin="normal" onChange={this.handleChange} value={this.state.password}/>
-                  <br/>
-                  <br/> {/* <input type="submit" className="btn btn-success" value="Iniciar sesión" /> */}
-                  <button className="nav-link btn btn-success" type="submit">Registrar</button>
-                </form>
+                <Tabs value={index} fullWidth="fullWidth" onChange={this.handleChange1} style={styles.tabs}>
+                  <Tab label="Enlaces"/>
+
+                  <Tab label="Importar excel"/>
+                </Tabs>
+                <br/>
+                <SwipeableViews index={index} onChangeIndex={this.handleChangeIndex}>
+                  <div style={Object.assign({}, styles.slide, styles.slide2)}>
+                    <form onSubmit={this.handleSubmit} className="dropzone">
+                      <h4>
+                        Crear estudiante
+                      </h4>
+                      <TextField id="id" label="Id" placeholder="Id" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idStudent}/>
+                      <br/>
+                      <TextField id="nameStudent" label="Nombre" placeholder="Nombre" className="textField" margin="normal" onChange={this.handleChange} value={this.state.nameStudent}/>
+                      <br/>
+                      <TextField id="age" label="Edad" placeholder="Edad" className="textField" margin="normal" onChange={this.handleChange} value={this.state.age}/>
+                      <br/>
+                      <TextField id="email" label="E-mail" placeholder="E-mail" className="textField" margin="normal" onChange={this.handleChange} value={this.state.email}/>
+                      <br/>
+                      <TextField id="password" label="Contraseña" type="password" placeholder="Contraseña" className="textField" margin="normal" onChange={this.handleChange} value={this.state.password}/>
+                      <br/>
+                      <br/> {/* <input type="submit" className="btn btn-success" value="Iniciar sesión" /> */}
+                      <button className="nav-link btn btn-success" type="submit">Registrar</button>
+                    </form>
+                  </div>
+                  <div style={Object.assign({}, styles.slide, styles.slide2)}>
+                    <div className="row">
+                      <div className="formAdmin">
+                        <div className="dropzone">
+                          <h2>Suelta aquí el archivo a usar</h2>
+                          <ul>
+                            {
+                              this.state.files.map(f => <li>
+                                {f.name}
+                              </li>)
+                            }
+                          </ul>
+                          <Dropzone onDrop={this.onDrop.bind(this)} disabled={this.state.disabled}>
+                            <p className="dropInnerText">
+                              Arrastre el archivo que desea agregar aquí o de click para seleccionar uno</p>
+                          </Dropzone>
+                        </div>
+                        <br/>
+                      </div>
+                    </div>
+                  </div>
+                </SwipeableViews>
               </div>
             </div>
           </div>

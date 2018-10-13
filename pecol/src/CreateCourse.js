@@ -14,6 +14,8 @@ import {
   Th,
   Td
 } from 'react-super-responsive-table';
+import XLSX from 'xlsx';
+import Dropzone from 'react-dropzone';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 import {confirmAlert} from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css' // Import css
@@ -45,12 +47,15 @@ const styles = {
   }
 };
 
+const rABS = true;
+
 class CreateCourse extends Component {
   constructor(props) {
     super(props);
     this.state = {
       index: 0,
       student: [],
+      studentsCourse: [],
       idCourse: "",
       nameCourse: "",
       introCourse: "",
@@ -82,24 +87,91 @@ class CreateCourse extends Component {
       exigibleCreditModify: "",
       interestsModify: "",
       limitDateModify: "",
-      idStudentAccountModify: ""
-
+      idStudentAccountModify: "",
+      files: []
     };
   }
+
+  //EXCEL
+  onDrop(files) {
+    this.setState({files});
+    confirmAlert({
+      title: 'Menu',
+      message: '¿Crear cursos?',
+      buttons: [
+        {
+          label: 'Si',
+          onClick: () => {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+              var data = e.target.result;
+              if (!rABS)
+                data = new Uint8Array(data);
+              var workbook = XLSX.read(data, {
+                type: rABS
+                  ? 'binary'
+                  : 'array'
+              });
+
+              var sheetName = workbook.SheetNames[4];
+              var worksheet = workbook.Sheets[sheetName];
+              var json = XLSX.utils.sheet_to_json(worksheet, {raw: true})
+              var i = 0;
+              for (i; i < json.length; i++) {
+                var id = json[i]["ID CURSO"];
+                var name = json[i]["NOMBRE"];
+                var intro = json[i]["INTRODUCCION"];
+
+                console.log(id + " " + name + " " + intro);
+
+                axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createCourse`, {
+                  idCourse: id,
+                  nameCourse: name,
+                  introCourse: intro
+
+                }).then(res => {
+                  console.log("SUCCESS", res);
+                  if (res.status == 200) {
+                  }
+                }).catch((error) => {
+                  //handle error
+                });
+              }
+            }
+            if (rABS) {
+              reader.readAsBinaryString(files[0]);
+            } else {
+              reader.readAsArrayBuffer(files[0]);
+            }
+          }
+        }, {
+          label: 'Cancelar',
+          onClick: () => {}
+        }
+      ]
+    })
+  }
+
   componentDidMount() {
     const idC = this.props.match.params.id
     console.log("PROPS", this.props.match.params.id, idC)
-    axios.get(`http://localhost:3004/AllCourses`).then(res => {
+    axios.get(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/AllCourses`).then(res => {
       const accounts = res.data;
       this.setState({student: accounts});
       //   console.log("course", this.state.course[0].idCOURSE)
     })
+    axios.get(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/subscriptions`).then(res2 => {
+      const accounts2 = res2.data;
+      this.setState({studentsCourse: accounts2});
+      console.log("course", this.state.studentsCourse[0])
+    })
+
   }
 
   handleSubmit = event => {
     event.preventDefault();
 
-    axios.post(`http://localhost:3004/createCourse`, {
+    axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createCourse`, {
       idCourse: this.state.idCourse,
       nameCourse: this.state.nameCourse,
       introCourse: this.state.introCourse
@@ -140,7 +212,7 @@ class CreateCourse extends Component {
     var selectedCourse = e.options[e.selectedIndex].value;
     alert(selectedCourse);
 
-    axios.post(`http://localhost:3004/createSubscription`, {
+    axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createSubscription`, {
       idStudentCSubscription: this.state.idStudentCSubscription,
       idCourseCSubscription: selectedCourse
 
@@ -170,9 +242,9 @@ class CreateCourse extends Component {
     formData.append('moduleDescription', this.state.moduleDescription)
     formData.append('idCourseModule', this.state.idCourseModule)
 
-    // axios.post(`http://localhost:3004/createTeacher`, this.formData)
+    // axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createTeacher`, this.formData)
 
-    axios.post(`http://localhost:3004/createModule`, formData, {
+    axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createModule`, formData, {
       headers: {
         'accept': 'application/json',
         'Accept-Language': 'en-US,en;q=0.8',
@@ -191,7 +263,7 @@ class CreateCourse extends Component {
   createAccount = event => {
     event.preventDefault();
 
-    axios.post(`http://localhost:3004/createAccount`, {
+    axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createAccount`, {
       totalCredit: this.state.totalCredit,
       exigibleCredit: this.state.exigibleCredit,
       interests: this.state.introCourse,
@@ -217,7 +289,7 @@ class CreateCourse extends Component {
   modifyAccount = event => {
     event.preventDefault();
 
-    axios.post(`http://localhost:3004/modifyAccount`, {
+    axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/modifyAccount`, {
       totalCreditModify: this.state.totalCreditModify,
       exigibleCreditModify: this.state.exigibleCreditModify,
       interestsModify: this.state.interestsModify,
@@ -242,7 +314,7 @@ class CreateCourse extends Component {
   modifyCourse = event => {
     event.preventDefault();
 
-    axios.put(`http://localhost:3004/modifyCourse`, {
+    axios.put(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/modifyCourse`, {
       idModify: this.state.idModify,
       nameModify: this.state.nameModify
 
@@ -273,9 +345,9 @@ class CreateCourse extends Component {
     formData.append('moduleDescription', this.state.moduleModifyDescription)
     formData.append('idCourseModule', this.state.idModifyModuleCourse)
 
-    // axios.post(`http://localhost:3004/createTeacher`, this.formData)
+    // axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createTeacher`, this.formData)
 
-    axios.put(`http://localhost:3004/modifyModule`, formData, {
+    axios.put(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/modifyModule`, formData, {
       headers: {
         'accept': 'application/json',
         'Accept-Language': 'en-US,en;q=0.8',
@@ -294,7 +366,7 @@ class CreateCourse extends Component {
   deleteModule = event => {
     event.preventDefault();
 
-    axios.post(`http://localhost:3004/deleteModule`, {idDeleteModule: this.state.idDeleteModule}).then(res => {
+    axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteModule`, {idDeleteModule: this.state.idDeleteModule}).then(res => {
       console.log("SUCCESS", res);
       if (res.status == 200) {
         console.log("Student deleted successfully")
@@ -312,7 +384,7 @@ class CreateCourse extends Component {
   deleteCourse = event => {
     event.preventDefault();
 
-    axios.post(`http://localhost:3004/deleteCourse`, {idDelete: this.state.idDelete}).then(res => {
+    axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteCourse`, {idDelete: this.state.idDelete}).then(res => {
       console.log("SUCCESS", res);
       if (res.status == 200) {
         console.log("Student deleted successfully")
@@ -330,7 +402,7 @@ class CreateCourse extends Component {
   deleteAccount = event => {
     event.preventDefault();
 
-    axios.post(`http://localhost:3004/deleteAccount`, {idStudentAccountDelete: this.state.idStudentAccountDelete}).then(res => {
+    axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteAccount`, {idStudentAccountDelete: this.state.idStudentAccountDelete}).then(res => {
       console.log("SUCCESS", res);
       if (res.status == 200) {
 
@@ -352,7 +424,7 @@ class CreateCourse extends Component {
     var e = document.getElementById("idCourseDSubscription");
     var selectedCourse = e.options[e.selectedIndex].value;
 
-    axios.post(`http://localhost:3004/deleteSubscription`, {
+    axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteSubscription`, {
       idStudentDSubscription: this.state.idStudentDSubscription,
       idCourseDSubscription: selectedCourse
     }).then(res => {
@@ -399,7 +471,7 @@ class CreateCourse extends Component {
         {
           label: 'Si',
           onClick: () => {
-            axios.post(`http://localhost:3004/deleteCourse`, {idStudentAccountDelete: id}).then(res => {
+            axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/deleteCourse`, {idDelete: id}).then(res => {
               console.log("SUCCESS", res);
               if (res.status == 200) {
                 console.log("Student deleted successfully")
@@ -437,34 +509,63 @@ class CreateCourse extends Component {
               <a className="btn btn-success" onClick={(e) => this.changeView(1, e)}>+</a>
             </h2>
             <div className="row">
-              <Table>
-                <Thead>
-                  <Tr>
-                    <Th>ID</Th>
-                    <Th>Nombre</Th>
-                    <Th>Introducción</Th>
-                    <Th></Th>
-                    <Th></Th>
-                  </Tr>
-                </Thead>
-                <Tbody>
-                  {
-                    this.state.student.map(n => {
-                      return (<Tr>
-                        <Td>{n.idCourse}</Td>
-                        <Td>{n.nameCourse}</Td>
-                        <Td>{n.introCourse}</Td>
-                        <Td>
-                          <a className="btn btn-info" onClick={(e) => this.changeView(2, e)}>Modificar</a>
-                        </Td>
-                        <Td>
-                          <a className="btn btn-danger" onClick={(e) => this.deleteSTD(n.idCourse, e)}>Borrar</a>
-                        </Td>
-                      </Tr>);
-                    })
-                  }
-                </Tbody>
-              </Table>
+              <div className="col-md-6">
+                <h3>Cursos</h3>
+                <Table>
+                  <Thead>
+                    <Tr>
+                      <Th>ID</Th>
+                      <Th>Nombre</Th>
+                      <Th>Introducción</Th>
+                      <Th></Th>
+                      <Th></Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
+                    {
+                      this.state.student.map(n => {
+                        return (<Tr>
+                          <Td>{n.idCourse}</Td>
+                          <Td>{n.nameCourse}</Td>
+                          <Td>{n.introCourse}</Td>
+                          <Td>
+                            <a className="btn btn-info" onClick={(e) => this.changeView(2, e)}>Modificar</a>
+                          </Td>
+                          <Td>
+                            <a className="btn btn-danger" onClick={(e) => this.deleteSTD(n.idCourse, e)}>Borrar</a>
+                          </Td>
+                        </Tr>);
+                      })
+                    }
+                  </Tbody>
+                </Table>
+              </div>
+              <div className="col-md-6">
+                <h3>Inscritos</h3>
+                <Table>
+                  <Thead>
+                    <Tr>
+                      <Th>ID estudiante</Th>
+                      <Th>Nombre</Th>
+                      <Th>ID curso</Th>
+                      <Th></Th>
+                      <Th></Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
+                    {
+                      this.state.studentsCourse.map(n => {
+                        return (<Tr>
+                          <Td>{n.ids}</Td>
+                          <Td>{n.ns}</Td>
+                          <Td>{n.idc}</Td>
+                        </Tr>);
+                      })
+                    }
+                  </Tbody>
+                </Table>
+              </div>
+
             </div>
             <div className="row">
               <div className="formAdmin" id="modify" style={styleNone}>
@@ -489,7 +590,7 @@ class CreateCourse extends Component {
                   <br/>
                   <TextField id="nameCourse" label="Nombre" placeholder="Nombre de curso" className="textField" margin="normal" onChange={this.handleChange} value={this.state.nameCourse}/>
                   <br/>
-                  <TextField id="introCourse" label="Edad" placeholder="Intro de curso" className="textField" margin="normal" onChange={this.handleChange} value={this.state.introCourse}/>
+                  <TextField id="introCourse" label="Introducción" placeholder="Intro de curso" className="textField" margin="normal" onChange={this.handleChange} value={this.state.introCourse}/>
                   <br/>
 
                   <br/> {/* <input type="submit" className="btn btn-success" value="Iniciar sesión" /> */}
@@ -503,6 +604,7 @@ class CreateCourse extends Component {
               <Tab label="Inscripciones"/>
               <Tab label="Módulos"/>
               <Tab label="Cuentas"/>
+              <Tab label="Importar Excel"/>
             </Tabs>
             <SwipeableViews index={index} onChangeIndex={this.handleChangeIndex}>
               <div style={Object.assign({}, styles.slide, styles.slide1)}>
@@ -538,7 +640,7 @@ class CreateCourse extends Component {
                       <br/>
                       <h7>Curso</h7>
                       <br></br>
-                      <select id="idCourseCSubscription" onChange={this.handleChange} value={this.state.idCourseDSubscription}>
+                      <select id="idCourseCSubscription" onChange={this.handleChange} value={this.state.idCourseCSubscription}>
                         {
                           this.state.student.map(n => {
                             return (<option value={n.idCourse}>{n.nameCourse}</option>);
@@ -671,6 +773,27 @@ class CreateCourse extends Component {
                   </div>
                 </div>
                 <br/>
+              </div>
+              <div style={Object.assign({}, styles.slide, styles.slide3)}>
+                <div className="row">
+                  <div className="formAdmin">
+                    <div className="dropzone">
+                      <h2>Suelta aquí el archivo a usar</h2>
+                      <ul>
+                        {
+                          this.state.files.map(f => <li>
+                            {f.name}
+                          </li>)
+                        }
+                      </ul>
+                      <Dropzone onDrop={this.onDrop.bind(this)} disabled={this.state.disabled}>
+                        <p className="dropInnerText">
+                          Arrastre el archivo que desea agregar aquí o de click para seleccionar uno</p>
+                      </Dropzone>
+                    </div>
+                    <br/>
+                  </div>
+                </div>
               </div>
             </SwipeableViews>
           </div>

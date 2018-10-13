@@ -78,43 +78,44 @@ class Home extends Component {
     };
   }
 
+
   sendEmail() {
 
-      console.log("state", this.state)
-        axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/sendEmail`, {
-          name: this.state.nameM,
-          email: this.state.email,
-          subject: this.state.subject,
-          textm: this.state.textm
+    console.log("state", this.state)
+      axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/sendEmail`, {
+        name: this.state.nameM,
+        email: this.state.email,
+        subject: this.state.subject,
+        textm: this.state.textm
 
 
-         })
-             .then(res => {
-               console.log("SUCCESS", res);
-                alert("Se ha enviado el mensaje correctamente");
-               if(res.status == 200) {
-                   console.log("ruLE deleted successfully")
+       })
+           .then(res => {
+             console.log("SUCCESS", res);
+              alert("Se ha enviado el mensaje correctamente");
+             if(res.status == 200) {
+                 console.log("ruLE deleted successfully")
 
-               //  browserHistory.replace("/login")
-               //  store.set('loggedIn', true);
-               //this.props.history.push("/");
+             //  browserHistory.replace("/login")
+             //  store.set('loggedIn', true);
+             //this.props.history.push("/");
 
-               }
-             }).catch((error) => {
-               //handle error
-               alert("Hubo un problema, intente nuevamente");
-             });
+             }
+           }).catch((error) => {
+             //handle error
+             alert("Hubo un problema, intente nuevamente");
+           });
+}
+
+
+
+
+  handleChange = event => {
+    console.log(this.state)
+    this.setState({
+      [event.target.id]: event.target.value
+    });
   }
-
-
-
-
-    handleChange = event => {
-      console.log(this.state)
-      this.setState({
-        [event.target.id]: event.target.value
-      });
-    }
 
   activateText(id) {
     switch (id) {
@@ -238,9 +239,6 @@ class Home extends Component {
       </div>
 
 
-{/*
-=======
->>>>>>> 1e930b19fd18600fb51e23cef4968205a56e8f5d
       <div className="team">
         <div className="row">
           <h1>
@@ -328,6 +326,9 @@ class Home extends Component {
         </div>
       </div>
       */}
+=======
+
+>>>>>>> b6038dad8742bbcfeb6229b4546df1650327bfed
       <div className="carousel">
         <Carousel>
           <div>
@@ -353,32 +354,31 @@ class Home extends Component {
           <div class="form-group">
             <label class="control-label col-sm-2" for="pwd">Nombre:</label>
             <div class="col-sm-10">
-              <input className="col-sm-offset-2 form-control col-md-12" type="text" name="name"/>
+              <input id="nameM" className="col-sm-offset-2 form-control col-md-12" type="text" name="name" placeholder="Nombre" onChange={this.handleChange} value={this.state.nameM} />
             </div>
           </div>
 
           <div class="form-group">
             <label class="control-label col-sm-2" for="pwd">Email:</label>
             <div class="col-sm-10">
-              <input className="form-control col-md-12" type="text" name="name" placeholder="E-mail"/>
+              <input id="email" className="form-control col-md-12" type="text" name="name" placeholder="E-mail" onChange={this.handleChange} value={this.state.email} />
             </div>
           </div>
 
           <div class="form-group">
             <label class="control-label col-sm-2" for="pwd">Asunto:</label>
             <div class="col-sm-10">
-              <input className="form-control col-md-12" type="text" name="name" placeholder="Asunto"/>
+              <input id="subject"  className="form-control col-md-12" type="text" name="name" placeholder="Asunto" onChange={this.handleChange} value={this.state.subject}/>
             </div>
           </div>
 
           <div class="form-group">
-            <label class="control-label col-sm-2" for="pwd">Asunto:</label>
+            <label class="control-label col-sm-2" for="pwd">Descripción:</label>
             <div class="col-sm-10">
-              <textarea className="form-control col-md-12" type="text" name="name" placeholder="Escribe lo que necesites agregar"/>
+              <textarea id="textm"  className="form-control col-md-12" type="text" name="name" placeholder="Escribe lo que necesites agregar" onChange={this.handleChange} value={this.state.textm} />
             </div>
           </div>
-
-          <button onClick={this.sendEmail.bind(this)} className="btn btn-success"> Enviar mensaje </button>
+          <button onClick={this.sendEmail.bind(this)}> Enviar mensaje </button>
         </div>
       </div>
 
@@ -399,6 +399,8 @@ class Home extends Component {
             <div className="col-sm-4">
               <img className="net" src={mail}/>
               infopecol17@gmail.com
+              <br/>
+              Tel.01 998 578 9193
             </div>
           </div>
         </div>

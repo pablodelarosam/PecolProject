@@ -5,6 +5,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Select from '@material-ui/core/Select';
 import SwipeableViews from 'react-swipeable-views';
 import ReactDOM from 'react-dom';
+import XLSX from 'xlsx';
 import './CreateStudent.css';
 import {
   Table,
@@ -22,6 +23,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import axios from 'axios'
 import FormData from 'form-data'
+import Dropzone from 'react-dropzone'
 import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
 
 var styleNone = {
@@ -46,6 +48,8 @@ const styles = {
     backgroundColor: '#FFF'
   }
 };
+
+const rABS = true;
 
 class CreateModule extends Component {
   constructor(props) {
@@ -92,8 +96,234 @@ class CreateModule extends Component {
       interestsModify: "",
       limitDateModify: "",
       idStudentAccountModify: "",
-      numero: ""
+      numero: "",
+      disabled: false,
+      files: []
+      // true: readAsBinaryString ; false: readAsArrayBuffer
     }
+  }
+
+  //EXCEL
+  onDrop(files) {
+    this.setState({files});
+    confirmAlert({
+      title: 'Menu',
+      message: '¿Qué deseas crear?',
+      buttons: [
+        {
+          label: 'Módulos',
+          onClick: () => {
+            confirmAlert({
+              title: 'Confirmar acción',
+              message: '¿Estas seguro(a)?',
+              buttons: [
+                {
+                  label: 'Si',
+                  onClick: () => {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                      var data = e.target.result;
+                      if (!rABS)
+                        data = new Uint8Array(data);
+                      var workbook = XLSX.read(data, {
+                        type: rABS
+                          ? 'binary'
+                          : 'array'
+                      });
+
+                      /* DO SOMETHING WITH workbook HERE */
+                      var sheetName = workbook.SheetNames[0];
+                      var worksheet = workbook.Sheets[sheetName];
+                      var json = XLSX.utils.sheet_to_json(worksheet, {raw: true})
+                      var i = 0;
+                      for (i; i < json.length; i++) {
+                        var id = json[i]["ID MODULO"];
+                        var name = json[i]["NOMBRE"];
+                        var description = json[i]["DESCRIPCION"];
+                        var idCOURSE = json[i]["ID CURSO"];
+                        console.log(id + " " + name + " " + description + " " + idCOURSE);
+
+                        const formData = new FormData();
+                        formData.append('idModule', id)
+                        formData.append('nameModule', name)
+                        formData.append('moduleDescription', description)
+                        formData.append('idCourseModule', idCOURSE)
+
+                        axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createModule`, formData, {
+                          headers: {
+                            'accept': 'application/json',
+                            'Accept-Language': 'en-US,en;q=0.8',
+                            'Content-Type': `multipart/form-data; boundary=${formData._boundary}`
+                          }
+                        }).then((response) => {
+                          //handle success
+                          console.log("success upload")
+                          //alert("Se ha creado el módulo correctamente");
+                        }).catch((error) => {
+                          //handle error
+                          //alert("Hubo un problema, intente nuevamente");
+                        });
+
+                      }
+                    };
+                    if (rABS) {
+                      reader.readAsBinaryString(files[0]);
+                    } else {
+                      reader.readAsArrayBuffer(files[0]);
+                    }
+                  }
+                }, {
+                  label: 'No'
+                }
+              ]
+            })
+          }
+        }, {
+          label: 'Enlaces',
+          onClick: () => {
+            confirmAlert({
+              title: 'Confirmar acción',
+              message: '¿Estas seguro(a)?',
+              buttons: [
+                {
+                  label: 'Si',
+                  onClick: () => {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                      var data = e.target.result;
+                      if (!rABS)
+                        data = new Uint8Array(data);
+                      var workbook = XLSX.read(data, {
+                        type: rABS
+                          ? 'binary'
+                          : 'array'
+                      });
+
+                      /* DO SOMETHING WITH workbook HERE */
+                      var sheetName = workbook.SheetNames[1];
+                      var worksheet = workbook.Sheets[sheetName];
+                      var json = XLSX.utils.sheet_to_json(worksheet, {raw: true})
+                      var i = 0;
+                      for (i; i < json.length; i++) {
+                        var name = json[i]["NOMBRE"];
+                        var url = json[i]["URL"];
+                        console.log(name + " " + url);
+
+                        const formData = new FormData();
+                        formData.append('nameEnlace', name)
+                        formData.append('urlEnlace', url)
+
+                        // axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createTeacher`, this.formData)
+
+                        axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createLink`, formData, {
+                          headers: {
+                            'accept': 'application/json',
+                            'Accept-Language': 'en-US,en;q=0.8',
+                            'Content-Type': `multipart/form-data; boundary=${formData._boundary}`
+                          }
+                        }).then((response) => {
+                          //handle success
+                          console.log("success upload")
+                          //alert("Se ha creado el enlace correctamente")
+                        }).catch((error) => {
+                          //handle error
+                          //alert("Se ha presentado un error, intente más tarde")
+                        });
+
+
+
+                      }
+                    };
+                    if (rABS) {
+                      reader.readAsBinaryString(files[0]);
+                    } else {
+                      reader.readAsArrayBuffer(files[0]);
+                    }
+                  }
+                }, {
+                  label: 'No'
+                }
+              ]
+            })
+          }
+        }, {
+          label: 'Actividades',
+          onClick: () => {
+            confirmAlert({
+              title: 'Confirmar acción',
+              message: '¿Estas seguro(a)?',
+              buttons: [
+                {
+                  label: 'Si',
+                  onClick: () => {
+
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                      var data = e.target.result;
+                      if (!rABS)
+                        data = new Uint8Array(data);
+                      var workbook = XLSX.read(data, {
+                        type: rABS
+                          ? 'binary'
+                          : 'array'
+                      });
+
+                      /* DO SOMETHING WITH workbook HERE */
+                      var sheetName = workbook.SheetNames[2];
+                      var worksheet = workbook.Sheets[sheetName];
+                      var json = XLSX.utils.sheet_to_json(worksheet, {raw: true})
+                      var i = 0;
+                      for (i; i < json.length; i++) {
+                        var id = json[i]["ID ACTIVIDAD"];
+                        var name = json[i]["NOMBRE"];
+                        var type = json[i]["TIPO"];
+                        var idMODULE = json[i]["ID MODULO"];
+                        var order = json[i]["ORDEN"];
+                        console.log(id + " " + name + " " + type + " " + idMODULE + " " + order);
+
+                        const formData = new FormData();
+                        formData.append('idACTIVITY', id)
+                        formData.append('nameActivity', name)
+                        formData.append('typeActivity', type)
+                        formData.append('idModule', idMODULE)
+                        formData.append('order', order)
+
+                        // axios.post(`http://ec2-34-212-223-202.us-west-2.compute.amazonaws.com:3004/createTeacher`, this.formData)
+
+                        axios.post(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/createActivites`, formData, {
+                          headers: {
+                            'accept': 'application/json',
+                            'Accept-Language': 'en-US,en;q=0.8',
+                            'Content-Type': `multipart/form-data; boundary=${formData._boundary}`
+                          }
+                        }).then((response) => {
+                          //handle success
+                          console.log("success upload")
+                        }).catch((error) => {
+                          //handle error
+                        });
+                      }
+                    };
+
+                    if (rABS) {
+                      reader.readAsBinaryString(files[0]);
+                    } else {
+                      reader.readAsArrayBuffer(files[0]);
+                    }
+                  }
+                }, {
+                  label: 'No'
+                }
+              ]
+            })
+          }
+        },{
+          label: 'Cancelar',
+          onClick: () => {
+          }
+        }
+      ]
+    })
   }
 
   componentDidMount() {
@@ -191,12 +421,10 @@ class CreateModule extends Component {
 
   }
 
-
   fileSelectedHandler = event => {
     console.log("event", event.target.files[0])
     this.setState({fileSelected: event.target.files[0]})
   };
-
 
   fileSelectedHandlerModify = event => {
     console.log("event", event.target.files[0])
@@ -232,6 +460,7 @@ class CreateModule extends Component {
   handleChange1 = (event, value) => {
     this.setState({index: value});
   };
+
   handleChangeIndex = index => {
     this.setState({index});
   };
@@ -272,6 +501,7 @@ class CreateModule extends Component {
         break;
     }
   }
+
   deleteSTD(id) {
     confirmAlert({
       title: 'Confirmar acción',
@@ -332,7 +562,7 @@ class CreateModule extends Component {
                   {
                     this.state.student.map(n => {
                       return (<Tr>
-                        <Td>{n.idCourse}</Td>
+                        <Td>{n.idModule}</Td>
                         <Td>{n.nameModule}</Td>
                         <Td>{n.moduleDescription}</Td>
                         <Td>{n.idCourse}</Td>
@@ -354,7 +584,7 @@ class CreateModule extends Component {
                   <h4>
                     Crear módulo
                   </h4>
-                  <TextField id="idModule" label="ID " placeholder="ID de módulo" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idModule}/>
+                  <TextField id="idModule" label="ID módulo" placeholder="ID de módulo" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idModule}/>
                   <br/>
                   <TextField id="nameModule" label="Nombre" placeholder="Nombre de módulo" className="textField" margin="normal" onChange={this.handleChange} value={this.state.nameModule}/>
                   <br/>
@@ -362,7 +592,7 @@ class CreateModule extends Component {
                       color: 'black'
                     }} className="textField" id="moduleDescription" label="ID" placeholder="Descripción" margin="normal" onChange={this.handleChange} value={this.state.moduleDescription}/>
                   <br/>
-                  <TextField id="idCourseModule" label="Nombre" placeholder="Curso asociado" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idCourseModule}/>
+                  <TextField id="idCourseModule" label="ID Curso" placeholder="Curso asociado" className="textField" margin="normal" onChange={this.handleChange} value={this.state.idCourseModule}/>
                   <br/>
                   <input type="file" onChange={this.fileSelectedHandler}/>
                   <br/>
@@ -395,6 +625,7 @@ class CreateModule extends Component {
             <Tabs value={index} fullWidth="fullWidth" onChange={this.handleChange1} style={styles.tabs}>
               <Tab label="Enlaces"/>
               <Tab label="Actividades"/>
+              <Tab label="Importar excel"/>
             </Tabs>
             <SwipeableViews index={index} onChangeIndex={this.handleChangeIndex}>
               <div style={Object.assign({}, styles.slide, styles.slide1)}>
@@ -419,7 +650,7 @@ class CreateModule extends Component {
               <div style={Object.assign({}, styles.slide, styles.slide2)}>
                 <div className="row">
                   <div className="formAdmin">
-                    <form onSubmit={this.createActivity}>
+                    <form onSubmit={this.createModule}>
                       <h3>
                         Crear actividad
                       </h3>
@@ -442,6 +673,33 @@ class CreateModule extends Component {
 
                     </form>
 
+                  </div>
+                </div>
+              </div>
+              {/*
+                EXCEL
+                */}
+              <div style={Object.assign({}, styles.slide, styles.slide2)}>
+                <div className="row">
+                  <div className="formAdmin">
+                    <div className="dropzone">
+                      <h2>Suelta aquí el archivo a usar</h2>
+                      <ul>
+                        {
+                          this.state.files.map(f =>
+                            <li>
+                              {f.name}
+                            </li>
+                          )
+                        }
+                      </ul>
+                      <Dropzone onDrop={this.onDrop.bind(this)} disabled={this.state.disabled}>
+                        <p className="dropInnerText">
+                          Arrastre el archivo que desea agregar aquí
+                          o de click para seleccionar uno</p>
+                      </Dropzone>
+                    </div>
+                    <br/>
                   </div>
                 </div>
               </div>
