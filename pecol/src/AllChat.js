@@ -110,7 +110,7 @@ class AllChat extends Component {
       //   return a.badget.valueOf() > b.badget.valueOf();
       // });
 
-      console.log(copyarray.sort(this.sorterPriceAsc));
+      console.log(copyarray.sort(this.compareNumbers));
 
     //  console.log("sortedobd", copyarray.sort(this.comparator))
       setTimeout(function() {
@@ -137,6 +137,18 @@ class AllChat extends Component {
       return 1;
     return 0;
   }
+
+  compareNumbers(a, b)
+{
+ return a.badget - b.badget;
+}
+
+compareDecimals(a, b) {
+    if (a === b)
+         return 0;
+
+    return a < b ? -1 : 1;
+}
 
   dynamicSort(property) {
     var sortOrder = 1;
