@@ -15,6 +15,7 @@ import Message from './Message.js';
 // }
 //
 // firebase.initializeApp(config)
+var countm = 0;
 
 export default class FormStudentMessage extends Component {
   constructor(props) {
@@ -22,9 +23,10 @@ export default class FormStudentMessage extends Component {
     this.state = {
       userName: 'Student',
       message: '',
+      badget: '',
       list: [],
     };
-      var countm = 0;
+
     this.messageRef = firebase.database().ref().child(this.props.match.params.id);
 //    this.messageRef.on("value", function(snapshot) {
 //
@@ -48,13 +50,15 @@ export default class FormStudentMessage extends Component {
   }
 
   componentDidMount() {
+    countm = 0;
     console.log("PROSP MEESANGES", this.props.match.params)
     const idC = this.props.match.params.id
-    axios.get(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/student/${idC}`)
+    axios.get(`http://localhost:3004/student/${idC}`)
      .then(res => {
        const teacher = res.data;
        console.log("student info", teacher)
        this.setState({userName: teacher[0].nameStudent });
+
        this.listenMessages();
      })
   }
@@ -66,9 +70,12 @@ export default class FormStudentMessage extends Component {
   }
   handleSend() {
     if (this.state.message) {
+      countm++;
+      console.log("Counter", countm)
       var newItem = {
         userName: this.state.userName,
         message: this.state.message,
+        badget: countm.toString()
       }
       this.messageRef.push(newItem);
       this.setState({ message: '' });
@@ -79,6 +86,8 @@ export default class FormStudentMessage extends Component {
     this.handleSend();
   }
   listenMessages() {
+
+
     this.messageRef
       .limitToLast(10)
       .on('value', message => {
@@ -94,6 +103,13 @@ export default class FormStudentMessage extends Component {
 
 
       });
+
+
+      // this.messageRef.orderByKey().limitToLast(1).on('child_added', function(snapshot) {
+      //    console.log('new record', snapshot.val());
+      //    snapshot.val().badget = 0;
+      //
+      // });
   }
   render() {
     return (

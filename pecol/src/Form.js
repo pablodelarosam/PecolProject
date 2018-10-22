@@ -24,6 +24,14 @@ export default class Form extends Component {
       list: [],
     };
     this.messageRef = firebase.database().ref().child(this.props.match.params.id);
+    this.messageRef.orderByKey().limitToLast(1).on('child_added', function(snapshot) {
+
+      // snapshot.val().update({ message: "New trainer" })
+      snapshot.ref.update({ badget: "0" })
+       //snapshot.val().message = "hol"
+       console.log('new record', snapshot  );
+
+    });
       this.listenMessages();
     console.log("mesagref", this.messageRef.path.pieces_)
 
@@ -77,6 +85,8 @@ export default class Form extends Component {
 
 
       });
+
+
   }
   render() {
     return (
