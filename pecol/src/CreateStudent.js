@@ -41,6 +41,7 @@ var styleNone = {
   display: 'none' // 'ms' is the only lowercase vendor prefix
 };
 let id = 0;
+var studentsCount = 0;
 function createData(name, partial1, partial2, partial3, grade) {
   id += 1;
 
@@ -59,6 +60,7 @@ class CreateStudent extends Component {
     super(props);
     this.state = {
       index: 0,
+      studentsCount: 0,
       student: [],
       autoplay: true,
       id: "",
@@ -130,7 +132,7 @@ class CreateStudent extends Component {
                           if (res.status == 200) {}
                         }).catch((error) => {
                           //handle error
-                        
+
                         });
 
                       }
@@ -169,7 +171,7 @@ class CreateStudent extends Component {
                       });
 
                       /* DO SOMETHING WITH workbook HERE */
-                      var sheetName = workbook.SheetNames[1];
+                      var sheetName = workbook.SheetNames[3];
                       var worksheet = workbook.Sheets[sheetName];
                       var json = XLSX.utils.sheet_to_json(worksheet, {raw: true})
                       var i = 0;
@@ -189,7 +191,6 @@ class CreateStudent extends Component {
                           age: age,
                           email: email,
                           password: password
-
                         }).then(res => {
                           console.log("SUCCESS", res);
                           if (res.status == 200) {
@@ -249,7 +250,11 @@ class CreateStudent extends Component {
 
       this.setState({student: accounts});
       //   console.log("course", this.state.course[0].idCOURSE)
+      studentsCount = this.state.student.length;
+      var badge = document.getElementById("qtyRecords");
+      badge.textContent = "(Total: " + studentsCount + ")";
     })
+
   }
   handleSubmit = event => {
     event.preventDefault();
@@ -379,7 +384,7 @@ class CreateStudent extends Component {
       <div className="mainContent">
         <div className="col-sm-12">
           <h2>
-            Administrar estudiantes
+            Administrar estudiantes <span className="badge" id="qtyRecords"></span>
             <a className="btn btn-success" onClick={(e) => this.changeView(1, e)}>+</a>
           </h2>
           <div className="container">

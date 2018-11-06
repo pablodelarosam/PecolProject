@@ -48,6 +48,7 @@ const styles = {
 };
 
 const rABS = true;
+var studentsCount = 0;
 
 class CreateCourse extends Component {
   constructor(props) {
@@ -57,6 +58,7 @@ class CreateCourse extends Component {
       student: [],
       studentsCourse: [],
       idCourse: "",
+      studentsCount: 0,
       nameCourse: "",
       introCourse: "",
       idDelete: "",
@@ -164,6 +166,9 @@ class CreateCourse extends Component {
       const accounts2 = res2.data;
       this.setState({studentsCourse: accounts2});
       console.log("course", this.state.studentsCourse[0])
+      studentsCount = this.state.studentsCourse.length;
+      var badge = document.getElementById("qtyRecords");
+      badge.textContent = "(Total: " + studentsCount + ")";
     })
 
   }
@@ -541,7 +546,7 @@ class CreateCourse extends Component {
                 </Table>
               </div>
               <div className="col-md-6">
-                <h3>Inscritos</h3>
+                <h3>Inscrpciones <span className="badge" id="qtyRecords"></span></h3>
                 <Table>
                   <Thead>
                     <Tr>
