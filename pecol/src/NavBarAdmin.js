@@ -23,6 +23,7 @@ class NavBarDash extends Component {
             <Link className="nav-link nav-dash-links" to="/createCourse">Cursos</Link>
             <Link className="nav-link nav-dash-links" to="/createAdvertisement">Avisos</Link>
             <Link className="nav-link nav-dash-links" to="/createTeacher">Profesores</Link>
+            <Link className="nav-link nav-dash-links" to="/createCompany">Empresas</Link>
             <Link className="nav-link nav-dash-links" to="/createRule">Reglas</Link>
             <Link className="nav-link nav-dash-links" to="/allChat">Correos</Link>
             <Link className="nav-link nav-dash-links" to="/createModule">Módulos</Link>

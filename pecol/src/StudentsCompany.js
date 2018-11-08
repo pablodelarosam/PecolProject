@@ -245,7 +245,7 @@ class CreateStudent extends Component {
   componentDidMount() {
     const idC = this.props.match.params.id
     console.log("PROPS", this.props.match.params.id, idC)
-    axios.get(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/allStudent`).then(res => {
+    axios.get(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/studentsCompany/${idC}`).then(res => {
       const accounts = res.data;
 
       this.setState({student: accounts});
@@ -454,8 +454,6 @@ class CreateStudent extends Component {
               <div className="formAdmin" id="create" style={styleNone}>
                 <Tabs value={index} fullWidth="fullWidth" onChange={this.handleChange1} style={styles.tabs}>
                   <Tab label="Alta estudiantes"/>
-
-                  <Tab label="Importar excel"/>
                 </Tabs>
                 <br/>
                 <SwipeableViews index={index} onChangeIndex={this.handleChangeIndex}>
@@ -477,27 +475,6 @@ class CreateStudent extends Component {
                       <br/> {/* <input type="submit" className="btn btn-success" value="Iniciar sesión" /> */}
                       <button className="nav-link btn btn-success" type="submit">Registrar</button>
                     </form>
-                  </div>
-                  <div style={Object.assign({}, styles.slide, styles.slide2)}>
-                    <div className="row">
-                      <div className="formAdmin">
-                        <div className="dropzone">
-                          <h2>Suelta aquí el archivo a usar</h2>
-                          <ul>
-                            {
-                              this.state.files.map(f => <li>
-                                {f.name}
-                              </li>)
-                            }
-                          </ul>
-                          <Dropzone onDrop={this.onDrop.bind(this)} disabled={this.state.disabled}>
-                            <p className="dropInnerText">
-                              Arrastre el archivo que desea agregar aquí o de click para seleccionar uno</p>
-                          </Dropzone>
-                        </div>
-                        <br/>
-                      </div>
-                    </div>
                   </div>
                 </SwipeableViews>
               </div>
