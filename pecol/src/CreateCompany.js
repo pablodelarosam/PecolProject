@@ -236,7 +236,7 @@ class CreateCompany extends Component {
                         <Td>{n.description}</Td>
                         <Td>{n.phone}</Td>
                         <Td>
-                          <Link className="customgoto" to={`/studentsCompany/${this.props.match.params.id}/${n.idCompany}`}>
+                          <Link className="customgoto" to={`/studentsCompany/${n.id}`}>
                             Ver
                           </Link>
                         </Td>
@@ -244,7 +244,7 @@ class CreateCompany extends Component {
                           <a className="btn btn-info" onClick={(e) => this.changeView(2, e)}>Modificar</a>
                         </Td>
                         <Td>
-                          <a className="btn btn-danger" onClick={(e) => this.deleteSTD(n.idCompany, e)}>Borrar</a>
+                          <a className="btn btn-danger" onClick={(e) => this.deleteSTD(n.id, e)}>Borrar</a>
                         </Td>
                       </Tr>);
                     })

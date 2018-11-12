@@ -243,7 +243,7 @@ class CreateStudent extends Component {
     this.setState({index});
   };
   componentDidMount() {
-    const idC = this.props.match.params.id
+    const idC = this.props.match.params.idCompany
     console.log("PROPS", this.props.match.params.id, idC)
     axios.get(`http://ec2-54-187-156-131.us-west-2.compute.amazonaws.com:3004/studentsCompany/${idC}`).then(res => {
       const accounts = res.data;

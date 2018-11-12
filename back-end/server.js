@@ -143,108 +143,6 @@ app.get("/subscriptions", function(req, res) {
   });
 });
 
-app.get("/allCompanies", function(req, res) {
-  sql = "select * from company ORDER BY idCompany ASC";
-  connection.query(sql, function(err, records) {
-    // Do something
-    console.log("Datos al consultar: " + records);
-    if (err) {
-      return res.serverError(err);
-    }
-    return res.send(records);
-  });
-});
-
-app.get("/company/:id", function(req, res) {
-  var paramid = req.param("id");
-  sql = "SELECT * FROM company where idCompany = " + "'" + paramid + "'";
-  console.log("query", sql)
-  connection.query(sql, function(err, records) {
-    // Do something
-    console.log("Datos al consultar: " + records);
-    if (err) {
-      return res.serverError(err);
-    }
-    return res.send(records);
-  });
-});
-
-app.get("/studentsCompany/:id", function(req, res) {
-  var paramid = req.param("id");
-  sql = "SELECT * FROM student where idCompany = " + "'" + paramid + "'";
-  console.log("query", sql)
-  connection.query(sql, function(err, records) {
-    // Do something
-    console.log("Datos al consultar: " + records);
-    if (err) {
-      return res.serverError(err);
-    }
-    return res.send(records);
-  });
-});
-
-app.post("/createCompany", function(req, res, next) {
-  console.log("BODY", req.file, req.body)
-  var idCompany = req.body.idCompany
-  var nameCompany = req.body.nameCompany
-  var description = req.body.description
-  var phone = req.body.phone
-  sql = "INSERT INTO company VALUES ('" + idCompany + "','" + nameCompany + "','" + description + "','" + phone + ")";
-  console.log("sql", sql)
-
-  connection.query(sql, function(err, records) {
-    console.log("Datos al consultar: " + records);
-    return res.send(records);
-    if (err) {
-      return res.serverError(err);
-    }
-  });
-});
-
-app.post("/modifyCompany", function(req, res, next) {
-
-
-  var idCompany = req.body.idCompany
-  var nameCompany = req.body.nameCompany
-  var description = req.body.description
-  var phone = req.body.phone
-  sql = "UPDATE company SET idCompany = '" + idCompany + "', nameCompany = '" + nameCompany + "' , description = '" + description + "' , phone = '" + "' ";
-  connection.query(sql, function(err, rows, fields) {
-    //connection.end();
-    if (!err) {
-      //  res.send('User added to database with ID: ' + rows);
-      console.log('Curso con id ' + sql + " modificado");
-      return true;
-
-    } else {
-      console.log('Error while performing Query.');
-      return false;
-    }
-
-  });
-
-});
-
-app.post('/deleteCompany', function(req, res, next) {
-  console.log("ID TO DELTE", req.body.idCompany)
-  var url = req.body.idCompanyDelete;
-
-  sql = "DELETE FROM company where idCompany = '" + url + "'";
-  connection.query(sql, function(err, result) {
-    if (err)
-      return err;
-    res = result;
-    console.log("Company deleted"), result;
-    //res.send("Created "+JSON.stringify(result));
-  });
-  return res.send({
-    status: 200
-
-  });
-
-});
-
-
 
 app.get("/student/:id", function(req, res) {
   var paramid = req.param("id");
@@ -2082,6 +1980,112 @@ app.post('/contact', function(req, res) {
     res.send("Created " + JSON.stringify(result));
   });
   //res.send("Received"+req.body)
+});
+
+
+/******** COMPANY ************/
+app.get("/allCompanies", function(req, res) {
+  sql = "select * from company ORDER BY idCompany ASC";
+  connection.query(sql, function(err, records) {
+    // Do something
+    console.log("Datos al consultar: " + records);
+    if (err) {
+      return res.serverError(err);
+    }
+    return res.send(records);
+  });
+});
+
+app.get("/company/:id", function(req, res) {
+  var paramid = req.param("id");
+  sql = "SELECT * FROM company where idCompany = " + "'" + paramid + "'";
+  console.log("query", sql)
+  connection.query(sql, function(err, records) {
+    // Do something
+    console.log("Datos al consultar: " + records);
+    if (err) {
+      return res.serverError(err);
+    }
+    return res.send(records);
+  });
+});
+
+
+app.get("/studentsCompany/:id", function(req, res) {
+  var paramid = req.param("id");
+  sql = "SELECT * FROM student where idCompany = " + "'" + paramid + "'";
+  console.log("query", sql)
+  connection.query(sql, function(err, records) {
+    // Do something
+    console.log("Datos al consultar: " + records);
+    if (err) {
+      return res.serverError(err);
+    }
+    return res.send(records);
+  });
+});
+
+app.post("/createCompany", function(req, res, next) {
+  console.log("BODY", req.file, req.body)
+  var idCompany = req.body.idCompany
+  var nameCompany = req.body.nameCompany
+  var description = req.body.description
+  var phone = req.body.phone
+  sql = "INSERT INTO company VALUES ('NULL','" + idCompany + "','" + nameCompany + "','" + description + "','" + phone + "')";
+  console.log("sql", sql)
+
+  connection.query(sql, function(err, records) {
+    console.log("Datos al consultar: " + records);
+    return res.send(records);
+    if (err) {
+      return res.serverError(err);
+    }
+  });
+});
+
+
+app.post("/modifyCompany", function(req, res, next) {
+
+  var id = req.body.id
+  var idCompany = req.body.idCompany
+  var nameCompany = req.body.nameCompany
+  var description = req.body.description
+  var phone = req.body.phone
+  sql = "UPDATE company SET idCompany = '" + idCompany + "', nameCompany = '" + nameCompany + "' , description = '" + description + "' , phone = '" +  phone + "' WHERE idCompany = '" + idCompany + "'";
+connection.query(sql, function(err, rows, fields) {
+    //connection.end();
+    if (!err) {
+      //  res.send('User added to database with ID: ' + rows);
+      console.log('Curso con id ' + sql + " modificado");
+      return true;
+
+    } else {
+      console.log('Error while performing Query.');
+      return false;
+    }
+
+  });
+
+});
+
+
+app.post('/deleteCompany', function(req, res, next) {
+  console.log("ID TO DELTE", req.body.id)
+  var id = req.param("idDelete");
+
+  sql = "DELETE FROM company where id = '" + id + "'";
+  connection.query(sql, function(err, result) {
+    if (err)
+      return err;
+    res = result;
+    console.log("Company deleted"), result;
+    //res.send("Created "+JSON.stringify(result));
+  });
+  return res.send({
+    status: 200
+
+  });
+
 });
 
 var http = require('http');
